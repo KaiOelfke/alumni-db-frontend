@@ -1,0 +1,21 @@
+language: node_js
+eng:
+  global:
+  - ALUMNI_FRONTEND_HOME=/home/travis/build/alumni-db-frontend/alumni-db-frontend
+node_js:
+  - '0.10'
+before_install:
+  - cd /usr/lib/git-core/
+  - sudo wget https://raw.github.com/apenwarr/git-subtree/master/git-subtree.sh
+  - sudo mv git-subtree.sh git-subtree
+  - sudo chmod 755 git-subtree
+before_script:
+  - 'npm install -g bower grunt-cli'
+  - 'bower install'
+  - 'npm install'
+  - sh -e /etc/init.d/xvfb start
+  - 'bower install'  
+script:
+  - cd $ALUMNI_FRONTEND_HOME && grunt test
+after_success:
+  _ echo 'success'
