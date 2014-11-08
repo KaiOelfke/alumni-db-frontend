@@ -4,3 +4,11 @@ dist
 .sass-cache
 bower_components
 dist
+#################
+## Sublime Text
+#################
+
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+node_modules/
