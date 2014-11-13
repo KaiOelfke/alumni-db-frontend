@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name alumniDbFrontendApp.controller:AboutCtrl
+ * @name alumniWebApp.controller:AboutCtrl
  * @description
  * # AboutCtrl
- * Controller of the alumniDbFrontendApp
+ * Controller of the alumniWebApp
  */
-angular.module('alumniDbFrontendApp')
+angular.module('alumniWebApp')
   .controller('AboutCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',

@@ -2,10 +2,10 @@
 
 /**
  * @ngdoc function
- * @name alumniDbFrontendApp.controller:SignupCtrl
+ * @name alumniWebApp.controller:SignupCtrl
  * @description
  * # SignupCtrl
- * Controller of the alumniDbFrontendApp
+ * Controller of the alumniWebApp
  */
 
 function signupCtrl(usersFactory, $scope) {
@@ -24,7 +24,7 @@ function signupCtrl(usersFactory, $scope) {
     };
 }
 
-angular.module('alumniDbFrontendApp')
+angular.module('alumniWebApp')
   .controller('SignupCtrl', ['usersFactory', '$scope', signupCtrl]);
 
 

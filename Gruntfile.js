@@ -63,6 +63,33 @@ module.exports = function (grunt) {
       }
     },
 
+
+    // Define configuration depending on environment.
+    ngconstant: {
+      options: {
+        space: '  '
+      },
+      development: [{
+        dest: '<%= yeoman.app %>/scripts/appConfig.js',
+        wrap: '\'use strict\';\n\n<%= __ngModule %>',
+        name: 'AppConfig',
+        constants: {
+          ENV: 'development',
+          API_HOST: 'localhost:3000',
+        }
+      }],
+      production: [{
+        dest: '<%= yeoman.app %>/scripts/appConfig.js',
+        wrap: '\'use strict\';\n\n<%= __ngModule %>',
+        name: 'AppConfig',
+        constants: {
+          ENV: 'production',
+          API_HOST: 'alumni-db-backend.herokuapp.com',
+        }
+      }]
+    },
+
+
     // The actual grunt server settings
     connect: {
       options: {
@@ -119,7 +146,9 @@ module.exports = function (grunt) {
       all: {
         src: [
           'Gruntfile.js',
-          '<%= yeoman.app %>/scripts/{,*/}*.js'
+          '<%= yeoman.app %>/scripts/{,*/}*.js',
+          // Exclude the auto-generated file from ngconstant task.
+          '!<%= yeoman.app %>/scripts/appConfig.js'
         ]
       },
       test: {
@@ -377,6 +406,7 @@ module.exports = function (grunt) {
       'wiredep',
       'concurrent:server',
       'autoprefixer',
+      'ngconstant:development',      
       'connect:livereload',
       'watch'
     ]);
@@ -391,12 +421,14 @@ module.exports = function (grunt) {
     'clean:server',
     'concurrent:test',
     'autoprefixer',
+    'ngconstant:development',    
     'connect:test',
     'karma'
   ]);
 
   grunt.registerTask('build', [
     'clean:dist',
+    'ngconstant:production', 
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
