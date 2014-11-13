@@ -8,8 +8,8 @@
  * Controller of the alumniWebApp
  */
 angular.module('alumniWebApp')
-  .factory('usersFactory', ['$http', function ($http) {
-        var urlBase = 'http://localhost:3000/users';
+  .factory('usersFactory', ['$http','API_HOST', function (API_HOST,$http) {
+        var urlBase = '//'+API_HOST+'/users';
 
         var usersFactory = {};
 
