@@ -2,7 +2,7 @@
 
   # Alumni Web Client Deploy
 
-  git remote add web-client-heroku git@heroku.com:alumni-db-frontend.git
+  git remote add heroku git@heroku.com:alumni-db-frontend.git
 
   # Create a temp branch to deploy from.
   git checkout -b tmp-deploy
