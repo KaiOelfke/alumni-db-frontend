@@ -21,8 +21,8 @@
   
   yes | git push heroku `git subtree split --prefix dist tmp-deploy`:master --force
 
-  # Remove tmp-deploy
-  git branch -D tmp-deploy
-
   # Switch back to master
   git checkout master
+
+  # Remove tmp-deploy
+  git branch -D tmp-deploy
