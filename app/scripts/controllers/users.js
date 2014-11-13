@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name alumniDbFrontendApp.controller:UsersCtrl
+ * @name alumniWebApp.controller:UsersCtrl
  * @description
  * # UsersCtrl
- * Controller of the alumniDbFrontendApp
+ * Controller of the alumniWebApp
  */
-angular.module('alumniDbFrontendApp')
+angular.module('alumniWebApp')
   .controller('UsersCtrl', ['usersFactory','$scope',function (usersFactory,$scope) {
     $scope.users =[];
 

@@ -2,14 +2,15 @@
 
 /**
  * @ngdoc overview
- * @name alumniDbFrontendApp
+ * @name alumniWebApp
  * @description
- * # alumniDbFrontendApp
+ * # alumniWebApp
  *
  * Main module of the application.
  */
 angular
-  .module('alumniDbFrontendApp', [
+  .module('alumniWebApp', [
+    'AppConfig',
     'ngCookies',
     'ngResource',
     'ngRoute'

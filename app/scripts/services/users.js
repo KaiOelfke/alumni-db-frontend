@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name alumniDbFrontendApp.service:usersFactory
+ * @name alumniWebApp.service:usersFactory
  * @description
  * # usersFactory
- * Controller of the alumniDbFrontendApp
+ * Controller of the alumniWebApp
  */
-angular.module('alumniDbFrontendApp')
+angular.module('alumniWebApp')
   .factory('usersFactory', ['$http', function ($http) {
         var urlBase = 'http://localhost:3000/users';
 
