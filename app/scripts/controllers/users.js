@@ -8,7 +8,7 @@
  * Controller of the alumniWebApp
  */
 angular.module('alumniWebApp')
-  .controller('UsersCtrl', ['usersFactory','$scope',function (usersFactory,$scope) {
+  .controller('UsersCtrl', ['usersFactory','$scope',function UsersCtrl (usersFactory,$scope) {
     $scope.users =[];
 
     usersFactory.getUsers()
