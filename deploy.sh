@@ -7,6 +7,9 @@
   # Create a temp branch to deploy from.
   git checkout -b tmp-deploy
 
+  git checkout tmp-deploy
+
+
   # Un-ignoring dist for a second.
   sed '/dist/d' .gitignore > .gitignore.new && mv .gitignore.new .gitignore
 
