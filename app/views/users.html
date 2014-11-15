@@ -3,8 +3,25 @@
 <p class="lead">List of all users.</p>
 </div>
 
-<ul>
-    <li ng-repeat="user in users">
-       {{ user }}
-    </li>
-</ul>
+<div class="table-responsive">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Username</th>
+				<th>Email</th>
+				<th>Created at</th>
+				<th>Updated at</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="user in users">
+				<td>{{ user.id }}</td>
+				<td>{{ user.username }}</td>
+				<td>{{ user.email }}</td>
+				<td>{{ user.created_at }}</td>
+				<td>{{ user.updated_at }}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

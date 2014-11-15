@@ -12,7 +12,6 @@ angular.module('alumni-db-frontend')
         var urlBase = '//' + API_HOST + '/users';
         var usersFactory = {};
 
-
         usersFactory.getUsers = function  () {
             return $http.get(urlBase);
         };
