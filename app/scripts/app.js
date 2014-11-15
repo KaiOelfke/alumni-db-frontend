@@ -8,6 +8,13 @@
  *
  * Main module of the application.
  */
+
+function HeaderCtrl($scope, $location) {
+  $scope.isActive = function(viewLocation) {
+    return viewLocation === $location.path();
+  };
+}
+
 angular
   .module('alumni-db-frontend', [
     'AppConfig',
@@ -32,4 +39,5 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  });
+  })
+  .controller('HeaderCtrl', HeaderCtrl);
