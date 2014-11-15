@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name alumniWebApp.service:usersFactory
+ * @name alumni-db-frontend.service:usersFactory
  * @description
  * # usersFactory
- * Controller of the alumniWebApp
+ * Controller of the alumni-db-frontend
  */
-angular.module('alumniWebApp')
+angular.module('alumni-db-frontend')
   .factory('usersFactory', ['$http','API_HOST', function ($http, API_HOST) {
         var urlBase = '//' + API_HOST + '/users';
         var usersFactory = {};

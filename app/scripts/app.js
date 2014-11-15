@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name alumniWebApp
+ * @name alumni-db-frontend
  * @description
- * # alumniWebApp
+ * # alumni-db-frontend
  *
  * Main module of the application.
  */
 angular
-  .module('alumniWebApp', [
+  .module('alumni-db-frontend', [
     'AppConfig',
     'ngCookies',
     'ngResource',
@@ -20,10 +20,6 @@ angular
       .when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
       })
       .when('/signup', {
         templateUrl: 'views/signup.html',

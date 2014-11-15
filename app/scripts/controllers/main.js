@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name alumniWebApp.controller:MainCtrl
+ * @name alumni-db-frontend.controller:MainCtrl
  * @description
  * # MainCtrl
- * Controller of the alumniWebApp
+ * Controller of the alumni-db-frontend
  */
-angular.module('alumniWebApp')
+angular.module('alumni-db-frontend')
   .controller('MainCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',

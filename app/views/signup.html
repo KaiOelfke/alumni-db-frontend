@@ -1,18 +1,19 @@
 <div class="jumbotron">
 <h1>Sign Up</h1>
-<p class="lead">Welcome to the alumni-db-frontend App. Please sign
-up.</p>
+<p class="lead">Please sign up.</p>
 </div>
 
-
 <form role="form">
+
   <div class="form-group">
-    <label>username</label>
-    <input type="text" class="form-control" placeholder="Enter username" ng-model="user.username" required>
-  </div>
+    <label>Username</label>
+    <input type="text" class="form-control" placeholder="Username" ng-model="user.username" required>
+  </div> <!-- /form-group -->
   <div class="form-group">
-    <label >email</label>
-    <input type="email" class="form-control" placeholder="Enter email" ng-model="user.email" required>
-  </div>
-  <button type="submit" class="btn btn-default" ng-click="insertUser(user)">Submit</button>
-</form>
+    <label>Email</label>
+    <input type="email" class="form-control" placeholder="Email" ng-model="user.email" required>
+  </div> <!-- /form-group -->
+
+  <button type="submit" class="btn btn-primary btn-block" ng-click="insertUser(user)">Submit</button>
+
+</form> <!-- /form -->
