@@ -11,10 +11,6 @@ body {
   padding-right: 15px;
 }
 
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-}
 /* Make the masthead heading the same height as the navigation */
 .header h3 {
   margin-top: 0;
@@ -73,4 +69,10 @@ body {
 /* Custom alumni-db-frontend stuff */
 .content {
   margin-bottom: 30px;
+}
+
+@media screen and (min-width: 768px) {
+  .header {
+    border-bottom: 1px solid #e5e5e5;
+  }
 }
