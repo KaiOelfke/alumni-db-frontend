@@ -406,7 +406,7 @@ module.exports = function (grunt) {
       'wiredep',
       'concurrent:server',
       'autoprefixer',
-      'ngconstant:development',      
+      'ngconstant:development',
       'connect:livereload',
       'watch'
     ]);
@@ -421,14 +421,14 @@ module.exports = function (grunt) {
     'clean:server',
     'concurrent:test',
     'autoprefixer',
-    'ngconstant:development',    
+    'ngconstant:development',
     'connect:test',
     'karma'
   ]);
 
   grunt.registerTask('build', [
     'clean:dist',
-    'ngconstant:production', 
+    'ngconstant:production',
     'wiredep',
     'useminPrepare',
     'concurrent:dist',
@@ -437,8 +437,8 @@ module.exports = function (grunt) {
     'ngAnnotate',
     'copy:dist',
     'cdnify',
-    'cssmin',
-    'uglify',
+    //'cssmin',
+    //'uglify',
     'filerev',
     'usemin',
     'htmlmin'

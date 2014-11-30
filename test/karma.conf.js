@@ -23,6 +23,8 @@ module.exports = function(config) {
       'bower_components/angular-cookies/angular-cookies.js',
       'bower_components/angular-resource/angular-resource.js',
       'bower_components/angular-route/angular-route.js',
+      'bower_components/angular-cookie/angular-cookie.js',
+      'bower_components/ng-token-auth/dist/ng-token-auth.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
       'test/spec/**/*.js'
