@@ -9,7 +9,7 @@
  */
 angular.module('alumniWebApp')
   .factory('usersFactory', ['$http','API_HOST', function ($http, API_HOST) {
-        var urlBase = '//' + API_HOST + '/users';
+        var urlBase =  API_HOST + '/users';
         var usersFactory = {};
 
 

@@ -5,14 +5,25 @@ up.</p>
 </div>
 
 
-<form role="form">
+<form role="form" ng-submit="handleRegBtnClick(registrationForm)" ng-init="registrationForm = {}">
   <div class="form-group">
     <label>username</label>
-    <input type="text" class="form-control" placeholder="Enter username" ng-model="user.username" required>
+    <input type="text" class="form-control" placeholder="Enter username" ng-model="registrationForm.username" required="required">
   </div>
   <div class="form-group">
     <label >email</label>
-    <input type="email" class="form-control" placeholder="Enter email" ng-model="user.email" required>
+    <input type="email" class="form-control" placeholder="Enter email" ng-model="registrationForm.email" required="required">
   </div>
-  <button type="submit" class="btn btn-default" ng-click="insertUser(user)">Submit</button>
+
+  <div class="form-group">
+    <label>password</label>
+    <input type="password" name="password" ng-model="registrationForm.password" required="required" class="form-control"/>
+  </div>
+
+  <div class="form-group">
+    <label>password confirmation</label>
+    <input type="password" name="password_confirmation" ng-model="registrationForm.password_confirmation" required="required" class="form-control"/>
+  </div>
+
+  <button type="submit" class="btn btn-default">Submit</button>
 </form>

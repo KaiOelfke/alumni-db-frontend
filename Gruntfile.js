@@ -75,7 +75,7 @@ module.exports = function (grunt) {
         name: 'AppConfig',
         constants: {
           ENV: 'development',
-          API_HOST: 'localhost:3000',
+          API_HOST: 'http://localhost:3000',
         }
       }],
       production: [{

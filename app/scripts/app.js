@@ -13,8 +13,14 @@ angular
     'AppConfig',
     'ngCookies',
     'ngResource',
-    'ngRoute'
+    'ngRoute',
+    'ng-token-auth'
   ])
+  .config(function($authProvider,API_HOST) {
+    $authProvider.configure({
+        apiUrl: API_HOST
+    });
+  })
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
@@ -25,6 +31,10 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
       })
+      .when('/signin', {
+        templateUrl: 'views/signin.html',
+        controller: 'SigninCtrl'
+      })      
       .when('/signup', {
         templateUrl: 'views/signup.html',
         controller: 'SignupCtrl'
@@ -36,4 +46,5 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  });
+  })
+  ;
