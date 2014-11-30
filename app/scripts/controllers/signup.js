@@ -8,24 +8,22 @@
  * Controller of the alumni-db-frontend
  */
 
-function signupCtrl(usersFactory, $scope) {
+function signupCtrl($auth, $scope) {
 
-    $scope.insertUser = function (user) {
-
-
-        usersFactory.insertUser(user)
-            .success(function  () {
-                console.log('success');
-            })
-            .error(function (error) {
-                console.error(error);
-            });
-
+    $scope.handleRegBtnClick = function() {
+      $auth.submitRegistration($scope.registrationForm)
+        .then(function(resp) {
+            console.log('You have successfully registered. ', resp);
+        })
+        .catch(function(resp) {
+            console.log('your information is wrong. ', resp);
+        });
     };
-}
+
+  }
 
 angular.module('alumni-db-frontend')
-  .controller('SignupCtrl', ['usersFactory', '$scope', signupCtrl]);
+  .controller('SignupCtrl', ['$auth', '$scope', signupCtrl]);
 
 
 
