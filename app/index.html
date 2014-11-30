@@ -5,10 +5,14 @@
     <title>alumni-db-frontend</title>
     <!-- Set width for mobile devices -->
     <meta name="viewport" content="width=device-width">
-    <!-- Bootstrap -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <!-- Shared styles -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
   </head>
   <body ng-app="alumni-db-frontend">
     <!--[if lt IE 7]>
@@ -58,7 +62,7 @@
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
-        <script src="scripts/appConfig.js"></script>        
+        <script src="scripts/appConfig.js"></script>
         <script src="scripts/services/users.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/signup.js"></script>
