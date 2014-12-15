@@ -20,24 +20,11 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right" ng-controller="HeaderCtrl">
-          <li ng-class="{ active: isActive('/') }"><a ng-href="#">Home</a></li>
-          <li ng-class="{ active: isActive('/signup') }"><a ng-href="#/signup">Sign Up</a></li>
-          <li ng-class="{ active: isActive('/users') }"><a ng-href="#/users">Users</a></li>
-        </ul>
-        <h3 class="text-muted">alumni-db-frontend</h3>
-      </div> <!-- /header -->
 
-      <div ng-view="" class="content">
-        <!-- Content goes here -->
-      </div>
 
-      <div class="footer">
-        <!-- Place footer here -->
-      </div> <!-- /footer -->
-    </div> <!-- /container -->
+    <div ui-view class="content">
+      <!-- Content goes here -->
+    </div>
 
     <!-- TODO: Find out what this is for -->
     <!-- build:js(.) scripts/oldieshim.js -->
@@ -54,9 +41,10 @@
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-cookie/angular-cookie.js"></script>
     <script src="bower_components/ng-token-auth/dist/ng-token-auth.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -68,6 +56,7 @@
         <script src="scripts/controllers/signup.js"></script>
         <script src="scripts/controllers/signin.js"></script>
         <script src="scripts/controllers/users.js"></script>
+        <script src="scripts/controllers/registration.js"></script>
         <!-- endbuild -->
 </body>
 </html>

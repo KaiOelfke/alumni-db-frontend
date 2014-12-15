@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-md-offset-2 col-md-8">
+
+    <div class="ordered steps">
+      <div class="step">
+        <div class="content">
+          <div class="title">Sign Up</div>
+        </div>                      
+      </div>
+      <div class="step">
+        <div class="content">
+          <div class="title">Personal Information</div>
+        </div>                      
+      </div>
+      <div class="step">
+        <div class="content">
+          <div class="title">JA-YE Program</div>
+        </div>
+      </div>
+    </div>
+
+
+    <div 
+      ng-switch on="infoForm">
+        <div ng-switch-when="personal-info"><div ng-include="'/views/home-registration/personal-info.html'"> </div></div>
+        <div ng-switch-when="program-info"><div ng-include="'/views/home-registration/program-info.html'"> </div></div>
+    </div>
+  </div>
+</div>

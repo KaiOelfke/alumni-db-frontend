@@ -9,18 +9,13 @@
  * Main module of the application.
  */
 
-function HeaderCtrl($scope, $location) {
-  $scope.isActive = function(viewLocation) {
-    return viewLocation === $location.path();
-  };
-}
 
 angular
   .module('alumni-db-frontend', [
     'AppConfig',
+    'ngMessages',
     'ngCookies',
-    'ngResource',
-    'ngRoute',
+    'ui.router',
     'ng-token-auth'
   ])
   .config(function($authProvider,API_HOST) {
@@ -28,27 +23,48 @@ angular
         apiUrl: API_HOST
     });
   })
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+  .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+
+
+    $locationProvider.html5Mode(false);
+
+    $urlRouterProvider
+        .when('/', '/signin')
+        .when('', '/signin')        
+        .otherwise('/404');
+
+    // For any unmatched url
+
+    console.log($stateProvider);
+    $stateProvider
+      .state('home', {
+        abstract: true,
+        url: '/home',
+        templateUrl: 'views/home.html'
       })
-      .when('/signin', {
-        templateUrl: 'views/signin.html',
-        controller: 'SigninCtrl'
+      .state('home.registration', {
+        url: '/registration',
+        templateUrl: 'views/home-registration/main.html',
+        controller: 'RegistrationCtrl'
       })
-      .when('/signup', {
-        templateUrl: 'views/signup.html',
-        controller: 'SignupCtrl'
-      })
-      .when('/users', {
+      .state('home.index', {
+        url: '',
         templateUrl: 'views/users.html',
         controller: 'UsersCtrl'
       })
-      .otherwise({
-        redirectTo: '/'
+      .state('signin', {
+        url: '/signin',
+        templateUrl: 'views/splash-signin.html',
+        controller: 'SigninCtrl'
+      })
+      .state('signup', {
+        url: '/signup',
+        templateUrl: 'views/splash-signup.html',
+        controller: 'SignupCtrl'
+      })
+      .state('404', {
+        url: '/404',
+        templateUrl: 'views/404.html'
       });
-  })
-  .controller('HeaderCtrl', HeaderCtrl);
 
+  });

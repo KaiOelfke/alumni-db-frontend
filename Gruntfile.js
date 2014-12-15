@@ -45,8 +45,8 @@ module.exports = function (grunt) {
         tasks: ['newer:jshint:test', 'karma']
       },
       styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
-        tasks: ['newer:copy:styles', 'autoprefixer']
+        files: ['<%= yeoman.app %>/styles/{,*/}*.less'],
+        tasks: ['less:development','autoprefixer']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -63,6 +63,25 @@ module.exports = function (grunt) {
       }
     },
 
+    less: {
+      development: {
+        options: {
+          paths: ['<%= yeoman.app %>/styles']
+        },
+        files: {
+          '.tmp/styles/main.css': '<%= yeoman.app %>/styles/main.less'
+        }
+      },
+      production: {
+        options: {
+          paths: ['<%= yeoman.app %>/styles'],
+          cleancss: true, 
+        },
+        files: {
+          '<%= yeoman.dist %>/result.css': '<%= yeoman.app %>/main.less'
+        }
+      }
+    },    
 
     // Define configuration depending on environment.
     ngconstant: {
@@ -219,8 +238,7 @@ module.exports = function (grunt) {
         flow: {
           html: {
             steps: {
-              js: ['concat', 'uglifyjs'],
-              css: ['cssmin']
+              js: ['concat', 'uglifyjs']
             },
             post: {}
           }
@@ -231,7 +249,6 @@ module.exports = function (grunt) {
     // Performs rewrites based on filerev and the useminPrepare configuration
     usemin: {
       html: ['<%= yeoman.dist %>/{,*/}*.html'],
-      css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
       options: {
         assetsDirs: ['<%= yeoman.dist %>','<%= yeoman.dist %>/images']
       }
@@ -362,22 +379,14 @@ module.exports = function (grunt) {
           src: 'fonts/*',
           dest: '<%= yeoman.dist %>'
         }]
-      },
-      styles: {
-        expand: true,
-        cwd: '<%= yeoman.app %>/styles',
-        dest: '.tmp/styles/',
-        src: '{,*/}*.css'
       }
     },
 
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
-        'copy:styles'
       ],
       test: [
-        'copy:styles'
       ],
       dist: [
         'copy:styles',
@@ -404,6 +413,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'wiredep',
+      'less:development',
       'concurrent:server',
       'autoprefixer',
       'ngconstant:development',

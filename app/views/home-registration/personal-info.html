@@ -1,0 +1,51 @@
+
+    <form role="form" class="form-horizontal" ng-submit="completeRegistration(registrationForm)" ng-init="registrationForm = {}">
+            <div class="form-group">
+              <div class="col-md-6">
+                <label>First name</label>
+                <input type="text" class="form-control" placeholder="First name" ng-model="registrationForm.first_name">
+              </div>
+              <div class="col-md-6">
+                <label for="exampleInputEmail1">Last name</label>
+                <input type="text" class="form-control" placeholder="Last name"
+                ng-model="registrationForm.last_name">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-md-6">
+                <label>Country</label>
+                <input type="text" class="form-control" placeholder="Country"
+                ng-model="registrationForm.country">
+              </div>
+              <div class="col-md-6">
+                <label>City</label>
+                <input type="text" class="form-control" placeholder="City"
+                ng-model="registrationForm.city">
+              </div>
+
+
+            </div>                        
+            <div class="form-group">
+              <div class="col-md-6">
+                <label>Date of Birth</label>
+                <input type="date" class="form-control" placeholder="Date of Birth" 
+                ng-model="registrationForm.date_of_birth">
+              </div>
+              <div class="col-md-6">
+                <label for="exampleInputEmail1">Gender</label>
+                <div class="checkbox-row" ng-init="registrationForm.gender=0">
+                  <div  class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: !registrationForm.gender}"
+                        ng-click="registrationForm.gender=0;">Male</div>
+                  <div  class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: registrationForm.gender}"
+                        ng-click="registrationForm.gender=1">Female</div>
+                </div>
+              </div>
+
+            </div>                        
+
+
+
+
+          <button type="submit" class="btn btn-default btn-lg" style="margin-left:20px">Continue</button>
+    </form>

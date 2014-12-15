@@ -1,0 +1,39 @@
+<div id="splash-view" class="container parent"> 
+  <div class="child">
+    <div class="panel">
+        <h3>Connect with Alumni</h3>
+
+        <form role="form" ng-submit="handleSignInBtnClick(signinForm)" ng-init="signinForm = {}">
+
+
+          <div class="form-group">
+            <label for="email">Email address</label>
+
+            <div class="input-icon"><span><span class="glyphicon glyphicon-user"></span></span></div>
+            <input autofocus="true" class="form-control" id=
+            "email" name="email" placeholder="Email address" tabindex="1" type="email" 
+            ng-model="signinForm.email"/>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+
+            <div class="input-icon">
+                <span><span class="glyphicon glyphicon-lock"></span></span>
+                <input class="form-control password" id="password" name="password" placeholder=
+                "Password" tabindex="2" type="password" ng-model="signinForm.password"/>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-lg btn-block" name="commit" tabindex="3"
+          type="submit" value="Log In">Log In</button>
+
+
+
+        </form>
+        <a class="panel-footer" href="#/signup">Not a member? &nbsp;<span> Join JA-YE Alumni Europe</span></a>
+
+
+    </div>
+  </div>
+</div>
+

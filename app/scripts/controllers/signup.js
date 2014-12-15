@@ -8,14 +8,16 @@
  * Controller of the alumni-db-frontend
  */
 
-function signupCtrl($auth, $scope) {
+function signupCtrl($auth, $state, $scope) {
 
-    $scope.handleRegBtnClick = function() {
-      $auth.submitRegistration($scope.registrationForm)
+    $scope.handleSignUpBtnClick = function() {
+      $auth.submitRegistration($scope.signupForm)
         .then(function(resp) {
-            console.log('You have successfully registered. ', resp);
+            $state.go('home.registration');          
+            console.log('You have successfully signed up. ', resp);
         })
         .catch(function(resp) {
+            $scope.signupForm.alerts = {type: 'error', msg: ''};            
             console.log('your information is wrong. ', resp);
         });
     };
@@ -23,7 +25,7 @@ function signupCtrl($auth, $scope) {
   }
 
 angular.module('alumni-db-frontend')
-  .controller('SignupCtrl', ['$auth', '$scope', signupCtrl]);
+  .controller('SignupCtrl', ['$auth', '$state', '$scope', signupCtrl]);
 
 
 

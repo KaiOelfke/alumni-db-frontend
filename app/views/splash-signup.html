@@ -1,0 +1,41 @@
+<div id="splash-view" class="container parent"> 
+  <div class="child">
+    <div clasS="panel">
+      <h3>Connect with Alumni</h3>
+
+      <form role="form" ng-submit="handleSignUpBtnClick(signupForm)" ng-init="signupForm = {}">
+
+        <div class="form-group">
+          <label for="email">Email address</label>
+
+          <div class="input-icon"><span><span class="glyphicon glyphicon-user"></span></span></div>
+          <input autofocus="true" class="form-control" id=
+          "email" name="email" placeholder="Email address" tabindex="1" type="email" ng-model="signupForm.email"/>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+
+          <div class="input-icon">
+              <span><span class="glyphicon glyphicon-lock"></span></span>
+              <input class="form-control password" id="password" name="password" placeholder=
+            "Password" tabindex="2" type="password" ng-model="signupForm.password"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password Confirmation</label>
+
+          <div class="input-icon">
+              <span><span class="glyphicon glyphicon-lock"></span></span>
+              <input class="form-control password" id="password" name="password" placeholder=
+            "Password Confirmation" tabindex="2" type="password" ng-model="signupForm.password_confirmation"//>
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-lg btn-block" name="commit" tabindex="3"
+        type="submit" value="Log In">Sign Up</button>
+      </form>
+    </div>
+  </div>
+</div>
+
