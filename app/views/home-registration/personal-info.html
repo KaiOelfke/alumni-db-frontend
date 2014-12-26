@@ -15,8 +15,11 @@
             <div class="form-group">
               <div class="col-md-6">
                 <label>Country</label>
-                <input type="text" class="form-control" placeholder="Country"
-                ng-model="registrationForm.country">
+                <select class="form-control" 
+                        ng-init="registrationForm.country_of_participation = getCountries[80] || registrationForm.country_of_participation"
+                        ng-model="registrationForm.country_of_participation" 
+                        ng-options="country.name for country in getCountries">
+                </select>
               </div>
               <div class="col-md-6">
                 <label>City</label>
@@ -47,5 +50,5 @@
 
 
 
-          <button type="submit" class="btn btn-default btn-lg" style="margin-left:20px">Continue</button>
+          <button type="submit" class="btn btn-default btn-green btn-lg">Continue</button>
     </form>

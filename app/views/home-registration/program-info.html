@@ -19,7 +19,12 @@
 
             <div class="form-group">
               <label>In which country did you participate?</label>
-              <input type="text" class="form-control" placeholder="Country" ng-model="registrationForm.country_of_participation">
+                <label>Country</label>
+                <select class="form-control" 
+                        ng-init="registrationForm.country_of_participation = getCountries[80] || registrationForm.country_of_participation"
+                        ng-model="registrationForm.country_of_participation" 
+                        ng-options="country.name for country in getCountries">
+                </select>              
             </div>
 
             <div class="form-group">
@@ -36,5 +41,5 @@
               <input type="text" class="form-control" placeholder="Name" ng-model="registrationForm.student_company_name">
             </div>
 
-            <button type="submit" class="btn btn-default btn-lg" style="margin-left:20px">Continue</button>
+            <button type="submit" class="btn btn-default btn-green btn-lg">Continue</button>
     </form>

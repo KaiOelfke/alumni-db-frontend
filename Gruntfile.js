@@ -78,7 +78,7 @@ module.exports = function (grunt) {
           cleancss: true, 
         },
         files: {
-          '<%= yeoman.dist %>/result.css': '<%= yeoman.app %>/main.less'
+          '<%= yeoman.dist %>/styles/main.css': '<%= yeoman.app %>/styles/main.less'
         }
       }
     },    
@@ -233,11 +233,13 @@ module.exports = function (grunt) {
     // additional tasks can operate on them
     useminPrepare: {
       html: '<%= yeoman.app %>/index.html',
+      css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
       options: {
         dest: '<%= yeoman.dist %>',
         flow: {
           html: {
             steps: {
+              css: ['cssmin'],
               js: ['concat', 'uglifyjs']
             },
             post: {}
@@ -249,6 +251,7 @@ module.exports = function (grunt) {
     // Performs rewrites based on filerev and the useminPrepare configuration
     usemin: {
       html: ['<%= yeoman.dist %>/{,*/}*.html'],
+      css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
       options: {
         assetsDirs: ['<%= yeoman.dist %>','<%= yeoman.dist %>/images']
       }
@@ -389,7 +392,6 @@ module.exports = function (grunt) {
       test: [
       ],
       dist: [
-        'copy:styles',
         'imagemin',
         'svgmin'
       ]
@@ -440,6 +442,7 @@ module.exports = function (grunt) {
     'clean:dist',
     'ngconstant:production',
     'wiredep',
+    'less:production',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',

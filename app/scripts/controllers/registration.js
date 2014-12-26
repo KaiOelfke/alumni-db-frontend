@@ -8,7 +8,7 @@
  * Controller of the alumni-db-frontend
  */
 
-function registrationCtrl($auth, $state, $scope) {
+function registrationCtrl($auth, $state, countriesFactory, $scope) {
     $scope.infoForm = 'personal-info';
 
     $scope.completeRegistration = function(registrationForm) {
@@ -17,18 +17,20 @@ function registrationCtrl($auth, $state, $scope) {
                 if ($scope.infoForm === 'program-info') {
                     $state.go('home.index');
                 }
-                console.log($scope.infoForm);
                 $scope.infoForm = 'program-info';
-                console.log('You have successfully logged in. ', resp);
+                console.log('data updated ', resp);
             })
             .catch(function(resp) {
-                console.log('your password / username is wrong. ', resp);
+                console.log( resp);
             });
     };
+
+    $scope.getCountries = countriesFactory.getCountries();
+
 }
 
 angular.module('alumni-db-frontend')
-  .controller('RegistrationCtrl', ['$auth', '$state', '$scope', registrationCtrl]);
+  .controller('RegistrationCtrl', ['$auth', '$state', 'countriesFactory', '$scope', registrationCtrl]);
 
 
 
