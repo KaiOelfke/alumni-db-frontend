@@ -1,20 +1,46 @@
-/* JA Worldwide Styling Guidelines 
-/* http://media.wix.com/ugd/b507ca_d0cac8808d0c4d748e94b103e9e2c184.pdf
+/* Primary color palette
+ * @green:       rgb(0,118,61);
+ * @orange:      rgb(239,121,12);
+ * @black:       #666;
+ * @gray:        #b2b2b2;
+
+ * Secundary color palete 
+ * @lightGreen:  rgb(127,189,54);
+ * @lightOrange: rgb(249,170,7);
+ * @lightYellow: rgb(255,243,82);
+ * @mediumGreen: rgb(111,183,43);
  */
 
-/* Primary color palette */
-@green: rgb(0,118,61);
-@orange: rgb(239,121,12);
-@black: rgba(0,0,0,0.6);
-@gray: rgba(0,0,0,0.3);
+.splash-parent {
+    display: table;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: @gray;
 
-/* Secundary color palete */
-@lightGreen: rgb(127,189,54);
-@lightOrange: rgb(249,170,7);
-@lightYellow: rgb(255,243,82);
-@mediumGreen: rgb(111,183,43);
+    .splash-child {
+      display: table-cell;
+      vertical-align: middle;
 
-#jo {
-  font-size: 55px;
-  color: @gray;
+      .splash-panel {
+        display: inline-block;
+        width: 430px;
+        background-color: white;
+        border-radius: 8px;
+        border: 1px solid transparent;
+        box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+      }
+
+      .splash-panel h3 {
+        margin: 40px;
+        font-family: inherit;
+        font-weight: 200;
+        color: @lightGreen;
+      }
+
+      .splash-panel .splash-panel-footer {
+        padding: 20px;
+      }
+    }
 }
+
