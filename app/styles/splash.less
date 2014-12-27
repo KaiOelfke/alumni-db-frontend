@@ -20,18 +20,18 @@
 @iconContainerSize: 44px;
 @inputPadding:       8px;
 
-.splash-parent {
+.parent {
     display: table;
     width: 100%;
     height: 100%;
     text-align: center;
     background-color: @gray;
 
-    .splash-child {
+    .child {
       display: table-cell;
       vertical-align: middle;
 
-      .splash-panel {
+      .panel {
         margin: 0 auto;
         max-width: @maxPanelWidth;
         background-color: white;
@@ -46,7 +46,7 @@
           color: @lightGreen;
         }
 
-        .splash-panel-footer {
+        .panel-footer {
           display: block;
           padding: 20px;
           color: @black;
@@ -59,7 +59,7 @@
           background-color: @footerGray;
         }
 
-        a.splash-panel-footer > span {
+        a.panel-footer > span {
           color: @lightGreen;
           text-decoration: underline;
         }
