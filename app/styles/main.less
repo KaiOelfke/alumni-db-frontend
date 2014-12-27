@@ -1,27 +1,38 @@
-body {
+@import "splash.less";
+
+/* JA Worldwide Styling Guidelines 
+/* http://media.wix.com/ugd/b507ca_d0cac8808d0c4d748e94b103e9e2c184.pdf
+ */
+
+/* Primary color palette */
+@green: rgb(0,118,61);
+@orange: rgb(239,121,12);
+@black: rgba(0,0,0,0.6);
+@gray: rgba(0,0,0,0.3);
+
+/* Secundary color palete */
+@lightGreen: rgb(127,189,54);
+@lightOrange: rgb(249,170,7);
+@lightYellow: rgb(255,243,82);
+@mediumGreen: rgb(111,183,43);
+
+html, body {
     height: 100%;
     font-size: 14px;    
     margin: 0;
     padding: 0;    
 }
 
-html {
-    height: 100%;
-    font-size: 14px;
-
-}
-
-
 .content {
     height: 100%;
 }
 
 .parent {
+    display: table;
     min-width: 100%;
     min-height: 100%;
     text-align: center;
-    display: table;
-    background: url('/images/background.png') 50% 50% no-repeat fixed; 
+    background: url('/images/background.png') no-repeat center center fixed; 
 
 }
 

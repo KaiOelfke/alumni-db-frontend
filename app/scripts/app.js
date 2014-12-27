@@ -62,6 +62,10 @@ angular
         templateUrl: 'views/splash-signup.html',
         controller: 'SignupCtrl'
       })
+      .state('test', {
+        url: '/test',
+        templateUrl: 'views/test.html'
+      }) 
       .state('404', {
         url: '/404',
         templateUrl: 'views/404.html'
