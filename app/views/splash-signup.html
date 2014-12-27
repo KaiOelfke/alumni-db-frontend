@@ -11,7 +11,12 @@
         novalidate>
 
         <!-- Email -->
-        <div class="form-group has-icon">
+        <div 
+          class="form-group has-icon"
+          ng-class="{ 
+            'has-success': signupForm.email.$dirty && signupForm.email.$valid, 
+            'has-error': signupForm.email.$dirty && signupForm.email.$invalid 
+          }">
           <!-- Label -->
           <label for="email">Email address</label>
           <!-- Input -->
@@ -27,13 +32,17 @@
           <span class="icon-container attach-left">
             <span class="glyphicon glyphicon-user input-icon"></span>
           </span> 
-          <!-- Feedback icons 
-          <span class="icon-container attach-right">
+          <!-- Feedback icons -->
+          <span 
+            class="icon-container attach-right"
+            ng-show="signupForm.email.$dirty && signupForm.email.$valid">
             <span class="glyphicon glyphicon-ok"></span>
           </span> 
-          <span class="icon-container attach-right">
+          <span 
+            class="icon-container attach-right"
+            ng-show="signupForm.email.$dirty && signupForm.email.$invalid">
             <span class="glyphicon glyphicon-remove"></span>
-          </span> -->
+          </span>
         </div>
 
         <!-- Password -->
