@@ -5,8 +5,10 @@
       <h3>Connect with Alumni</h3>
       <!-- Form -->
       <form 
+        name="signupForm" 
         role="form" 
-        ng-submit="handleSignUpBtnClick(signupForm)">
+        ng-submit="signupForm.$valid && handleSignUpBtnClick(signupData)"
+        novalidate>
 
         <!-- Email -->
         <div class="form-group has-icon">
@@ -16,10 +18,11 @@
           <input 
             type="email" 
             name="email" 
-            ng-model="signupForm.email" 
+            ng-model="signupData.email" 
             class="form-control" 
             placeholder="Email address"
-            autofocus="true" />
+            autofocus="true" 
+            required />
           <!-- Input icon -->
           <span class="icon-container attach-left">
             <span class="glyphicon glyphicon-user input-icon"></span>
@@ -41,9 +44,10 @@
           <input 
             type="password" 
             name="password" 
-            ng-model="signupForm.password" 
+            ng-model="signupData.password" 
             class="form-control" 
-            placeholder="Password" />
+            placeholder="Password" 
+            required />
           <!-- Input icon -->
           <span class="icon-container attach-left">
             <span class="glyphicon glyphicon-lock input-icon"></span>
@@ -65,9 +69,10 @@
           <input 
             type="password" 
             name="password" 
-            ng-model="signupForm.password_confirmation" 
+            ng-model="signupData.password_confirmation" 
             class="form-control" 
-            placeholder="Password confirmation" />
+            placeholder="Password confirmation" 
+            required />
           <!-- Input icon -->
           <span class="icon-container attach-left">
             <span class="glyphicon glyphicon-lock input-icon"></span>
@@ -85,9 +90,18 @@
         <button 
           name="commit" 
           type="submit" 
+          ng-disabled="signupForm.$invalid"
           class="btn btn-lg btn-block btn-alumni" 
           value="Sign Up">Sign Up</button>
       </form>
+
+      <!-- Debug -->
+      <div class="form-group">
+        signupForm.$valid = <b>{{ signupForm.$valid }}</b><br>
+        signupForm.email.$dirty = <b>{{ signupForm.email.$dirty }}</b><br>
+        signupForm.email.$valid = <b>{{ signupForm.email.$valid }}</b>
+      </div>
+
     </div>
   </div>
 </div>
