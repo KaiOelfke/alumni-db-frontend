@@ -19,19 +19,51 @@
             name="email" 
             ng-model="signinForm.email" 
             class="form-control" 
-            placeholder="Email address" />
+            placeholder="Email address"
+            autofocus="true" />
           <!-- Input icon -->
           <span class="icon-container attach-left">
             <span class="glyphicon glyphicon-user input-icon"></span>
           </span> 
-          <!-- Feedback icons -->
+          <!-- Feedback icons 
           <span class="icon-container attach-right">
             <span class="glyphicon glyphicon-ok"></span>
           </span> 
           <span class="icon-container attach-right">
             <span class="glyphicon glyphicon-remove"></span>
-          </span> 
+          </span> -->
         </div>
+
+        <!-- Password -->
+        <div class="form-group has-icon">
+          <!-- Label -->
+          <label for="password">Password</label>
+          <!-- Input -->
+          <input 
+            type="password" 
+            name="password" 
+            ng-model="signinForm.password" 
+            class="form-control" 
+            placeholder="Password" />
+          <!-- Input icon -->
+          <span class="icon-container attach-left">
+            <span class="glyphicon glyphicon-lock input-icon"></span>
+          </span> 
+          <!-- Feedback icons 
+          <span class="icon-container attach-right">
+            <span class="glyphicon glyphicon-ok"></span>
+          </span> 
+          <span class="icon-container attach-right">
+            <span class="glyphicon glyphicon-remove"></span>
+          </span> -->
+        </div>
+
+        <!-- Login button -->
+        <button 
+          name="commit" 
+          type="submit" 
+          value="Log In" 
+          class="btn btn-lg btn-block btn-alumni">Log In</button>
 
       </form>
       <!-- Footer -->
