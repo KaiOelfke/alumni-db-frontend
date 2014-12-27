@@ -1,41 +1,94 @@
-<div id="splash-view" class="container parent"> 
+<div class="container parent">
   <div class="child">
-    <div clasS="panel">
+    <div class="panel">
+      <!-- Title -->
       <h3>Connect with Alumni</h3>
+      <!-- Form -->
+      <form 
+        role="form" 
+        ng-submit="handleSignUpBtnClick(signupForm)" 
+        ng-init="signupForm = {}">
 
-      <form role="form" ng-submit="handleSignUpBtnClick(signupForm)" ng-init="signupForm = {}">
-
-        <div class="form-group">
+        <!-- Email -->
+        <div class="form-group has-icon">
+          <!-- Label -->
           <label for="email">Email address</label>
-
-          <div class="input-icon"><span><span class="glyphicon glyphicon-user"></span></span></div>
-          <input autofocus="true" class="form-control" id=
-          "email" name="email" placeholder="Email address" tabindex="1" type="email" ng-model="signupForm.email"/>
+          <!-- Input -->
+          <input 
+            type="email" 
+            name="email" 
+            ng-model="signupForm.email" 
+            class="form-control" 
+            placeholder="Email address"
+            autofocus="true" />
+          <!-- Input icon -->
+          <span class="icon-container attach-left">
+            <span class="glyphicon glyphicon-user input-icon"></span>
+          </span> 
+          <!-- Feedback icons 
+          <span class="icon-container attach-right">
+            <span class="glyphicon glyphicon-ok"></span>
+          </span> 
+          <span class="icon-container attach-right">
+            <span class="glyphicon glyphicon-remove"></span>
+          </span> -->
         </div>
 
-        <div class="form-group">
+        <!-- Password -->
+        <div class="form-group has-icon">
+          <!-- Label -->
           <label for="password">Password</label>
-
-          <div class="input-icon">
-              <span><span class="glyphicon glyphicon-lock"></span></span>
-              <input class="form-control password" id="password" name="password" placeholder=
-            "Password" tabindex="2" type="password" ng-model="signupForm.password"/>
-          </div>
+          <!-- Input -->
+          <input 
+            type="password" 
+            name="password" 
+            ng-model="signupForm.password" 
+            class="form-control" 
+            placeholder="Password" />
+          <!-- Input icon -->
+          <span class="icon-container attach-left">
+            <span class="glyphicon glyphicon-lock input-icon"></span>
+          </span> 
+          <!-- Feedback icons 
+          <span class="icon-container attach-right">
+            <span class="glyphicon glyphicon-ok"></span>
+          </span> 
+          <span class="icon-container attach-right">
+            <span class="glyphicon glyphicon-remove"></span>
+          </span> -->
         </div>
-        <div class="form-group">
-          <label for="password">Password Confirmation</label>
 
-          <div class="input-icon">
-              <span><span class="glyphicon glyphicon-lock"></span></span>
-              <input class="form-control password" id="password" name="password" placeholder=
-            "Password Confirmation" tabindex="2" type="password" ng-model="signupForm.password_confirmation"//>
-          </div>
+        <!-- Password confirmation -->
+        <div class="form-group has-icon">
+          <!-- Label -->
+          <label for="password">Password confirmation</label>
+          <!-- Input -->
+          <input 
+            type="password" 
+            name="password" 
+            ng-model="signupForm.password_confirmation" 
+            class="form-control" 
+            placeholder="Password confirmation" />
+          <!-- Input icon -->
+          <span class="icon-container attach-left">
+            <span class="glyphicon glyphicon-lock input-icon"></span>
+          </span> 
+          <!-- Feedback icons 
+          <span class="icon-container attach-right">
+            <span class="glyphicon glyphicon-ok"></span>
+          </span> 
+          <span class="icon-container attach-right">
+            <span class="glyphicon glyphicon-remove"></span>
+          </span> -->
         </div>
 
-        <button class="btn btn-primary btn-lg btn-block" name="commit" tabindex="3"
-        type="submit" value="Log In">Sign Up</button>
+        <!-- Login button -->
+        <button 
+          name="commit" 
+          type="submit" 
+          class="btn btn-lg btn-block btn-alumni" 
+          value="Sign Up">Sign Up</button>
       </form>
     </div>
   </div>
 </div>
-
