@@ -81,7 +81,12 @@
         </div>
 
         <!-- Password confirmation -->
-        <div class="form-group has-icon">
+        <div 
+          class="form-group has-icon"
+          ng-class="{ 
+            'has-success': signupForm.confirm_password.$dirty && signupForm.confirm_password.$valid, 
+            'has-error': signupForm.confirm_password.$dirty && signupForm.confirm_password.$invalid
+          }">
           <!-- Label -->
           <label for="password">Password confirmation</label>
           <!-- Input -->
@@ -89,22 +94,25 @@
             type="password" 
             name="confirm_password" 
             ng-model="signupData.password_confirmation" 
+            ng-minlength="8" 
             class="form-control" 
             placeholder="Password confirmation" 
-            required 
-            ui-validate="'$value==password'" 
-            ui-validate-watch="'password'"/>
+            required />
           <!-- Input icon -->
           <span class="icon-container attach-left">
             <span class="glyphicon glyphicon-lock input-icon"></span>
           </span> 
-          <!-- Feedback icons 
-          <span class="icon-container attach-right">
+          <!-- Feedback icons -->
+          <span 
+            class="icon-container attach-right"
+            ng-show="signupForm.confirm_password.$dirty && signupForm.confirm_password.$valid">
             <span class="glyphicon glyphicon-ok"></span>
           </span> 
-          <span class="icon-container attach-right">
+          <span 
+            class="icon-container attach-right"
+            ng-show="signupForm.confirm_password.$dirty && signupForm.confirm_password.$invalid">
             <span class="glyphicon glyphicon-remove"></span>
-          </span> -->
+          </span>
         </div>
 
         <!-- Login button -->
