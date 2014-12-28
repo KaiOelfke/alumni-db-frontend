@@ -1,3 +1,4 @@
+(function(){
 'use strict';
 
 /**
@@ -8,24 +9,27 @@
  * Controller of the alumni-db-frontend
  */
 
-function signupCtrl($auth, $state, $scope) {
+var app = angular.module('alumni-db-frontend');
+
+app.controller('SignupCtrl', [
+  '$auth', 
+  '$state', 
+  '$scope', 
+  function($auth, $state, $scope) {
+    $scope.signupForm = {};
 
     $scope.handleSignUpBtnClick = function() {
       $auth.submitRegistration($scope.signupForm)
         .then(function(resp) {
-            $state.go('home.registration');          
-            console.log('You have successfully signed up. ', resp);
+          $state.go('home.registration');
+          console.log('You have successfully signed up. ', resp);
         })
         .catch(function(resp) {
-            $scope.signupForm.alerts = {type: 'error', msg: ''};            
-            console.log('your information is wrong. ', resp);
+          $scope.signupForm.alerts = {type: 'error', msg: ''};      
+          console.log('Something went wrong. ', resp);
         });
     };
-
   }
+]);
 
-angular.module('alumni-db-frontend')
-  .controller('SignupCtrl', ['$auth', '$state', '$scope', signupCtrl]);
-
-
-
+})();
