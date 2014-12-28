@@ -29,10 +29,6 @@ app.controller('SignupCtrl', [
           console.log('Something went wrong. ', resp);
         });
     };
-
-    $scope.pwValid = function(password) {
-      return password.length >= 8;
-    };
   }
 ]);
 

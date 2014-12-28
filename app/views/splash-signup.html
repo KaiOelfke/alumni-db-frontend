@@ -49,8 +49,8 @@
         <div 
           class="form-group has-icon"
           ng-class="{ 
-            'has-success': signupForm.password.$dirty && pwValid(signupData.password), 
-            'has-error': signupForm.password.$dirty && !pwValid(signupData.password)
+            'has-success': signupForm.password.$dirty && signupForm.password.$valid, 
+            'has-error': signupForm.password.$dirty && signupForm.password.$invalid
           }">
           <!-- Label -->
           <label for="password">Password</label>
@@ -59,6 +59,7 @@
             type="password" 
             name="password" 
             ng-model="signupData.password" 
+            ng-minlength="8" 
             class="form-control" 
             placeholder="Password" 
             required />
@@ -69,12 +70,12 @@
           <!-- Feedback icons -->
           <span 
             class="icon-container attach-right"
-            ng-show="signupForm.password.$dirty && pwValid(signupData.password)">
+            ng-show="signupForm.password.$dirty && signupForm.password.$valid">
             <span class="glyphicon glyphicon-ok"></span>
           </span> 
           <span 
             class="icon-container attach-right"
-            ng-show="signupForm.password.$dirty && !pwValid(signupData.password)">
+            ng-show="signupForm.password.$dirty && signupForm.password.$invalid">
             <span class="glyphicon glyphicon-remove"></span>
           </span>
         </div>
@@ -120,7 +121,8 @@
         signupForm.$valid = <b>{{ signupForm.$valid }}</b><br>
         signupForm.email.$dirty = <b>{{ signupForm.email.$dirty }}</b><br>
         signupForm.email.$valid = <b>{{ signupForm.email.$valid }}</b><br>
-        Passwords match? <b>{{ !!form.confirm_password.$error.validator }}</b>
+        signupForm.password.$valid = <b>{{ signupForm.password.$valid }}</b><br>
+        signupForm.password.$error.minlength = <b>{{ signupForm.password.$error.minlength }}</b><br>
       </div>
 
     </div>
