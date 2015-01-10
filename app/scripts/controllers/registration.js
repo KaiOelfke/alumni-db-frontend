@@ -15,7 +15,7 @@ function registrationCtrl($auth, $state, countriesFactory, $scope) {
           $auth.updateAccount(registrationForm)
             .then(function(resp) {
                 if ($scope.infoForm === 'program-info') {
-                    $state.go('home.index');
+                    $state.go('home.loggedin.index');
                 }
                 $scope.infoForm = 'program-info';
                 console.log('data updated ', resp);

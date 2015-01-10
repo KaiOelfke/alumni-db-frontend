@@ -14,18 +14,26 @@ var app = angular.module('alumni-db-frontend');
 app.controller('SigninCtrl', [
   '$auth', 
   '$state', 
-  '$scope', 
-  function($auth, $state, $scope) {
-    var signinData = {};
+  'authorizationService',  
+  'USER_ROLES',
+  '$scope',
+  function($auth, $state, authorizationService, USER_ROLES, $scope) {
+
+    $scope.signinData = {};
 
     $scope.handleSignInBtnClick = function() {
       $auth.submitLogin($scope.signinData)
         .then(function(resp) {
-          $state.go('home.index');
+          var user = resp;
+          if (user.statuses.indexOf(USER_ROLES.registered) !== -1) {
+            $state.go('home.loggedin.index');
+          }else {
+            $state.go('home.loggedin.registration');
+          }
           console.log('You have successfully logged in. ', resp);
         })
         .catch(function(resp) {
-          signinData.alerts = {type: 'error', msg: ''};
+          $scope.signinData.alerts = {type: 'error', msg: ''};
           console.log('your password / username is wrong. ', resp);
         });
     };

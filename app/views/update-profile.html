@@ -1,0 +1,161 @@
+<div id="home-view">
+  <div class="colorbar">
+    <div class="o1"></div>
+    <div class="hg1"></div>
+    <div class="dg1"></div>
+    <div class="o2"></div>
+    <div class="dg2"></div>
+    <div class="hg2"></div>
+    <div class="o3"></div>
+  </div>
+
+  <div class="container-fuild">
+    <div class="container">
+
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+          <h1 class="title">Update profile of {{userData.first_name}} {{userData.last_name}}</h1>
+        </div>
+      </div>
+
+      <!--
+      <ui-view/>
+      -->
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+          <form 
+            name="updateUserForm" 
+            ng-submit="updateUserForm.$valid && submitUpdatedUserData(userData)"
+            role="form" 
+            class="form-inline update-form"
+            novalidate>
+
+            <!-- Firstname -->
+            <div class="form-group">
+              <label for="firstname">Firstname</label>
+              <input 
+                name="firstname" 
+                ng-model="userData.first_name" 
+                type="text" 
+                class="form-control" 
+                required />
+            </div>
+
+            <!-- Lastname -->
+            <div class="form-group">
+              <label for="lastname">Lastname</label>
+              <input 
+                name="lastname" 
+                ng-model="userData.last_name" 
+                type="text" 
+                class="form-control" 
+                required />
+            </div>
+
+            <!-- Country -->
+            <div class="form-group">
+              <label for="country">Country</label>
+              <input 
+                name="country" 
+                ng-model="userData.country" 
+                type="text" 
+                class="form-control" 
+                required />
+            </div>
+
+            <!-- City -->
+            <div class="form-group">
+              <label for="city">City</label>
+              <input 
+                name="city" 
+                ng-model="userData.city" 
+                type="text" 
+                class="form-control" 
+                required />
+            </div>
+
+            <!-- Date of Birth -->
+            <div class="form-group">
+              <label for="birthday">Date of Birth</label>
+              <input 
+                name="birthday" 
+                ng-model="userData.date_of_birth" 
+                type="date" 
+                class="form-control" 
+                required />
+            </div>
+
+            <!-- Program type -->
+            <div class="form-group">
+              <label for="programm_type">Program type</label>
+              <input 
+                name="programm_type" 
+                ng-model="userData.program_type" 
+                type="text" 
+                class="form-control" 
+                required />
+            </div>
+
+            <!-- Country of Participation -->
+            <div class="form-group">
+              <label for="country_of_participation">Country of Participation</label>
+              <input 
+                name="country_of_participation" 
+                ng-model="userData.country_of_participation" 
+                type="text" 
+                class="form-control" 
+                required />
+            </div>
+
+            <!-- Institution -->
+            <div class="form-group">
+              <label for="institution">Institution</label>
+              <input 
+                name="institution" 
+                ng-model="userData.institution" 
+                type="text" 
+                class="form-control" 
+                required />
+            </div>
+
+            <!-- Year of Participation -->
+            <div class="form-group">
+              <label for="year_of_participation">Year of Participation</label>
+              <input 
+                name="year_of_participation" 
+                ng-model="userData.year_of_participation" 
+                type="date" 
+                class="form-control" 
+                required />
+            </div>
+
+            <!-- Student company name -->
+            <div class="form-group">
+              <label for="student_company_name">Student company name</label>
+              <input 
+                name="student_company_name" 
+                ng-model="userData.student_company_name" 
+                type="text" 
+                class="form-control" 
+                required />
+            </div>
+
+            <!-- Submit -->
+            <button 
+              name="edit" 
+              ng-disabled="updateUser.$invalid" 
+              type="submit" 
+              id="update-submit-btn" 
+              class="btn btn-success">
+              Submit
+            </button>
+
+          </form>
+
+      </div>
+    </div>
+
+
+    </div>
+  </div>
+</div>

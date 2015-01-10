@@ -25,7 +25,6 @@ app.controller('SignupCtrl', [
           console.log('You have successfully signed up. ', resp);
         })
         .catch(function(resp) {
-          $scope.signupForm.alerts = {type: 'error', msg: ''};      
           console.log('Something went wrong. ', resp);
         });
     };
