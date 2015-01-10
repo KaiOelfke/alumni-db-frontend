@@ -19,7 +19,7 @@ app.controller('SigninCtrl', [
     var signinData = {};
 
     $scope.handleSignInBtnClick = function() {
-      $auth.submitLogin()
+      $auth.submitLogin($scope.signinData)
         .then(function(resp) {
           $state.go('home.index');
           console.log('You have successfully logged in. ', resp);

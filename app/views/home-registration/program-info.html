@@ -1,45 +1,65 @@
-
-    <form role="form" ng-submit="completeRegistration(registrationForm)" ng-init="registrationForm = {}">
-
-            <div class="form-group">
-              <label>Which JA-YE Program did you participate in?</label>
-              <div class="checkbox-row" ng-init="registrationForm.program_type=0">
-                <div class="btn btn-checkbox" style="margin-left:20px" 
-                      ng-class="{active: registrationForm.program_type === 0}"
-                      ng-click="registrationForm.program_type=0;">Company</div>
-                <div  class="btn btn-checkbox" style="margin-left:20px" 
-                      ng-class="{active: registrationForm.program_type === 1}"
-                      ng-click="registrationForm.program_type=1;">Startup</div>
-                <div  class="btn btn-checkbox" style="margin-left:20px" 
-                      ng-class="{active: registrationForm.program_type === 2}"
-                      ng-click="registrationForm.program_type=2;">Other</div>
-              </div>
-                                           
-            </div>
-
-            <div class="form-group">
-              <label>In which country did you participate?</label>
-                <label>Country</label>
-                <select class="form-control" 
-                        ng-init="registrationForm.country_of_participation = getCountries[80] || registrationForm.country_of_participation"
-                        ng-model="registrationForm.country_of_participation" 
-                        ng-options="country.name for country in getCountries">
-                </select>              
-            </div>
-
-            <div class="form-group">
-              <label>At which school or university did you participate?</label>
-              <input type="text" class="form-control" placeholder="Institute" ng-model="registrationForm.institution">
-            </div>
-
-            <div class="form-group">
-              <label>In which year did you participate?</label>
-              <input type="date" class="form-control" placeholder="Year" ng-model="registrationForm.year_of_participation">
-            </div>
-            <div class="form-group">
-              <label>What was the name of your student company?</label>
-              <input type="text" class="form-control" placeholder="Name" ng-model="registrationForm.student_company_name">
-            </div>
-
-            <button type="submit" class="btn btn-default btn-green btn-lg">Continue</button>
-    </form>
+<form 
+  name="programForm" 
+  role="form" 
+  ng-submit="programForm.$valid $$ completeRegistration(registrationForm)" 
+  ng-init="registrationForm = {}"
+  novalidate>
+  <!-- JA-YE program -->
+  <div class="form-group">
+    <label>Which JA-YE Program did you participate in?</label>
+    <div class="checkbox-row" ng-init="registrationForm.program_type=0">
+      <div class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: registrationForm.program_type === 0}" ng-click="registrationForm.program_type=0;">Company</div>
+      <div class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: registrationForm.program_type === 1}" ng-click="registrationForm.program_type=1;">Startup</div>
+      <div class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: registrationForm.program_type === 2}" ng-click="registrationForm.program_type=2;">Other</div>
+    </div>
+  </div>
+  <!-- JA-YE country -->
+  <div class="form-group">
+    <label>In which country did you participate?</label>
+    <label>Country</label>
+    <select 
+      class="form-control" 
+      ng-init="registrationForm.country_of_participation = getCountries[80] || registrationForm.country_of_participation" 
+      ng-model="registrationForm.country_of_participation" 
+      ng-options="country.name for country in getCountries"
+      required />
+    </select>              
+  </div>
+  <!-- School -->
+  <div class="form-group">
+    <label>At which school or university did you participate?</label>
+    <input 
+      type="text" 
+      class="form-control" 
+      placeholder="Institute" 
+      ng-model="registrationForm.institution" 
+      required />
+  </div>
+  <!-- Year of participation -->
+  <div class="form-group">
+    <label>In which year did you participate?</label>
+    <input 
+      type="date" 
+      class="form-control" 
+      placeholder="Year" 
+      ng-model="registrationForm.year_of_participation" 
+      required />
+  </div>
+  <!-- Name of student company -->
+  <div class="form-group">
+    <label>What was the name of your student company?</label>
+    <input 
+      type="text" 
+      class="form-control" 
+      placeholder="Name" 
+      ng-model="registrationForm.student_company_name" 
+      required />
+  </div>
+  <!-- Continue button -->
+  <button 
+    type="submit" 
+    ng-disabled="programForm.$invalid" 
+    class="btn btn-default btn-green btn-lg">
+    Continue
+  </button>
+</form>

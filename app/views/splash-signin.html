@@ -7,7 +7,7 @@
       <form 
         name="signinForm"
         role="form" 
-        ng-submit="handleSignInBtnClick()"
+        ng-submit="signinForm.$valid && handleSignInBtnClick()"
         novalidate>
 
         <!-- Email -->

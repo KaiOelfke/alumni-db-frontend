@@ -35,7 +35,7 @@ angular
 
     // For any unmatched url
 
-    console.log($stateProvider);
+    //console.log($stateProvider);
     $stateProvider
       .state('home', {
         abstract: true,
