@@ -16,16 +16,14 @@ app.controller('SignupCtrl', [
   '$state', 
   '$scope', 
   function($auth, $state, $scope) {
-    $scope.signupForm = {};
 
-    $scope.handleSignUpBtnClick = function() {
-      $auth.submitRegistration($scope.signupForm)
+    $scope.handleSignUpBtnClick = function(signupData) {
+      $auth.submitRegistration(signupData)
         .then(function(resp) {
           $state.go('home.registration');
           console.log('You have successfully signed up. ', resp);
         })
         .catch(function(resp) {
-          $scope.signupForm.alerts = {type: 'error', msg: ''};      
           console.log('Something went wrong. ', resp);
         });
     };
