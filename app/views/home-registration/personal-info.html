@@ -1,54 +1,102 @@
+<!-- Form -->
+<form 
+  name="personalForm" 
+  role="form" 
+  class="form-horizontal" 
+  ng-submit="personalForm.$valid && personalInformation(peronalData)" 
+  ng-init="peronalData = {}"
+  novalidate>
+  
+  <!-- 1st row -->
+  <div class="form-group">
+    <!-- First name -->
+    <div class="col-md-6">
+      <label>First name</label>
+      <input 
+        type="text" 
+        class="form-control" 
+        placeholder="First name" 
+        ng-model="peronalData.first_name" 
+        required />
+    </div>
+    <!-- Last name -->
+    <div class="col-md-6">
+      <label for="exampleInputEmail1">Last name</label>
+      <input 
+        type="text" 
+        class="form-control" 
+        placeholder="Last name"
+        ng-model="peronalData.last_name"
+        required />
+    </div>
+  </div>
+  <!-- 2nd row -->
+  <div class="form-group">
+    <!-- Country -->              
+    <div class="col-md-6">
+      <label>Country</label>
+      <select 
+        class="form-control" 
+        ng-init="peronalData.country = getCountries[80] || peronalData.country"
+        ng-model="peronalData.country" 
+        ng-options="country.code as country.name for country in getCountries" 
+        required>
+      </select>
+    </div>
+    <!-- City -->
+    <div class="col-md-6">
+      <label>City</label>
+      <input 
+        type="text" 
+        class="form-control" 
+        placeholder="City"
+        ng-model="peronalData.city" 
+        required />
+    </div>
+  </div>
+  <!-- 3rd row -->
+  <div class="form-group">
+    <!-- Date of Birth -->
+    <div class="col-md-6">
+      <label>Date of Birth</label>
+      <input 
+        type="date" 
+        class="form-control" 
+        placeholder="Date of Birth" 
+        ng-model="peronalData.date_of_birth" 
+        required />
+    </div>
+    <!-- Gender -->
+    <div class="col-md-6">
+      <label for="exampleInputEmail1">Gender</label>
+      <div class="checkbox-row" ng-init="peronalData.gender=0">
+        <!-- Male -->
+        <div  
+          class="btn btn-checkbox" 
+          style="margin-left:20px" 
+          ng-class="{active: !peronalData.gender}" 
+          ng-click="peronalData.gender=0;">
+          Male
+        </div>
+        <!-- Female -->
+        <div  
+          class="btn btn-checkbox" 
+          style="margin-left:20px" 
+          ng-class="{active: peronalData.gender}"
+          ng-click="peronalData.gender=1">
+          Female
+        </div>
+      </div>
+    </div>
+  </div> <!-- /3rd-row -->
 
-    <form role="form" class="form-horizontal" ng-submit="personalInformation(peronalData)" ng-init="peronalData = {}">
-            <div class="form-group">
-              <div class="col-md-6">
-                <label>First name</label>
-                <input type="text" class="form-control" placeholder="First name" ng-model="peronalData.first_name">
-              </div>
-              <div class="col-md-6">
-                <label for="exampleInputEmail1">Last name</label>
-                <input type="text" class="form-control" placeholder="Last name"
-                ng-model="peronalData.last_name">
-              </div>
-            </div>
+  <!-- Continue -->
+  <button 
+    type="submit" 
+    ng-disabled="personalForm.$invalid" 
+    class="btn btn-default btn-green btn-lg">
+    Continue
+  </button>
 
-            <div class="form-group">
-              <div class="col-md-6">
-                <label>Country</label>
-                <select class="form-control" 
-                        ng-init="peronalData.country = getCountries[80] || peronalData.country"
-                        ng-model="peronalData.country" 
-                        ng-options="country.code as country.name for country in getCountries">
-                </select>
-              </div>
-              <div class="col-md-6">
-                <label>City</label>
-                <input type="text" class="form-control" placeholder="City"
-                ng-model="peronalData.city">
-              </div>
-
-
-            </div>                        
-            <div class="form-group">
-              <div class="col-md-6">
-                <label>Date of Birth</label>
-                <input type="date" class="form-control" placeholder="Date of Birth" 
-                ng-model="peronalData.date_of_birth">
-              </div>
-              <div class="col-md-6">
-                <label for="exampleInputEmail1">Gender</label>
-                <div class="checkbox-row" ng-init="peronalData.gender=0">
-                  <div  class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: !peronalData.gender}"
-                        ng-click="peronalData.gender=0;">Male</div>
-                  <div  class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: peronalData.gender}"
-                        ng-click="peronalData.gender=1">Female</div>
-                </div>
-              </div>
-
-            </div>                        
-
-
-
-
-          <button type="submit" class="btn btn-default btn-green btn-lg">Continue</button>
-    </form>
+</form>
+>>>>>>> 3d22fae04fd1a7b991eb0a79c55d349c6331440e

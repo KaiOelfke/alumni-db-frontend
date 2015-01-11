@@ -1,45 +1,66 @@
-
-    <form role="form" ng-submit="programInformation(programData)" ng-init="programData = {}">
-
-            <div class="form-group">
-              <label>Which JA-YE Program did you participate in?</label>
-              <div class="checkbox-row" ng-init="registrationForm.program_type=0">
-                <div class="btn btn-checkbox" style="margin-left:20px" 
-                      ng-class="{active: registrationForm.program_type === 0}"
-                      ng-click="registrationForm.program_type=0;">Company</div>
-                <div  class="btn btn-checkbox" style="margin-left:20px" 
-                      ng-class="{active: registrationForm.program_type === 1}"
-                      ng-click="registrationForm.program_type=1;">Startup</div>
-                <div  class="btn btn-checkbox" style="margin-left:20px" 
-                      ng-class="{active: registrationForm.program_type === 2}"
-                      ng-click="registrationForm.program_type=2;">Other</div>
-              </div>
-                                           
-            </div>
-
-            <div class="form-group">
-              <label>In which country did you participate?</label>
-                <label>Country</label>
-                <select class="form-control" 
-                        ng-init="programData.country_of_participation = getCountries[80] || programData.country_of_participation"
-                        ng-model="programData.country_of_participation" 
-                        ng-options="country.code as country.name for country in getCountries">
-                </select>              
-            </div>
-
-            <div class="form-group">
-              <label>At which school or university did you participate?</label>
-              <input type="text" class="form-control" placeholder="Institute" ng-model="programData.institution">
-            </div>
-
-            <div class="form-group">
-              <label>In which year did you participate?</label>
-              <input type="text" class="form-control" placeholder="Year" ng-model="programData.year_of_participation">
-            </div>
-            <div class="form-group">
-              <label>What was the name of your student company?</label>
-              <input type="text" class="form-control" placeholder="Name" ng-model="programData.student_company_name">
-            </div>
-
-            <button type="submit" class="btn btn-default btn-green btn-lg">Continue</button>
-    </form>
+<form 
+  name="programForm" 
+  role="form" 
+  ng-submit="programForm.$valid $$ programInformation(programData)" 
+  ng-init="programData = {}"
+  novalidate>
+  <!-- JA-YE program -->
+  <div class="form-group">
+    <label>Which JA-YE Program did you participate in?</label>
+    <div class="checkbox-row" ng-init="programData.program_type=0">
+      <div class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: programData.program_type === 0}" ng-click="programData.program_type=0;">Company</div>
+      <div class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: programData.program_type === 1}" ng-click="programData.program_type=1;">Startup</div>
+      <div class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: programData.program_type === 2}" ng-click="programData.program_type=2;">Other</div>
+    </div>
+  </div>
+  <!-- JA-YE country -->
+  <div class="form-group">
+    <label>In which country did you participate?</label>
+    <label>Country</label>
+    <select 
+      class="form-control" 
+      ng-init="programData.country_of_participation = getCountries[80] || programData.country_of_participation" 
+      ng-model="programData.country_of_participation" 
+      ng-options="country.code as country.name for country in getCountries"
+      required />
+    </select>              
+  </div>
+  <!-- School -->
+  <div class="form-group">
+    <label>At which school or university did you participate?</label>
+    <input 
+      type="text" 
+      class="form-control" 
+      placeholder="Institute" 
+      ng-model="programData.institution" 
+      required />
+  </div>
+  <!-- Year of participation -->
+  <div class="form-group">
+    <label>In which year did you participate?</label>
+    <input 
+      type="text" 
+      class="form-control" 
+      placeholder="Year" 
+      ng-model="programData.year_of_participation" 
+      required />
+  </div>
+  <!-- Name of student company -->
+  <div class="form-group">
+    <label>What was the name of your student company?</label>
+    <input 
+      type="text" 
+      class="form-control" 
+      placeholder="Name" 
+      ng-model="programData.student_company_name" 
+      required />
+  </div>
+  <!-- Continue button -->
+  <button 
+    type="submit" 
+    ng-disabled="programForm.$invalid" 
+    class="btn btn-default btn-green btn-lg">
+    Continue
+  </button>
+</form>
+>>>>>>> 3d22fae04fd1a7b991eb0a79c55d349c6331440e

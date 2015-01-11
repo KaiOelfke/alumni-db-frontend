@@ -16,6 +16,7 @@ app.controller('SignupCtrl', [
   '$state', 
   '$scope', 
   function($auth, $state, $scope) {
+    $scope.signupData = {};
 
     $scope.handleSignUpBtnClick = function(signupData) {
       $auth.submitRegistration(signupData)

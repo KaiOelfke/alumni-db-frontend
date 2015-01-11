@@ -58,6 +58,9 @@ angular
         .when('/','home')
         .otherwise('/404');
 
+    // For any unmatched url
+
+    //console.log($stateProvider);
     $stateProvider
       .state('home', {
         url: '',
@@ -155,10 +158,19 @@ angular
           }
         }
       })
-
       .state('home.404', {
         url: '/404',
         templateUrl: 'views/404.html'
+      })
+      .state('profile-show', {
+        url: '/show', 
+        templateUrl: 'views/show-profile.html', 
+        controller: 'ProfileCtrl'
+      })
+      .state('profile-update', {
+        url: '/update', 
+        templateUrl: 'views/update-profile.html', 
+        controller: 'ProfileCtrl'
       });
 
 

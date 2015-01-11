@@ -19,8 +19,10 @@ app.controller('SigninCtrl', [
   '$scope',
   function($auth, $state, authorizationService, USER_ROLES, $scope) {
 
-    $scope.handleSignInBtnClick = function(signinForm) {
-      $auth.submitLogin(signinForm)
+    $scope.signinData = {};
+
+    $scope.handleSignInBtnClick = function() {
+      $auth.submitLogin($scope.signinData)
         .then(function(resp) {
           var user = resp;
           if (user.statuses.indexOf(USER_ROLES.profileCompleted) !== -1) {
