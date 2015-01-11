@@ -9,21 +9,31 @@
  */
 
 function registrationCtrl($auth, $state, countriesFactory, $scope) {
-    $scope.infoForm = 'personal-info';
 
-    $scope.completeRegistration = function(registrationForm) {
-          $auth.updateAccount(registrationForm)
-            .then(function(resp) {
-                if ($scope.infoForm === 'program-info') {
-                    $state.go('home.loggedin.index');
-                }
-                $scope.infoForm = 'program-info';
-                console.log('data updated ', resp);
-            })
-            .catch(function(resp) {
-                console.log( resp);
-            });
+    var _personalData = {};
+    
+    $scope.personalInformation = function(personalData) {
+      _personalData = personalData;
+      $scope.infoForm = 'program-info';
     };
+
+    $scope.programInformation = function(programData) {
+      var profileData = {};
+
+      angular.extend(profileData, programData, _personalData);
+
+      $auth.updateAccount(profileData)
+        .then(function(resp) {
+            $state.go('home.loggedin.home');
+            console.log('data updated ', resp);
+        })
+        .catch(function(resp) {
+            console.log( resp);
+        });
+
+
+    };   
+
 
     $scope.getCountries = countriesFactory.getCountries();
 

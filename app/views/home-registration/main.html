@@ -21,7 +21,7 @@
 
 
     <div 
-      ng-switch on="infoForm">
+      ng-switch on="infoForm" ng-init="infoForm = 'personal-info'">
         <div ng-switch-when="personal-info"><div ng-include="'/views/home-registration/personal-info.html'"> </div></div>
         <div ng-switch-when="program-info"><div ng-include="'/views/home-registration/program-info.html'"> </div></div>
     </div>

@@ -1,14 +1,14 @@
 
-    <form role="form" class="form-horizontal" ng-submit="completeRegistration(registrationForm)" ng-init="registrationForm = {}">
+    <form role="form" class="form-horizontal" ng-submit="personalInformation(peronalData)" ng-init="peronalData = {}">
             <div class="form-group">
               <div class="col-md-6">
                 <label>First name</label>
-                <input type="text" class="form-control" placeholder="First name" ng-model="registrationForm.first_name">
+                <input type="text" class="form-control" placeholder="First name" ng-model="peronalData.first_name">
               </div>
               <div class="col-md-6">
                 <label for="exampleInputEmail1">Last name</label>
                 <input type="text" class="form-control" placeholder="Last name"
-                ng-model="registrationForm.last_name">
+                ng-model="peronalData.last_name">
               </div>
             </div>
 
@@ -16,15 +16,15 @@
               <div class="col-md-6">
                 <label>Country</label>
                 <select class="form-control" 
-                        ng-init="registrationForm.country_of_participation = getCountries[80] || registrationForm.country_of_participation"
-                        ng-model="registrationForm.country_of_participation" 
-                        ng-options="country.name for country in getCountries">
+                        ng-init="peronalData.country = getCountries[80] || peronalData.country"
+                        ng-model="peronalData.country" 
+                        ng-options="country.code as country.name for country in getCountries">
                 </select>
               </div>
               <div class="col-md-6">
                 <label>City</label>
                 <input type="text" class="form-control" placeholder="City"
-                ng-model="registrationForm.city">
+                ng-model="peronalData.city">
               </div>
 
 
@@ -33,15 +33,15 @@
               <div class="col-md-6">
                 <label>Date of Birth</label>
                 <input type="date" class="form-control" placeholder="Date of Birth" 
-                ng-model="registrationForm.date_of_birth">
+                ng-model="peronalData.date_of_birth">
               </div>
               <div class="col-md-6">
                 <label for="exampleInputEmail1">Gender</label>
-                <div class="checkbox-row" ng-init="registrationForm.gender=0">
-                  <div  class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: !registrationForm.gender}"
-                        ng-click="registrationForm.gender=0;">Male</div>
-                  <div  class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: registrationForm.gender}"
-                        ng-click="registrationForm.gender=1">Female</div>
+                <div class="checkbox-row" ng-init="peronalData.gender=0">
+                  <div  class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: !peronalData.gender}"
+                        ng-click="peronalData.gender=0;">Male</div>
+                  <div  class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: peronalData.gender}"
+                        ng-click="peronalData.gender=1">Female</div>
                 </div>
               </div>
 

@@ -23,15 +23,14 @@ app.controller('SigninCtrl', [
       $auth.submitLogin(signinForm)
         .then(function(resp) {
           var user = resp;
-          if (user.statuses.indexOf(USER_ROLES.registered) !== -1) {
-            $state.go('home.loggedin.index');
+          if (user.statuses.indexOf(USER_ROLES.profileCompleted) !== -1) {
+            $state.transitionTo('home.loggedin.home', {location:'replace'});
           }else {
-            $state.go('home.loggedin.registration');
+             $state.transitionTo('home.loggedin.registration', {location:'replace'});
           }
           console.log('You have successfully logged in. ', resp);
         })
         .catch(function(resp) {
-          signinForm.alerts = {type: 'error', msg: ''};
           console.log('your password / username is wrong. ', resp);
         });
     };

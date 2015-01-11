@@ -28,23 +28,19 @@ angular.module('alumni-db-frontend')
             function (user) {
 
               var userStatuses = user.statuses;
-              console.log(userStatuses);
               for (var i = 0, len = userStatuses.length; i < len; i++) {
-                console.log(userStatuses[i]);
                 if (authorizedRoles.indexOf(userStatuses[i]) !== -1) {
-                  deferred.resolve();
+                  deferred.resolve({});
                   return;
                 }
               }
 
-              deferred.reject('Greeting ' + name + ' is not allowed.');
-
               $rootScope.$broadcast(AUTHZ_EVENTS.notAuthorized);
+              deferred.reject({});
               
             },
             function () {
                 $rootScope.$broadcast('auth:not-loggedin');
-
                 if (authorizedRoles.indexOf(USER_ROLES.guest) !== -1){
                   deferred.resolve();          
                   return;       
@@ -53,7 +49,7 @@ angular.module('alumni-db-frontend')
                 $rootScope.$broadcast(AUTHZ_EVENTS.notAuthorized);
             });
 
-          return deferred;          
+          return deferred.promise;          
 
         };
        

@@ -41,6 +41,8 @@ angular
 
     $authProvider.configure({
         apiUrl: API_HOST,
+        accountUpdatePath: '/users',
+        storage: 'localStorage',        
         handleLoginResponse: formatConvertar,
         handleAccountUpdateResponse: formatConvertar,
         handleTokenValidationResponse: formatConvertar
@@ -62,14 +64,14 @@ angular
         template: '<ui-view/>',
         controller: ['$auth', '$state', function  ($auth,$state) {
             $auth.validateUser().then(function (user) {
-              if (user.statuses.indexOf(USER_ROLES.registered) !== -1) {
-                $state.transitionTo('home.loggedin.index');
+              if (user.statuses.indexOf(USER_ROLES.profileCompleted) !== -1) {
+                $state.transitionTo('home.loggedin.home' , {location:'replace'});
               }else {
-                $state.transitionTo('home.loggedin.registration');
+                $state.transitionTo('home.loggedin.registration' , {location:'replace'});
               }          
             },function () {
               if ($state.current.name.indexOf('home.guest') === -1) {
-                $state.transitionTo('home.guest.signin');
+                $state.transitionTo('home.guest.signin', {location:'replace'});
               }
             });
         }]
@@ -100,19 +102,6 @@ angular
             return authorizationService.isAuthorized(authorizedRoles);
           }
         }    
-      })
-      .state('home.loggedin.search', {
-        url: '/search',
-        templateUrl: 'views/users.html',
-        controller: 'UsersCtrl',
-        resolve: {
-          authorizedRoles: function (USER_ROLES) {
-            return USER_ROLES.profileCompleted;
-          },          
-          authz: function  (authorizedRoles,authorizationService) {
-            return authorizationService.isAuthorized(authorizedRoles);
-          }
-        }    
       })               
       .state('home.loggedin.registration', {
         url: '/registration',
@@ -121,8 +110,7 @@ angular
         resolve: {
           authorizedRoles: function (USER_ROLES) {
             return [USER_ROLES.registered,
-                    USER_ROLES.emailConfirmed,
-                    USER_ROLES.profileCompleted];
+                    USER_ROLES.emailConfirmed];
           },
           authz: function  (authorizedRoles,authorizationService) {
             return authorizationService.isAuthorized(authorizedRoles);
