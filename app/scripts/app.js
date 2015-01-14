@@ -106,9 +106,24 @@ angular
           }
         }
       })
-      .state('home.loggedin.profile', {
+      .state('home.loggedin.profile-show', {
         url: '/profile/:id',
         templateUrl: 'views/show-profile.html',
+        controller: 'ProfileCtrl',
+        resolve: {
+          authorizedRoles: function (USER_ROLES) {
+            return [USER_ROLES.registered,
+                    USER_ROLES.emailConfirmed,
+                    USER_ROLES.profileCompleted];
+          },
+          authz: function  (authorizedRoles,authorizationService) {
+            return authorizationService.isAuthorized(authorizedRoles);
+          }
+        }
+      })
+      .state('home.loggedin.profile-update', {
+        url: '/update',
+        templateUrl: 'views/update-profile.html',
         controller: 'ProfileCtrl',
         resolve: {
           authorizedRoles: function (USER_ROLES) {

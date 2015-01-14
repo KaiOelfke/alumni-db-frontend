@@ -21,35 +21,29 @@ app.controller('ProfileCtrl', [
 
     console.log($state.params.id);
 
-    usersFactory.getUser($state.params.id)
+    if ($state.current.name === 'home.loggedin.profile-show') {
+      usersFactory.getUser($state.params.id)
       .success(function (data) {
         $scope.userData = data;
       })
       .error(function (error) {
         console.error(error);
       });
-
-    /*
-    $scope.userData = {
-      'id': 666,
-      'first_name': 'Max',
-      'last_name': 'Mustermann',
-      'country': 'Germany',
-      'city': 'Berlin',
-      'date_of_birth': '12.10.1990',
-      'program_type': 0,
-      'country_of_participation': 'Germany',
-      'institution': 'X',
-      'year_of_participation': '1991',
-      'student_company_name': 'Y'
-    };*/
+    }
 
     $scope.goToUpdateUser = function() {
       $state.go('profile-update');
     };
 
     $scope.submitUpdatedUserData = function(userData) {
-      console.log(userData);
+      $auth.updateAccount(userData)
+        .then(function(resp) {
+            $state.go('home.loggedin.home');
+            console.log('data updated ', resp);
+        })
+        .catch(function(resp) {
+            console.log( resp);
+        });
     };
   }
 ]);

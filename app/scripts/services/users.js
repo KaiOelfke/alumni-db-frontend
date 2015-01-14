@@ -14,15 +14,15 @@ angular.module('alumni-db-frontend')
 
         usersFactory.getUsers = function  () {
             return $http.get(urlBase);
-        };
+            };
 
         usersFactory.insertUser = function  (user) {
             return $http.post(urlBase, {user: user});
-        };
+            };
 
         usersFactory.getUser = function(id) {
             return $http.get(urlBase + '/' + id);
-        };
+            };
 
         return usersFactory;
   }]);
