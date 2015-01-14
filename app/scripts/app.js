@@ -14,19 +14,19 @@ angular
   .module('alumni-db-frontend', [
     'AppConfig',
     'ngCookies',
-    'ng-token-auth',    
+    'ng-token-auth',
     'ngMessages',
     'ui.router'
   ])
-  .constant('USER_ROLES', {  
+  .constant('USER_ROLES', {
     registered: 'registered',
     emailConfirmed: 'email_confirmed',
     profileCompleted: 'profile_completed',
     guest: 'guest'
   })
-  .constant('AUTHZ_EVENTS', {  
+  .constant('AUTHZ_EVENTS', {
     notAuthorized: 'notAuthorized'
-  })  
+  })
   .config(function($authProvider,API_HOST) {
 
     var formatConvertar = function(response) {
@@ -42,7 +42,7 @@ angular
     $authProvider.configure({
         apiUrl: API_HOST,
         accountUpdatePath: '/users',
-        storage: 'localStorage',        
+        storage: 'localStorage',
         handleLoginResponse: formatConvertar,
         handleAccountUpdateResponse: formatConvertar,
         handleTokenValidationResponse: formatConvertar
@@ -54,7 +54,7 @@ angular
 
     $locationProvider.html5Mode(false);
 
-    $urlRouterProvider    
+    $urlRouterProvider
         .when('/','home')
         .otherwise('/404');
 
@@ -71,7 +71,7 @@ angular
                 $state.transitionTo('home.loggedin.home' , {location:'replace'});
               }else {
                 $state.transitionTo('home.loggedin.registration' , {location:'replace'});
-              }          
+              }
             },function () {
               if ($state.current.name.indexOf('home.guest') === -1) {
                 $state.transitionTo('home.guest.signin', {location:'replace'});
@@ -81,7 +81,7 @@ angular
       })
       .state('home.loggedin', {
         url: '',
-        templateUrl: 'views/home.html',        
+        templateUrl: 'views/home.html',
         resolve: {
           authorizedRoles: function (USER_ROLES) {
             return [USER_ROLES.registered,
@@ -91,7 +91,7 @@ angular
           authz: function  (authorizedRoles,authorizationService) {
             return authorizationService.isAuthorized(authorizedRoles);
           }
-        } 
+        }
       })
       .state('home.loggedin.home', {
         url: '/home',
@@ -100,12 +100,12 @@ angular
         resolve: {
           authorizedRoles: function (USER_ROLES) {
             return USER_ROLES.profileCompleted;
-          },          
+          },
           authz: function  (authorizedRoles,authorizationService) {
             return authorizationService.isAuthorized(authorizedRoles);
           }
-        }    
-      })               
+        }
+      })
       .state('home.loggedin.registration', {
         url: '/registration',
         templateUrl: 'views/home-registration/main.html',
@@ -118,7 +118,7 @@ angular
           authz: function  (authorizedRoles,authorizationService) {
             return authorizationService.isAuthorized(authorizedRoles);
           }
-        } 
+        }
       })
       .state('home.guest', {
         url: '',
@@ -126,12 +126,12 @@ angular
         resolve: {
           authorizedRoles: function (USER_ROLES) {
             return USER_ROLES.guest;
-          },          
+          },
           authz: function ($state,authorizationService) {
             return authorizationService.isAuthorized($state.current.data);
           }
         }
-      })       
+      })
       .state('home.guest.signup', {
         url: '/signup',
         templateUrl: 'views/splash-signup.html',
@@ -144,7 +144,7 @@ angular
             return authorizationService.isAuthorized(authorizedRoles);
           }
         }
-      })      
+      })
       .state('home.guest.signin', {
         url: '/signin',
         templateUrl: 'views/splash-signin.html',
@@ -163,13 +163,13 @@ angular
         templateUrl: 'views/404.html'
       })
       .state('profile-show', {
-        url: '/show', 
-        templateUrl: 'views/show-profile.html', 
+        url: '/show',
+        templateUrl: 'views/show-profile.html',
         controller: 'ProfileCtrl'
       })
       .state('profile-update', {
-        url: '/update', 
-        templateUrl: 'views/update-profile.html', 
+        url: '/update',
+        templateUrl: 'views/update-profile.html',
         controller: 'ProfileCtrl'
       });
 
@@ -194,27 +194,33 @@ angular
 
     $rootScope.$on('auth:registration-email-success', function() {
       $state.go('home.loggedin.registration');
-    });    
+    });
+    $rootScope.$on('auth:email-confirmation-success', function() {
+      $state.go('home.loggedin');
+    });
+    $rootScope.$on('auth:email-confirmation-error', function() {
+    window.alert('There was an error with your registration.');
+    });
     $rootScope.$on('$stateChangeStart',function(event, toState, toParams){
       console.log('$stateChangeStart to '+toState.to+'- fired when the transition begins. toState,toParams : \n',toState, toParams);
     });
-     
+
     $rootScope.$on('$stateChangeError',function(){
       console.log('$stateChangeError - fired when an error occurs during transition.');
       console.log(arguments);
     });
-     
+
     $rootScope.$on('$stateChangeSuccess',function(event, toState){
       console.log('$stateChangeSuccess to '+toState.name+'- fired once the state transition is complete.');
     });
-     
+
     $rootScope.$on('$viewContentLoaded',function(event){
       console.log('$viewContentLoaded - fired after dom rendered',event);
     });
-     
+
     $rootScope.$on('$stateNotFound',function(event, unfoundState, fromState, fromParams){
       console.log('$stateNotFound '+unfoundState.to+'  - fired when a state cannot be found by its name.');
       console.log(unfoundState, fromState, fromParams);
     });
-  
+
 });

@@ -4,19 +4,17 @@
 		<thead>
 			<tr>
 				<th>#</th>
-				<th>Username</th>
 				<th>Email</th>
-				<th>Created at</th>
-				<th>Updated at</th>
+				<th>First name</th>
+				<th>Last name</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr ng-repeat="user in users">
 				<td>{{ user.id }}</td>
-				<td>{{ user.username }}</td>
 				<td>{{ user.email }}</td>
-				<td>{{ user.created_at }}</td>
-				<td>{{ user.updated_at }}</td>
+				<td><a ng-href="/#/users/{{user.id}}">{{ user.first_name }}</a></td>
+				<td>{{ user.last_name }}</td>
 			</tr>
 		</tbody>
 	</table>

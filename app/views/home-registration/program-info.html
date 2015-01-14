@@ -1,7 +1,7 @@
-<form 
-  name="programForm" 
-  role="form" 
-  ng-submit="programForm.$valid $$ programInformation(programData)" 
+<form
+  name="programForm"
+  role="form"
+  ng-submit="programForm.$valid && programInformation(programData)"
   ng-init="programData = {}"
   novalidate>
   <!-- JA-YE program -->
@@ -17,48 +17,48 @@
   <div class="form-group">
     <label>In which country did you participate?</label>
     <label>Country</label>
-    <select 
-      class="form-control" 
-      ng-init="programData.country_of_participation = getCountries[80] || programData.country_of_participation" 
-      ng-model="programData.country_of_participation" 
+    <select
+      class="form-control"
+      ng-init="programData.country_of_participation = getCountries[80] || programData.country_of_participation"
+      ng-model="programData.country_of_participation"
       ng-options="country.code as country.name for country in getCountries"
       required />
-    </select>              
+    </select>
   </div>
   <!-- School -->
   <div class="form-group">
     <label>At which school or university did you participate?</label>
-    <input 
-      type="text" 
-      class="form-control" 
-      placeholder="Institute" 
-      ng-model="programData.institution" 
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Institute"
+      ng-model="programData.institution"
       required />
   </div>
   <!-- Year of participation -->
   <div class="form-group">
     <label>In which year did you participate?</label>
-    <input 
-      type="text" 
-      class="form-control" 
-      placeholder="Year" 
-      ng-model="programData.year_of_participation" 
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Year"
+      ng-model="programData.year_of_participation"
       required />
   </div>
   <!-- Name of student company -->
   <div class="form-group">
     <label>What was the name of your student company?</label>
-    <input 
-      type="text" 
-      class="form-control" 
-      placeholder="Name" 
-      ng-model="programData.student_company_name" 
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Name"
+      ng-model="programData.student_company_name"
       required />
   </div>
   <!-- Continue button -->
-  <button 
-    type="submit" 
-    ng-disabled="programForm.$invalid" 
+  <button
+    type="submit"
+    ng-disabled="programForm.$invalid"
     class="btn btn-default btn-green btn-lg">
     Continue
   </button>
