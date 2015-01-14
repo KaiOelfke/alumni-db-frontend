@@ -106,6 +106,21 @@ angular
           }
         }
       })
+      .state('home.loggedin.profile', {
+        url: '/profile/:id',
+        templateUrl: 'views/show-profile.html',
+        controller: 'ProfileCtrl',
+        resolve: {
+          authorizedRoles: function (USER_ROLES) {
+            return [USER_ROLES.registered,
+                    USER_ROLES.emailConfirmed,
+                    USER_ROLES.profileCompleted];
+          },
+          authz: function  (authorizedRoles,authorizationService) {
+            return authorizationService.isAuthorized(authorizedRoles);
+          }
+        }
+      })
       .state('home.loggedin.registration', {
         url: '/registration',
         templateUrl: 'views/home-registration/main.html',

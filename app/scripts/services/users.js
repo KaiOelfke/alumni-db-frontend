@@ -20,6 +20,10 @@ angular.module('alumni-db-frontend')
             return $http.post(urlBase, {user: user});
         };
 
+        usersFactory.getUser = function(id) {
+            return $http.get(urlBase + '/' + id);
+        };
+
         return usersFactory;
   }]);
 
