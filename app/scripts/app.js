@@ -204,7 +204,7 @@ angular
       });
 
 
-  }).run(function ($rootScope,$state) {
+  }).run(function ($rootScope, $state, AUTHZ_EVENTS) {
     /* $rootScope.$on('$stateChangeStart', function (event, next) {
      var authorizedRoles = next.data.authorizedRoles;
 
@@ -231,14 +231,18 @@ angular
     $rootScope.$on('auth:email-confirmation-error', function() {
     window.alert('There was an error with your registration.');
     });
+
+    $rootScope.$on('$stateChangeError',function(event, toState, toParams, fromState, fromParams, error){
+      if (error === AUTHZ_EVENTS.notAuthorized) {
+        $state.go('home');
+      } 
+      console.log('$stateChangeError - fired when an error occurs during transition.');
+    });
+
     $rootScope.$on('$stateChangeStart',function(event, toState, toParams){
       console.log('$stateChangeStart to '+toState.to+'- fired when the transition begins. toState,toParams : \n',toState, toParams);
     });
 
-    $rootScope.$on('$stateChangeError',function(){
-      console.log('$stateChangeError - fired when an error occurs during transition.');
-      console.log(arguments);
-    });
 
     $rootScope.$on('$stateChangeSuccess',function(event, toState){
       console.log('$stateChangeSuccess to '+toState.name+'- fired once the state transition is complete.');
