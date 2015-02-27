@@ -52,6 +52,47 @@ angular.module('alumni-db-frontend')
           return deferred.promise;          
 
         };
+
+        authorizationService.isNotAuthorized = function (notAuthorizedRoles) {
+          if (typeof notAuthorizedRoles === 'undefined') {
+            return true;
+          }
+
+          var deferred = $q.defer();
+
+          if (!angular.isArray(notAuthorizedRoles)) {
+            notAuthorizedRoles = [notAuthorizedRoles];
+          }
+
+          $auth.validateUser().then(
+            function (user) {
+
+              var userStatuses = user.statuses;
+              for (var i = 0, len = userStatuses.length; i < len; i++) {
+                if (notAuthorizedRoles.indexOf(userStatuses[i]) !== -1) {
+                  $rootScope.$broadcast(AUTHZ_EVENTS.notAuthorized);
+                  deferred.reject({});
+                  return;
+                }
+              }
+
+              deferred.resolve({});
+              
+            },
+            function () {
+                $rootScope.$broadcast('auth:not-loggedin');
+                if (notAuthorizedRoles.indexOf(USER_ROLES.guest) !== -1){
+                  $rootScope.$broadcast(AUTHZ_EVENTS.notAuthorized);
+                  deferred.reject();          
+                  return;       
+                }
+
+                deferred.resolve({});
+            });
+
+          return deferred.promise;          
+
+        };
        
         return authorizationService;
   }]);

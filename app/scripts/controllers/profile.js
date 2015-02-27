@@ -10,6 +10,7 @@
 
 var app = angular.module('alumni-db-frontend');
 
+
 app.controller('ProfileCtrl', [
   'usersFactory',
   '$auth',

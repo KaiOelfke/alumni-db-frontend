@@ -21,7 +21,6 @@ app.controller('SignupCtrl', [
     $scope.handleSignUpBtnClick = function(signupData) {
       $auth.submitRegistration(signupData)
         .then(function(resp) {
-          $state.transitionTo('home.registration', {location:'replace'});
           console.log('You have successfully signed up. ', resp);
         })
         .catch(function(resp) {

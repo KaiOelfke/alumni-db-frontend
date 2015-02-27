@@ -11,6 +11,18 @@
 function registrationCtrl($auth, $state, countriesFactory, $scope) {
 
     var _personalData = {};
+
+    function getYears() {
+          var input = [];
+          var min = 1900;
+          var max = moment().year();
+          for (var i=min; i<=max; i++){
+            input.push(i);
+          }
+          return input;
+        }
+    $scope.possibleYears = getYears();
+
     
     $scope.personalInformation = function(personalData) {
       _personalData = personalData;

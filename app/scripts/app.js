@@ -141,12 +141,12 @@ angular
         templateUrl: 'views/home-registration/main.html',
         controller: 'RegistrationCtrl',
         resolve: {
-          authorizedRoles: function (USER_ROLES) {
-            return [USER_ROLES.registered,
-                    USER_ROLES.emailConfirmed];
-          },
-          authz: function  (authorizedRoles,authorizationService) {
-            return authorizationService.isAuthorized(authorizedRoles);
+          notAuthorizedRoles: function (USER_ROLES) {
+            return [USER_ROLES.guest,
+                    USER_ROLES.profileCompleted];
+          },          
+          authz: function  (notAuthorizedRoles,authorizationService) {
+            return authorizationService.isNotAuthorized(notAuthorizedRoles);
           }
         }
       })

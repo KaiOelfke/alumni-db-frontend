@@ -60,12 +60,14 @@
     <div class="col-md-6">
       <label>Date of Birth</label>
       <input 
-        type="date" 
+        type="text" 
         class="form-control" 
-        placeholder="Date of Birth" 
-        ng-model="peronalData.date_of_birth" 
+        placeholder="Date of Birth e.g. 22.02.1992"  
+        ng-model="peronalData.date_of_birth"
+        date-format
         required />
     </div>
+
     <!-- Gender -->
     <div class="col-md-6">
       <label for="exampleInputEmail1">Gender</label>
@@ -99,4 +101,3 @@
   </button>
 
 </form>
->>>>>>> 3d22fae04fd1a7b991eb0a79c55d349c6331440e

@@ -38,12 +38,13 @@
   <!-- Year of participation -->
   <div class="form-group">
     <label>In which year did you participate?</label>
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Year"
-      ng-model="programData.year_of_participation"
-      required />
+    <select 
+      class="form-control" 
+      ng-init="programData.year_of_participation = 1993"
+      ng-model="programData.year_of_participation" 
+      ng-options="year for year in possibleYears" 
+      required>
+    </select>
   </div>
   <!-- Name of student company -->
   <div class="form-group">
@@ -63,4 +64,3 @@
     Continue
   </button>
 </form>
->>>>>>> 3d22fae04fd1a7b991eb0a79c55d349c6331440e
