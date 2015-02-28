@@ -55,12 +55,13 @@
             <!-- Country -->
             <div class="form-group">
               <label for="country">Country</label>
-              <input 
+              <select 
                 name="country" 
-                ng-model="userData.country" 
                 type="text" 
                 class="form-control" 
-                required />
+                ng-model="userData.country" 
+                ng-options="country.code as country.name for country in getAllCountries"
+                required />                
             </div>
 
             <!-- City -->
@@ -80,31 +81,37 @@
               <input 
                 name="birthday" 
                 ng-model="userData.date_of_birth" 
-                type="date" 
-                class="form-control" 
-                required />
-            </div>
-
-            <!-- Program type -->
-            <div class="form-group">
-              <label for="programm_type">Program type</label>
-              <input 
-                name="programm_type" 
-                ng-model="userData.program_type" 
                 type="text" 
                 class="form-control" 
+                date-format
                 required />
+              <div ng-show="updateUserForm.birthday.$dirty && updateUserForm.birthday.$invalid">
+                <div ng-show="updateUserForm.birthday.$error.required">Example: 02.01.1992 </div>
+              </div>
+
             </div>
 
-            <!-- Country of Participation -->
+            <!-- Gender -->
             <div class="form-group">
-              <label for="country_of_participation">Country of Participation</label>
-              <input 
-                name="country_of_participation" 
-                ng-model="userData.country_of_participation" 
-                type="text" 
-                class="form-control" 
-                required />
+              <label for="gender">Gender</label>
+              <div class="checkbox-row">
+                <!-- Male -->
+                <div  
+                  class="btn btn-checkbox" 
+                  style="margin-left:20px" 
+                  ng-class="{active: !userData.gender}" 
+                  ng-click="userData.gender=0;">
+                  Male
+                </div>
+                <!-- Female -->
+                <div  
+                  class="btn btn-checkbox" 
+                  style="margin-left:20px" 
+                  ng-class="{active: userData.gender}"
+                  ng-click="userData.gender=1">
+                  Female
+                </div>
+              </div>
             </div>
 
             <!-- Institution -->
@@ -118,14 +125,38 @@
                 required />
             </div>
 
+            <!-- Program type -->
+            <div class="form-group">
+              <label for="programm_type">Program type</label>
+              <div class="checkbox-row">
+                <div class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: userData.program_type === 0}" ng-click="userData.program_type=0;">Company</div>
+                <div class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: userData.program_type === 1}" ng-click="userData.program_type=1;">Startup</div>
+                <div class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: userData.program_type === 2}" ng-click="userData.program_type=2;">Other</div>
+              </div>
+            </div>
+
+            <!-- Country of Participation -->
+            <div class="form-group">
+              <label for="country_of_participation">Country of Participation</label>
+              <select 
+                name="country_of_participation" 
+                type="text" 
+                class="form-control" 
+                ng-model="userData.country_of_participation" 
+                ng-options="country.code as country.name for country in getCountries"
+                required />
+            </div>
+
+
             <!-- Year of Participation -->
             <div class="form-group">
               <label for="year_of_participation">Year of Participation</label>
-              <input 
+              <select 
                 name="year_of_participation" 
-                ng-model="userData.year_of_participation" 
-                type="date" 
+                type="text" 
                 class="form-control" 
+                ng-model="userData.year_of_participation"
+                ng-options="year for year in possibleYears"                 
                 required />
             </div>
 
@@ -140,15 +171,17 @@
                 required />
             </div>
 
+
             <!-- Submit -->
-            <button 
-              name="edit" 
-              ng-disabled="updateUser.$invalid" 
-              type="submit" 
-              id="update-submit-btn" 
-              class="btn btn-success">
-              Submit
-            </button>
+            <div>
+              <button 
+                name="edit" 
+                type="submit" 
+                id="update-submit-btn" 
+                class="btn btn-success">
+                Submit
+              </button>
+            </div>
 
           </form>
 

@@ -993,12 +993,113 @@ angular.module('alumni-db-frontend').constant('COUNTRIES',
     }
 ]);
 
+angular.module('alumni-db-frontend').constant('PERMITTEDCOUNTRIES',
+[    
+    {
+        'name': 'Bulgaria',
+        'code': 'BG'
+    },    {
+        'name': 'Denmark',
+        'code': 'DK'
+    },    {
+        'name': 'Estonia',
+        'code': 'EE'
+    },    {
+        'name': 'Germany',
+        'code': 'DE'
+    },    {
+        'name': 'Sweden',
+        'code': 'SE'
+    },    {
+        'name': 'Switzerland',
+        'code': 'CH'
+    },    {
+        'name': 'Italy',
+        'code': 'IT'
+    },    {
+        'name': 'Lithuania',
+        'code': 'LT'
+    },    {
+        'name': 'Portugal',
+        'code': 'PT'
+    },    {
+        'name': 'Finland',
+        'code': 'FI'
+    },    {
+        'name': 'Spain',
+        'code': 'ES'
+    },    {
+        'name': 'Norway',
+        'code': 'NO'
+    },    {
+        'name': 'Austria',
+        'code': 'AT'
+    },    {
+        'name': 'Serbia',
+        'code': 'RS'
+    },    {
+        'name': 'Czech Republic',
+        'code': 'CZ'
+    },    {
+        'name': 'Belgium',
+        'code': 'BE'
+    },    {
+        'name': 'Greece',
+        'code': 'GR'
+    },    {
+        'name': 'Netherlands',
+        'code': 'NL'
+    },    {
+        'name': 'Malta',
+        'code': 'MT'
+    },    {
+        'name': 'Slovakia',
+        'code': 'SK'
+    },    {
+        'name': 'France',
+        'code': 'FR'
+    },    {
+        'name': 'Luxembourg',
+        'code': 'LU'
+    },    {
+        'name': 'Poland',
+        'code': 'PL'
+}]);
+
+
 angular.module('alumni-db-frontend')
-  .factory('countriesFactory', [ 'COUNTRIES',function (COUNTRIES) {
+  .factory('countriesFactory', [ 'COUNTRIES', 'PERMITTEDCOUNTRIES',
+                                function (COUNTRIES, PERMITTEDCOUNTRIES) {
         var countriesFactory = {};
 
-        countriesFactory.getCountries = function  () {
+        countriesFactory.getAllCountries = function  () {
             return COUNTRIES;
+        };
+        countriesFactory.getCountries = function  () {
+            return PERMITTEDCOUNTRIES;
+        };
+
+        countriesFactory.getFromPermittedCountry = function  (code) {
+            if (code &&  (typeof code === 'string' || code instanceof String) ) {
+                for (var i = PERMITTEDCOUNTRIES.length - 1; i >= 0; i--) {
+                    if (PERMITTEDCOUNTRIES[i].code === code) {
+                        return PERMITTEDCOUNTRIES[i].name;
+                    }
+                }
+            }
+            return '';
+
+        };
+
+        countriesFactory.getFromAllCountry = function  (code) {
+            if (code &&  (typeof code === 'string' || code instanceof String) ) {
+                for (var i = COUNTRIES.length - 1; i >= 0; i--) {
+                    if (COUNTRIES[i].code === code) {
+                        return COUNTRIES[i].name;
+                    }
+                }
+            }
+            return '';
         };
 
         return countriesFactory;

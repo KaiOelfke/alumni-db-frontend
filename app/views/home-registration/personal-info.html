@@ -37,9 +37,9 @@
       <label>Country</label>
       <select 
         class="form-control" 
-        ng-init="peronalData.country = getCountries[80] || peronalData.country"
+        ng-init="peronalData.country = getAllCountries[80] || peronalData.country"
         ng-model="peronalData.country" 
-        ng-options="country.code as country.name for country in getCountries" 
+        ng-options="country.code as country.name for country in getAllCountries" 
         required>
       </select>
     </div>
@@ -70,7 +70,7 @@
 
     <!-- Gender -->
     <div class="col-md-6">
-      <label for="exampleInputEmail1">Gender</label>
+      <label>Gender</label>
       <div class="checkbox-row" ng-init="peronalData.gender=0">
         <!-- Male -->
         <div  

@@ -118,13 +118,16 @@ angular
           },
           authz: function  (authorizedRoles,authorizationService) {
             return authorizationService.isAuthorized(authorizedRoles);
+          },
+          data: function  (usersFactory, $stateParams) {
+            return usersFactory.getUser($stateParams.id);
           }
         }
       })
       .state('home.loggedin.profile-update', {
         url: '/update',
         templateUrl: 'views/update-profile.html',
-        controller: 'ProfileCtrl',
+        controller: 'ProfileUpdateCtrl',
         resolve: {
           authorizedRoles: function (USER_ROLES) {
             return [USER_ROLES.registered,
@@ -133,7 +136,7 @@ angular
           },
           authz: function  (authorizedRoles,authorizationService) {
             return authorizationService.isAuthorized(authorizedRoles);
-          }
+          }     
         }
       })
       .state('home.loggedin.registration', {
@@ -191,36 +194,10 @@ angular
       .state('home.404', {
         url: '/404',
         templateUrl: 'views/404.html'
-      })
-      .state('profile-show', {
-        url: '/show',
-        templateUrl: 'views/show-profile.html',
-        controller: 'ProfileCtrl'
-      })
-      .state('profile-update', {
-        url: '/update',
-        templateUrl: 'views/update-profile.html',
-        controller: 'ProfileCtrl'
       });
 
-
   }).run(function ($rootScope, $state, AUTHZ_EVENTS) {
-    /* $rootScope.$on('$stateChangeStart', function (event, next) {
-     var authorizedRoles = next.data.authorizedRoles;
 
-      $auth.validateUser().then(
-        function () {
-          if (authorizedRoles && !authorizationService.isAuthorized(authorizedRoles)) {
-            event.preventDefault();
-            $rootScope.$broadcast(AUTHZ_EVENTS.notAuthorized);
-          }
-        },
-        function () {
-            $rootScope.$broadcast('auth:not-loggedin');
-        });
-    });*/
-
-    // debug
 
     $rootScope.$on('auth:registration-email-success', function() {
       $state.go('home.loggedin.registration');
@@ -229,7 +206,7 @@ angular
       $state.go('home.loggedin');
     });
     $rootScope.$on('auth:email-confirmation-error', function() {
-    window.alert('There was an error with your registration.');
+      window.alert('There was an error with your registration.');
     });
 
     $rootScope.$on('$stateChangeError',function(event, toState, toParams, fromState, fromParams, error){
@@ -239,22 +216,5 @@ angular
       console.log('$stateChangeError - fired when an error occurs during transition.');
     });
 
-    $rootScope.$on('$stateChangeStart',function(event, toState, toParams){
-      console.log('$stateChangeStart to '+toState.to+'- fired when the transition begins. toState,toParams : \n',toState, toParams);
-    });
-
-
-    $rootScope.$on('$stateChangeSuccess',function(event, toState){
-      console.log('$stateChangeSuccess to '+toState.name+'- fired once the state transition is complete.');
-    });
-
-    $rootScope.$on('$viewContentLoaded',function(event){
-      console.log('$viewContentLoaded - fired after dom rendered',event);
-    });
-
-    $rootScope.$on('$stateNotFound',function(event, unfoundState, fromState, fromParams){
-      console.log('$stateNotFound '+unfoundState.to+'  - fired when a state cannot be found by its name.');
-      console.log(unfoundState, fromState, fromParams);
-    });
 
 });

@@ -8,20 +8,11 @@
  * Controller of the alumni-db-frontend
  */
 
-function registrationCtrl($auth, $state, countriesFactory, $scope) {
+function registrationCtrl($auth, $state, yearsFactory, countriesFactory, $scope) {
 
     var _personalData = {};
 
-    function getYears() {
-          var input = [];
-          var min = 1900;
-          var max = moment().year();
-          for (var i=min; i<=max; i++){
-            input.push(i);
-          }
-          return input;
-        }
-    $scope.possibleYears = getYears();
+    $scope.possibleYears = yearsFactory.getYears();
 
     
     $scope.personalInformation = function(personalData) {
@@ -46,7 +37,7 @@ function registrationCtrl($auth, $state, countriesFactory, $scope) {
 
     };   
 
-
+    $scope.getAllCountries = countriesFactory.getAllCountries();
     $scope.getCountries = countriesFactory.getCountries();
 
 }
