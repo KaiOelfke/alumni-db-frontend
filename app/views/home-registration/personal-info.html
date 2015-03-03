@@ -87,9 +87,9 @@
         }">
       <label for="birthday">Birthday</label>
       <p class="input-group">
-        <input name="birthday" type="text" class="form-control" datepicker-popup="dd.MM.yyyy" ng-model="personalData.date_of_birth" is-open="opened" max-date="maxDate" datepicker-options="dateOptions" show-button-bar="false" ng-required="true"/>
+        <input name="birthday" type="text" class="form-control" datepicker-popup="dd.MM.yyyy" ng-model="personalData.date_of_birth" is-open="personal.opened" max-date="personal.maxDate" datepicker-options="personal.dateOptions" show-button-bar="false" date-format required/>
         <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+          <button type="button" class="btn btn-default" ng-click="personal.open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
         </span>
       </p>
     </div>

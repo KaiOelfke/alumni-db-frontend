@@ -40,6 +40,20 @@ function registrationPersonalCtrl($scope) {
       $scope.registration.infoForm = 'program-info';
     };
 
+    this.open = function($event) {
+      console.log('message fur debug');
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      this.opened = true;
+    };
+
+    this.dateOptions = {
+      startingDay: 1,
+      showWeeks: false
+    };
+
+    this.format = 'dd.MM.yyyy';
 }
 
 angular.module('alumni-db-frontend')
@@ -77,21 +91,6 @@ function registrationProgramCtrl($auth, $state, toaster, $scope) {
 
 
     };
-
-    this.open = function($event) {
-      $event.preventDefault();
-      $event.stopPropagation();
-
-      this.opened = true;
-    };
-
-    this.dateOptions = {
-      startingDay: 1,
-      showWeeks: false
-    };
-
-    this.format = 'dd.MM.yyyy';
-
 }
 
 angular.module('alumni-db-frontend')
