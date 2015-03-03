@@ -4,8 +4,8 @@
   name="personalForm"
   role="form"
   class="form-horizontal"
-  ng-submit="personal.personalInformation(peronalData)"
-  ng-init="peronalData = {}"
+  ng-submit="personal.personalInformation(personalData)"
+  ng-init="personalData = {}"
   novalidate>
 
   <!-- Form Validation Massages -->
@@ -29,7 +29,7 @@
         type="text"
         class="form-control"
         placeholder="First name"
-        ng-model="peronalData.first_name"
+        ng-model="personalData.first_name"
         required />
     </div>
     <!-- Last name -->
@@ -44,7 +44,7 @@
         name="lastname"
         class="form-control"
         placeholder="Last name"
-        ng-model="peronalData.last_name"
+        ng-model="personalData.last_name"
         required />
     </div>
   </div>
@@ -56,7 +56,7 @@
       <select
         name="country"
         class="form-control"
-        ng-model="peronalData.country"
+        ng-model="personalData.country"
         ng-options="country.code as country.name for country in registration.getAllCountries"
         required>
       </select>
@@ -73,7 +73,7 @@
         type="text"
         class="form-control"
         placeholder="City"
-        ng-model="peronalData.city"
+        ng-model="personalData.city"
         required />
     </div>
   </div>
@@ -97,21 +97,21 @@
     <!-- Gender -->
     <div class="col-md-6">
       <label>Gender</label>
-      <div class="checkbox-row" ng-init="peronalData.gender=0">
+      <div class="checkbox-row" ng-init="personalData.gender=0">
         <!-- Male -->
         <div
           class="btn btn-checkbox"
           style="margin-left:20px"
-          ng-class="{active: !peronalData.gender}"
-          ng-click="peronalData.gender=0;">
+          ng-class="{active: !personalData.gender}"
+          ng-click="personalData.gender=0;">
           Male
         </div>
         <!-- Female -->
         <div
           class="btn btn-checkbox"
           style="margin-left:20px"
-          ng-class="{active: peronalData.gender}"
-          ng-click="peronalData.gender=1">
+          ng-class="{active: personalData.gender}"
+          ng-click="personalData.gender=1">
           Female
         </div>
       </div>
