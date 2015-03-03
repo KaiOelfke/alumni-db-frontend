@@ -101,7 +101,7 @@ module.exports = function (grunt) {
         wrap: '\'use strict\';\n\n<%= __ngModule %>',
         constants: {
           ENV: 'production',
-          API_HOST: 'alumni-db-backend.herokuapp.com',
+          API_HOST: 'https://alumni-db-backend.herokuapp.com',
         }
       }
     },
