@@ -75,37 +75,35 @@ module.exports = function (grunt) {
       production: {
         options: {
           paths: ['<%= yeoman.app %>/styles'],
-          cleancss: true, 
+          cleancss: true,
         },
         files: {
           '<%= yeoman.dist %>/styles/main.css': '<%= yeoman.app %>/styles/main.less'
         }
       }
-    },    
+    },
 
     // Define configuration depending on environment.
     ngconstant: {
       options: {
-        space: '  '
-      },
-      development: [{
+        space: '  ',
         dest: '<%= yeoman.app %>/scripts/appConfig.js',
+        name: 'AppConfig'
+      },
+      development: {
         wrap: '\'use strict\';\n\n<%= __ngModule %>',
-        name: 'AppConfig',
         constants: {
           ENV: 'development',
           API_HOST: 'http://localhost:3000',
         }
-      }],
-      production: [{
-        dest: '<%= yeoman.app %>/scripts/appConfig.js',
+      },
+      production: {
         wrap: '\'use strict\';\n\n<%= __ngModule %>',
-        name: 'AppConfig',
         constants: {
           ENV: 'production',
           API_HOST: 'alumni-db-backend.herokuapp.com',
         }
-      }]
+      }
     },
 
 
