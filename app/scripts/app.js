@@ -215,7 +215,4 @@ angular
     });
 
 
-})/*.controller('NavbarController', ['$scope', function($scope) {
-  console.log($scope);
-  console.log($scope.user);
-}])*/;
+});

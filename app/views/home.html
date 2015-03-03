@@ -9,7 +9,7 @@
     <div class="o3"></div>
   </div>
 
-  <div class="alumni-navbar">
+  <div class="alumni-navbar" ng-controller="NavbarCtrl">
     <div class="alumni-navbar-content">
       <div class="alumni-navbar-logo">
         Alumni Connect
@@ -18,8 +18,8 @@
         <div class="alumni-navbar-element alumni-profile">
           <a ui-sref="home.loggedin.profile-show({ id: user.id})">{{ user.first_name }} {{ user.last_name }}</a>
         </div><!--
-     --><div class="alumni-navbar-element">
-          <a href="#">Logout</a>
+     --><div class="alumni-navbar-element alumni-logout">
+          <a ng-click="handleSignOutBtnClick()">Logout</a>
         </div>
       </div>
     </div>
