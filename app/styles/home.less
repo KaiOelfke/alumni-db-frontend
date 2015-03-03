@@ -1,0 +1,49 @@
+/* Primary color palette
+ * @green
+ * @orange
+ * @black
+ * @gray
+
+ * Secundary color palete 
+ * @lightGreen
+ * @lightOrange
+ * @lightYellow
+ * @mediumGreen
+ */
+
+@navbarHeight: 64px;
+@navbarVerticalPadding: 8px;
+@navbarHorizontalPadding: 128px;
+
+.alumni-navbar {
+  width: 100%;
+  height: @navbarHeight;
+  padding-top: @navbarVerticalPadding;
+  padding-bottom: @navbarVerticalPadding;
+  padding-left: @navbarHorizontalPadding;
+  padding-right: @navbarHorizontalPadding;
+  border: 1px solid black;
+
+  .alumni-navbar-content {
+    width: 100%;
+    height: 100%;
+    line-height: @navbarHeight - 2 * @navbarVerticalPadding;
+  }
+
+  .alumni-navbar-logo {
+    height: 100%;
+    font-size: 18px;
+    color: @lightGreen;
+    float: left;
+  }
+
+  /* takes remaining space */
+  .alumni-navbar-rest {
+    width: auto;
+    height: 100%;
+    float: none;
+    overflow: hidden;
+    text-align: right;
+  }
+
+}
