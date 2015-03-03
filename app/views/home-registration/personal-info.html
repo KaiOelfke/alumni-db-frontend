@@ -1,48 +1,48 @@
 <!-- Form -->
-<form 
+<form
   ng-controller="RegistrationPersonalCtrl as personal"
-  name="personalForm" 
-  role="form" 
-  class="form-horizontal" 
-  ng-submit="personal.personalInformation(peronalData)" 
+  name="personalForm"
+  role="form"
+  class="form-horizontal"
+  ng-submit="personal.personalInformation(peronalData)"
   ng-init="peronalData = {}"
   novalidate>
 
   <!-- Form Validation Massages -->
-  <validation-messages form="personalForm" 
+  <validation-messages form="personalForm"
                         get-messages="registration.formValidationMessages"
                         get-title="registration.farmValidationTitle">
-  </validation-messages>            
+  </validation-messages>
 
-  
+
   <!-- 1st row -->
   <div class="form-group">
     <!-- First name -->
-    <div class="col-md-6" 
-        ng-class="{ 
-          'has-success': personalForm.firstname.$dirty && personalForm.firstname.$valid, 
+    <div class="col-md-6"
+        ng-class="{
+          'has-success': personalForm.firstname.$dirty && personalForm.firstname.$valid,
           'has-error': personalForm.firstname.$dirty && personalForm.firstname.$invalid
-        }"> 
+        }">
       <label for="firstname">First name</label>
       <input
         name="firstname"
-        type="text" 
-        class="form-control" 
-        placeholder="First name" 
-        ng-model="peronalData.first_name" 
+        type="text"
+        class="form-control"
+        placeholder="First name"
+        ng-model="peronalData.first_name"
         required />
     </div>
     <!-- Last name -->
     <div class="col-md-6"
-        ng-class="{ 
-          'has-success': personalForm.lastname.$dirty && personalForm.lastname.$valid, 
+        ng-class="{
+          'has-success': personalForm.lastname.$dirty && personalForm.lastname.$valid,
           'has-error': personalForm.lastname.$dirty && personalForm.lastname.$invalid
-        }">     
+        }">
       <label for="lastname">Last name</label>
-      <input 
-        type="text" 
+      <input
+        type="text"
         name="lastname"
-        class="form-control" 
+        class="form-control"
         placeholder="Last name"
         ng-model="peronalData.last_name"
         required />
@@ -50,30 +50,30 @@
   </div>
   <!-- 2nd row -->
   <div class="form-group">
-    <!-- Country -->              
+    <!-- Country -->
     <div class="col-md-6">
       <label for="country">Country</label>
-      <select 
+      <select
         name="country"
-        class="form-control" 
-        ng-model="peronalData.country" 
-        ng-options="country.code as country.name for country in registration.getAllCountries" 
+        class="form-control"
+        ng-model="peronalData.country"
+        ng-options="country.code as country.name for country in registration.getAllCountries"
         required>
       </select>
     </div>
     <!-- City -->
     <div class="col-md-6"
-        ng-class="{ 
-          'has-success': personalForm.city.$dirty && personalForm.city.$valid, 
+        ng-class="{
+          'has-success': personalForm.city.$dirty && personalForm.city.$valid,
           'has-error': personalForm.city.$dirty && personalForm.city.$invalid
         }">
       <label for="city">City</label>
-      <input 
+      <input
         name="city"
-        type="text" 
-        class="form-control" 
+        type="text"
+        class="form-control"
         placeholder="City"
-        ng-model="peronalData.city" 
+        ng-model="peronalData.city"
         required />
     </div>
   </div>
@@ -81,19 +81,17 @@
   <div class="form-group">
     <!-- Date of Birth -->
     <div class="col-md-6"
-        ng-class="{ 
-          'has-success': personalForm.birthday.$dirty && personalForm.birthday.$valid, 
+        ng-class="{
+          'has-success': personalForm.birthday.$dirty && personalForm.birthday.$valid,
           'has-error': personalForm.birthday.$dirty && personalForm.birthday.$invalid
         }">
-      <label for="birthday">Date of Birth</label>
-      <input 
-        name="birthday"
-        type="text" 
-        class="form-control" 
-        placeholder="Date of Birth e.g. 22.02.1992"  
-        ng-model="peronalData.date_of_birth"
-        date-format
-        required />
+      <label for="birthday">Birthday</label>
+      <p class="input-group">
+        <input name="birthday" type="text" class="form-control" datepicker-popup="dd.MM.yyyy" ng-model="personalData.date_of_birth" is-open="opened" max-date="maxDate" datepicker-options="dateOptions" show-button-bar="false" ng-required="true"/>
+        <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+        </span>
+      </p>
     </div>
 
     <!-- Gender -->
@@ -101,17 +99,17 @@
       <label>Gender</label>
       <div class="checkbox-row" ng-init="peronalData.gender=0">
         <!-- Male -->
-        <div  
-          class="btn btn-checkbox" 
-          style="margin-left:20px" 
-          ng-class="{active: !peronalData.gender}" 
+        <div
+          class="btn btn-checkbox"
+          style="margin-left:20px"
+          ng-class="{active: !peronalData.gender}"
           ng-click="peronalData.gender=0;">
           Male
         </div>
         <!-- Female -->
-        <div  
-          class="btn btn-checkbox" 
-          style="margin-left:20px" 
+        <div
+          class="btn btn-checkbox"
+          style="margin-left:20px"
           ng-class="{active: peronalData.gender}"
           ng-click="peronalData.gender=1">
           Female
@@ -121,8 +119,8 @@
   </div> <!-- /3rd-row -->
 
   <!-- Continue -->
-  <button 
-    type="submit" 
+  <button
+    type="submit"
     class="btn btn-default btn-green btn-lg">
     Continue
   </button>

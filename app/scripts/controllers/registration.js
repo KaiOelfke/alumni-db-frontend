@@ -78,6 +78,20 @@ function registrationProgramCtrl($auth, $state, toaster, $scope) {
 
     };
 
+    this.open = function($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      this.opened = true;
+    };
+
+    this.dateOptions = {
+      startingDay: 1,
+      showWeeks: false
+    };
+
+    this.format = 'dd.MM.yyyy';
+
 }
 
 angular.module('alumni-db-frontend')
