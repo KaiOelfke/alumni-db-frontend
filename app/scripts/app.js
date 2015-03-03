@@ -197,8 +197,6 @@ angular
       });
 
   }).run(function ($rootScope, $state, AUTHZ_EVENTS) {
-
-
     $rootScope.$on('auth:registration-email-success', function() {
       $state.go('home.loggedin.registration');
     });
@@ -217,4 +215,7 @@ angular
     });
 
 
-});
+})/*.controller('NavbarController', ['$scope', function($scope) {
+  console.log($scope);
+  console.log($scope.user);
+}])*/;

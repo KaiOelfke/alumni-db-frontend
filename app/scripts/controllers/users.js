@@ -8,7 +8,7 @@
  * Controller of the alumni-db-frontend
  */
 angular.module('alumni-db-frontend')
-  .controller('UsersCtrl', ['usersFactory','$scope',function UsersCtrl (usersFactory,$scope) {
+  .controller('UsersCtrl', ['usersFactory', '$scope', function UsersCtrl (usersFactory,$scope) {
     $scope.users =[];
 
     usersFactory.getUsers()
@@ -18,5 +18,4 @@ angular.module('alumni-db-frontend')
         .error(function (error) {
             console.error(error);
         });
-
   }]);

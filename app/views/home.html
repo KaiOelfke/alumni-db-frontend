@@ -16,7 +16,7 @@
       </div>
       <div class="alumni-navbar-rest">
         <div class="alumni-navbar-element alumni-profile">
-          <a href="#">Max Mustermann</a>
+          <a ui-sref="home.loggedin.profile-show({ id: user.id})">{{ user.first_name }} {{ user.last_name }}</a>
         </div><!--
      --><div class="alumni-navbar-element">
           <a href="#">Logout</a>
