@@ -50,12 +50,16 @@ app.controller('ProfileCtrl', [
 app.controller('ProfileUpdateCtrl', [
   'countriesFactory',
   'yearsFactory',
+  'validationMessagesFactory',  
   '$auth',
   '$state',
+  'toaster',
   '$scope',
   '$rootScope',
-  function(countriesFactory, yearsFactory, $auth, $state, $scope, $rootScope) {
+  function(countriesFactory, yearsFactory, validationMessagesFactory, $auth, $state, toaster, $scope, $rootScope) {
     var _user = $rootScope.user;
+    $scope.formValidationMessages = validationMessagesFactory.getValidationMsg;
+    $scope.farmValidationTitle = validationMessagesFactory.getValidationTitle;
     /*jshint camelcase: false */
 
     if (moment(_user.date_of_birth,'YYYY-MM-DD').isValid()) {
@@ -68,13 +72,19 @@ app.controller('ProfileUpdateCtrl', [
     $scope.getAllCountries = countriesFactory.getAllCountries();
 
     $scope.submitUpdatedUserData = function(userData) {
+      $scope.$broadcast('show-errors-messages-block');
+
+      if ($scope.updateUserForm.$invalid) {
+        return ;
+      }
+      
       $auth.updateAccount(userData)
-        .then(function(resp) {
+        .then(function() {
+            toaster.pop('success', 'updated.');
             $state.go('home.loggedin.home');
-            console.log('data updated ', resp);
         })
-        .catch(function(resp) {
-            console.log( resp);
+        .catch(function() {
+          toaster.pop('error', 'Something went wrong.');
         });
     };
 

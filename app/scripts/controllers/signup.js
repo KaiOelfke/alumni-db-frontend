@@ -12,19 +12,29 @@
 var app = angular.module('alumni-db-frontend');
 
 app.controller('SignupCtrl', [
+  'validationMessagesFactory',
   '$auth', 
   '$state', 
+  'toaster',
   '$scope', 
-  function($auth, $state, $scope) {
+  function(validationMessagesFactory, $auth, $state, toaster, $scope) {
     $scope.signupData = {};
+    $scope.formValidationMessages = validationMessagesFactory.getValidationMsg;
+    $scope.farmValidationTitle = validationMessagesFactory.getValidationTitle;
 
     $scope.handleSignUpBtnClick = function(signupData) {
+      $scope.$broadcast('show-errors-messages-block');
+
+      if ($scope.signupForm.$invalid) {
+        return ;
+      }
+
       $auth.submitRegistration(signupData)
-        .then(function(resp) {
-          console.log('You have successfully signed up. ', resp);
+        .then(function() {
+          toaster.pop('success', 'You have successfully signed up');          
         })
-        .catch(function(resp) {
-          console.log('Something went wrong. ', resp);
+        .catch(function() {
+          toaster.pop('error', 'Something went wrong.');
         });
     };
   }

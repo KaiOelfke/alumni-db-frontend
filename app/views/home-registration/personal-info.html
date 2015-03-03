@@ -1,18 +1,31 @@
 <!-- Form -->
 <form 
+  ng-controller="RegistrationPersonalCtrl as personal"
   name="personalForm" 
   role="form" 
   class="form-horizontal" 
-  ng-submit="personalForm.$valid && personalInformation(peronalData)" 
+  ng-submit="personal.personalInformation(peronalData)" 
   ng-init="peronalData = {}"
   novalidate>
+
+  <!-- Form Validation Massages -->
+  <validation-messages form="personalForm" 
+                        get-messages="registration.formValidationMessages"
+                        get-title="registration.farmValidationTitle">
+  </validation-messages>            
+
   
   <!-- 1st row -->
   <div class="form-group">
     <!-- First name -->
-    <div class="col-md-6">
-      <label>First name</label>
-      <input 
+    <div class="col-md-6" 
+        ng-class="{ 
+          'has-success': personalForm.firstname.$dirty && personalForm.firstname.$valid, 
+          'has-error': personalForm.firstname.$dirty && personalForm.firstname.$invalid
+        }"> 
+      <label for="firstname">First name</label>
+      <input
+        name="firstname"
         type="text" 
         class="form-control" 
         placeholder="First name" 
@@ -20,10 +33,15 @@
         required />
     </div>
     <!-- Last name -->
-    <div class="col-md-6">
-      <label for="exampleInputEmail1">Last name</label>
+    <div class="col-md-6"
+        ng-class="{ 
+          'has-success': personalForm.lastname.$dirty && personalForm.lastname.$valid, 
+          'has-error': personalForm.lastname.$dirty && personalForm.lastname.$invalid
+        }">     
+      <label for="lastname">Last name</label>
       <input 
         type="text" 
+        name="lastname"
         class="form-control" 
         placeholder="Last name"
         ng-model="peronalData.last_name"
@@ -34,19 +52,24 @@
   <div class="form-group">
     <!-- Country -->              
     <div class="col-md-6">
-      <label>Country</label>
+      <label for="country">Country</label>
       <select 
+        name="country"
         class="form-control" 
-        ng-init="peronalData.country = getAllCountries[80] || peronalData.country"
         ng-model="peronalData.country" 
-        ng-options="country.code as country.name for country in getAllCountries" 
+        ng-options="country.code as country.name for country in registration.getAllCountries" 
         required>
       </select>
     </div>
     <!-- City -->
-    <div class="col-md-6">
-      <label>City</label>
+    <div class="col-md-6"
+        ng-class="{ 
+          'has-success': personalForm.city.$dirty && personalForm.city.$valid, 
+          'has-error': personalForm.city.$dirty && personalForm.city.$invalid
+        }">
+      <label for="city">City</label>
       <input 
+        name="city"
         type="text" 
         class="form-control" 
         placeholder="City"
@@ -57,9 +80,14 @@
   <!-- 3rd row -->
   <div class="form-group">
     <!-- Date of Birth -->
-    <div class="col-md-6">
-      <label>Date of Birth</label>
+    <div class="col-md-6"
+        ng-class="{ 
+          'has-success': personalForm.birthday.$dirty && personalForm.birthday.$valid, 
+          'has-error': personalForm.birthday.$dirty && personalForm.birthday.$invalid
+        }">
+      <label for="birthday">Date of Birth</label>
       <input 
+        name="birthday"
         type="text" 
         class="form-control" 
         placeholder="Date of Birth e.g. 22.02.1992"  
@@ -95,7 +123,6 @@
   <!-- Continue -->
   <button 
     type="submit" 
-    ng-disabled="personalForm.$invalid" 
     class="btn btn-default btn-green btn-lg">
     Continue
   </button>

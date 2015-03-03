@@ -8,6 +8,7 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angularjs-toaster/toaster.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <link rel="stylesheet" href="styles/main.css">
@@ -17,8 +18,10 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
-
+    <toaster-container toaster-options="{'position-class': 'toast-top-center',
+                                         'animation-class': 'toast-top-center',
+                                          'time-out': 3000}">
+    </toaster-container>
 
     <div ui-view class="content">
       <!-- Content goes here -->
@@ -44,6 +47,8 @@
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/angular-messages/angular-messages.js"></script>
     <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angularjs-toaster/toaster.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -55,7 +60,8 @@
         <script src="scripts/services/countries.js"></script>  
         <script src="scripts/services/years.js"></script>  
         <script src="scripts/services/programTypes.js"></script> 
-        <script src="scripts/services/gender.js"></script>                                                   
+        <script src="scripts/services/gender.js"></script>   
+        <script src="scripts/services/validationMessages.js"></script>     
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/signup.js"></script>
         <script src="scripts/controllers/signin.js"></script>
@@ -64,6 +70,8 @@
         <script src="scripts/controllers/profile.js"></script>
         <script src="scripts/directives/steps.js"></script>
         <script src="scripts/directives/validationDateFormat.js"></script>
+        <script src="scripts/directives/validationMessages.js"></script>
+
         <!-- endbuild -->
 </body>
 </html>
