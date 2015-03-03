@@ -1,9 +1,17 @@
 <form
+  ng-controller="RegistrationProgramCtrl as program"
   name="programForm"
   role="form"
-  ng-submit="programForm.$valid && programInformation(programData)"
+  ng-submit="program.programInformation(programData)"
   ng-init="programData = {}"
   novalidate>
+
+  <!-- Form Validation Massages -->
+  <validation-messages  form="programForm" 
+                        get-messages="registration.formValidationMessages"
+                        get-title="registration.farmValidationTitle">
+  </validation-messages>
+
   <!-- JA-YE program -->
   <div class="form-group">
     <label>Which JA-YE Program did you participate in?</label>
@@ -14,21 +22,29 @@
     </div>
   </div>
   <!-- JA-YE country -->
-  <div class="form-group">
-    <label>In which country did you participate?</label>
-    <label>Country</label>
+  <div  class="form-group"
+        ng-class="{ 
+          'has-success': programForm.country_of_participation.$dirty && programForm.country_of_participation.$valid, 
+          'has-error': programForm.country_of_participation.$dirty && programForm.country_of_participation.$invalid
+        }">  
+    <label for="country_of_participation">In which country did you participate?</label>
     <select
+      name="country_of_participation"
       class="form-control"
-      ng-init="programData.country_of_participation = getCountries[80] || programData.country_of_participation"
       ng-model="programData.country_of_participation"
-      ng-options="country.code as country.name for country in getCountries"
+      ng-options="country.code as country.name for country in registration.getCountries"
       required />
     </select>
   </div>
   <!-- School -->
-  <div class="form-group">
-    <label>At which school or university did you participate?</label>
+  <div  class="form-group"
+        ng-class="{ 
+          'has-success': programForm.institution.$dirty && programForm.institution.$valid, 
+          'has-error': programForm.institution.$dirty && programForm.institution.$invalid
+        }">  
+    <label for="institution">At which school or university did you participate?</label>
     <input
+      name="institution"
       type="text"
       class="form-control"
       placeholder="Institute"
@@ -36,20 +52,29 @@
       required />
   </div>
   <!-- Year of participation -->
-  <div class="form-group">
-    <label>In which year did you participate?</label>
+  <div  class="form-group"
+        ng-class="{ 
+          'has-success': programForm.year_of_participation.$dirty && programForm.year_of_participation.$valid, 
+          'has-error': programForm.year_of_participation.$dirty && programForm.year_of_participation.$invalid
+        }">    
+    <label for="year_of_participation">In which year did you participate?</label>
     <select 
+      name="year_of_participation"
       class="form-control" 
-      ng-init="programData.year_of_participation = 1993"
       ng-model="programData.year_of_participation" 
-      ng-options="year for year in possibleYears" 
+      ng-options="year for year in registration.possibleYears" 
       required>
     </select>
   </div>
   <!-- Name of student company -->
-  <div class="form-group">
-    <label>What was the name of your student company?</label>
+  <div  class="form-group"
+        ng-class="{ 
+          'has-success': programForm.student_company_name.$dirty && programForm.student_company_name.$valid, 
+          'has-error': programForm.student_company_name.$dirty && programForm.student_company_name.$invalid
+        }">  
+    <label for="student_company_name">What was the name of your student company?</label>
     <input
+      name="student_company_name"
       type="text"
       class="form-control"
       placeholder="Name"
@@ -59,7 +84,6 @@
   <!-- Continue button -->
   <button
     type="submit"
-    ng-disabled="programForm.$invalid"
     class="btn btn-default btn-green btn-lg">
     Continue
   </button>

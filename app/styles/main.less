@@ -291,6 +291,17 @@ html, body {
       border: 1px solid rgba(184, 213, 27, 1);
     }
 
+    .has-error .form-control, 
+    .has-error .form-control:focus {
+      border-color: @red;
+    }
+
+    .has-success .form-control, 
+    .has-success .form-control:focus {
+      border-color: @lightGreen;
+    }
+
+
     h1.title {
         color:#777;
         margin:  40px 0 30px 0;
@@ -320,4 +331,28 @@ html, body {
     margin-top: 8px;
 }
 
+}
+
+
+// override colors of bootstrap
+.alert-danger {
+  color: #FFFFFF;
+  background-color: #d64242;
+  border-color: #d64242;
+}
+
+
+.toast-top-center {
+  top: 12px;
+}
+
+#toast-container.toast-center,
+#toast-container.toast-top-center,
+#toast-container.toast-bottom-center{
+  width: 100%;
+}
+#toast-container.toast-center > div,
+#toast-container.toast-top-center > div,
+#toast-container.toast-bottom-center > div{
+  margin: auto;
 }

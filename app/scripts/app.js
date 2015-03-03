@@ -9,14 +9,13 @@
  * Main module of the application.
  */
 
-
 angular
   .module('alumni-db-frontend', [
     'AppConfig',
     'ngCookies',
     'ng-token-auth',
-    'ngMessages',
-    'ui.router'
+    'ui.router',
+    'toaster'
   ])
   .constant('USER_ROLES', {
     registered: 'registered',
@@ -143,6 +142,7 @@ angular
         url: '/registration',
         templateUrl: 'views/home-registration/main.html',
         controller: 'RegistrationCtrl',
+        controllerAs: 'registration',
         resolve: {
           notAuthorizedRoles: function (USER_ROLES) {
             return [USER_ROLES.guest,
