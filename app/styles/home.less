@@ -11,18 +11,90 @@
  * @mediumGreen
  */
 
-@navbarHeight: 64px;
+@colorbarHeight: 9px;
+@navbarHeight: 60px;
 @navbarVerticalPadding: 8px;
 @navbarHorizontalPadding: 128px;
+@navbarLogoSize: 20px;
+@navbarElementSize: 14px;
+@navbarElementSpacing: 16px;
+
+#home-view{
+  height: 100%;
+  margin-top: @colorbarHeight + @navbarHeight;
+}
+
+.colorbar {
+  z-index: 999;
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  height: @colorbarHeight;
+}
+
+.o1 {
+  width: 11.85789726356217%;
+  height: 100%;
+  float: left;
+  background-color: #e87000;    
+}
+
+.hg1 {
+  width: 5.928948631781085%;
+  height: 100%;
+  float: left;
+  background-color: #b8d51b;
+}
+
+.dg1 {
+  width: 14.13826212193951%;
+  height: 100%;
+  float: left;
+  background-color: #63b531;
+}
+
+.o2 {
+  width: 6.265002400384062%;
+  height: 100%;
+  float: left;
+  background-color: #f29a01;
+}
+
+.dg2 {
+  width: 16.68266922707633%;
+  height: 100%;
+  float: left;
+  background-color: #33a444;
+}
+
+.hg2 {
+  width: 5.760921747479597%;
+  height: 100%;
+  float: left;
+  background-color: #b8d51b;
+}
+
+.o3 {
+  width: 39.366298607777246%;
+  height: 100%;
+  float: left;
+  background-color: #e68701;
+}
 
 .alumni-navbar {
+  z-index: 998;
+  position: fixed;
   width: 100%;
+  top: 9px;
   height: @navbarHeight;
   padding-top: @navbarVerticalPadding;
   padding-bottom: @navbarVerticalPadding;
   padding-left: @navbarHorizontalPadding;
   padding-right: @navbarHorizontalPadding;
-  border: 1px solid black;
+  background-color: white;
+  -webkit-box-shadow: 0px 2px 2px 0px @gray;
+     -moz-box-shadow: 0px 2px 2px 0px @gray;
+          box-shadow: 0px 2px 2px 0px @gray;
 
   .alumni-navbar-content {
     width: 100%;
@@ -32,7 +104,7 @@
 
   .alumni-navbar-logo {
     height: 100%;
-    font-size: 18px;
+    font-size: @navbarLogoSize;
     color: @lightGreen;
     float: left;
   }
@@ -44,6 +116,28 @@
     float: none;
     overflow: hidden;
     text-align: right;
+
+    .alumni-navbar-element {
+      display: inline-block;
+      font-size: @navbarElementSize;
+      color: @green;
+
+      a {
+        color: @green;
+      }
+
+      a:hover {
+        color: @green;
+      }
+    }
+
+    .alumni-navbar-element + .alumni-navbar-element {
+      margin-left: @navbarElementSpacing;
+    }
+
+    .alumni-profile {
+      font-weight: bolder;
+    }
   }
 
 }
