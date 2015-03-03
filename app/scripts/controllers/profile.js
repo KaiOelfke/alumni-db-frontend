@@ -23,13 +23,13 @@ app.controller('ProfileCtrl', [
     var _user  = data.data;
     /*jshint camelcase: false */
     if (moment(_user.date_of_birth,'YYYY-MM-DD').isValid()) {
-      _user.date_of_birth = moment(_user.date_of_birth,'YYYY-MM-DD').format('MM.MM.YYYY');
+      _user.date_of_birth = moment(_user.date_of_birth,'YYYY-MM-DD').format('DD.MM.YYYY');
     }
     _user.country = countriesFactory.getFromPermittedCountry(_user.country);
     _user.program_type = programTypesFactory.getTypeName(_user.program_type);
     _user.country_of_participation = countriesFactory.getFromAllCountry(_user.country_of_participation);
     _user.gender = genderFactory.getGenderName(_user.gender);
-    
+
     $scope.userData = _user;
 
     $scope.goToUpdateUser = function() {
@@ -59,7 +59,7 @@ app.controller('ProfileUpdateCtrl', [
     /*jshint camelcase: false */
 
     if (moment(_user.date_of_birth,'YYYY-MM-DD').isValid()) {
-      _user.date_of_birth = moment(_user.date_of_birth,'YYYY-MM-DD').format('MM.MM.YYYY');
+      _user.date_of_birth = moment(_user.date_of_birth,'YYYY-MM-DD').format('DD.MM.YYYY');
     }
 
     $scope.userData = _user;

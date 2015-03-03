@@ -14,7 +14,7 @@ function registrationCtrl($auth, $state, yearsFactory, countriesFactory, $scope)
 
     $scope.possibleYears = yearsFactory.getYears();
 
-    
+
     $scope.personalInformation = function(personalData) {
       _personalData = personalData;
       $scope.infoForm = 'program-info';
@@ -35,7 +35,7 @@ function registrationCtrl($auth, $state, yearsFactory, countriesFactory, $scope)
         });
 
 
-    };   
+    };
 
     $scope.getAllCountries = countriesFactory.getAllCountries();
     $scope.getCountries = countriesFactory.getCountries();
@@ -43,7 +43,7 @@ function registrationCtrl($auth, $state, yearsFactory, countriesFactory, $scope)
 }
 
 angular.module('alumni-db-frontend')
-  .controller('RegistrationCtrl', ['$auth', '$state', 'countriesFactory', '$scope', registrationCtrl]);
+  .controller('RegistrationCtrl', ['$auth', '$state', 'yearsFactory', 'countriesFactory', '$scope', registrationCtrl]);
 
 
 
