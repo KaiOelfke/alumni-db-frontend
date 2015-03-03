@@ -40,6 +40,19 @@ function registrationCtrl($auth, $state, yearsFactory, countriesFactory, $scope)
     $scope.getAllCountries = countriesFactory.getAllCountries();
     $scope.getCountries = countriesFactory.getCountries();
 
+    $scope.open = function($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+
+      $scope.opened = true;
+    };
+
+    $scope.dateOptions = {
+      startingDay: 1,
+      showWeeks: false
+    };
+
+    $scope.format = 'dd.MM.yyyy';
 }
 
 angular.module('alumni-db-frontend')
