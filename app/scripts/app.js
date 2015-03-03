@@ -9,14 +9,14 @@
  * Main module of the application.
  */
 
-
 angular
   .module('alumni-db-frontend', [
     'AppConfig',
     'ngCookies',
     'ng-token-auth',
-    'ngMessages',
-    'ui.router'
+    'ui.router',
+    'toaster',
+    'ui.bootstrap'
   ])
   .constant('USER_ROLES', {
     registered: 'registered',
@@ -136,18 +136,19 @@ angular
           },
           authz: function  (authorizedRoles,authorizationService) {
             return authorizationService.isAuthorized(authorizedRoles);
-          }     
+          }
         }
       })
       .state('home.loggedin.registration', {
         url: '/registration',
         templateUrl: 'views/home-registration/main.html',
         controller: 'RegistrationCtrl',
+        controllerAs: 'registration',
         resolve: {
           notAuthorizedRoles: function (USER_ROLES) {
             return [USER_ROLES.guest,
                     USER_ROLES.profileCompleted];
-          },          
+          },
           authz: function  (notAuthorizedRoles,authorizationService) {
             return authorizationService.isNotAuthorized(notAuthorizedRoles);
           }
@@ -210,9 +211,11 @@ angular
     $rootScope.$on('$stateChangeError',function(event, toState, toParams, fromState, fromParams, error){
       if (error === AUTHZ_EVENTS.notAuthorized) {
         $state.go('home');
-      } 
+      }
       console.log('$stateChangeError - fired when an error occurs during transition.');
     });
-
+    $rootScope.isOwner = function(uid){
+      return $rootScope.user.id === uid;
+    };
 
 });

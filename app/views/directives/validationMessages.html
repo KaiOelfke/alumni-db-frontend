@@ -1,0 +1,12 @@
+<div class="alert alert-danger" role="alert">
+  {{getTitle()}}
+  <ul>
+      <li ng-repeat=" (name, value) in form"  ng-show="value.$invalid" >
+          {{name}}, {{value}}
+          {{ getMessages(name) }}
+          <span ng-repeat=" (errorname, errorvalue) in value.$error" ng-show="errorvalue">
+            {{ getMessages(name + "."+ errorname) }}
+          </span>
+      </li>
+  </ul>
+</div>

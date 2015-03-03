@@ -1,12 +1,21 @@
     <div class="panel">
       <!-- Title -->
       <h3>Connect with Alumni</h3>
+
+
+
       <!-- Form -->
       <form 
         name="signupForm" 
         role="form" 
-        ng-submit="signupForm.$valid && handleSignUpBtnClick(signupData)" 
+        ng-submit="handleSignUpBtnClick(signupData)" 
         novalidate>
+
+        <!-- Form Validation Massages -->
+        <validation-messages form="signupForm" 
+                              get-messages="formValidationMessages"
+                              get-title="farmValidationTitle">
+        </validation-messages>
 
         <!-- Email -->
         <div 
@@ -117,7 +126,6 @@
         <button 
           name="commit" 
           type="submit" 
-          ng-disabled="signupForm.$invalid" 
           class="btn btn-lg btn-block btn-alumni" 
           value="Sign Up">Sign Up</button>
       </form>
