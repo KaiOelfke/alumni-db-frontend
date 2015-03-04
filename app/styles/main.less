@@ -18,7 +18,7 @@
 @mediumGreen: rgb(111,183,43);
 
 @containerWidth: 1024px;
-@containerPaddingTop: 16px;
+@containerPaddingTop: 32px;
 
 @pageTitleColor: @green;
 @pageTitleSize: 40px;
@@ -40,7 +40,7 @@ html, body {
 
 /* home.html inner container */
 .container {
-    padding: @containerPaddingTop 0 0 0;
+    padding: @containerPaddingTop 0 @containerPaddingTop 0;
     width: @containerWidth;
 }
 
@@ -73,8 +73,16 @@ html, body {
 }
 
 .page-section {
+    width: 100%;
+    height: auto;
     padding-left: @pageSectionPadding;
     padding-right: @pageSectionPadding;
+
+    :after {
+        display: block;
+        content: '';
+        clear: both;
+    }
 
   .section-title {
     padding-bottom: @pageSectionPadding / 2;
@@ -83,37 +91,48 @@ html, body {
     border-bottom: 1px solid @gray;
   }
 
-  .user-info {
+  .section-row {
     width: 100%;
-    padding: 4px 8px 4px 8px;
     height: auto;
-    overflow: hidden;
+    padding: 0;
+    clear: left;
 
     p {
         margin: 0;
     }
   }
 
-  .info-description {
-    margin-right: @pageSectionPadding;
-    width: @infoDescriptionWidth;
+  .section-column-left {
     float: left;
+    margin-right: @pageSectionPadding;
     font-size: 14px;
     color: @gray;
     text-transform: uppercase;
   }
 
-  .info {
-    width: auto;
-    float: none;
+  .section-column-right {
+    width: @containerWidth - @infoDescriptionWidth;
+    float: right;
     color: @black;
+
+    .form-control {
+        width: 100%;
+        height: 44px;
+    }
+  }
+
+  .section-row + .section-row {
+    margin-top: 8px;
+  }
+
+  label {
+    font-weight: normal;
   }
 }
 
 .page-section + .page-section {
     margin: @pageSectionPadding 0 0 0;
 }
-
 
 /* home.html outer container */
 #home-view {
@@ -183,7 +202,6 @@ html, body {
         transform: translateY(-50%) translateX(50%) rotate(-45deg);
     }
 
-
     .steps .step:last-child {
         margin-right: 0;
     }
@@ -216,7 +234,6 @@ html, body {
         color: rgba(0,0,0,.8);
     }
 
-
     .steps .step.active .title {
         color: rgba(0,0,0,.85);
     }
@@ -237,7 +254,6 @@ html, body {
     :after, :before {
         box-sizing: border-box;
     }
-
 
     .registration label {
 
@@ -261,13 +277,11 @@ html, body {
         margin: 4px 7px 0px 7px;
     }
 
-
     .btn-checkbox{
         border-color: #FFFFFF;
         color: #FFFFFF;
         background-color: #63B531;    
     }
-
 
     .btn-checkbox:active,
     .btn-checkbox.active {
@@ -283,13 +297,10 @@ html, body {
       background-color: #444444;
     }
 
-
-
     .btn-checkbox:hover{
         color: #FFFFFF;
         background-color: #33A444;    
     }
-
 
     .btn-green {
         color: #fff;
@@ -330,7 +341,6 @@ html, body {
       border-color: @lightGreen;
     }
 
-
     h1.title {
         color:#777;
         margin:  40px 0 30px 0;
@@ -354,10 +364,6 @@ html, body {
 
 .update-form > .form-group > input {
     width: 100%;
-}
-
-#update-submit-btn {
-    margin-top: 8px;
 }
 
 }
