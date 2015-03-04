@@ -1,33 +1,96 @@
-<div class="row">
-  <div class="col-md-offset-2 col-md-8">
-    <h1 class="title">{{userData.first_name}} {{userData.last_name}}</h1>
-    <p>City: <b>{{userData.city}}</b></p>
-    <p>Country: <b>{{userData.country}} </b></p>
-    <p>Birthday: <b>{{userData.date_of_birth}}</b></p>
-    <p>Gender: <b>{{userData.gender}}</b></p>
-    <p>Program type: <b>{{userData.program_type}}</b></p>
-    <p>Country of Participation: <b>{{userData.country_of_participation}}</b></p>
-    <p>Institution: <b>{{userData.institution}}</b></p>
-    <p>Year of Participation: <b>{{userData.year_of_participation}}</b></p>
-    <p>Student company name: <b>{{userData.student_company_name}}</b></p>
+<div class="page-title">
+  <h1>{{ userData.first_name }} {{ userData.last_name }}</h1>
+</div>
+
+<div class="page-section">
+  <!-- Personal information -->
+  <p class="section-title">Personal information</p>
+  <div class="row section-row">
+    <!-- Name -->
+    <div class="col-md-2">
+      <p class="info-description">Name</p>
+    </div>
+    <div class="col-md-10">
+      <p class="info">{{ userData.first_name }} {{ userData.last_name }}</p>
+    </div>
+    <!-- Birthday -->
+    <div class="col-md-2">
+      <p class="info-description">Birthday</p>
+    </div>
+    <div class="col-md-10">
+      <p class="info">{{ userData.date_of_birth }}</p>
+    </div>
+    <!-- Gender -->
+    <div class="col-md-2">
+      <p class="info-description">Gender</p>
+    </div>
+    <div class="col-md-10">
+      <p class="info">{{ userData.gender }}</p>
+    </div>
+    <!-- City -->
+    <div class="col-md-2">
+      <p class="info-description">City</p>
+    </div>
+    <div class="col-md-10">
+      <p class="info">{{ userData.city }}</p>
+    </div>
+    <!-- Country -->
+    <div class="col-md-2">
+      <p class="info-description">Country</p>
+    </div>
+    <div class="col-md-10">
+      <p class="info">{{ userData.country }}</p>
+    </div>
+  </div>
+</div>
+<div class="page-section">
+  <!-- Other shit -->
+  <p class="section-title">Other shit</p>
+  <div class="row section-row">
+    <!-- Program type -->
+    <div class="col-md-2">
+      <p class="info-description">Program type</p>
+    </div>
+    <div class="col-md-10">
+      <p class="info">{{ userData.program_type }}</p>
+    </div>
+    <!-- Country of Participation -->
+    <div class="info-description">
+      <p>Country of Participation</p>
+    </div>
+    <div class="info">
+      <p>{{ userData.country_of_participation }}</p>
+    </div>
+    <!-- Institution -->
+    <div class="col-md-2">
+      <p class="info-description">Institution</p>
+    </div>
+    <div class="col-md-10">
+      <p class="info">{{ userData.institution }}</p>
+    </div>
+    <!-- Year of Participation -->
+    <div class="col-md-2">
+      <p class="info-description">Year of Participation</p>
+    </div>
+    <div class="col-md-10">
+      <p class="info">{{ userData.year_of_participation }}</p>
+    </div>
+    <!-- Student company name -->
+    <div class="col-md-2">
+      <p class="info-description">Student company name</p>
+    </div>
+    <div class="col-md-10">
+      <p class="info">{{ userData.student_company_name }}</p>
+    </div>
   </div>
 </div>
 
-<!--
-<ui-view/>
--->
-<div class="row">
-  <div class="col-md-offset-2 col-md-8">
-
-  <!-- Edit -->
-  <button
-    name="edit"
-    ng-click="goToUpdateUser()"
-    type="button"
-    class="btn btn-danger"
-    ng-show="isOwner(userData.id)">
-    Edit
-  </button>
-
-  </div>
-</div>
+<!-- Edit -->
+<button
+  name="edit"
+  ng-click="goToUpdateUser()"
+  type="button"
+  class="btn btn-danger"
+  ng-show="isOwner(userData.id)">
+  Edit
+</button>
