@@ -13,31 +13,31 @@ angular.module('alumni-db-frontend')
 
         /*jshint camelcase: false */
         var _messages = {
-          confirm_password: 'confirm password:',
-          password: 'password:',
-          email: 'email:',
-          birthday: 'Date of Birth:',
+          confirm_password: 'Password confirmation:',
+          password: 'Password:',
+          email: 'Email:',
+          birthday: 'Birthday:',
           firstname: 'First name: ',
           lastname: 'Last name: ',
           country: 'Country: ',
           student_company_name: 'Student company name: ',
           city: 'City: ',
           institution: 'Institution: ',
-          'confirm_password.required': 'confirm_password is not valid',
-          'password.required': 'password is not valid',
-          'password.minlength': 'password is minlength 8',
-          'confirm_password.minlength': 'confirm_password is minlength 8',                    
-          'email.required': 'email is required',
-          'email.email': 'email is not valid',
-          'birthday.dateFormat': 'date format is not valid example 01.11.1993',
-          'lastname.required': 'lastname is required',
-          'firstname.required': 'firstname is required',
-          'city.required': 'city is required',
-          'student_company_name.required': 'is required',
-          'institution.required': 'is required'
+          'confirm_password.required': 'Sorry. You need to have a confirmation. To avoid the typos.',
+          'password.required': 'Some security is needed so no one can change your account.',
+          'password.minlength': 'The minimum length is 8.',
+          'confirm_password.minlength': 'The minimum length is 8.',
+          'email.required': 'We will not spam you, but we need your email.',
+          'email.email': 'The format seems to be wrong.',
+          'birthday.dateFormat': 'Maybe the date format is wrong. It should be like in this example: 01.11.1993 / day.month.year',
+          'lastname.required': 'You have a last name, right?',
+          'firstname.required': 'You have a first name, right?',
+          'city.required': 'Please enter your city, village, settlement or some location.',
+          'student_company_name.required': 'Every real company needs a name!',
+          'institution.required': 'The name of the institution where you did the JA program is missing.'
         };
 
-        var _title = 'Change a few things up and try submitting again.';
+        var _title = 'Change a few things and try submitting again.';
 
         validationMessagesFactory.getValidationMsg = function (id) {
           return _messages[id] || '';

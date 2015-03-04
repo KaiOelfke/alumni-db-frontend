@@ -51,7 +51,7 @@ app.controller('ProfileCtrl', [
 app.controller('ProfileUpdateCtrl', [
   'countriesFactory',
   'yearsFactory',
-  'validationMessagesFactory',  
+  'validationMessagesFactory',
   '$auth',
   '$state',
   'toaster',
@@ -59,6 +59,7 @@ app.controller('ProfileUpdateCtrl', [
   '$rootScope',
   function(countriesFactory, yearsFactory, validationMessagesFactory, $auth, $state, toaster, $scope, $rootScope) {
     var _user = $rootScope.user;
+    console.log(_user);
     $scope.formValidationMessages = validationMessagesFactory.getValidationMsg;
     $scope.farmValidationTitle = validationMessagesFactory.getValidationTitle;
     /*jshint camelcase: false */
@@ -67,22 +68,25 @@ app.controller('ProfileUpdateCtrl', [
       _user.date_of_birth = moment(_user.date_of_birth,'YYYY-MM-DD').format('DD.MM.YYYY');
     }
 
-    $scope.userData = _user;
+    /*ToDO: Probably this can be more elegant. We create a copy of _user
+    with the following line and assign that to tempUserData so that tempUserData is unique and updating the profile doesn't result in live data binding changes of names in the nav bar. We only want those changes when the user actually successfully submits the change.
+    */
+    $scope.tempUserData = JSON.parse(JSON.stringify(_user));
     $scope.getCountries = countriesFactory.getCountries();
     $scope.possibleYears = yearsFactory.getYears();
     $scope.getAllCountries = countriesFactory.getAllCountries();
 
-    $scope.submitUpdatedUserData = function(userData) {
+    $scope.submitUpdatedUserData = function(tempUserData) {
       $scope.$broadcast('show-errors-messages-block');
 
       if ($scope.updateUserForm.$invalid) {
         return ;
       }
-      
-      $auth.updateAccount(userData)
+      $scope.userData = tempUserData;
+      console.log(tempUserData.date_of_birth);
+      $auth.updateAccount(tempUserData)
         .then(function() {
-            toaster.pop('success', 'updated.');
-            $state.go('home.loggedin.home');
+            $state.go('home.loggedin.profile-show', {id: _user.id});
         })
         .catch(function() {
           toaster.pop('error', 'Something went wrong.');
@@ -105,7 +109,7 @@ app.controller('ProfileUpdateCtrl', [
       showWeeks: false
     };
 
-    $scope.format = 'dd.MM.yyyy';
+    $scope.format = 'DD.MM.YYYY';
 
   }
 ]);

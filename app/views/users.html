@@ -16,7 +16,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="user in users">
+			<tr ng-repeat="user in users | orderBy: 'first_name'">
 				<td>{{ user.id }}</td>
 				<td>{{ user.email }}</td>
 				<td><a ui-sref="home.loggedin.profile-show({ id: user.id})">{{ user.first_name }}</a></td>

@@ -11,20 +11,20 @@
 var app = angular.module('alumni-db-frontend');
 
 app.controller('NavbarCtrl', [
-  '$auth', 
-  '$scope', 
-  '$state', 
-  function($auth, $scope, $state) {
-    $scope.handleSignOutBtnClick = function() {
+  '$auth',
+  '$rootScope',
+  '$state',
+  function($auth, $rootScope, $state) {
+    $rootScope.handleSignOutBtnClick = function() {
       $auth.signOut()
-        .then(function() { 
+        .then(function() {
           // handle success response
           $state.go('home.guest.signin');
         })
-        .catch(function(resp) { 
+        .catch(function(resp) {
           // handle error response
           console.log(resp);
-          $scope.alert('Sorry, something went wrong.');
+          window.alert('Sorry, something went wrong.');
         });
     };
   }
