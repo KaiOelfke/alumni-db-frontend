@@ -22,6 +22,9 @@
 
 @pageTitleColor: @green;
 @pageTitleSize: 40px;
+@pageDescriptionSize: 16px;
+@pageSectionPadding: 16px;
+@infoDescriptionWidth: 391px;
 
 html, body {
     height: 100%;
@@ -46,28 +49,71 @@ html, body {
     margin-bottom: @containerPaddingTop;
 
     h1 {
-        margin: 0 0 16px 0;
+        margin: 0 0 @pageDescriptionSize 0;
         font-size: @pageTitleSize;
         color: @pageTitleColor;
     }
 
     p {
-        font-size: 16px;
+        font-size: @pageDescriptionSize;
         color: @black;
     }
 }
 
 .announcement {
-    padding: 16px;
+    padding: @pageDescriptionSize;
     background-color: fade(@lightGreen, 20%);
     border-radius: 8px;
     border: 1px solid @lightGreen;
 
     p {
-        font-size: 16px;
+        font-size: @pageDescriptionSize;
         color: @green;
     }
 }
+
+.page-section {
+    padding-left: @pageSectionPadding;
+    padding-right: @pageSectionPadding;
+
+  .section-title {
+    padding-bottom: @pageSectionPadding / 2;
+    font-size: @pageDescriptionSize;
+    color: @pageTitleColor;
+    border-bottom: 1px solid @gray;
+  }
+
+  .user-info {
+    width: 100%;
+    padding: 4px 8px 4px 8px;
+    height: auto;
+    overflow: hidden;
+
+    p {
+        margin: 0;
+    }
+  }
+
+  .info-description {
+    margin-right: @pageSectionPadding;
+    width: @infoDescriptionWidth;
+    float: left;
+    font-size: 14px;
+    color: @gray;
+    text-transform: uppercase;
+  }
+
+  .info {
+    width: auto;
+    float: none;
+    color: @black;
+  }
+}
+
+.page-section + .page-section {
+    margin: @pageSectionPadding 0 0 0;
+}
+
 
 /* home.html outer container */
 #home-view {
