@@ -17,6 +17,9 @@
 @lightYellow: rgb(255,243,82);
 @mediumGreen: rgb(111,183,43);
 
+@containerWidth: 1024px;
+@containerPaddingTop: 16px;
+
 html, body {
     height: 100%;
     font-size: 14px;    
@@ -26,6 +29,14 @@ html, body {
 
 .content {
     height: 100%;
+}
+
+.container {
+    /* Continue here */
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: @containerPaddingTop;
+    width: @containerWidth;
 }
 
 #home-view{

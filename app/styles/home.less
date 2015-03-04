@@ -11,12 +11,12 @@
  * @mediumGreen
  */
 
-@colorbarHeight: 8px;
-@navbarHeight: 60px + @colorbarHeight;
+@colorbarHeight: 9px;
+@navbarHeight: 60px;
+@navbarContainerWidth: @containerWidth;
 @navbarContentHeight: @navbarHeight - @colorbarHeight;
 @navbarVerticalPadding: 8px;
-@navbarHorizontalPadding: 128px;
-@navbarLogoSize: 20px;
+@navbarLogoSize: 22px;
 @navbarElementSize: 14px;
 @navbarElementSpacing: 16px;
 
@@ -93,13 +93,14 @@
 
   .navbar-container {
     position: absolute;
-    width: 100%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: @navbarContainerWidth;
     height: @navbarContentHeight;
     top: @colorbarHeight;
     padding-top: @navbarVerticalPadding;
     padding-bottom: @navbarVerticalPadding;
-    padding-left: @navbarHorizontalPadding;
-    padding-right: @navbarHorizontalPadding;
     line-height: @navbarHeight;
   }
 
