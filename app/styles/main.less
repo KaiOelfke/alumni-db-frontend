@@ -20,6 +20,9 @@
 @containerWidth: 1024px;
 @containerPaddingTop: 16px;
 
+@pageTitleColor: @green;
+@pageTitleSize: 40px;
+
 html, body {
     height: 100%;
     font-size: 14px;    
@@ -27,16 +30,49 @@ html, body {
     padding: 0;    
 }
 
+/* index.html ui-view container */
 .content {
     height: 100%;
 }
 
+/* home.html inner container */
 .container {
-    padding-top: @containerPaddingTop 0 0 0;
+    padding: @containerPaddingTop 0 0 0;
     width: @containerWidth;
 }
 
-#home-view{
+.page-title {
+    width: 100%;
+    margin-bottom: @containerPaddingTop;
+
+    h1 {
+        margin: 0 0 16px 0;
+        font-size: @pageTitleSize;
+        color: @pageTitleColor;
+    }
+
+    p {
+        font-size: 16px;
+        color: @black;
+    }
+}
+
+.announcement {
+    padding: 16px;
+    background-color: fade(@lightGreen, 20%);
+    border-radius: 8px;
+    border: 1px solid @lightGreen;
+
+    p {
+        font-size: 16px;
+        color: @green;
+    }
+}
+
+/* home.html outer container */
+#home-view {
+    height: 100%;
+
     .ordered.steps {
         counter-reset: ordered;
     }
