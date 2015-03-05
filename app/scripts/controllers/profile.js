@@ -62,7 +62,6 @@ app.controller('ProfileUpdateCtrl', [
     $scope.formValidationMessages = validationMessagesFactory.getValidationMsg;
     $scope.farmValidationTitle = validationMessagesFactory.getValidationTitle;
     /*jshint camelcase: false */
-
     if (moment(_user.date_of_birth,'YYYY-MM-DD').isValid()) {
       _user.date_of_birth = moment(_user.date_of_birth,'YYYY-MM-DD').format('DD.MM.YYYY');
     }
@@ -75,10 +74,19 @@ app.controller('ProfileUpdateCtrl', [
     $scope.submitUpdatedUserData = function(userData) {
       $scope.$broadcast('show-errors-messages-block');
 
+      console.log(userData.date_of_birth);
+
       if ($scope.updateUserForm.$invalid) {
-        return ;
+        return;
       }
       
+      // Fix timezone difference
+      if (typeof(userData.date_of_birth) === 'string') {
+        userData.date_of_birth = new Date(userData.date_of_birth);
+      }
+      var offset = userData.date_of_birth.getTimezoneOffset();
+      userData.date_of_birth = new Date(userData.date_of_birth.getTime() - (offset * (60 * 1000)));
+
       $auth.updateAccount(userData)
         .then(function() {
             toaster.pop('success', 'updated.');
@@ -104,8 +112,6 @@ app.controller('ProfileUpdateCtrl', [
       startingDay: 1,
       showWeeks: false
     };
-
-    $scope.format = 'dd.MM.yyyy';
 
   }
 ]);

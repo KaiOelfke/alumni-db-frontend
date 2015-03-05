@@ -112,9 +112,7 @@ angular
         controller: 'ProfileCtrl',
         resolve: {
           authorizedRoles: function (USER_ROLES) {
-            return [USER_ROLES.registered,
-                    USER_ROLES.emailConfirmed,
-                    USER_ROLES.profileCompleted];
+            return [USER_ROLES.profileCompleted];
           },
           authz: function  (authorizedRoles,authorizationService) {
             return authorizationService.isAuthorized(authorizedRoles);
