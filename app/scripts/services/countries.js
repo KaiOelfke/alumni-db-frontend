@@ -32,7 +32,7 @@ angular.module('alumni-db-frontend').constant('COUNTRIES',
         'code': 'AS'
     },
     {
-        'name': 'AndorrA',
+        'name': 'Andorra',
         'code': 'AD'
     },
     {
@@ -994,7 +994,7 @@ angular.module('alumni-db-frontend').constant('COUNTRIES',
 ]);
 
 angular.module('alumni-db-frontend').constant('PERMITTEDCOUNTRIES',
-[    
+[
     {
         'name': 'Bulgaria',
         'code': 'BG'

@@ -11,11 +11,11 @@
 var app = angular.module('alumni-db-frontend');
 
 app.controller('SigninCtrl', [
-  '$auth', 
-  '$state', 
+  '$auth',
+  '$state',
   'toaster',
-  'validationMessagesFactory',  
-  'authorizationService',  
+  'validationMessagesFactory',
+  'authorizationService',
   'USER_ROLES',
   '$scope',
   function($auth, $state, toaster, validationMessagesFactory, authorizationService, USER_ROLES, $scope) {
@@ -34,7 +34,6 @@ app.controller('SigninCtrl', [
       $auth.submitLogin($scope.signinData)
         .then(function(resp) {
           var user = resp;
-          toaster.pop('success', 'You have successfully logged in.');
           if (user.statuses.indexOf(USER_ROLES.profileCompleted) !== -1) {
             $state.transitionTo('home.loggedin.home', {location:'replace'});
           }else {
