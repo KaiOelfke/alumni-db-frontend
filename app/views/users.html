@@ -1,15 +1,12 @@
-<div>
-	<p>
-		Welcome to the beta version of Alumni Connect (working title). Currently you can register new accounts, see a list of members and their profile information. Also you can update your own information.
-
-		We will add continuously add features based on your feedback.
-	</p>
+<div class="page-title">
+	<h1>Welcome!</h1>
+	<p>Welcome to the beta version of Alumni Connect (working title). Currently you can register new accounts, see a list of members and their profile information. Also you can update your own information. We will continuously add features based on your feedback.</p>
 </div>
+
 <div class="table-responsive">
 	<table class="table">
 		<thead>
 			<tr>
-				<th>#</th>
 				<th>Email</th>
 				<th>First name</th>
 				<th>Last name</th>
@@ -17,7 +14,6 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat="user in users | filter :{completed_profile:true} | orderBy: 'first_name'">
-				<td>{{ user.id }}</td>
 				<td>{{ user.email }}</td>
 				<td><a ui-sref="home.loggedin.profile-show({ id: user.id})">{{ user.first_name }}</a></td>
 				<td>{{ user.last_name }}</td>

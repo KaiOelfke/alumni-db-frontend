@@ -28,10 +28,8 @@ app.controller('SignupCtrl', [
       if ($scope.signupForm.$invalid) {
         return ;
       }
-
       $auth.submitRegistration(signupData)
-        .then(function()
-        {
+        .then(function() {
         })
         .catch(function() {
           toaster.pop('error', 'Something went wrong.');

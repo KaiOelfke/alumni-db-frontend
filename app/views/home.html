@@ -1,37 +1,37 @@
 <div id="home-view">
-  <div class="colorbar">
-    <div class="o1"></div>
-    <div class="hg1"></div>
-    <div class="dg1"></div>
-    <div class="o2"></div>
-    <div class="dg2"></div>
-    <div class="hg2"></div>
-    <div class="o3"></div>
-  </div>
-
+  <!-- Navbar -->
   <div class="alumni-navbar" ng-controller="NavbarCtrl">
-    <div class="alumni-navbar-content">
-      <div class="alumni-navbar-logo">
-        Alumni Connect
-      </div>
-      <div class="alumni-navbar-rest">
-        <div class="alumni-navbar-element alumni-profile">
-          <a ui-sref="home.loggedin.profile-show({ id: user.id})">{{ user.first_name }} {{ user.last_name }}</a>
-        </div><!--
-     --><div class="alumni-navbar-element alumni-logout">
-          <a ng-click="handleSignOutBtnClick()">Logout</a>
+    <!-- Colorbar -->
+    <div class="colorbar">
+      <div class="o1"></div>
+      <div class="hg1"></div>
+      <div class="dg1"></div>
+      <div class="o2"></div>
+      <div class="dg2"></div>
+      <div class="hg2"></div>
+      <div class="o3"></div>
+    </div>
+    <!-- Navbar container -->
+    <div class="navbar-container">
+      <!-- Navbar content -->
+      <div class="navbar-content">
+        <!-- Logo -->
+        <div class="navbar-logo">
+          <a id="alumni-connect-logo" ui-sref="home.loggedin.home">Alumni Connect</a>
+        </div>
+        <!-- Links -->
+        <div class="navbar-rest">
+          <a class="navbar-element alumni-profile" ui-sref="home.loggedin.profile-show({ id: user.id})">{{ user.first_name }} {{ user.last_name }}</a><!--
+       --><a class="navbar-element alumni-logout" ng-click="handleSignOutBtnClick()">Logout</a>
         </div>
       </div>
     </div>
   </div>
-
-  <div class="container-fuild">
-    <div class="container">
-
-      <ui-view/>
-
-    </div>
+  
+  <div class="home-container">
+    <ui-view/>
   </div>
+
 </div>
 
 
