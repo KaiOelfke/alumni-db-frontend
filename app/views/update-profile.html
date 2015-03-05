@@ -1,13 +1,17 @@
 <div class="row">
   <div class="col-md-offset-2 col-md-9">
-    <h1 class="title">Update profile of {{userData.first_name}} {{userData.last_name}}</h1>
+    <h1 class="title">Update profile</h1>
   </div>
 </div>
+
+      <!--
+      <ui-view/>
+    -->
     <div class="row">
       <div class="col-md-offset-2 col-md-9">
         <form
         name="updateUserForm"
-        ng-submit="submitUpdatedUserData(userData)"
+        ng-submit="submitUpdatedUserData(tempUserData)"
         role="form"
         class="form-inline update-form"
         novalidate>
@@ -26,205 +30,10 @@
     <label for="firstname">First name</label>
     <input
     name="firstname"
-    ng-model="userData.first_name"
+    ng-model="tempUserData.first_name"
     type="text"
     class="form-control"
     required />
-      <div class="row">
-        <div class="col-md-offset-2 col-md-8">
-          <form
-            name="updateUserForm"
-            ng-submit="submitUpdatedUserData(tempUserData)"
-            role="form"
-            class="form-inline update-form"
-            novalidate>
-            <!-- Form Validation Massages -->
-            <validation-messages form="updateUserForm"
-                                  get-messages="formValidationMessages"
-                                  get-title="farmValidationTitle">
-            </validation-messages>
-
-            <!-- Firstname -->
-            <div  class="form-group"
-                  ng-class="{
-                    'has-success': updateUserForm.firstname.$dirty && updateUserForm.firstname.$valid,
-                    'has-error': updateUserForm.firstname.$dirty && updateUserForm.firstname.$invalid
-                  }">
-              <label for="firstname">First name</label>
-              <input
-                name="firstname"
-                ng-model="tempUserData.first_name"
-                type="text"
-                class="form-control"
-                required />
-            </div>
-
-            <!-- Lastname -->
-            <div  class="form-group"
-                  ng-class="{
-                    'has-success': updateUserForm.lastname.$dirty && updateUserForm.lastname.$valid,
-                    'has-error': updateUserForm.lastname.$dirty && updateUserForm.lastname.$invalid
-                  }">
-              <label for="lastname">Last name</label>
-              <input
-                ng-class="{
-                  'has-success': updateUserForm.lastname.$dirty && updateUserForm.lastname.$valid,
-                  'has-error': updateUserForm.lastname.$dirty && updateUserForm.lastname.$invalid
-                }"
-                name="lastname"
-                ng-model="tempUserData.last_name"
-                type="text"
-                class="form-control"
-                required />
-            </div>
-
-            <!-- Country -->
-            <div  class="form-group">
-              <label for="country">Country</label>
-              <select
-                name="country"
-                type="text"
-                class="form-control"
-                ng-model="tempUserData.country"
-                ng-options="country.code as country.name for country in getAllCountries"
-                required />
-            </div>
-
-            <!-- City -->
-            <div  class="form-group"
-                  ng-class="{
-                    'has-success': updateUserForm.city.$dirty && updateUserForm.city.$valid,
-                    'has-error': updateUserForm.city.$dirty && updateUserForm.city.$invalid
-                  }">
-              <label for="city">City</label>
-              <input
-                name="city"
-                ng-model="tempUserData.city"
-                type="text"
-                class="form-control"
-                required />
-            </div>
-
-            <!-- Date of Birth -->
-            <div  class="form-group"
-                  ng-class="{
-                    'has-success': updateUserForm.birthday.$dirty && updateUserForm.birthday.$valid,
-                    'has-error': updateUserForm.birthday.$dirty && updateUserForm.birthday.$invalid
-                  }">
-              <label for="birthday">Birthday</label>
-              <p class="input-group">
-              <input name="birthday" type="text" class="form-control" datepicker-popup="dd.MM.yyyy" ng-model="tempUserData.date_of_birth" is-open="opened" max-date="maxDate" datepicker-options="dateOptions" show-button-bar="false" date-format required/>
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
-              </p>
-            </div>
-
-            <!-- Gender -->
-            <div class="form-group">
-              <label for="gender">Gender</label>
-              <div class="checkbox-row">
-                <!-- Male -->
-                <div
-                  class="btn btn-checkbox"
-                  style="margin-left:20px"
-                  ng-class="{active: !tempUserData.gender}"
-                  ng-click="tempUserData.gender=0;">
-                  Male
-                </div>
-                <!-- Female -->
-                <div
-                  class="btn btn-checkbox"
-                  style="margin-left:20px"
-                  ng-class="{active: tempUserData.gender}"
-                  ng-click="tempUserData.gender=1">
-                  Female
-                </div>
-              </div>
-            </div>
-
-            <!-- Institution -->
-            <div  class="form-group"
-                  ng-class="{
-                    'has-success': updateUserForm.institution.$dirty && updateUserForm.institution.$valid,
-                    'has-error': updateUserForm.institution.$dirty && updateUserForm.institution.$invalid
-                  }">
-              <label for="institution">Institution</label>
-              <input
-                name="institution"
-                ng-model="tempUserData.institution"
-                type="text"
-                class="form-control"
-                required />
-            </div>
-
-            <!-- Program type -->
-            <div class="form-group">
-              <label for="programm_type">Program type</label>
-              <div class="checkbox-row">
-                <div class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: tempUserData.program_type === 0}" ng-click="tempUserData.program_type=0;">Company</div>
-                <div class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: tempUserData.program_type === 1}" ng-click="tempUserData.program_type=1;">Startup</div>
-                <div class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: tempUserData.program_type === 2}" ng-click="tempUserData.program_type=2;">Other</div>
-              </div>
-            </div>
-
-            <!-- Country of Participation -->
-            <div class="form-group">
-              <label for="country_of_participation">Country of Participation</label>
-              <select
-                name="country_of_participation"
-                type="text"
-                class="form-control"
-                ng-model="tempUserData.country_of_participation"
-                ng-options="country.code as country.name for country in getCountries"
-                required />
-            </div>
-
-
-            <!-- Year of Participation -->
-            <div class="form-group">
-              <label for="year_of_participation">Year of Participation</label>
-              <select
-                name="year_of_participation"
-                type="text"
-                class="form-control"
-                ng-model="tempUserData.year_of_participation"
-                ng-options="year for year in possibleYears"
-                required />
-            </div>
-
-            <!-- Student company name -->
-            <div  class="form-group"
-                  ng-class="{
-                    'has-success': updateUserForm.student_company_name.$dirty && updateUserForm.student_company_name.$valid,
-                    'has-error': updateUserForm.student_company_name.$dirty && updateUserForm.student_company_name.$invalid
-                  }">
-              <label for="student_company_name">Student company name</label>
-              <input
-                name="student_company_name"
-                ng-model="tempUserData.student_company_name"
-                type="text"
-                class="form-control"
-                required />
-            </div>
-
-
-            <!-- Submit -->
-            <div>
-              <button
-                name="edit"
-                type="submit"
-                id="update-submit-btn"
-                class="btn btn-success">
-                Submit
-              </button>
-            </div>
-
-          </form>
-
-      </div>
-    </div>
-    </div>
   </div>
 
   <!-- Lastname -->
@@ -240,7 +49,7 @@ ng-class="{
 'has-error': updateUserForm.lastname.$dirty && updateUserForm.lastname.$invalid
 }"
 name="lastname"
-ng-model="userData.last_name"
+ng-model="tempUserData.last_name"
 type="text"
 class="form-control"
 required />
@@ -253,7 +62,7 @@ required />
   name="country"
   type="text"
   class="form-control"
-  ng-model="userData.country"
+  ng-model="tempUserData.country"
   ng-options="country.code as country.name for country in getAllCountries"
   required />
 </div>
@@ -267,7 +76,7 @@ ng-class="{
 <label for="city">City</label>
 <input
 name="city"
-ng-model="userData.city"
+ng-model="tempUserData.city"
 type="text"
 class="form-control"
 required />
@@ -281,7 +90,7 @@ ng-class="{
 }">
 <label for="birthday">Birthday</label>
 <p class="input-group">
-  <input name="birthday" type="text" class="form-control" datepicker-popup="dd.MM.yyyy" ng-model="userData.date_of_birth" is-open="opened" max-date="maxDate" datepicker-options="dateOptions" show-button-bar="false" date-format required/>
+  <input name="birthday" type="text" class="form-control" datepicker-popup="dd.MM.yyyy" ng-model="tempUserData.date_of_birth" is-open="opened" max-date="maxDate" datepicker-options="dateOptions" show-button-bar="false" date-format required/>
   <span class="input-group-btn">
     <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
   </span>
@@ -296,16 +105,16 @@ ng-class="{
     <div
     class="btn btn-checkbox"
     style="margin-left:20px"
-    ng-class="{active: !userData.gender}"
-    ng-click="userData.gender=0;">
+    ng-class="{active: !tempUserData.gender}"
+    ng-click="tempUserData.gender=0;">
     Male
   </div>
   <!-- Female -->
   <div
   class="btn btn-checkbox"
   style="margin-left:20px"
-  ng-class="{active: userData.gender}"
-  ng-click="userData.gender=1">
+  ng-class="{active: tempUserData.gender}"
+  ng-click="tempUserData.gender=1">
   Female
 </div>
 </div>
@@ -320,7 +129,7 @@ ng-class="{
 <label for="institution">Institution</label>
 <input
 name="institution"
-ng-model="userData.institution"
+ng-model="tempUserData.institution"
 type="text"
 class="form-control"
 required />
@@ -330,9 +139,9 @@ required />
 <div class="form-group">
   <label for="programm_type">Program type</label>
   <div class="checkbox-row">
-    <div class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: userData.program_type === 0}" ng-click="userData.program_type=0;">Company</div>
-    <div class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: userData.program_type === 1}" ng-click="userData.program_type=1;">Startup</div>
-    <div class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: userData.program_type === 2}" ng-click="userData.program_type=2;">Other</div>
+    <div class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: tempUserData.program_type === 0}" ng-click="tempUserData.program_type=0;">Company</div>
+    <div class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: tempUserData.program_type === 1}" ng-click="tempUserData.program_type=1;">Startup</div>
+    <div class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: tempUserData.program_type === 2}" ng-click="tempUserData.program_type=2;">Other</div>
   </div>
 </div>
 
@@ -343,7 +152,7 @@ required />
   name="country_of_participation"
   type="text"
   class="form-control"
-  ng-model="userData.country_of_participation"
+  ng-model="tempUserData.country_of_participation"
   ng-options="country.code as country.name for country in getCountries"
   required />
 </div>
@@ -356,7 +165,7 @@ required />
   name="year_of_participation"
   type="text"
   class="form-control"
-  ng-model="userData.year_of_participation"
+  ng-model="tempUserData.year_of_participation"
   ng-options="year for year in possibleYears"
   required />
 </div>
@@ -370,7 +179,7 @@ ng-class="{
 <label for="student_company_name">Student company name</label>
 <input
 name="student_company_name"
-ng-model="userData.student_company_name"
+ng-model="tempUserData.student_company_name"
 type="text"
 class="form-control"
 required />
