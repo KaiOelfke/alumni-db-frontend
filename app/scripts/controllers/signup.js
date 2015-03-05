@@ -13,10 +13,10 @@ var app = angular.module('alumni-db-frontend');
 
 app.controller('SignupCtrl', [
   'validationMessagesFactory',
-  '$auth', 
-  '$state', 
+  '$auth',
+  '$state',
   'toaster',
-  '$scope', 
+  '$scope',
   function(validationMessagesFactory, $auth, $state, toaster, $scope) {
     $scope.signupData = {};
     $scope.formValidationMessages = validationMessagesFactory.getValidationMsg;
@@ -30,8 +30,8 @@ app.controller('SignupCtrl', [
       }
 
       $auth.submitRegistration(signupData)
-        .then(function() {
-          toaster.pop('success', 'You have successfully signed up');          
+        .then(function()
+        {
         })
         .catch(function() {
           toaster.pop('error', 'Something went wrong.');

@@ -20,8 +20,8 @@ angular
   ])
   .constant('USER_ROLES', {
     registered: 'registered',
-    emailConfirmed: 'email_confirmed',
-    profileCompleted: 'profile_completed',
+    confirmedEmail: 'confirmedEmail',
+    completedProfile: 'completedProfile',
     guest: 'guest'
   })
   .constant('AUTHZ_EVENTS', {
@@ -32,8 +32,20 @@ angular
     var formatConvertar = function(response) {
                       response = response.data;
                       var statuses = [];
-                      for (var i = response.statuses.length - 1; i >= 0; i--) {
-                        statuses.push(response.statuses[i].kind);
+
+                      /*jshint camelcase: false */
+
+                      if (response.registered)
+                      {
+                        statuses.push('registered');
+                      }
+                      if (response.completed_email)
+                      {
+                        statuses.push('confirmedEmail');
+                      }
+                      if (response.completed_profile)
+                      {
+                        statuses.push('completedProfile');
                       }
                       response.statuses = statuses;
                       return response;
@@ -67,7 +79,7 @@ angular
         template: '<ui-view/>',
         controller: ['$auth', '$state', function  ($auth,$state) {
             $auth.validateUser().then(function (user) {
-              if (user.statuses.indexOf(USER_ROLES.profileCompleted) !== -1) {
+              if (user.statuses.indexOf(USER_ROLES.completedProfile) !== -1) {
                 $state.transitionTo('home.loggedin.home' , {location:'replace'});
               }else {
                 $state.transitionTo('home.loggedin.registration' , {location:'replace'});
@@ -85,8 +97,8 @@ angular
         resolve: {
           authorizedRoles: function (USER_ROLES) {
             return [USER_ROLES.registered,
-                    USER_ROLES.emailConfirmed,
-                    USER_ROLES.profileCompleted];
+                    USER_ROLES.completedEmail,
+                    USER_ROLES.completedProfile];
           },
           authz: function  (authorizedRoles,authorizationService) {
             return authorizationService.isAuthorized(authorizedRoles);
@@ -99,7 +111,7 @@ angular
         controller: 'UsersCtrl',
         resolve: {
           authorizedRoles: function (USER_ROLES) {
-            return USER_ROLES.profileCompleted;
+            return USER_ROLES.completedProfile;
           },
           authz: function  (authorizedRoles,authorizationService) {
             return authorizationService.isAuthorized(authorizedRoles);
@@ -113,8 +125,8 @@ angular
         resolve: {
           authorizedRoles: function (USER_ROLES) {
             return [USER_ROLES.registered,
-                    USER_ROLES.emailConfirmed,
-                    USER_ROLES.profileCompleted];
+                    USER_ROLES.completedEmail,
+                    USER_ROLES.completedProfile];
           },
           authz: function  (authorizedRoles,authorizationService) {
             return authorizationService.isAuthorized(authorizedRoles);
@@ -131,8 +143,8 @@ angular
         resolve: {
           authorizedRoles: function (USER_ROLES) {
             return [USER_ROLES.registered,
-                    USER_ROLES.emailConfirmed,
-                    USER_ROLES.profileCompleted];
+                    USER_ROLES.completedEmail,
+                    USER_ROLES.completedProfile];
           },
           authz: function  (authorizedRoles,authorizationService) {
             return authorizationService.isAuthorized(authorizedRoles);
@@ -147,7 +159,7 @@ angular
         resolve: {
           notAuthorizedRoles: function (USER_ROLES) {
             return [USER_ROLES.guest,
-                    USER_ROLES.profileCompleted];
+                    USER_ROLES.completedProfile];
           },
           authz: function  (notAuthorizedRoles,authorizationService) {
             return authorizationService.isNotAuthorized(notAuthorizedRoles);

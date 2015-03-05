@@ -34,7 +34,7 @@ app.controller('SigninCtrl', [
       $auth.submitLogin($scope.signinData)
         .then(function(resp) {
           var user = resp;
-          if (user.statuses.indexOf(USER_ROLES.profileCompleted) !== -1) {
+          if (user.statuses.indexOf(USER_ROLES.completedProfile) !== -1) {
             $state.transitionTo('home.loggedin.home', {location:'replace'});
           }else {
              $state.transitionTo('home.loggedin.registration', {location:'replace'});
