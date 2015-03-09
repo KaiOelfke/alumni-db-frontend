@@ -72,22 +72,18 @@ angular
 
     // For any unmatched url
 
-    //console.log($stateProvider);
     $stateProvider
       .state('home', {
         url: '',
         template: '<ui-view/>',
         controller: ['$auth', '$state', function  ($auth,$state) {
-            console.log('ganz oben');
             $auth.validateUser().then(function (user) {
-              console.log('nach home hier logged in');
               if (user.statuses.indexOf(USER_ROLES.completedProfile) !== -1) {
                 $state.transitionTo('home.loggedin.home' , {location:'replace'});
               }else {
                 $state.transitionTo('home.loggedin.registration' , {location:'replace'});
               }
             },function () {
-              console.log('nach home hier logged out');
               // if ($state.current.name.indexOf('home.guest') === -1) {
               //   $state.transitionTo('home.guest.signin', {location:'replace'});
               // }
@@ -222,15 +218,16 @@ angular
       window.alert('There was an error with your registration.');
     });
     $rootScope.$on('notAuthorized', function() {
-      console.log($state.current);
+      if ($state.current.name !== '') {
+        $state.transitionTo($state.current.name, {reload: true});
+      } else {
+        $state.go('home');
+      }
       /*jshint quotmark: false*/
       toaster.pop('warning', "Not authorized", "Sorry. You are not allowed to see this page.");
-      console.log('notAuthorized Fehler hier');
+
     });
     $rootScope.$on('$stateChangeError',function(event, toState, toParams, fromState, fromParams, error){
-      console.log(error);
-      console.log(fromState);
-      console.log(toState);
       if (error === AUTHZ_EVENTS.notAuthorized) {
       }
       console.log('$stateChangeError - fired when an error occurs during transition.');
