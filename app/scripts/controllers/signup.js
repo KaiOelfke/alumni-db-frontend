@@ -28,7 +28,6 @@ app.controller('SignupCtrl', [
       if ($scope.signupForm.$invalid) {
         return ;
       }
-
       $auth.submitRegistration(signupData)
         .then(function() {
         })
