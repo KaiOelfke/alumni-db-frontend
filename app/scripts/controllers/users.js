@@ -14,10 +14,6 @@ angular.module('alumni-db-frontend')
     usersFactory.getUsers()
         .success(function  (data) {
 
-            var u = data[0];
-            console.log(u);
-            console.log(u.statuses);
-
             $scope.users = data;
         })
         .error(function (error) {

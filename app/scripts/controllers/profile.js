@@ -24,7 +24,7 @@ app.controller('ProfileCtrl', [
     var _user  = data.data;
     /*jshint camelcase: false */
     if (moment(_user.date_of_birth,'YYYY-MM-DD').isValid()) {
-      _user.date_of_birth = moment(_user.date_of_birth,'YYYY-MM-DD').format('DD.MM.YYYY');
+      _user.date_of_birth = moment(_user.date_of_birth,'YYYY-MM-DD').toDate();
     }
     _user.country = countriesFactory.getFromPermittedCountry(_user.country);
     _user.program_type = programTypesFactory.getTypeName(_user.program_type);
@@ -59,33 +59,37 @@ app.controller('ProfileUpdateCtrl', [
   '$rootScope',
   function(countriesFactory, yearsFactory, validationMessagesFactory, $auth, $state, toaster, $scope, $rootScope) {
     var _user = $rootScope.user;
-    console.log(_user);
     $scope.formValidationMessages = validationMessagesFactory.getValidationMsg;
     $scope.farmValidationTitle = validationMessagesFactory.getValidationTitle;
-    /*jshint camelcase: false */
-
-    if (moment(_user.date_of_birth,'YYYY-MM-DD').isValid()) {
-      _user.date_of_birth = moment(_user.date_of_birth,'YYYY-MM-DD').format('DD.MM.YYYY');
-    }
 
     /*ToDO: Probably this can be more elegant. We create a copy of _user
-    with the following line and assign that to tempUserData so that tempUserData is unique and updating the profile doesn't result in live data binding changes of names in the nav bar. We only want those changes when the user actually successfully submits the change.
+    with the following line and assign that to tempUserData so that 
+    tempUserData is unique and updating the profile doesn't result in 
+    live data binding changes of names in the nav bar. We only want 
+    those changes when the user actually successfully submits the change.
     */
     $scope.tempUserData = JSON.parse(JSON.stringify(_user));
     $scope.getCountries = countriesFactory.getCountries();
     $scope.possibleYears = yearsFactory.getYears();
     $scope.getAllCountries = countriesFactory.getAllCountries();
 
+    /*jshint camelcase: false */
+    if (moment($scope.tempUserData.date_of_birth,'YYYY-MM-DD').isValid()) {
+      $scope.tempUserData.date_of_birth = moment($scope.tempUserData.date_of_birth,'YYYY-MM-DD').toDate();
+    }
+
     $scope.submitUpdatedUserData = function(tempUserData) {
       $scope.$broadcast('show-errors-messages-block');
-
       if ($scope.updateUserForm.$invalid) {
-        return ;
+        return;
       }
+
+      // Fix timezone difference
+      var offset = tempUserData.date_of_birth.getTimezoneOffset();
+      tempUserData.date_of_birth = new Date(tempUserData.date_of_birth.getTime() - (offset * (60 * 1000)));
+
       $scope.userData = tempUserData;
-      console.log(tempUserData.date_of_birth);
-      $auth.updateAccount(tempUserData)
-        .then(function() {
+      $auth.updateAccount(tempUserData).then(function() {
             $state.go('home.loggedin.profile-show', {id: _user.id});
         })
         .catch(function() {
@@ -108,8 +112,5 @@ app.controller('ProfileUpdateCtrl', [
       startingDay: 1,
       showWeeks: false
     };
-
-    $scope.format = 'DD.MM.YYYY';
-
   }
 ]);
