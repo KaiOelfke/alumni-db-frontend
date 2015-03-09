@@ -57,7 +57,7 @@ required />
 
 <!-- Country -->
 <div  class="form-group">
-  <label for="country">Country</label>
+  <label for="country">Current country</label>
   <select
   name="country"
   type="text"
@@ -73,7 +73,7 @@ ng-class="{
 'has-success': updateUserForm.city.$dirty && updateUserForm.city.$valid,
 'has-error': updateUserForm.city.$dirty && updateUserForm.city.$invalid
 }">
-<label for="city">City</label>
+<label for="city">Current city</label>
 <input
 name="city"
 ng-model="tempUserData.city"
