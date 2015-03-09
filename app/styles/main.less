@@ -144,7 +144,7 @@ html, body {
     }
 
     .steps {
-        display: inline-block;
+        display: table;
         font-size: 0;
         background: 0 0;
         line-height: 1.142rem;
@@ -165,11 +165,11 @@ html, body {
 
     .steps .step {
         width: 33.3%;
-        display: inline-block;
+        display: table-cell;
         position: relative;
         margin: 0;
         padding: 1.285em 1.5em 1.285em 2.25em;
-        vertical-align: top;
+        vertical-align: middle;
         background: #fff;
         color: rgba(0,0,0,.8);
         box-shadow: 0 0 0 1px rgba(39,41,43,.15);
@@ -180,6 +180,7 @@ html, body {
     .ordered.steps .step:before {
         display: table-cell;
         position: static;
+        vertical-align: middle;
         padding-right: .6em;
         font-size: 2em;
         counter-increment: ordered;
