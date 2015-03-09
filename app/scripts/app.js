@@ -20,8 +20,8 @@ angular
   ])
   .constant('USER_ROLES', {
     registered: 'registered',
-    emailConfirmed: 'email_confirmed',
-    profileCompleted: 'profile_completed',
+    confirmedEmail: 'confirmedEmail',
+    completedProfile: 'completedProfile',
     guest: 'guest'
   })
   .constant('AUTHZ_EVENTS', {
@@ -32,8 +32,20 @@ angular
     var formatConvertar = function(response) {
                       response = response.data;
                       var statuses = [];
-                      for (var i = response.statuses.length - 1; i >= 0; i--) {
-                        statuses.push(response.statuses[i].kind);
+
+                      /*jshint camelcase: false */
+
+                      if (response.registered)
+                      {
+                        statuses.push('registered');
+                      }
+                      if (response.confirmed_email)
+                      {
+                        statuses.push('confirmedEmail');
+                      }
+                      if (response.completed_profile)
+                      {
+                        statuses.push('completedProfile');
                       }
                       response.statuses = statuses;
                       return response;
@@ -66,16 +78,20 @@ angular
         url: '',
         template: '<ui-view/>',
         controller: ['$auth', '$state', function  ($auth,$state) {
+            console.log('ganz oben');
             $auth.validateUser().then(function (user) {
-              if (user.statuses.indexOf(USER_ROLES.profileCompleted) !== -1) {
+              console.log('nach home hier logged in');
+              if (user.statuses.indexOf(USER_ROLES.completedProfile) !== -1) {
                 $state.transitionTo('home.loggedin.home' , {location:'replace'});
               }else {
                 $state.transitionTo('home.loggedin.registration' , {location:'replace'});
               }
             },function () {
-              if ($state.current.name.indexOf('home.guest') === -1) {
+              console.log('nach home hier logged out');
+              // if ($state.current.name.indexOf('home.guest') === -1) {
+              //   $state.transitionTo('home.guest.signin', {location:'replace'});
+              // }
                 $state.transitionTo('home.guest.signin', {location:'replace'});
-              }
             });
         }]
       })
@@ -85,8 +101,8 @@ angular
         resolve: {
           authorizedRoles: function (USER_ROLES) {
             return [USER_ROLES.registered,
-                    USER_ROLES.emailConfirmed,
-                    USER_ROLES.profileCompleted];
+                    USER_ROLES.confirmedEmail,
+                    USER_ROLES.completedProfile];
           },
           authz: function  (authorizedRoles,authorizationService) {
             return authorizationService.isAuthorized(authorizedRoles);
@@ -99,7 +115,7 @@ angular
         controller: 'UsersCtrl',
         resolve: {
           authorizedRoles: function (USER_ROLES) {
-            return USER_ROLES.profileCompleted;
+            return USER_ROLES.completedProfile;
           },
           authz: function  (authorizedRoles,authorizationService) {
             return authorizationService.isAuthorized(authorizedRoles);
@@ -112,9 +128,7 @@ angular
         controller: 'ProfileCtrl',
         resolve: {
           authorizedRoles: function (USER_ROLES) {
-            return [USER_ROLES.registered,
-                    USER_ROLES.emailConfirmed,
-                    USER_ROLES.profileCompleted];
+            return [USER_ROLES.completedProfile];
           },
           authz: function  (authorizedRoles,authorizationService) {
             return authorizationService.isAuthorized(authorizedRoles);
@@ -131,8 +145,8 @@ angular
         resolve: {
           authorizedRoles: function (USER_ROLES) {
             return [USER_ROLES.registered,
-                    USER_ROLES.emailConfirmed,
-                    USER_ROLES.profileCompleted];
+                    USER_ROLES.confirmedEmail,
+                    USER_ROLES.completedProfile];
           },
           authz: function  (authorizedRoles,authorizationService) {
             return authorizationService.isAuthorized(authorizedRoles);
@@ -147,7 +161,7 @@ angular
         resolve: {
           notAuthorizedRoles: function (USER_ROLES) {
             return [USER_ROLES.guest,
-                    USER_ROLES.profileCompleted];
+                    USER_ROLES.completedProfile];
           },
           authz: function  (notAuthorizedRoles,authorizationService) {
             return authorizationService.isNotAuthorized(notAuthorizedRoles);
@@ -197,7 +211,7 @@ angular
         templateUrl: 'views/404.html'
       });
 
-  }).run(function ($rootScope, $state, AUTHZ_EVENTS) {
+  }).run(function ($rootScope, $state, AUTHZ_EVENTS, toaster) {
     $rootScope.$on('auth:registration-email-success', function() {
       $state.go('home.loggedin.registration');
     });
@@ -207,10 +221,17 @@ angular
     $rootScope.$on('auth:email-confirmation-error', function() {
       window.alert('There was an error with your registration.');
     });
-
+    $rootScope.$on('notAuthorized', function() {
+      console.log($state.current);
+      /*jshint quotmark: false*/
+      toaster.pop('warning', "Not authorized", "Sorry. You are not allowed to see this page.");
+      console.log('notAuthorized Fehler hier');
+    });
     $rootScope.$on('$stateChangeError',function(event, toState, toParams, fromState, fromParams, error){
+      console.log(error);
+      console.log(fromState);
+      console.log(toState);
       if (error === AUTHZ_EVENTS.notAuthorized) {
-        $state.go('home');
       }
       console.log('$stateChangeError - fired when an error occurs during transition.');
     });

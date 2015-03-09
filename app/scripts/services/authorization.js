@@ -26,7 +26,8 @@ angular.module('alumni-db-frontend')
 
           $auth.validateUser().then(
             function (user) {
-
+              console.log(user.statuses);
+              console.log(authorizedRoles);
               var userStatuses = user.statuses;
               for (var i = 0, len = userStatuses.length; i < len; i++) {
                 if (authorizedRoles.indexOf(userStatuses[i]) !== -1) {
@@ -37,19 +38,19 @@ angular.module('alumni-db-frontend')
 
               $rootScope.$broadcast(AUTHZ_EVENTS.notAuthorized);
               deferred.reject(AUTHZ_EVENTS.notAuthorized);
-              
+
             },
             function () {
                 $rootScope.$broadcast('auth:not-loggedin');
                 if (authorizedRoles.indexOf(USER_ROLES.guest) !== -1){
-                  deferred.resolve();          
-                  return;       
+                  deferred.resolve();
+                  return;
                 }
                 $rootScope.$broadcast(AUTHZ_EVENTS.notAuthorized);
                 deferred.reject(AUTHZ_EVENTS.notAuthorized);
             });
 
-          return deferred.promise;          
+          return deferred.promise;
 
         };
 
@@ -77,22 +78,22 @@ angular.module('alumni-db-frontend')
               }
 
               deferred.resolve({});
-              
+
             },
             function () {
                 $rootScope.$broadcast('auth:not-loggedin');
                 if (notAuthorizedRoles.indexOf(USER_ROLES.guest) !== -1){
                   $rootScope.$broadcast(AUTHZ_EVENTS.notAuthorized);
-                  deferred.reject(AUTHZ_EVENTS.notAuthorized);          
-                  return;       
+                  deferred.reject(AUTHZ_EVENTS.notAuthorized);
+                  return;
                 }
                 deferred.resolve({});
             });
 
-          return deferred.promise;          
+          return deferred.promise;
 
         };
-       
+
         return authorizationService;
   }]);
 
