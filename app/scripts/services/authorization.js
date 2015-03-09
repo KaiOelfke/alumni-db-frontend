@@ -26,8 +26,6 @@ angular.module('alumni-db-frontend')
 
           $auth.validateUser().then(
             function (user) {
-              console.log(user.statuses);
-              console.log(authorizedRoles);
               var userStatuses = user.statuses;
               for (var i = 0, len = userStatuses.length; i < len; i++) {
                 if (authorizedRoles.indexOf(userStatuses[i]) !== -1) {

@@ -80,6 +80,14 @@ function registrationProgramCtrl($auth, $state, toaster, $scope) {
 
       angular.extend(profileData, programData, $scope.registration._personalData);
 
+      /*jshint camelcase: false */
+      // From profile.js - submitUpdatedUserData
+      if (typeof(profileData.date_of_birth) === 'string') {
+        profileData.date_of_birth = new Date(profileData.date_of_birth);
+      }
+      var offset = profileData.date_of_birth.getTimezoneOffset();
+      profileData.date_of_birth = new Date(profileData.date_of_birth.getTime() - (offset * (60 * 1000)));
+
       $auth.updateAccount(profileData)
         .then(function() {
             $state.go('home.loggedin.home');
