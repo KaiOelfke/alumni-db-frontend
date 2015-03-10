@@ -93,14 +93,14 @@
             'has-error': signupForm.confirm_password.$dirty && signupForm.confirm_password.$invalid
           }">
           <!-- Label -->
-          <label for="password">Password confirmation</label>
+          <label for="confirm_password">Password confirmation</label>
           <!-- Input -->
           <input 
             type="password" 
             name="confirm_password" 
             ng-model="signupData.confirm_password" 
             ng-minlength="8" 
-            match="signupData.password"
+            compare-to="signupData.password"
             class="form-control" 
             placeholder="Password confirmation" />
           <!-- Input icon -->

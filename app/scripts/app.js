@@ -16,8 +16,7 @@ angular
     'ng-token-auth',
     'ui.router',
     'toaster',
-    'ui.bootstrap',
-    'validation.match'
+    'ui.bootstrap'
   ])
   .constant('USER_ROLES', {
     registered: 'registered',
