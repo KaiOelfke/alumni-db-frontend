@@ -2,8 +2,6 @@
       <!-- Title -->
       <h3>Connect with Alumni</h3>
 
-
-
       <!-- Form -->
       <form 
         name="signupForm" 
@@ -102,9 +100,9 @@
             name="confirm_password" 
             ng-model="signupData.confirm_password" 
             ng-minlength="8" 
+            match="signupData.password"
             class="form-control" 
-            placeholder="Password confirmation" 
-            required />
+            placeholder="Password confirmation" />
           <!-- Input icon -->
           <span class="icon-container attach-left">
             <span class="glyphicon glyphicon-lock input-icon"></span>

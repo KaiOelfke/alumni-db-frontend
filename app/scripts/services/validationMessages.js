@@ -25,10 +25,11 @@ angular.module('alumni-db-frontend')
           institution: 'Institution: ',
           country_of_participation: 'Country of participation: ',
           year_of_participation: 'Year of participation: ',
-          'confirm_password.required': 'Sorry. You need to have a confirmation. To avoid the typos.',
+          /*'confirm_password.required': 'Password confirmation is required.',*/
           'password.required': 'Some security is needed so no one can change your account.',
           'password.minlength': 'The minimum length is 8.',
           'confirm_password.minlength': 'The minimum length is 8.',
+          'confirm_password.match': 'Passwords have to match.',
           'email.required': 'We will not spam you, but we need your email.',
           'email.email': 'The format seems to be wrong.',
           'birthday.dateFormat': 'Maybe the date format is wrong. It should be like in this example: 01.11.1993 / day.month.year',
