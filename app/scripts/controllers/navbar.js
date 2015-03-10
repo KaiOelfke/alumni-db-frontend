@@ -19,7 +19,7 @@ app.controller('NavbarCtrl', [
       $auth.signOut()
         .then(function() {
           // handle success response
-          $state.go('home.guest.signin');
+          $state.go('guest.signin');
         })
         .catch(function(resp) {
           // handle error response

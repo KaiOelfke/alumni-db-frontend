@@ -90,7 +90,7 @@ function registrationProgramCtrl($auth, $state, toaster, $scope) {
 
       $auth.updateAccount(profileData)
         .then(function() {
-            $state.go('home.loggedin.home');
+            $state.go('home.start-page');
         })
         .catch(function() {
             toaster.pop('error', 'Something went wrong.');

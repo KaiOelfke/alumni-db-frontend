@@ -33,9 +33,6 @@ app.controller('ProfileCtrl', [
 
     $scope.userData = _user;
     $scope.editEnabled = $rootScope.isOwner(_user.id);
-    $scope.goToUpdateUser = function() {
-      $state.go('home.loggedin.profile-update');
-    };
 
   }
 ]);
@@ -90,7 +87,7 @@ app.controller('ProfileUpdateCtrl', [
 
       $scope.userData = tempUserData;
       $auth.updateAccount(tempUserData).then(function() {
-            $state.go('home.loggedin.profile-show', {id: _user.id});
+            $state.go('home.profile-show', {id: _user.id});
         })
         .catch(function() {
           toaster.pop('error', 'Something went wrong.');
