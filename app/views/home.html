@@ -17,11 +17,11 @@
       <div class="navbar-content">
         <!-- Logo -->
         <div class="navbar-logo">
-          <a id="alumni-connect-logo" ui-sref="home.loggedin.home">Alumni Connect</a>
+          <a id="alumni-connect-logo" ui-sref="home.start-page">Alumni Connect</a>
         </div>
         <!-- Links -->
         <div class="navbar-rest">
-          <a class="navbar-element alumni-profile" ui-sref="home.loggedin.profile-show({ id: user.id})">{{ user.first_name }} {{ user.last_name }}</a><!--
+          <a class="navbar-element alumni-profile" ui-sref="home.profile-show({ id: user.id})">{{ user.first_name }} {{ user.last_name }}</a><!--
        --><a class="navbar-element alumni-logout" ng-click="handleSignOutBtnClick()">Logout</a>
         </div>
       </div>

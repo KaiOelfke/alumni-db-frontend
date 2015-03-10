@@ -61,13 +61,13 @@ angular
 
     });
   })
-  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, USER_ROLES) {
+  .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
 
     $locationProvider.html5Mode(false);
 
     $urlRouterProvider
-        .when('/','home')
+        .when('','/')
         .otherwise('/404');
 
     // For any unmatched url
@@ -75,24 +75,7 @@ angular
     $stateProvider
       .state('home', {
         url: '',
-        template: '<ui-view/>',
-        controller: ['$auth', '$state', function  ($auth,$state) {
-            $auth.validateUser().then(function (user) {
-              if (user.statuses.indexOf(USER_ROLES.completedProfile) !== -1) {
-                $state.transitionTo('home.loggedin.home' , {location:'replace'});
-              }else {
-                $state.transitionTo('home.loggedin.registration' , {location:'replace'});
-              }
-            },function () {
-              // if ($state.current.name.indexOf('home.guest') === -1) {
-              //   $state.transitionTo('home.guest.signin', {location:'replace'});
-              // }
-                $state.transitionTo('home.guest.signin', {location:'replace'});
-            });
-        }]
-      })
-      .state('home.loggedin', {
-        url: '',
+        abstract: true,
         templateUrl: 'views/home.html',
         resolve: {
           authorizedRoles: function (USER_ROLES) {
@@ -105,8 +88,8 @@ angular
           }
         }
       })
-      .state('home.loggedin.home', {
-        url: '/home',
+      .state('home.start-page', {
+        url: '/',
         templateUrl: 'views/users.html',
         controller: 'UsersCtrl',
         resolve: {
@@ -118,7 +101,7 @@ angular
           }
         }
       })
-      .state('home.loggedin.profile-show', {
+      .state('home.profile-show', {
         url: '/profile/:id',
         templateUrl: 'views/show-profile.html',
         controller: 'ProfileCtrl',
@@ -126,7 +109,7 @@ angular
           authorizedRoles: function (USER_ROLES) {
             return [USER_ROLES.completedProfile];
           },
-          authz: function  (authorizedRoles,authorizationService) {
+          authz: function (authorizedRoles,authorizationService) {
             return authorizationService.isAuthorized(authorizedRoles);
           },
           data: function  (usersFactory, $stateParams) {
@@ -134,7 +117,7 @@ angular
           }
         }
       })
-      .state('home.loggedin.profile-update', {
+      .state('home.profile-update', {
         url: '/update',
         templateUrl: 'views/update-profile.html',
         controller: 'ProfileUpdateCtrl',
@@ -149,7 +132,7 @@ angular
           }
         }
       })
-      .state('home.loggedin.registration', {
+      .state('home.registration', {
         url: '/registration',
         templateUrl: 'views/home-registration/main.html',
         controller: 'RegistrationCtrl',
@@ -164,8 +147,9 @@ angular
           }
         }
       })
-      .state('home.guest', {
+      .state('guest', {
         url: '',
+        abstract: true,
         templateUrl: 'views/splash.html',
         resolve: {
           authorizedRoles: function (USER_ROLES) {
@@ -176,7 +160,7 @@ angular
           }
         }
       })
-      .state('home.guest.signup', {
+      .state('guest.signup', {
         url: '/signup',
         templateUrl: 'views/splash-signup.html',
         controller: 'SignupCtrl',
@@ -189,7 +173,7 @@ angular
           }
         }
       })
-      .state('home.guest.signin', {
+      .state('guest.signin', {
         url: '/signin',
         templateUrl: 'views/splash-signin.html',
         controller: 'SigninCtrl',
@@ -202,36 +186,54 @@ angular
           }
         }
       })
-      .state('home.404', {
+      .state('404', {
         url: '/404',
         templateUrl: 'views/404.html'
       });
 
-  }).run(function ($rootScope, $state, AUTHZ_EVENTS, toaster) {
+  }).run(function ($rootScope, $state, AUTHZ_EVENTS, USER_ROLES, toaster) {
     $rootScope.$on('auth:registration-email-success', function() {
       $state.go('home.loggedin.registration');
     });
+
     $rootScope.$on('auth:email-confirmation-success', function() {
       $state.go('home.loggedin');
     });
+
     $rootScope.$on('auth:email-confirmation-error', function() {
       window.alert('There was an error with your registration.');
     });
+
     $rootScope.$on('notAuthorized', function() {
-      if ($state.current.name !== '') {
+      /*if ($state.current.name !== '') {
         $state.transitionTo($state.current.name, {reload: true});
       } else {
-        $state.go('home');
-      }
+        $state.go('home.start-page');
+      }*/
       /*jshint quotmark: false*/
-      toaster.pop('warning', "Not authorized", "Sorry. You are not allowed to see this page.");
+    });
+/*
+    $rootScope.$on('$stateChangeStart',function(event, toState, toParams, fromState, fromParams, error){
+    });    */
 
-    });
     $rootScope.$on('$stateChangeError',function(event, toState, toParams, fromState, fromParams, error){
+      event.preventDefault();
       if (error === AUTHZ_EVENTS.notAuthorized) {
+          if (fromState.name !== '') {
+              toaster.pop('warning', 'Not authorized', 'Sorry. You are not allowed to see this page.');
+          }
+
+          if ( !$rootScope.user  || !$rootScope.user.statuses) {
+            $state.transitionTo('guest.signin');
+          }else if ($rootScope.user.statuses.indexOf(USER_ROLES.completedProfile) === -1) {
+            $state.transitionTo('home.registration');
+          }else {
+            $state.transitionTo('home.start-page');
+          }
       }
-      console.log('$stateChangeError - fired when an error occurs during transition.');
+      console.log('$stateChangeError - fired when an error occurs during transition.', error);
     });
+
     $rootScope.isOwner = function(uid){
       return $rootScope.user.id === uid;
     };
