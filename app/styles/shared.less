@@ -1,0 +1,105 @@
+/* JA Worldwide Styling Guidelines 
+/* http://media.wix.com/ugd/b507ca_d0cac8808d0c4d748e94b103e9e2c184.pdf
+ */
+
+/* Primary color palette */
+@green:       rgb(0,118,61);
+@orange:      rgb(239,121,12);
+@black:       #666;
+@gray:        #b2b2b2;
+
+/* Secundary color palete */
+@lightGreen:  rgb(127,189,54);
+@lightOrange: rgb(249,170,7);
+@lightYellow: rgb(255,243,82);
+@mediumGreen: rgb(111,183,43);
+
+.page-title {
+    width: 100%;
+    margin-bottom: @containerPaddingTop;
+
+    h1 {
+        margin: 0 0 @pageDescriptionSize 0;
+        font-size: @pageTitleSize;
+        color: @pageTitleColor;
+    }
+
+    p {
+        font-size: @pageDescriptionSize;
+        color: @black;
+    }
+}
+
+.announcement {
+    padding: @pageDescriptionSize;
+    background-color: fade(@lightGreen, 20%);
+    border-radius: 8px;
+    border: 1px solid @lightGreen;
+
+    p {
+        font-size: @pageDescriptionSize;
+        color: @green;
+    }
+}
+
+.page-section {
+    width: 100%;
+    height: auto;
+    padding-left: @pageSectionPadding;
+    padding-right: @pageSectionPadding;
+
+    :after {
+        display: block;
+        content: '';
+        clear: both;
+    }
+
+  .section-title {
+    padding-bottom: @pageSectionPadding / 2;
+    font-size: @pageDescriptionSize;
+    color: @pageTitleColor;
+    border-bottom: 1px solid @gray;
+  }
+
+  .section-row {
+    width: 100%;
+    height: auto;
+    padding: 0;
+    clear: left;
+
+    p {
+        margin: 0;
+    }
+  }
+
+  .section-column-left {
+    float: left;
+    margin-right: @pageSectionPadding;
+    font-size: 14px;
+    color: @gray;
+    text-transform: uppercase;
+  }
+
+  .section-column-right {
+    width: @containerWidth - @infoDescriptionWidth;
+    float: right;
+    color: @black;
+
+    .form-control {
+        width: 100%;
+        height: 44px;
+    }
+  }
+
+  .section-row + .section-row {
+    margin-top: 8px;
+  }
+
+  label {
+    font-weight: normal;
+  }
+}
+
+.page-section + .page-section {
+    margin: @pageSectionPadding 0 0 0;
+}

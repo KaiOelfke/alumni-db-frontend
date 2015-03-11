@@ -13,12 +13,14 @@
 
 @sidebarWidth: 256px;
 @sidebarContentPadding: 8px;
-@mainContentPadding: 8px;
+@mainContentPadding: 8px 8px 8px 16px;
 @profileImageSize: 256px;
 @profileImageBorderSize: 4px;
 @contactInfoIconWidth: 24px;
 @contactInfoHeight: 24px;
 @contactInfoPadding: 0 4px 0 4px;
+@subtitleFontSize: 20px;
+@subtitleColor: @gray;
 
 .two-page-layout {
   height: 100%;
@@ -41,11 +43,22 @@
   .main-content {
     padding: @mainContentPadding;
 
-    .page-title, 
-    .page-title h1 {
+    .with-subtitle {
+      margin: 0 0 16px 0;
+    } 
+
+    .with-subtitle h1 {
       margin: 0;
     }
   }
+}
+
+.with-subtitle p {
+  margin: 0;
+  padding: 0;
+  font-size: @subtitleFontSize;
+  font-weight: 300;
+  color: @pageTitleColor;
 }
 
 .contact-info-section {
@@ -54,6 +67,7 @@
     width: 100%;
     height: @contactInfoHeight;
     line-height: @contactInfoHeight;
+    color: @black;
 
     .contact-info-icon {
       float: left;
@@ -90,6 +104,14 @@
     top: 0; right: 0; bottom: 0; left: 0;
     width: auto;
     height: 100%;
+  }
+}
+
+.page-section {
+  padding: 0;
+
+  .section-column-right {
+    width: 70%;
   }
 }
 
