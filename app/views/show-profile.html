@@ -42,9 +42,9 @@
 
 
 
-      <!-- Personal information -->
+      <!-- Personal -->
       <div class="page-section">
-        <p class="section-title">Personal information</p>
+        <p class="section-title">Personal</p>
         <!-- Birthday -->
         <div class="section-row">
           <div class="section-column-left">
@@ -54,13 +54,58 @@
             <p>{{ userData.date_of_birth | date:'dd.MM.yyyy' }}</p>
           </div>
         </div>
-      </div>
+        <!-- Education -->
+        <div class="section-row">
+          <div class="section-column-left">
+            <p>Education</p>
+          </div>
+          <div class="section-column-right">
+            <p>university_major, university_name</p>
+          </div>
+        </div>
+        <!-- Founded startups -->
+        <div class="section-row">
+          <div class="section-column-left">
+            <p>Founded startups</p>
+          </div>
+          <div class="section-column-right">
+            <p>TODO</p>
+          </div>
+        </div>
+        <!-- Working place -->
+        <div class="section-row">
+          <div class="section-column-left">
+            <p>Working place</p>
+          </div>
+          <div class="section-column-right">
+            <p>TODO</p>
+          </div>
+        </div>
+        <!-- Job position -->
+        <div class="section-row">
+          <div class="section-column-left">
+            <p>Job position</p>
+          </div>
+          <div class="section-column-right">
+            <p>TODO</p>
+          </div>
+        </div>
+        <!-- Interests -->
+        <div class="section-row">
+          <div class="section-column-left">
+            <p>Interests</p>
+          </div>
+          <div class="section-column-right">
+            <p>TODO</p>
+          </div>
+        </div>
+      </div> <!-- Personal information -->
 
 
 
-      <!-- JA-YE Program -->
+      <!-- JA-YE -->
       <div class="page-section">
-        <p class="section-title">JA-YE Program</p>
+        <p class="section-title">JA-YE</p>
         <!-- Program type -->
         <div class="section-row">
           <div class="section-column-left">
@@ -147,7 +192,7 @@
       <div class="page-section">
         <button
           name="edit"
-          ng-click="goToUpdateUser()"
+          ui-sref="home.profile-update"
           type="button"
           class="btn btn-danger"
           ng-show="isOwner(userData.id)">
@@ -158,16 +203,3 @@
 
   </div> <!-- main-container -->
 </div> <!-- /two-page-layout -->
-
-
-
-<div class="page-section">
-  <button
-    name="edit"
-    ui-sref="home.profile-update"
-    type="button"
-    class="btn btn-danger"
-    ng-show="isOwner(userData.id)">
-    Edit
-  </button>
-</div>
