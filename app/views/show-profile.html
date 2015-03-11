@@ -9,7 +9,7 @@
             <span class="glyphicon glyphicon-map-marker contact-info-icon">
             </span>
             <span class="contact-info-data">
-              Berlin, Germany
+              {{ userData.city }}, {{ userData.country }}
             </span>
           </div>
           <div class="contact-info clearfix">
@@ -23,7 +23,7 @@
             <span class="glyphicon glyphicon-phone contact-info-icon">
             </span>
             <span class="contact-info-data">
-              +49 172 7484271
+              TODO
             </span>
           </div>
         </div>
@@ -45,15 +45,6 @@
       <!-- Personal information -->
       <div class="page-section">
         <p class="section-title">Personal information</p>
-        <!-- Name -->
-        <div class="section-row">
-          <div class="section-column-left">
-            <p>Name</p>
-          </div>
-          <div class="section-column-right">
-            <p>{{ userData.first_name }} {{ userData.last_name }}</p>
-          </div>
-        </div>
         <!-- Birthday -->
         <div class="section-row">
           <div class="section-column-left">
@@ -61,33 +52,6 @@
           </div>
           <div class="section-column-right">
             <p>{{ userData.date_of_birth | date:'dd.MM.yyyy' }}</p>
-          </div>
-        </div>
-        <!-- Gender -->
-        <div class="section-row">
-          <div class="section-column-left">
-            <p>Gender</p>
-          </div>
-          <div class="section-column-right">
-            <p>{{ userData.gender }}</p>
-          </div>
-        </div>
-        <!-- City -->
-        <div class="section-row">
-          <div class="section-column-left">
-            <p>Current city</p>
-          </div>
-          <div class="section-column-right">
-            <p>{{ userData.city }}</p>
-          </div>
-        </div>
-        <!-- Country -->
-        <div class="section-row">
-          <div class="section-column-left">
-            <p>Current country</p>
-          </div>
-          <div class="section-column-right">
-            <p>{{ userData.country }}</p>
           </div>
         </div>
       </div>
@@ -140,6 +104,40 @@
           </div>
           <div class="section-column-right">
             <p>{{ userData.student_company_name }}</p>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- Alumni -->
+      <div class="page-section">
+        <p class="section-title">Alumni</p>
+        <!-- Member since -->
+        <div class="section-row">
+          <div class="section-column-left">
+            <p>Member since</p>
+          </div>
+          <div class="section-column-right">
+            <p>TODO</p>
+          </div>
+        </div>
+        <!-- Status -->
+        <div class="section-row">
+          <div class="section-column-left">
+            <p>Status</p>
+          </div>
+          <div class="section-column-right">
+            <p>TODO</p>
+          </div>
+        </div>
+        <!-- Position -->
+        <div class="section-row">
+          <div class="section-column-left">
+            <p>Position</p>
+          </div>
+          <div class="section-column-right">
+            <p>TODO</p>
           </div>
         </div>
       </div>

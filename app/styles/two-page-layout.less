@@ -13,12 +13,13 @@
 
 @sidebarWidth: 256px;
 @sidebarContentPadding: 8px;
-@mainContentPadding: 8px 8px 8px 16px;
+@mainContentPadding: 8px 8px 8px 32px;
 @profileImageSize: 256px;
 @profileImageBorderSize: 4px;
 @contactInfoIconWidth: 24px;
 @contactInfoHeight: 24px;
 @contactInfoPadding: 0 4px 0 4px;
+@pageTitleWithSubtitleMargin: 0 0 32px 0;
 @subtitleFontSize: 20px;
 @subtitleColor: @gray;
 
@@ -44,7 +45,7 @@
     padding: @mainContentPadding;
 
     .with-subtitle {
-      margin: 0 0 16px 0;
+      margin: @pageTitleWithSubtitleMargin;
     } 
 
     .with-subtitle h1 {
@@ -109,6 +110,11 @@
 
 .page-section {
   padding: 0;
+
+  .section-title {
+    font-weight: 500;
+    font-size: 16px;
+  }
 
   .section-column-right {
     width: 70%;
