@@ -30,6 +30,7 @@ app.controller('SignupCtrl', [
       }
       $auth.submitRegistration(signupData)
         .then(function() {
+          $state.go('home.registration');
         })
         .catch(function() {
           toaster.pop('error', 'Something went wrong.');

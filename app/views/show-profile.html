@@ -159,3 +159,15 @@
   </div> <!-- main-container -->
 </div> <!-- /two-page-layout -->
 
+
+
+<div class="page-section">
+  <button
+    name="edit"
+    ui-sref="home.profile-update"
+    type="button"
+    class="btn btn-danger"
+    ng-show="isOwner(userData.id)">
+    Edit
+  </button>
+</div>
