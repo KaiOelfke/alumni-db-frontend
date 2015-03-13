@@ -22,6 +22,8 @@
 @pageTitleWithSubtitleMargin: 0 0 32px 0;
 @subtitleFontSize: 20px;
 @subtitleColor: @gray;
+@changeProfileButtonSize: @profileImageSize;
+@inputBtnSize: 40px;
 
 .two-page-layout {
   height: 100%;
@@ -99,12 +101,35 @@
      -moz-box-shadow: 0px 0px 2px 0px @gray;
           box-shadow: 0px 0px 2px 0px @gray;
   overflow: hidden;
+  background-color: @black;
 
   img {
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
     width: auto;
     height: 100%;
+  }
+}
+
+.profile-image-update:hover {
+  cursor: pointer;
+
+  img {
+    opacity: 0.66;
+  }
+
+  &::after {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: @changeProfileButtonSize;
+    height: @changeProfileButtonSize;
+    text-align: center;
+    line-height: @changeProfileButtonSize;
+    font-size: 48px;
+    content: '+';
+    color: white;
   }
 }
 
@@ -119,6 +144,35 @@
   .section-column-right {
     width: 70%;
   }
+}
+
+.with-form {
+
+  label {
+    line-height: 32px;
+  }
+
+  .form-group,
+  .section-row + .section-row {
+    margin: 0;
+  }
+
+  .form-control {
+    padding: 4px;
+  }
+
+  .input-group {
+
+    .form-control {
+      width: @inputFieldWidth - @inputBtnSize;
+    }
+  }
+
+  .checkbox-row {
+    width: @inputFieldWidth;
+    text-align: left;
+  }
+
 }
 
 .clearfix:after {

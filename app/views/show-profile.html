@@ -5,6 +5,7 @@
     </div>
     <div class="sidebar-content">
       <div class="contact-info-section">
+          <!-- Location -->
           <div class="contact-info clearfix">
             <span class="glyphicon glyphicon-map-marker contact-info-icon">
             </span>
@@ -12,6 +13,7 @@
               {{ userData.city }}, {{ userData.country }}
             </span>
           </div>
+          <!-- Email -->
           <div class="contact-info clearfix">
             <span class="glyphicon glyphicon-envelope contact-info-icon">
             </span>
@@ -19,11 +21,12 @@
               can.goektas@gmail.com
             </span>
           </div>
+          <!-- Mobile phone -->
           <div class="contact-info clearfix">
             <span class="glyphicon glyphicon-phone contact-info-icon">
             </span>
             <span class="contact-info-data">
-              TODO
+              {{ userData.mobile_phone }}
             </span>
           </div>
         </div>
@@ -60,7 +63,7 @@
             <p>Education</p>
           </div>
           <div class="section-column-right">
-            <p>university_major, university_name</p>
+            <p>{{ userData.university_major }}, {{ userData.university_name }}</p>
           </div>
         </div>
         <!-- Founded startups -->
@@ -69,7 +72,7 @@
             <p>Founded startups</p>
           </div>
           <div class="section-column-right">
-            <p>TODO</p>
+            <p>{{ userData.founded_company_name }}</p>
           </div>
         </div>
         <!-- Working place -->
@@ -78,7 +81,7 @@
             <p>Working place</p>
           </div>
           <div class="section-column-right">
-            <p>TODO</p>
+            <p>{{ userData.current_company_name }}</p>
           </div>
         </div>
         <!-- Job position -->
@@ -87,7 +90,7 @@
             <p>Job position</p>
           </div>
           <div class="section-column-right">
-            <p>TODO</p>
+            <p>{{ userData.current_job_position }}</p>
           </div>
         </div>
         <!-- Interests -->
@@ -96,7 +99,7 @@
             <p>Interests</p>
           </div>
           <div class="section-column-right">
-            <p>TODO</p>
+            <p>{{ userData.interests }}</p>
           </div>
         </div>
       </div> <!-- Personal information -->
@@ -164,25 +167,27 @@
             <p>Member since</p>
           </div>
           <div class="section-column-right">
-            <p>TODO</p>
+            <p>{{ userData.member_since | date:'dd.MM.yyyy' }}</p>
           </div>
         </div>
         <!-- Status -->
+        <!--
         <div class="section-row">
           <div class="section-column-left">
             <p>Status</p>
           </div>
           <div class="section-column-right">
-            <p>TODO</p>
+            <p>{{ userData.active_member }}</p>
           </div>
         </div>
+        -->
         <!-- Position -->
         <div class="section-row">
           <div class="section-column-left">
             <p>Position</p>
           </div>
           <div class="section-column-right">
-            <p>TODO</p>
+            <p>{{ userData.alumni_position }}</p>
           </div>
         </div>
       </div>
