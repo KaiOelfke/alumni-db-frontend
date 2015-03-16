@@ -1,7 +1,7 @@
 <div class="two-page-layout clearfix">
   <div class="sidebar">
     <div class="profile-image-container profile-image-update">
-      <img src="/images/default_profile_male.png" alt="Default profile image male">
+      <img src="{{tempUserData.avatar}}" alt="Profile image" onerror="this.src = '/images/default_profile_male.png';">
     </div>
     <div class="sidebar-content">
       <!-- Empty -->
@@ -30,10 +30,10 @@
         <!-- Personal -->
         <div class="page-section">
           <p class="section-title">Personal</p>
-          
+
           <!-- First name -->
-          <div 
-            class="section-row form-group" 
+          <div
+            class="section-row form-group"
             ng-class="{
               'has-error': updateUserForm.firstname.$dirty && updateUserForm.firstname.$invalid
             }">
@@ -50,8 +50,8 @@
             </div>
           </div>
           <!-- Last name -->
-          <div 
-            class="section-row form-group" 
+          <div
+            class="section-row form-group"
             ng-class="{
               'has-error': updateUserForm.lastname.$dirty && updateUserForm.lastname.$invalid
             }">
@@ -63,13 +63,13 @@
                 name="lastname"
                 ng-model="tempUserData.last_name"
                 type="text"
-                class="form-control" 
+                class="form-control"
                 required />
             </div>
           </div>
           <!-- City -->
-          <div 
-            class="section-row form-group" 
+          <div
+            class="section-row form-group"
             ng-class="{
               'has-error': updateUserForm.city.$dirty && updateUserForm.city.$invalid
             }">
@@ -81,13 +81,13 @@
                 name="city"
                 ng-model="tempUserData.city"
                 type="text"
-                class="form-control" 
+                class="form-control"
                 required />
             </div>
           </div>
           <!-- Country -->
-          <div 
-            class="section-row form-group" 
+          <div
+            class="section-row form-group"
             ng-class="{
               'has-error': updateUserForm.country.$dirty && updateUserForm.country.$invalid
             }">
@@ -105,8 +105,8 @@
             </div>
           </div>
           <!-- Birthday -->
-          <div 
-            class="section-row form-group" 
+          <div
+            class="section-row form-group"
             ng-class="{
               'has-error': updateUserForm.birthday.$dirty && updateUserForm.birthday.$invalid
               }">
@@ -115,17 +115,17 @@
             </div>
             <div class="section-column-right">
               <p class="input-group">
-                <input 
-                  name="birthday" 
-                  type="text" 
-                  class="form-control" 
-                  datepicker-popup="dd.MM.yyyy" 
-                  ng-model="tempUserData.date_of_birth" 
-                  is-open="opened" 
-                  max-date="maxDate" 
-                  datepicker-options="dateOptions" 
-                  show-button-bar="false" 
-                  date-format 
+                <input
+                  name="birthday"
+                  type="text"
+                  class="form-control"
+                  datepicker-popup="dd.MM.yyyy"
+                  ng-model="tempUserData.date_of_birth"
+                  is-open="opened"
+                  max-date="maxDate"
+                  datepicker-options="dateOptions"
+                  show-button-bar="false"
+                  date-format
                   required />
                 <span class="input-group-btn">
                   <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -156,8 +156,8 @@
             </div>
           </div>
           <!-- University name -->
-          <div 
-            class="section-row form-group" 
+          <div
+            class="section-row form-group"
             ng-class="{
               'has-error': updateUserForm.university_name.$dirty && updateUserForm.university_name.$invalid
             }">
@@ -173,8 +173,8 @@
             </div>
           </div>
           <!-- Major -->
-          <div 
-            class="section-row form-group" 
+          <div
+            class="section-row form-group"
             ng-class="{
               'has-error': updateUserForm.university_major.$dirty && updateUserForm.university_major.$invalid
             }">
@@ -190,8 +190,8 @@
             </div>
           </div>
           <!-- Founded startups -->
-          <div 
-            class="section-row form-group" 
+          <div
+            class="section-row form-group"
             ng-class="{
               'has-error': updateUserForm.founded_company_name.$dirty && updateUserForm.founded_company_name.$invalid
             }">
@@ -207,8 +207,8 @@
             </div>
           </div>
           <!-- Working place -->
-          <div 
-            class="section-row form-group" 
+          <div
+            class="section-row form-group"
             ng-class="{
               'has-error': updateUserForm.current_company_name.$dirty && updateUserForm.current_company_name.$invalid
             }">
@@ -224,8 +224,8 @@
             </div>
           </div>
           <!-- Job position -->
-          <div 
-            class="section-row form-group" 
+          <div
+            class="section-row form-group"
             ng-class="{
               'has-error': updateUserForm.current_job_position.$dirty && updateUserForm.current_job_position.$invalid
             }">
@@ -241,8 +241,8 @@
             </div>
           </div>
           <!-- Interests -->
-          <div 
-            class="section-row form-group" 
+          <div
+            class="section-row form-group"
             ng-class="{
               'has-error': updateUserForm.interests.$dirty && updateUserForm.interests.$invalid
             }">
@@ -256,6 +256,24 @@
                 type="text"
                 class="form-control" />
             </div>
+            <!-- Short bio -->
+          <div
+            class="section-row form-group"
+            ng-class="{
+              'has-error': updateUserForm.short_bio.$dirty && updateUserForm.short_bio.$invalid
+            }">
+            <div class="section-column-left">
+              <label for="short_bio"><p>Short Bio</p></label>
+            </div>
+            <div class="section-column-right">
+              <textarea
+                name="short_bio"
+                ng-model="tempUserData.short_bio"
+                type="text"
+
+                cols="34"
+                rows="3"/>
+            </div>
           </div>
         </div> <!-- /page-section -->
 
@@ -265,8 +283,8 @@
           <p class="section-title">JA-YE</p>
 
           <!-- Institution -->
-          <div 
-            class="section-row form-group" 
+          <div
+            class="section-row form-group"
             ng-class="{
               'has-error': updateUserForm.institution.$dirty && updateUserForm.institution.$invalid
             }">
@@ -278,7 +296,7 @@
                 name="institution"
                 ng-model="tempUserData.institution"
                 type="text"
-                class="form-control" 
+                class="form-control"
                 required />
             </div>
           </div>
@@ -296,8 +314,8 @@
             </div>
           </div>
           <!-- Country of Participation -->
-          <div 
-            class="section-row form-group" 
+          <div
+            class="section-row form-group"
             ng-class="{
               'has-error': updateUserForm.country_of_participation.$dirty && updateUserForm.country_of_participation.$invalid
             }">
@@ -315,8 +333,8 @@
             </div>
           </div>
           <!-- Year of Participation -->
-          <div 
-            class="section-row form-group" 
+          <div
+            class="section-row form-group"
             ng-class="{
               'has-error': updateUserForm.year_of_participation.$dirty && updateUserForm.year_of_participation.$invalid
             }">
@@ -334,8 +352,8 @@
             </div>
           </div>
           <!-- Student company name -->
-          <div 
-            class="section-row form-group" 
+          <div
+            class="section-row form-group"
             ng-class="{
               'has-error': updateUserForm.student_company_name.$dirty && updateUserForm.student_company_name.$invalid
             }">
@@ -384,8 +402,8 @@
           </div>
           -->
           <!-- Position -->
-          <div 
-            class="section-row form-group" 
+          <div
+            class="section-row form-group"
             ng-class="{
               'has-error': updateUserForm.alumni_position.$dirty && updateUserForm.alumni_position.$invalid
             }">
@@ -401,8 +419,8 @@
             </div>
           </div>
           <!-- Member since -->
-          <div 
-            class="section-row form-group" 
+          <div
+            class="section-row form-group"
             ng-class="{
               'has-error': updateUserForm.member_since.$dirty && updateUserForm.member_since.$invalid
               }">
@@ -411,16 +429,16 @@
             </div>
             <div class="section-column-right">
               <p class="input-group">
-                <input 
-                  name="member_since" 
-                  type="text" 
-                  class="form-control" 
-                  datepicker-popup="dd.MM.yyyy" 
-                  ng-model="tempUserData.member_since" 
-                  is-open="opened" 
-                  max-date="maxDate" 
-                  datepicker-options="dateOptions" 
-                  show-button-bar="false" 
+                <input
+                  name="member_since"
+                  type="text"
+                  class="form-control"
+                  datepicker-popup="dd.MM.yyyy"
+                  ng-model="tempUserData.member_since"
+                  is-open="opened"
+                  max-date="maxDate"
+                  datepicker-options="dateOptions"
+                  show-button-bar="false"
                   date-format />
                 <span class="input-group-btn">
                   <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -437,8 +455,8 @@
           <p class="section-title">Contact info</p>
 
           <!-- Facebook url -->
-          <div 
-            class="section-row form-group" 
+          <div
+            class="section-row form-group"
             ng-class="{
               'has-error': updateUserForm.facebook_url.$dirty && updateUserForm.facebook_url.$invalid
             }">
@@ -454,8 +472,8 @@
             </div>
           </div>
           <!-- Skype ID -->
-          <div 
-            class="section-row form-group" 
+          <div
+            class="section-row form-group"
             ng-class="{
               'has-error': updateUserForm.skype_id.$dirty && updateUserForm.skype_id.$invalid
             }">
@@ -471,8 +489,8 @@
             </div>
           </div>
           <!-- Twitter url -->
-          <div 
-            class="section-row form-group" 
+          <div
+            class="section-row form-group"
             ng-class="{
               'has-error': updateUserForm.twitter_url.$dirty && updateUserForm.twitter_url.$invalid
             }">
@@ -488,8 +506,8 @@
             </div>
           </div>
           <!-- LinkedIn url -->
-          <div 
-            class="section-row form-group" 
+          <div
+            class="section-row form-group"
             ng-class="{
               'has-error': updateUserForm.linkedin_url.$dirty && updateUserForm.linkedin_url.$invalid
             }">
@@ -505,8 +523,8 @@
             </div>
           </div>
           <!-- Mobile phone -->
-          <div 
-            class="section-row form-group" 
+          <div
+            class="section-row form-group"
             ng-class="{
               'has-error': updateUserForm.mobile_phone.$dirty && updateUserForm.mobile_phone.$invalid
             }">
@@ -522,7 +540,7 @@
             </div>
           </div>
         </div> <!-- /page-section -->
-        
+
 
 
         <div class="page-section">

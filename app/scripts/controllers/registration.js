@@ -41,7 +41,6 @@ function registrationPersonalCtrl($scope) {
     };
 
     this.open = function($event) {
-      console.log('message fur debug');
       $event.preventDefault();
       $event.stopPropagation();
 

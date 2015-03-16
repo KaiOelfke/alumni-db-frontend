@@ -18,7 +18,7 @@
             <span class="glyphicon glyphicon-envelope contact-info-icon">
             </span>
             <span class="contact-info-data">
-              can.goektas@gmail.com
+                <a href="mailto:{{ userData.email }}">{{ userData.email }}</a>
             </span>
           </div>
           <!-- Mobile phone -->
@@ -26,7 +26,7 @@
             <span class="glyphicon glyphicon-phone contact-info-icon">
             </span>
             <span class="contact-info-data">
-              {{ userData.mobile_phone }}
+              <a href="tel:{{userData.mobile_phone}}">{{userData.mobile_phone}}</a>
             </span>
           </div>
         </div>
@@ -40,7 +40,7 @@
       <!-- Title -->
       <div class="page-title with-subtitle">
         <h1>{{ userData.first_name }} {{ userData.last_name }}</h1>
-        <p>Hello and welcome to my page! Feel free to contact me. :)</p>
+        <p> {{ userData.short_bio }} </p>
       </div>
 
 
