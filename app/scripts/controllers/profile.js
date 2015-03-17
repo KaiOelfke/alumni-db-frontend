@@ -75,6 +75,10 @@ app.controller('ProfileUpdateCtrl', [
       $scope.tempUserData.date_of_birth = moment($scope.tempUserData.date_of_birth,'YYYY-MM-DD').toDate();
     }
 
+    if (moment($scope.tempUserData.member_since,'YYYY-MM-DD').isValid()) {
+      $scope.tempUserData.member_since = moment($scope.tempUserData.member_since,'YYYY-MM-DD').toDate();
+    }
+
     $scope.submitUpdatedUserData = function(tempUserData) {
       $scope.$broadcast('show-errors-messages-block');
       if ($scope.updateUserForm.$invalid) {
@@ -84,8 +88,12 @@ app.controller('ProfileUpdateCtrl', [
       // Fix timezone difference
       var offset = tempUserData.date_of_birth.getTimezoneOffset();
       tempUserData.date_of_birth = new Date(tempUserData.date_of_birth.getTime() - (offset * (60 * 1000)));
-      offset = tempUserData.member_since.getTimezoneOffset();
+
+      if (tempUserData.member_since) {
+        offset = tempUserData.member_since.getTimezoneOffset();
       tempUserData.member_since = new Date(tempUserData.member_since.getTime() - (offset * (60 * 1000)));
+    }
+
       $scope.userData = tempUserData;
       $auth.updateAccount(tempUserData).then(function() {
             $state.go('home.profile-show', {id: _user.id});
