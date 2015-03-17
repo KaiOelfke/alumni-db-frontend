@@ -60,9 +60,9 @@ app.controller('ProfileUpdateCtrl', [
     $scope.farmValidationTitle = validationMessagesFactory.getValidationTitle;
 
     /*ToDO: Probably this can be more elegant. We create a copy of _user
-    with the following line and assign that to tempUserData so that 
-    tempUserData is unique and updating the profile doesn't result in 
-    live data binding changes of names in the nav bar. We only want 
+    with the following line and assign that to tempUserData so that
+    tempUserData is unique and updating the profile doesn't result in
+    live data binding changes of names in the nav bar. We only want
     those changes when the user actually successfully submits the change.
     */
     $scope.tempUserData = JSON.parse(JSON.stringify(_user));
@@ -80,11 +80,12 @@ app.controller('ProfileUpdateCtrl', [
       if ($scope.updateUserForm.$invalid) {
         return;
       }
-
+      console.log(tempUserData.avatar);
       // Fix timezone difference
       var offset = tempUserData.date_of_birth.getTimezoneOffset();
       tempUserData.date_of_birth = new Date(tempUserData.date_of_birth.getTime() - (offset * (60 * 1000)));
-
+      offset = tempUserData.member_since.getTimezoneOffset();
+      tempUserData.member_since = new Date(tempUserData.member_since.getTime() - (offset * (60 * 1000)));
       $scope.userData = tempUserData;
       $auth.updateAccount(tempUserData).then(function() {
             $state.go('home.profile-show', {id: _user.id});
@@ -98,11 +99,12 @@ app.controller('ProfileUpdateCtrl', [
     max.setDate(max.getDate - 365*10);
     $scope.maxDate = max;
 
-    $scope.open = function($event) {
+    $scope.open = function($event,opened) {
+      console.log(opened);
       $event.preventDefault();
       $event.stopPropagation();
 
-      $scope.opened = true;
+      $scope[opened] = true;
     };
 
     $scope.dateOptions = {

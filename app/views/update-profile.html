@@ -121,14 +121,14 @@
                   class="form-control"
                   datepicker-popup="dd.MM.yyyy"
                   ng-model="tempUserData.date_of_birth"
-                  is-open="opened"
+                  is-open="openedBD"
                   max-date="maxDate"
                   datepicker-options="dateOptions"
                   show-button-bar="false"
                   date-format
                   required />
                 <span class="input-group-btn">
-                  <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                  <button type="button" class="btn btn-default" ng-click="open($event,'openedBD')"><i class="glyphicon glyphicon-calendar"></i></button>
                 </span>
               </p>
             </div>
@@ -435,13 +435,13 @@
                   class="form-control"
                   datepicker-popup="dd.MM.yyyy"
                   ng-model="tempUserData.member_since"
-                  is-open="opened"
+                  is-open="openedMS"
                   max-date="maxDate"
                   datepicker-options="dateOptions"
                   show-button-bar="false"
                   date-format />
                 <span class="input-group-btn">
-                  <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                  <button type="button" class="btn btn-default" ng-click="open($event,'openedMS')"><i class="glyphicon glyphicon-calendar"></i></button>
                 </span>
               </p>
             </div>
