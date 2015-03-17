@@ -33,7 +33,6 @@ app.controller('ProfileCtrl', [
 
     $scope.userData = _user;
     $scope.editEnabled = $rootScope.isOwner(_user.id);
-
   }
 ]);
 
