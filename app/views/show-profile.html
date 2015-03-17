@@ -1,7 +1,7 @@
 <div class="two-page-layout clearfix">
   <div class="sidebar">
     <div class="profile-image-container">
-      <img ng-src="{{getAvatar(userData)}}" 
+      <img ng-src="{{getAvatar(userData)}}"
            alt="Profile image"/>
     </div>
     <div class="sidebar-content">
@@ -32,19 +32,19 @@
           </div>
           <!-- Social media icons -->
           <div class="social-media-box clearfix">
-            <a 
+            <a
               ng-href="{{ userData.facebook_url }}"
               ng-show="userData.facebook_url !== null">
               <i class="fa fa-facebook social-media-icon"></i></a>
-            <a 
-              ng-href="{{ userData.skype_id }}"
+            <a
+              ng-href="skype:{{ userData.skype_id }}?call"
               ng-show="userData.skype_id !== null">
-              <i class="fa fa-twitter social-media-icon"></i></a>
-            <a 
+              <i class="fa fa-skype social-media-icon"></i></a>
+            <a
               ng-href="{{ userData.twitter_url }}"
               ng-show="userData.twitter_url !== null">
-              <i class="fa fa-skype social-media-icon"></i></a>
-            <a 
+              <i class="fa fa-twitter social-media-icon"></i></a>
+            <a
               ng-href="{{ userData.linkedin_url }}"
               ng-show="userData.linkedin_url !== null">
               <i class="fa fa-linkedin social-media-icon"></i></a>

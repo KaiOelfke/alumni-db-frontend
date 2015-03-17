@@ -28,6 +28,13 @@ angular
   .constant('AUTHZ_EVENTS', {
     notAuthorized: 'notAuthorized'
   })
+  .config([
+    '$compileProvider',
+    function( $compileProvider )
+    {
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|tel|mailto|skype):/);
+    }
+  ])
   .config(function($authProvider,API_HOST) {
 
     var formatConvertar = function(response) {
