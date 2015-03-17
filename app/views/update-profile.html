@@ -101,7 +101,8 @@
                 class="form-control"
                 ng-model="tempUserData.country"
                 ng-options="country.code as country.name for country in getAllCountries"
-                required />
+                required>
+              </select>
             </div>
           </div>
           <!-- Birthday -->
@@ -272,7 +273,8 @@
                 type="text"
                 ng-maxlength="160"
                 cols="34"
-                rows="3"/>
+                rows="3">
+              </textarea>
             </div>
           </div>
         </div> <!-- /page-section -->
@@ -329,7 +331,8 @@
                 class="form-control"
                 ng-model="tempUserData.country_of_participation"
                 ng-options="country.code as country.name for country in getCountries"
-                required />
+                required>
+              </select>
             </div>
           </div>
           <!-- Year of Participation -->
@@ -348,7 +351,8 @@
               class="form-control"
               ng-model="tempUserData.year_of_participation"
               ng-options="year for year in possibleYears"
-              required />
+              required>
+            </select>
             </div>
           </div>
           <!-- Student company name -->
