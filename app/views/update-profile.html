@@ -270,7 +270,7 @@
                 name="short_bio"
                 ng-model="tempUserData.short_bio"
                 type="text"
-
+                ng-maxlength="160"
                 cols="34"
                 rows="3"/>
             </div>
@@ -467,7 +467,7 @@
               <input
                 name="facebook_url"
                 ng-model="tempUserData.facebook_url"
-                type="text"
+                type="url"
                 class="form-control" />
             </div>
           </div>
@@ -501,7 +501,7 @@
               <input
                 name="twitter_url"
                 ng-model="tempUserData.twitter_url"
-                type="text"
+                type="url"
                 class="form-control" />
             </div>
           </div>
@@ -518,7 +518,7 @@
               <input
                 name="linkedin_url"
                 ng-model="tempUserData.linkedin_url"
-                type="text"
+                type="url"
                 class="form-control" />
             </div>
           </div>
