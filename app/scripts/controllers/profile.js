@@ -100,7 +100,6 @@ app.controller('ProfileUpdateCtrl', [
     $scope.maxDate = max;
 
     $scope.open = function($event,opened) {
-      console.log(opened);
       $event.preventDefault();
       $event.stopPropagation();
 
