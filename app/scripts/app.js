@@ -16,6 +16,7 @@ angular
     'ng-token-auth',
     'ui.router',
     'toaster',
+    'angularFileUpload',
     'ui.bootstrap'
   ])
   .constant('USER_ROLES', {

@@ -1,10 +1,15 @@
 <div class="two-page-layout clearfix">
-  <div class="sidebar">
-    <div class="profile-image-container profile-image-update">
-      <img ng-src="{{tempUserData.avatar}}" alt="Profile image"/>
+  <div class="sidebar"> 
+    <div class="profile-image-container profile-image-update" 
+        ng-file-select ng-model="myFiles"
+        ng-file-change="fileSelected($files, $event)"
+        ng-capture="'camera'"
+        accept="'image/*'" 
+        ng-accept="'image/*'">
+        <img ng-src="{{getAvatar(tempUserData)}}" alt="Profile image"/>
     </div>
     <div class="sidebar-content">
-      <!-- Empty -->
+        <span class="label label-info">{{uploadingStatus}}</span>
     </div>
   </div>
   <div class="main-container">
