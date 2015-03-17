@@ -36,7 +36,6 @@ app.controller('ProfileCtrl', [
     $scope.userData = _user;
     $scope.editEnabled = $rootScope.isOwner(_user.id);
     $scope.getAvatar = avatarFactory.getUserAvatar;
-
   }
 ]);
 
@@ -82,17 +81,17 @@ app.controller('ProfileUpdateCtrl', [
         $scope.tempUserData.avatar = data.data.avatar;
         $scope.uploadingStatus = undefined;
       }, function () {
-        $scope.uploadingStatus = undefined; 
+        $scope.uploadingStatus = undefined;
         toaster.error('Something went wrong');
       }, function (progress) {
         $scope.uploadingStatus = 'uploading: '+ progress + '%';
       });
     };
-    
+
 
     $scope.getAvatar = avatarFactory.getUserAvatar;
 
-    
+
 
     /*jshint camelcase: false */
     if (moment($scope.tempUserData.date_of_birth,'YYYY-MM-DD').isValid()) {

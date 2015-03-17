@@ -30,6 +30,25 @@
               <a href="tel:{{userData.mobile_phone}}">{{userData.mobile_phone}}</a>
             </span>
           </div>
+          <!-- Social media icons -->
+          <div class="social-media-box clearfix">
+            <a 
+              ng-href="{{ userData.facebook_url }}"
+              ng-show="userData.facebook_url !== null">
+              <i class="fa fa-facebook social-media-icon"></i></a>
+            <a 
+              ng-href="{{ userData.skype_id }}"
+              ng-show="userData.skype_id !== null">
+              <i class="fa fa-twitter social-media-icon"></i></a>
+            <a 
+              ng-href="{{ userData.twitter_url }}"
+              ng-show="userData.twitter_url !== null">
+              <i class="fa fa-skype social-media-icon"></i></a>
+            <a 
+              ng-href="{{ userData.linkedin_url }}"
+              ng-show="userData.linkedin_url !== null">
+              <i class="fa fa-linkedin social-media-icon"></i></a>
+          </div>
         </div>
     </div>
   </div>
