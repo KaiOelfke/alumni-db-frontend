@@ -26,7 +26,7 @@ app.controller('ProfileCtrl', [
     if (moment(_user.date_of_birth,'YYYY-MM-DD').isValid()) {
       _user.date_of_birth = moment(_user.date_of_birth,'YYYY-MM-DD').toDate();
     }
-    _user.country = countriesFactory.getFromPermittedCountry(_user.country);
+    _user.country = countriesFactory.getFromAllCountry(_user.country);
     _user.program_type = programTypesFactory.getTypeName(_user.program_type);
     _user.country_of_participation = countriesFactory.getFromAllCountry(_user.country_of_participation);
     _user.gender = genderFactory.getGenderName(_user.gender);
@@ -60,9 +60,9 @@ app.controller('ProfileUpdateCtrl', [
     $scope.farmValidationTitle = validationMessagesFactory.getValidationTitle;
 
     /*ToDO: Probably this can be more elegant. We create a copy of _user
-    with the following line and assign that to tempUserData so that 
-    tempUserData is unique and updating the profile doesn't result in 
-    live data binding changes of names in the nav bar. We only want 
+    with the following line and assign that to tempUserData so that
+    tempUserData is unique and updating the profile doesn't result in
+    live data binding changes of names in the nav bar. We only want
     those changes when the user actually successfully submits the change.
     */
     $scope.tempUserData = JSON.parse(JSON.stringify(_user));
@@ -75,15 +75,24 @@ app.controller('ProfileUpdateCtrl', [
       $scope.tempUserData.date_of_birth = moment($scope.tempUserData.date_of_birth,'YYYY-MM-DD').toDate();
     }
 
+    if (moment($scope.tempUserData.member_since,'YYYY-MM-DD').isValid()) {
+      $scope.tempUserData.member_since = moment($scope.tempUserData.member_since,'YYYY-MM-DD').toDate();
+    }
+
     $scope.submitUpdatedUserData = function(tempUserData) {
       $scope.$broadcast('show-errors-messages-block');
       if ($scope.updateUserForm.$invalid) {
         return;
       }
-
+      console.log(tempUserData.avatar);
       // Fix timezone difference
       var offset = tempUserData.date_of_birth.getTimezoneOffset();
       tempUserData.date_of_birth = new Date(tempUserData.date_of_birth.getTime() - (offset * (60 * 1000)));
+
+      if (tempUserData.member_since) {
+        offset = tempUserData.member_since.getTimezoneOffset();
+      tempUserData.member_since = new Date(tempUserData.member_since.getTime() - (offset * (60 * 1000)));
+    }
 
       $scope.userData = tempUserData;
       $auth.updateAccount(tempUserData).then(function() {
@@ -98,11 +107,11 @@ app.controller('ProfileUpdateCtrl', [
     max.setDate(max.getDate - 365*10);
     $scope.maxDate = max;
 
-    $scope.open = function($event) {
+    $scope.open = function($event,opened) {
       $event.preventDefault();
       $event.stopPropagation();
 
-      $scope.opened = true;
+      $scope[opened] = true;
     };
 
     $scope.dateOptions = {

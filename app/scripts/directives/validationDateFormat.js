@@ -6,6 +6,10 @@ angular.module('alumni-db-frontend').directive('dateFormat', function() {
     link: function(scope, elm, attrs, ctrl) {
 
       ctrl.$parsers.unshift(function(viewValue) {
+        if (!viewValue) {
+          ctrl.$setValidity('dateFormat', true);
+          return undefined;
+        }
         var tmp = moment(viewValue);
         if (tmp.isValid()) {
           viewValue = tmp.format('DD.MM.YYYY');

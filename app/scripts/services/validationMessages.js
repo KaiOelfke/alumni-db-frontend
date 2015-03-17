@@ -25,6 +25,11 @@ angular.module('alumni-db-frontend')
           institution: 'Institution: ',
           country_of_participation: 'Country of participation: ',
           year_of_participation: 'Year of participation: ',
+          member_since: 'Member since: ',
+          short_bio: 'Short bio: ',
+          facebook_url: 'Facebook URL: ',
+          twitter_url: 'Twitter URL: ',
+          linkedin_url: 'LinkedIn URL: ',
           /*'confirm_password.required': 'Password confirmation is required.',*/
           'password.required': 'Some security is needed so no one can change your account.',
           'password.minlength': 'The minimum length is 8.',
@@ -40,7 +45,12 @@ angular.module('alumni-db-frontend')
           'institution.required': 'The name of the institution where you did the JA program is missing.',
           'country.required': 'Please enter the country in that you currently live.',
           'country_of_participation.required': 'Please enter in which country you participated in the JA program.',
-          'year_of_participation.required': 'Please enter in which year you participated in the JA program.'
+          'year_of_participation.required': 'Please enter in which year you participated in the JA program.',
+          'member_since.dateFormat': 'Maybe the date format is wrong. It should be like in this example: 06.06.2006 / day.month.year',
+          'short_bio.maxlength': 'The maximum length is 160 letters.',
+          'facebook_url.url': 'The URL is not valid.',
+          'linkedin_url.url': 'The URL is not valid.',
+          'twitter_url.url': 'The URL is not valid.'
         };
 
         var _title = 'Change a few things and try submitting again.';

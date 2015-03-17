@@ -1,203 +1,567 @@
-<div class="row">
-  <div class="col-md-offset-2 col-md-9">
-    <h1 class="title">Update profile</h1>
+<div class="two-page-layout clearfix">
+  <div class="sidebar">
+    <div class="profile-image-container profile-image-update">
+      <img src="{{tempUserData.avatar}}" alt="Profile image" onerror="this.src = '/images/default_profile_male.png';">
+    </div>
+    <div class="sidebar-content">
+      <!-- Empty -->
+    </div>
   </div>
-</div>
+  <div class="main-container">
+    <div class="main-content with-form">
+      <!-- Title -->
+      <div class="page-title">
+        <h1>Update profile</h1>
+      </div>
 
-      <!--
-      <ui-view/>
-    -->
-    <div class="row">
-      <div class="col-md-offset-2 col-md-9">
-        <form
+      <form
         name="updateUserForm"
         ng-submit="submitUpdatedUserData(tempUserData)"
         role="form"
         class="form-inline update-form"
         novalidate>
+
         <!-- Form Validation Massages -->
         <validation-messages form="updateUserForm"
-        get-messages="formValidationMessages"
-        get-title="farmValidationTitle">
-      </validation-messages>
+          get-messages="formValidationMessages"
+          get-title="farmValidationTitle">
+        </validation-messages>
 
-      <!-- Firstname -->
-      <div  class="form-group"
-      ng-class="{
-      'has-success': updateUserForm.firstname.$dirty && updateUserForm.firstname.$valid,
-      'has-error': updateUserForm.firstname.$dirty && updateUserForm.firstname.$invalid
-    }">
-    <label for="firstname">First name</label>
-    <input
-    name="firstname"
-    ng-model="tempUserData.first_name"
-    type="text"
-    class="form-control"
-    required />
-  </div>
+        <!-- Personal -->
+        <div class="page-section">
+          <p class="section-title">Personal</p>
 
-  <!-- Lastname -->
-  <div  class="form-group"
-  ng-class="{
-  'has-success': updateUserForm.lastname.$dirty && updateUserForm.lastname.$valid,
-  'has-error': updateUserForm.lastname.$dirty && updateUserForm.lastname.$invalid
-}">
-<label for="lastname">Last name</label>
-<input
-ng-class="{
-'has-success': updateUserForm.lastname.$dirty && updateUserForm.lastname.$valid,
-'has-error': updateUserForm.lastname.$dirty && updateUserForm.lastname.$invalid
-}"
-name="lastname"
-ng-model="tempUserData.last_name"
-type="text"
-class="form-control"
-required />
-</div>
+          <!-- First name -->
+          <div
+            class="section-row form-group"
+            ng-class="{
+              'has-error': updateUserForm.firstname.$dirty && updateUserForm.firstname.$invalid
+            }">
+            <div class="section-column-left">
+              <label for="firstname"><p>First name</p></label>
+            </div>
+            <div class="section-column-right">
+              <input
+                name="firstname"
+                ng-model="tempUserData.first_name"
+                type="text"
+                class="form-control"
+                required />
+            </div>
+          </div>
+          <!-- Last name -->
+          <div
+            class="section-row form-group"
+            ng-class="{
+              'has-error': updateUserForm.lastname.$dirty && updateUserForm.lastname.$invalid
+            }">
+            <div class="section-column-left">
+              <label for="lastname"><p>Last name</p></label>
+            </div>
+            <div class="section-column-right">
+              <input
+                name="lastname"
+                ng-model="tempUserData.last_name"
+                type="text"
+                class="form-control"
+                required />
+            </div>
+          </div>
+          <!-- City -->
+          <div
+            class="section-row form-group"
+            ng-class="{
+              'has-error': updateUserForm.city.$dirty && updateUserForm.city.$invalid
+            }">
+            <div class="section-column-left">
+              <label for="city"><p>City</p></label>
+            </div>
+            <div class="section-column-right">
+              <input
+                name="city"
+                ng-model="tempUserData.city"
+                type="text"
+                class="form-control"
+                required />
+            </div>
+          </div>
+          <!-- Country -->
+          <div
+            class="section-row form-group"
+            ng-class="{
+              'has-error': updateUserForm.country.$dirty && updateUserForm.country.$invalid
+            }">
+            <div class="section-column-left">
+              <label for="country"><p>Country</p></label>
+            </div>
+            <div class="section-column-right">
+              <select
+                name="country"
+                type="text"
+                class="form-control"
+                ng-model="tempUserData.country"
+                ng-options="country.code as country.name for country in getAllCountries"
+                required />
+            </div>
+          </div>
+          <!-- Birthday -->
+          <div
+            class="section-row form-group"
+            ng-class="{
+              'has-error': updateUserForm.birthday.$dirty && updateUserForm.birthday.$invalid
+              }">
+            <div class="section-column-left">
+              <label for="birthday"><p>Birthday</p></label>
+            </div>
+            <div class="section-column-right">
+              <p class="input-group">
+                <input
+                  name="birthday"
+                  type="text"
+                  class="form-control"
+                  datepicker-popup="dd.MM.yyyy"
+                  ng-model="tempUserData.date_of_birth"
+                  is-open="openedBD"
+                  max-date="maxDate"
+                  datepicker-options="dateOptions"
+                  show-button-bar="false"
+                  date-format
+                  required />
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="open($event,'openedBD')"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+              </p>
+            </div>
+          </div>
+          <!-- Gender -->
+          <div class="section-row form-group">
+            <div class="section-column-left">
+              <label for="gender"><p>Gender</p></label>
+            </div>
+            <div class="section-column-right">
+              <div class="checkbox-row">
+                <div
+                  class="btn btn-checkbox"
+                  ng-class="{active: !tempUserData.gender}"
+                  ng-click="tempUserData.gender=0;">
+                  Male
+                </div>
+                <div
+                  class="btn btn-checkbox"
+                  ng-class="{active: tempUserData.gender}"
+                  ng-click="tempUserData.gender=1">
+                  Female
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- University name -->
+          <div
+            class="section-row form-group"
+            ng-class="{
+              'has-error': updateUserForm.university_name.$dirty && updateUserForm.university_name.$invalid
+            }">
+            <div class="section-column-left">
+              <label for="university_name"><p>University name</p></label>
+            </div>
+            <div class="section-column-right">
+              <input
+                name="university_name"
+                ng-model="tempUserData.university_name"
+                type="text"
+                class="form-control" />
+            </div>
+          </div>
+          <!-- Major -->
+          <div
+            class="section-row form-group"
+            ng-class="{
+              'has-error': updateUserForm.university_major.$dirty && updateUserForm.university_major.$invalid
+            }">
+            <div class="section-column-left">
+              <label for="university_major"><p>Major</p></label>
+            </div>
+            <div class="section-column-right">
+              <input
+                name="university_major"
+                ng-model="tempUserData.university_major"
+                type="text"
+                class="form-control" />
+            </div>
+          </div>
+          <!-- Founded startups -->
+          <div
+            class="section-row form-group"
+            ng-class="{
+              'has-error': updateUserForm.founded_company_name.$dirty && updateUserForm.founded_company_name.$invalid
+            }">
+            <div class="section-column-left">
+              <label for="founded_company_name"><p>Founded startups</p></label>
+            </div>
+            <div class="section-column-right">
+              <input
+                name="founded_company_name"
+                ng-model="tempUserData.founded_company_name"
+                type="text"
+                class="form-control" />
+            </div>
+          </div>
+          <!-- Working place -->
+          <div
+            class="section-row form-group"
+            ng-class="{
+              'has-error': updateUserForm.current_company_name.$dirty && updateUserForm.current_company_name.$invalid
+            }">
+            <div class="section-column-left">
+              <label for="current_company_name"><p>Working place</p></label>
+            </div>
+            <div class="section-column-right">
+              <input
+                name="current_company_name"
+                ng-model="tempUserData.current_company_name"
+                type="text"
+                class="form-control" />
+            </div>
+          </div>
+          <!-- Job position -->
+          <div
+            class="section-row form-group"
+            ng-class="{
+              'has-error': updateUserForm.current_job_position.$dirty && updateUserForm.current_job_position.$invalid
+            }">
+            <div class="section-column-left">
+              <label for="current_job_position"><p>Job position</p></label>
+            </div>
+            <div class="section-column-right">
+              <input
+                name="current_job_position"
+                ng-model="tempUserData.current_job_position"
+                type="text"
+                class="form-control" />
+            </div>
+          </div>
+          <!-- Interests -->
+          <div
+            class="section-row form-group"
+            ng-class="{
+              'has-error': updateUserForm.interests.$dirty && updateUserForm.interests.$invalid
+            }">
+            <div class="section-column-left">
+              <label for="interests"><p>Interests</p></label>
+            </div>
+            <div class="section-column-right">
+              <input
+                name="interests"
+                ng-model="tempUserData.interests"
+                type="text"
+                class="form-control" />
+            </div>
+            <!-- Short bio -->
+          <div
+            class="section-row form-group"
+            ng-class="{
+              'has-error': updateUserForm.short_bio.$dirty && updateUserForm.short_bio.$invalid
+            }">
+            <div class="section-column-left">
+              <label for="short_bio"><p>Short Bio</p></label>
+            </div>
+            <div class="section-column-right">
+              <textarea
+                name="short_bio"
+                ng-model="tempUserData.short_bio"
+                type="text"
+                ng-maxlength="160"
+                cols="34"
+                rows="3"/>
+            </div>
+          </div>
+        </div> <!-- /page-section -->
 
-<!-- Country -->
-<div  class="form-group">
-  <label for="country">Current country</label>
-  <select
-  name="country"
-  type="text"
-  class="form-control"
-  ng-model="tempUserData.country"
-  ng-options="country.code as country.name for country in getAllCountries"
-  required />
-</div>
 
-<!-- City -->
-<div  class="form-group"
-ng-class="{
-'has-success': updateUserForm.city.$dirty && updateUserForm.city.$valid,
-'has-error': updateUserForm.city.$dirty && updateUserForm.city.$invalid
-}">
-<label for="city">Current city</label>
-<input
-name="city"
-ng-model="tempUserData.city"
-type="text"
-class="form-control"
-required />
-</div>
+        <!-- JA-YE -->
+        <div class="page-section">
+          <p class="section-title">JA-YE</p>
 
-<!-- Date of Birth -->
-<div  class="form-group"
-ng-class="{
-'has-success': updateUserForm.birthday.$dirty && updateUserForm.birthday.$valid,
-'has-error': updateUserForm.birthday.$dirty && updateUserForm.birthday.$invalid
-}">
-<label for="birthday">Birthday</label>
-<p class="input-group">
-  <input 
-    name="birthday" 
-    type="text" 
-    class="form-control" 
-    datepicker-popup="dd.MM.yyyy" 
-    ng-model="tempUserData.date_of_birth" 
-    is-open="opened" 
-    max-date="maxDate" 
-    datepicker-options="dateOptions" 
-    show-button-bar="false" 
-    date-format 
-    required />
-  <span class="input-group-btn">
-    <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-  </span>
-</p>
-</div>
-
-<!-- Gender -->
-<div class="form-group">
-  <label for="gender">Gender</label>
-  <div class="checkbox-row">
-    <!-- Male -->
-    <div
-    class="btn btn-checkbox"
-    style="margin-left:20px"
-    ng-class="{active: !tempUserData.gender}"
-    ng-click="tempUserData.gender=0;">
-    Male
-  </div>
-  <!-- Female -->
-  <div
-  class="btn btn-checkbox"
-  style="margin-left:20px"
-  ng-class="{active: tempUserData.gender}"
-  ng-click="tempUserData.gender=1">
-  Female
-</div>
-</div>
-</div>
-
-<!-- Institution -->
-<div  class="form-group"
-ng-class="{
-'has-success': updateUserForm.institution.$dirty && updateUserForm.institution.$valid,
-'has-error': updateUserForm.institution.$dirty && updateUserForm.institution.$invalid
-}">
-<label for="institution">Institution</label>
-<input
-name="institution"
-ng-model="tempUserData.institution"
-type="text"
-class="form-control"
-required />
-</div>
-
-<!-- Program type -->
-<div class="form-group">
-  <label for="programm_type">Program type</label>
-  <div class="checkbox-row">
-    <div class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: tempUserData.program_type === 0}" ng-click="tempUserData.program_type=0;">Company</div>
-    <div class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: tempUserData.program_type === 1}" ng-click="tempUserData.program_type=1;">Startup</div>
-    <div class="btn btn-checkbox" style="margin-left:20px" ng-class="{active: tempUserData.program_type === 2}" ng-click="tempUserData.program_type=2;">Other</div>
-  </div>
-</div>
-
-<!-- Country of Participation -->
-<div class="form-group">
-  <label for="country_of_participation">Country of Participation</label>
-  <select
-  name="country_of_participation"
-  type="text"
-  class="form-control"
-  ng-model="tempUserData.country_of_participation"
-  ng-options="country.code as country.name for country in getCountries"
-  required />
-</div>
+          <!-- Institution -->
+          <div
+            class="section-row form-group"
+            ng-class="{
+              'has-error': updateUserForm.institution.$dirty && updateUserForm.institution.$invalid
+            }">
+            <div class="section-column-left">
+              <label for="institution"><p>Institution</p></label>
+            </div>
+            <div class="section-column-right">
+              <input
+                name="institution"
+                ng-model="tempUserData.institution"
+                type="text"
+                class="form-control"
+                required />
+            </div>
+          </div>
+          <!-- Program type -->
+          <div class="section-row form-group">
+            <div class="section-column-left">
+              <label for="program_type"><p>Program type</p></label>
+            </div>
+            <div class="section-column-right">
+              <div class="checkbox-row">
+              <div class="btn btn-checkbox" ng-class="{active: tempUserData.program_type === 0}" ng-click="tempUserData.program_type=0;">Company</div>
+              <div class="btn btn-checkbox" ng-class="{active: tempUserData.program_type === 1}" ng-click="tempUserData.program_type=1;">Startup</div>
+              <div class="btn btn-checkbox" ng-class="{active: tempUserData.program_type === 2}" ng-click="tempUserData.program_type=2;">Other</div>
+            </div>
+            </div>
+          </div>
+          <!-- Country of Participation -->
+          <div
+            class="section-row form-group"
+            ng-class="{
+              'has-error': updateUserForm.country_of_participation.$dirty && updateUserForm.country_of_participation.$invalid
+            }">
+            <div class="section-column-left">
+              <label for="country_of_participation"><p>Country of Participation</p></label>
+            </div>
+            <div class="section-column-right">
+              <select
+                name="country_of_participation"
+                type="text"
+                class="form-control"
+                ng-model="tempUserData.country_of_participation"
+                ng-options="country.code as country.name for country in getCountries"
+                required />
+            </div>
+          </div>
+          <!-- Year of Participation -->
+          <div
+            class="section-row form-group"
+            ng-class="{
+              'has-error': updateUserForm.year_of_participation.$dirty && updateUserForm.year_of_participation.$invalid
+            }">
+            <div class="section-column-left">
+              <label for="year_of_participation"><p>Year of Participation</p></label>
+            </div>
+            <div class="section-column-right">
+              <select
+              name="year_of_participation"
+              type="text"
+              class="form-control"
+              ng-model="tempUserData.year_of_participation"
+              ng-options="year for year in possibleYears"
+              required />
+            </div>
+          </div>
+          <!-- Student company name -->
+          <div
+            class="section-row form-group"
+            ng-class="{
+              'has-error': updateUserForm.student_company_name.$dirty && updateUserForm.student_company_name.$invalid
+            }">
+            <div class="section-column-left">
+              <label for="student_company_name"><p>Student company name</p></label>
+            </div>
+            <div class="section-column-right">
+              <input
+                name="student_company_name"
+                ng-model="tempUserData.student_company_name"
+                type="text"
+                class="form-control"
+                required />
+            </div>
+          </div>
+        </div> <!-- /page-section -->
 
 
-<!-- Year of Participation -->
-<div class="form-group">
-  <label for="year_of_participation">Year of Participation</label>
-  <select
-  name="year_of_participation"
-  type="text"
-  class="form-control"
-  ng-model="tempUserData.year_of_participation"
-  ng-options="year for year in possibleYears"
-  required />
-</div>
 
-<!-- Student company name -->
-<div  class="form-group"
-ng-class="{
-'has-success': updateUserForm.student_company_name.$dirty && updateUserForm.student_company_name.$valid,
-'has-error': updateUserForm.student_company_name.$dirty && updateUserForm.student_company_name.$invalid
-}">
-<label for="student_company_name">Student company name</label>
-<input
-name="student_company_name"
-ng-model="tempUserData.student_company_name"
-type="text"
-class="form-control"
-required />
-</div>
+        <!-- Alumni -->
+        <div class="page-section">
+          <p class="section-title">Alumni</p>
+
+          <!-- Status -->
+          <!--
+          <div class="section-row form-group">
+            <div class="section-column-left">
+              <label for="active_member"><p>Status</p></label>
+            </div>
+            <div class="section-column-right">
+              <div class="checkbox-row">
+                <div
+                  class="btn btn-checkbox"
+                  ng-class="{active: tempUserData.active_member}"
+                  ng-click="tempUserData.active_member=true;">
+                  Active
+                </div>
+                <div
+                  class="btn btn-checkbox"
+                  ng-class="{active: !tempUserData.active_member}"
+                  ng-click="tempUserData.active_member=false">
+                  Inactive
+                </div>
+              </div>
+            </div>
+          </div>
+          -->
+          <!-- Position -->
+          <div
+            class="section-row form-group"
+            ng-class="{
+              'has-error': updateUserForm.alumni_position.$dirty && updateUserForm.alumni_position.$invalid
+            }">
+            <div class="section-column-left">
+              <label for="alumni_position"><p>Position</p></label>
+            </div>
+            <div class="section-column-right">
+              <input
+                name="alumni_position"
+                ng-model="tempUserData.alumni_position"
+                type="text"
+                class="form-control" />
+            </div>
+          </div>
+          <!-- Member since -->
+          <div
+            class="section-row form-group"
+            ng-class="{
+              'has-error': updateUserForm.member_since.$dirty && updateUserForm.member_since.$invalid
+              }">
+            <div class="section-column-left">
+              <label for="member_since"><p>Member since</p></label>
+            </div>
+            <div class="section-column-right">
+              <p class="input-group">
+                <input
+                  name="member_since"
+                  type="text"
+                  class="form-control"
+                  datepicker-popup="dd.MM.yyyy"
+                  ng-model="tempUserData.member_since"
+                  is-open="openedMS"
+                  max-date="maxDate"
+                  datepicker-options="dateOptions"
+                  show-button-bar="false"
+                  date-format />
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="open($event,'openedMS')"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div> <!-- /page-section -->
 
 
-<!-- Submit -->
+
+        <!-- Contact info -->
+        <div class="page-section">
+          <p class="section-title">Contact info</p>
+
+          <!-- Facebook url -->
+          <div
+            class="section-row form-group"
+            ng-class="{
+              'has-error': updateUserForm.facebook_url.$dirty && updateUserForm.facebook_url.$invalid
+            }">
+            <div class="section-column-left">
+              <label for="facebook_url"><p>Facebook url</p></label>
+            </div>
+            <div class="section-column-right">
+              <input
+                name="facebook_url"
+                ng-model="tempUserData.facebook_url"
+                type="url"
+                class="form-control" />
+            </div>
+          </div>
+          <!-- Skype ID -->
+          <div
+            class="section-row form-group"
+            ng-class="{
+              'has-error': updateUserForm.skype_id.$dirty && updateUserForm.skype_id.$invalid
+            }">
+            <div class="section-column-left">
+              <label for="skype_id"><p>Skype ID</p></label>
+            </div>
+            <div class="section-column-right">
+              <input
+                name="skype_id"
+                ng-model="tempUserData.skype_id"
+                type="text"
+                class="form-control" />
+            </div>
+          </div>
+          <!-- Twitter url -->
+          <div
+            class="section-row form-group"
+            ng-class="{
+              'has-error': updateUserForm.twitter_url.$dirty && updateUserForm.twitter_url.$invalid
+            }">
+            <div class="section-column-left">
+              <label for="twitter_url"><p>Twitter url</p></label>
+            </div>
+            <div class="section-column-right">
+              <input
+                name="twitter_url"
+                ng-model="tempUserData.twitter_url"
+                type="url"
+                class="form-control" />
+            </div>
+          </div>
+          <!-- LinkedIn url -->
+          <div
+            class="section-row form-group"
+            ng-class="{
+              'has-error': updateUserForm.linkedin_url.$dirty && updateUserForm.linkedin_url.$invalid
+            }">
+            <div class="section-column-left">
+              <label for="linkedin_url"><p>LinkedIn url</p></label>
+            </div>
+            <div class="section-column-right">
+              <input
+                name="linkedin_url"
+                ng-model="tempUserData.linkedin_url"
+                type="url"
+                class="form-control" />
+            </div>
+          </div>
+          <!-- Mobile phone -->
+          <div
+            class="section-row form-group"
+            ng-class="{
+              'has-error': updateUserForm.mobile_phone.$dirty && updateUserForm.mobile_phone.$invalid
+            }">
+            <div class="section-column-left">
+              <label for="mobile_phone"><p>Mobile phone</p></label>
+            </div>
+            <div class="section-column-right">
+              <input
+                name="mobile_phone"
+                ng-model="tempUserData.mobile_phone"
+                type="text"
+                class="form-control" />
+            </div>
+          </div>
+        </div> <!-- /page-section -->
+
+
+
+        <div class="page-section">
+          <!-- Submit -->
+          <div>
+            <button
+            name="edit"
+            type="submit"
+            id="update-submit-btn"
+            class="btn btn-success">
+            Submit
+          </button>
+        </div> <!-- /page-section -->
+      </form>
+    </div> <!-- /main-content -->
+  </div> <!-- /main-container -->
+</div> <!-- /two-page-layout -->
+
+<!--
+
+
 <div>
   <button
   name="edit"
@@ -211,4 +575,4 @@ required />
 </form>
 
 </div>
-</div>
+</div>-->

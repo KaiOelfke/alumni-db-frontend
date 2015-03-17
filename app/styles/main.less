@@ -1,21 +1,7 @@
+@import "shared.less";
 @import "splash.less";
 @import "home.less";
-
-/* JA Worldwide Styling Guidelines 
-/* http://media.wix.com/ugd/b507ca_d0cac8808d0c4d748e94b103e9e2c184.pdf
- */
-
-/* Primary color palette */
-@green:       rgb(0,118,61);
-@orange:      rgb(239,121,12);
-@black:       #666;
-@gray:        #b2b2b2;
-
-/* Secundary color palete */
-@lightGreen:  rgb(127,189,54);
-@lightOrange: rgb(249,170,7);
-@lightYellow: rgb(255,243,82);
-@mediumGreen: rgb(111,183,43);
+@import "two-page-layout.less";
 
 @containerWidth: 1024px;
 @containerPaddingTop: 32px;
@@ -43,96 +29,6 @@ html, body {
     margin: 0 auto;
     padding: @containerPaddingTop 0 @containerPaddingTop 0;
     width: @containerWidth;
-}
-
-.page-title {
-    width: 100%;
-    margin-bottom: @containerPaddingTop;
-
-    h1 {
-        margin: 0 0 @pageDescriptionSize 0;
-        font-size: @pageTitleSize;
-        color: @pageTitleColor;
-    }
-
-    p {
-        font-size: @pageDescriptionSize;
-        color: @black;
-    }
-}
-
-.announcement {
-    padding: @pageDescriptionSize;
-    background-color: fade(@lightGreen, 20%);
-    border-radius: 8px;
-    border: 1px solid @lightGreen;
-
-    p {
-        font-size: @pageDescriptionSize;
-        color: @green;
-    }
-}
-
-.page-section {
-    width: 100%;
-    height: auto;
-    padding-left: @pageSectionPadding;
-    padding-right: @pageSectionPadding;
-
-    :after {
-        display: block;
-        content: '';
-        clear: both;
-    }
-
-  .section-title {
-    padding-bottom: @pageSectionPadding / 2;
-    font-size: @pageDescriptionSize;
-    color: @pageTitleColor;
-    border-bottom: 1px solid @gray;
-  }
-
-  .section-row {
-    width: 100%;
-    height: auto;
-    padding: 0;
-    clear: left;
-
-    p {
-        margin: 0;
-    }
-  }
-
-  .section-column-left {
-    float: left;
-    margin-right: @pageSectionPadding;
-    font-size: 14px;
-    color: @gray;
-    text-transform: uppercase;
-  }
-
-  .section-column-right {
-    width: @containerWidth - @infoDescriptionWidth;
-    float: right;
-    color: @black;
-
-    .form-control {
-        width: 100%;
-        height: 44px;
-    }
-  }
-
-  .section-row + .section-row {
-    margin-top: 8px;
-  }
-
-  label {
-    font-weight: normal;
-  }
-}
-
-.page-section + .page-section {
-    margin: @pageSectionPadding 0 0 0;
 }
 
 /* home.html outer container */
@@ -267,80 +163,6 @@ html, body {
     .registration .form-control {
         width:200px;
         margin-left: 20px;
-    }
-
-    .checkbox-row {
-        display: block;
-        padding-left: 25px;
-        font-size: 1.1rem;
-    }
-
-    .checkbox-row input {
-        margin: 4px 7px 0px 7px;
-    }
-
-    .btn-checkbox{
-        border-color: #FFFFFF;
-        color: #FFFFFF;
-        background-color: #63B531;    
-    }
-
-    .btn-checkbox:active,
-    .btn-checkbox.active {
-      background-image: none;
-      outline: 0;
-      -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
-      box-shadow: inset 0 3px 5px rgba(0, 0, 0, 1);
-      background-color: #333333;
-    }
-
-    .btn-checkbox:active:hover,
-    .btn-checkbox.active:hover {
-      background-color: #444444;
-    }
-
-    .btn-checkbox:hover{
-        color: #FFFFFF;
-        background-color: #33A444;    
-    }
-
-    .btn-green {
-        color: #fff;
-        background-color: #7FBD36;
-        border-color: #7FBD36;
-    }
-
-    .btn-green:hover {
-
-        background-color: #95C956;
-
-    }
-
-    input[type=text],select, textarea, 
-    input[type=date],select, textarea {
-        -webkit-transition: all 0.30s ease-in-out;
-        -moz-transition: all 0.30s ease-in-out;
-        -ms-transition: all 0.30s ease-in-out;
-        -o-transition: all 0.30s ease-in-out;
-        outline: none;
-        border: 1px solid #DDDDDD;
-        background-color: #FAFAFA;
-    }
-     
-    input[type=text]:focus, textarea:focus, 
-    input[type=date]:focus, textarea:focus {
-      box-shadow: 0 0 5px rgba(184, 213, 27, 1);
-      border: 1px solid rgba(184, 213, 27, 1);
-    }
-
-    .has-error .form-control, 
-    .has-error .form-control:focus {
-      border-color: @red;
-    }
-
-    .has-success .form-control, 
-    .has-success .form-control:focus {
-      border-color: @lightGreen;
     }
 
     h1.title {
