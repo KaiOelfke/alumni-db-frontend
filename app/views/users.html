@@ -2,6 +2,8 @@
 	<h1>Welcome!</h1>
 	<p>Welcome to the beta version of Alumni Connect (working title). Currently you can register new accounts, see a list of members and their profile information. Also you can update your own information. We will continuously add features based on your feedback.</p>
 </div>
+<!-- ng-change="search()" -->
+<input class="form-control field span12" id="objctf" rows="4" ng-model="searchText"/>
 
 <div class="table-responsive">
 	<table class="table">
@@ -13,7 +15,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="user in users | filter :{completed_profile:true} | orderBy: 'first_name'">
+			<tr ng-repeat="user in users | filter :{completed_profile:true} | filter : searchText | orderBy: 'first_name'">
 				<td>{{ user.email }}</td>
 				<td><a ui-sref="home.profile-show({ id: user.id})">{{ user.first_name }}</a></td>
 				<td>{{ user.last_name }}</td>
