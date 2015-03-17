@@ -26,7 +26,7 @@ app.controller('ProfileCtrl', [
     if (moment(_user.date_of_birth,'YYYY-MM-DD').isValid()) {
       _user.date_of_birth = moment(_user.date_of_birth,'YYYY-MM-DD').toDate();
     }
-    _user.country = countriesFactory.getFromPermittedCountry(_user.country);
+    _user.country = countriesFactory.getFromAllCountry(_user.country);
     _user.program_type = programTypesFactory.getTypeName(_user.program_type);
     _user.country_of_participation = countriesFactory.getFromAllCountry(_user.country_of_participation);
     _user.gender = genderFactory.getGenderName(_user.gender);
