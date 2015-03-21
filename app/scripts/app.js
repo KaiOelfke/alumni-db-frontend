@@ -63,10 +63,12 @@ angular
         apiUrl: API_HOST,
         accountUpdatePath: '/users',
         storage: 'localStorage',
+        passwordResetSuccessUrl: window.location.origin + '/#/password-update',
         handleLoginResponse: formatConvertar,
         handleAccountUpdateResponse: formatConvertar,
-        handleTokenValidationResponse: formatConvertar
-
+        handleTokenValidationResponse: formatConvertar,
+        passwordResetPath: '/auth/password/',
+        passwordUpdatePath: '/auth/password/'
     });
   })
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {

@@ -35,6 +35,7 @@ angular.module('alumni-db-frontend')
           'password.minlength': 'The minimum length is 8.',
           'confirm_password.minlength': 'The minimum length is 8.',
           'confirm_password.match': 'Passwords have to match.',
+          'password_confirmation': 'Passwords have to match.',
           'email.required': 'We will not spam you, but we need your email.',
           'email.email': 'The format seems to be wrong.',
           'birthday.dateFormat': 'Maybe the date format is wrong. It should be like in this example: 01.11.1993 / day.month.year',
