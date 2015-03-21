@@ -19,8 +19,10 @@ app.controller('ProfileCtrl', [
   '$state',
   '$scope',
   'data',
+  'avatarFactory',
   '$rootScope',
-  function(usersFactory, countriesFactory, programTypesFactory, genderFactory, $state, $scope, data, $rootScope) {
+  function(usersFactory, countriesFactory, programTypesFactory,
+           genderFactory, $state, $scope, data, avatarFactory, $rootScope) {
     var _user  = data.data;
     /*jshint camelcase: false */
     if (moment(_user.date_of_birth,'YYYY-MM-DD').isValid()) {
@@ -33,6 +35,7 @@ app.controller('ProfileCtrl', [
 
     $scope.userData = _user;
     $scope.editEnabled = $rootScope.isOwner(_user.id);
+    $scope.getAvatar = avatarFactory.getUserAvatar;
   }
 ]);
 
@@ -51,9 +54,11 @@ app.controller('ProfileUpdateCtrl', [
   '$auth',
   '$state',
   'toaster',
+  'avatarFactory',
   '$scope',
   '$rootScope',
-  function(countriesFactory, yearsFactory, validationMessagesFactory, $auth, $state, toaster, $scope, $rootScope) {
+  function(countriesFactory, yearsFactory, validationMessagesFactory, $auth,
+           $state, toaster, avatarFactory, $scope, $rootScope) {
     var _user = $rootScope.user;
     $scope.formValidationMessages = validationMessagesFactory.getValidationMsg;
     $scope.farmValidationTitle = validationMessagesFactory.getValidationTitle;
@@ -64,10 +69,29 @@ app.controller('ProfileUpdateCtrl', [
     live data binding changes of names in the nav bar. We only want
     those changes when the user actually successfully submits the change.
     */
+
     $scope.tempUserData = JSON.parse(JSON.stringify(_user));
     $scope.getCountries = countriesFactory.getCountries();
     $scope.possibleYears = yearsFactory.getYears();
     $scope.getAllCountries = countriesFactory.getAllCountries();
+    $scope.uploadingStatus = undefined;
+
+    $scope.fileSelected = function (files) {
+      avatarFactory.uploadAvatar(files).then(function (data) {
+        $scope.tempUserData.avatar = data.data.avatar;
+        $scope.uploadingStatus = undefined;
+      }, function () {
+        $scope.uploadingStatus = undefined;
+        toaster.error('Something went wrong');
+      }, function (progress) {
+        $scope.uploadingStatus = 'uploading: '+ progress + '%';
+      });
+    };
+
+
+    $scope.getAvatar = avatarFactory.getUserAvatar;
+
+
 
     /*jshint camelcase: false */
     if (moment($scope.tempUserData.date_of_birth,'YYYY-MM-DD').isValid()) {
@@ -78,12 +102,15 @@ app.controller('ProfileUpdateCtrl', [
       $scope.tempUserData.member_since = moment($scope.tempUserData.member_since,'YYYY-MM-DD').toDate();
     }
 
+
+
+
     $scope.submitUpdatedUserData = function(tempUserData) {
       $scope.$broadcast('show-errors-messages-block');
       if ($scope.updateUserForm.$invalid) {
         return;
       }
-      console.log(tempUserData.avatar);
+
       // Fix timezone difference
       var offset = tempUserData.date_of_birth.getTimezoneOffset();
       tempUserData.date_of_birth = new Date(tempUserData.date_of_birth.getTime() - (offset * (60 * 1000)));

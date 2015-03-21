@@ -14,6 +14,7 @@
     "moment": "~2.9.0",
     "angularjs-toaster": "0.4.7",
     "angular-bootstrap": "~0.12.1",
+    "ng-file-upload": "~3.2.4",
     "font-awesome": "~4.3.0"
   },
   "devDependencies": {

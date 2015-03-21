@@ -16,6 +16,7 @@ angular
     'ng-token-auth',
     'ui.router',
     'toaster',
+    'angularFileUpload',
     'ui.bootstrap'
   ])
   .constant('USER_ROLES', {
@@ -27,6 +28,13 @@ angular
   .constant('AUTHZ_EVENTS', {
     notAuthorized: 'notAuthorized'
   })
+  .config([
+    '$compileProvider',
+    function( $compileProvider )
+    {
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|tel|mailto|skype):/);
+    }
+  ])
   .config(function($authProvider,API_HOST) {
 
     var formatConvertar = function(response) {
@@ -204,11 +212,11 @@ angular
 
   }).run(function ($rootScope, $state, AUTHZ_EVENTS, USER_ROLES, toaster) {
     $rootScope.$on('auth:registration-email-success', function() {
-      $state.go('home.loggedin.registration');
+      //$state.go('home.loggedin.registration');
     });
 
     $rootScope.$on('auth:email-confirmation-success', function() {
-      $state.go('home.loggedin');
+      $state.go('home');
     });
 
     $rootScope.$on('auth:email-confirmation-error', function() {

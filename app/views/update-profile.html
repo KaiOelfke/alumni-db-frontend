@@ -1,10 +1,15 @@
 <div class="two-page-layout clearfix">
-  <div class="sidebar">
-    <div class="profile-image-container profile-image-update">
-      <img src="{{tempUserData.avatar}}" alt="Profile image" onerror="this.src = '/images/default_profile_male.png';">
+  <div class="sidebar"> 
+    <div class="profile-image-container profile-image-update" 
+        ng-file-select ng-model="myFiles"
+        ng-file-change="fileSelected($files, $event)"
+        ng-capture="'camera'"
+        accept="'image/*'" 
+        ng-accept="'image/*'">
+        <img ng-src="{{getAvatar(tempUserData)}}" alt="Profile image"/>
     </div>
     <div class="sidebar-content">
-      <!-- Empty -->
+        <span class="label label-info">{{uploadingStatus}}</span>
     </div>
   </div>
   <div class="main-container">
@@ -101,7 +106,8 @@
                 class="form-control"
                 ng-model="tempUserData.country"
                 ng-options="country.code as country.name for country in getAllCountries"
-                required />
+                required>
+              </select>
             </div>
           </div>
           <!-- Birthday -->
@@ -272,7 +278,8 @@
                 type="text"
                 ng-maxlength="160"
                 cols="34"
-                rows="3"/>
+                rows="3">
+              </textarea>
             </div>
           </div>
         </div> <!-- /page-section -->
@@ -329,7 +336,8 @@
                 class="form-control"
                 ng-model="tempUserData.country_of_participation"
                 ng-options="country.code as country.name for country in getCountries"
-                required />
+                required>
+              </select>
             </div>
           </div>
           <!-- Year of Participation -->
@@ -348,7 +356,8 @@
               class="form-control"
               ng-model="tempUserData.year_of_participation"
               ng-options="year for year in possibleYears"
-              required />
+              required>
+            </select>
             </div>
           </div>
           <!-- Student company name -->
