@@ -192,6 +192,19 @@ angular
           }
         }
       })
+      .state('guest.reset', {
+        url: '/reset',
+        templateUrl: 'views/splash-password-reset.html',
+        controller: 'ResetCtrl',
+        resolve: {
+          authorizedRoles: function (USER_ROLES) {
+            return USER_ROLES.guest;
+          },
+          authz: function  (authorizedRoles,authorizationService) {
+            return authorizationService.isAuthorized(authorizedRoles);
+          }
+        }
+      })
       .state('404', {
         url: '/404',
         templateUrl: 'views/404.html'
