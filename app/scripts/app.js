@@ -138,6 +138,19 @@ angular
           }
         }
       })
+      .state('home.profile-password-update', {
+        url: '/password-update',
+        templateUrl: 'views/password-update.html',
+        controller: 'ProfileUpdateCtrl',
+        resolve: {
+          authorizedRoles: function (USER_ROLES) {
+            return [USER_ROLES.completedProfile];
+          },
+          authz: function  (authorizedRoles,authorizationService) {
+            return authorizationService.isAuthorized(authorizedRoles);
+          }
+        }
+      })
       .state('home.registration', {
         url: '/registration',
         templateUrl: 'views/home-registration/main.html',
@@ -212,11 +225,11 @@ angular
 
   }).run(function ($rootScope, $state, AUTHZ_EVENTS, USER_ROLES, toaster) {
     $rootScope.$on('auth:registration-email-success', function() {
-      $state.go('home.loggedin.registration');
+      //$state.go('home.loggedin.registration');
     });
 
     $rootScope.$on('auth:email-confirmation-success', function() {
-      $state.go('home.loggedin');
+      $state.go('home');
     });
 
     $rootScope.$on('auth:email-confirmation-error', function() {
