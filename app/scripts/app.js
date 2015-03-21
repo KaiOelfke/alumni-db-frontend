@@ -130,6 +130,19 @@ angular
           }
         }
       })
+      .state('home.profile-password-update', {
+        url: '/password-update',
+        templateUrl: 'views/password-update.html',
+        controller: 'ProfileUpdateCtrl',
+        resolve: {
+          authorizedRoles: function (USER_ROLES) {
+            return [USER_ROLES.completedProfile];
+          },
+          authz: function  (authorizedRoles,authorizationService) {
+            return authorizationService.isAuthorized(authorizedRoles);
+          }
+        }
+      })
       .state('home.registration', {
         url: '/registration',
         templateUrl: 'views/home-registration/main.html',
