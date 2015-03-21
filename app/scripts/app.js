@@ -199,11 +199,11 @@ angular
 
   }).run(function ($rootScope, $state, AUTHZ_EVENTS, USER_ROLES, toaster) {
     $rootScope.$on('auth:registration-email-success', function() {
-      $state.go('home.loggedin.registration');
+      //$state.go('home.loggedin.registration');
     });
 
     $rootScope.$on('auth:email-confirmation-success', function() {
-      $state.go('home.loggedin');
+      $state.go('home');
     });
 
     $rootScope.$on('auth:email-confirmation-error', function() {
