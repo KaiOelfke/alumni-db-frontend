@@ -102,9 +102,6 @@ app.controller('ProfileUpdateCtrl', [
       $scope.tempUserData.member_since = moment($scope.tempUserData.member_since,'YYYY-MM-DD').toDate();
     }
 
-
-
-
     $scope.submitUpdatedUserData = function(tempUserData) {
       $scope.$broadcast('show-errors-messages-block');
       if ($scope.updateUserForm.$invalid) {
@@ -143,6 +140,22 @@ app.controller('ProfileUpdateCtrl', [
     $scope.dateOptions = {
       startingDay: 1,
       showWeeks: false
+    };
+
+    $scope.updatePassword = function(passwordData) {
+      $scope.$broadcast('show-errors-messages-block');
+      if ($scope.updatePasswordForm.$invalid) {
+        return;
+      }
+      $auth.updatePassword(passwordData)
+        .then(function() {
+          toaster.pop('success', 'Password successfully changed.');
+          $state.go('home.start-page');
+        })
+        .catch(function() {
+          console.log('error');
+          toaster.pop('error', 'Something went wrong.');
+        });
     };
   }
 ]);

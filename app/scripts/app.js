@@ -63,10 +63,12 @@ angular
         apiUrl: API_HOST,
         accountUpdatePath: '/users',
         storage: 'localStorage',
+        passwordResetSuccessUrl: window.location.origin + '/#/password-update',
         handleLoginResponse: formatConvertar,
         handleAccountUpdateResponse: formatConvertar,
-        handleTokenValidationResponse: formatConvertar
-
+        handleTokenValidationResponse: formatConvertar,
+        passwordResetPath: '/auth/password/',
+        passwordUpdatePath: '/auth/password/'
     });
   })
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -138,6 +140,19 @@ angular
           }
         }
       })
+      .state('home.profile-password-update', {
+        url: '/password-update',
+        templateUrl: 'views/password-update.html',
+        controller: 'ProfileUpdateCtrl',
+        resolve: {
+          authorizedRoles: function (USER_ROLES) {
+            return [USER_ROLES.completedProfile];
+          },
+          authz: function  (authorizedRoles,authorizationService) {
+            return authorizationService.isAuthorized(authorizedRoles);
+          }
+        }
+      })
       .state('home.registration', {
         url: '/registration',
         templateUrl: 'views/home-registration/main.html',
@@ -183,6 +198,19 @@ angular
         url: '/signin',
         templateUrl: 'views/splash-signin.html',
         controller: 'SigninCtrl',
+        resolve: {
+          authorizedRoles: function (USER_ROLES) {
+            return USER_ROLES.guest;
+          },
+          authz: function  (authorizedRoles,authorizationService) {
+            return authorizationService.isAuthorized(authorizedRoles);
+          }
+        }
+      })
+      .state('guest.reset', {
+        url: '/reset',
+        templateUrl: 'views/splash-password-reset.html',
+        controller: 'ResetCtrl',
         resolve: {
           authorizedRoles: function (USER_ROLES) {
             return USER_ROLES.guest;

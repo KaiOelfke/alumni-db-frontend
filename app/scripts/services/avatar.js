@@ -12,7 +12,7 @@ angular.module('alumni-db-frontend')
                               '$upload',
                               'API_HOST',
                               '$q',function (ENV, $upload, API_HOST, $q) {
-                                
+
         var avatarFactory = {};
 
         avatarFactory.uploadAvatar = function uploadAvatar (files) {
@@ -31,8 +31,8 @@ angular.module('alumni-db-frontend')
                 deferred.resolve(data);
                 console.log('file ' + config + 'uploaded. Response: ' + data);
             }).error(function  (err) {
-                console.log('error', err);   
-                deferred.reject(err);               
+                console.log('error', err);
+                deferred.reject(err);
             });
           }
           return deferred.promise;
@@ -43,7 +43,9 @@ angular.module('alumni-db-frontend')
           if (! (user.avatar && user.avatar.url) ) {
             return '';
           }
-
+          if (/amazonaws.com/.test(user.avatar.url)) {
+            return user.avatar.url;
+          }
           if (ENV  === 'development') {
             return 'http://localhost:3000/' + user.avatar.url;
           }
