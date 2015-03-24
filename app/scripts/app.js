@@ -151,6 +151,22 @@ angular
           }
         }
       })
+      .state('home.groups', {
+        url: '/groups',
+        templateUrl: 'views/groups-show.html',
+        controller: 'GroupsCtrl',
+        resolve: {
+          authorizedRoles: function(USER_ROLES) {
+            return [USER_ROLES.completedProfile];
+          },
+          authz: function(authorizedRoles,authorizationService) {
+            return authorizationService.isAuthorized(authorizedRoles);
+          },
+          data: function() {
+            return ['group0','group1','group2'];
+          }
+        }
+      })
       .state('home.registration', {
         url: '/registration',
         templateUrl: 'views/home-registration/main.html',

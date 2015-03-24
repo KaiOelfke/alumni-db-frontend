@@ -43,10 +43,6 @@ angular.module('alumni-db-frontend')
           if (! (user.avatar && user.avatar.url) ) {
             return '';
           }
-
-          if (ENV  === 'development') {
-            return 'http://localhost:3000/' + user.avatar.url;
-          }
           return user.avatar.url;
         };
 
