@@ -168,6 +168,20 @@ angular
           }
         }
       })
+      .state('home.groups', {
+        url: '/groups',
+        templateUrl: 'views/groups.html',
+        controller: 'GroupsCtrl',
+        controllerAs: 'groupsCtrl',        
+        resolve: {
+          authorizedRoles: function (USER_ROLES) {
+            return USER_ROLES.completedProfile;
+          },
+          authz: function  (authorizedRoles,authorizationService) {
+            return authorizationService.isAuthorized(authorizedRoles);
+          }
+        }
+      })      
       .state('guest', {
         url: '',
         abstract: true,

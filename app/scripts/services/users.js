@@ -24,6 +24,11 @@ angular.module('alumni-db-frontend')
             return $http.get(urlBase + '/' + id);
             };
 
+        usersFactory.getUserMemberships = function(id) {
+            return $http.get(urlBase + '/' + id + '/memberships');
+            };
+
+
         return usersFactory;
   }]);
 

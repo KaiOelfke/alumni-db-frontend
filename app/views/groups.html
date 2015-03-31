@@ -1,0 +1,39 @@
+<h3>Groups</h3>
+<hr>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Subscribe</th>
+                <th>Delete</th>                
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="group in groupsCtrl.groups">
+                <td>{{ group.name }}</td>
+                <td>{{ group.description }}</td>
+                <td><button ng-click="groupsCtrl.subscribe(group)" class="btn btn-default">subscribe</button></td>
+                <td><button ng-click="groupsCtrl.delete(group)"  class="btn btn-default">delete</button></td>
+                <td><button ng-click="groupsCtrl.subscribe(group)" class="btn btn-default">edit</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<hr>
+<button class="btn btn-default" ng-click="groupsCtrl.isCollapsed = !groupsCtrl.isCollapsed">Add</button>
+<div collapse="groupsCtrl.isCollapsed">
+    <form name="groupForm" class="form-inline" ng-submit="groupsCtrl.addGroup(group)">
+      <div class="form-group">
+        <input ng-model="group.name" type="text"
+               class="form-control" id="Name" placeholder="Name">
+      </div>
+      <div class="form-group">
+        <input ng-model="group.description" type="text"
+               class="form-control" id="Description" placeholder="Description">
+      </div>
+      <button type="submit" class="btn btn-default">Create</button>
+    </form>
+</div>
