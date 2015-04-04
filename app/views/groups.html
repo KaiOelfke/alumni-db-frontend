@@ -7,17 +7,22 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Subscribe</th>
-                <th>Delete</th>                
-                <th>Edit</th>
+                <th>Unsubscribe</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="group in groupsCtrl.groups">
-                <td>{{ group.name }}</td>
+                <td><a ui-sref='home.group({id: group.id})'>{{ group.name }}</a></td>
                 <td>{{ group.description }}</td>
-                <td><button ng-click="groupsCtrl.subscribe(group)" class="btn btn-default">subscribe</button></td>
-                <td><button ng-click="groupsCtrl.delete(group)"  class="btn btn-default">delete</button></td>
-                <td><button ng-click="groupsCtrl.subscribe(group)" class="btn btn-default">edit</button></td>
+                <td>
+                  <button ng-click="groupsCtrl.subscribe(group)"
+                          ng-disabled="{{!!group.membership}}"
+                          class="btn btn-default">subscribe</button></td>
+                <td><button  ng-click="groupsCtrl.unsubscribe(group.membership)"
+                            ng-disabled="{{!group.membership}}"
+                            class="btn btn-default">Unsubscribe</button></td>
+                <td><button ng-show=" groupCtrl.isSuperUser " 
+                  ng-click="groupsCtrl.delete(group)"  class="btn btn-default">delete</button></td>
             </tr>
         </tbody>
     </table>

@@ -8,7 +8,7 @@
  * Factory of the alumni-db-frontend
  */
 angular.module('alumni-db-frontend')
-  .factory('memebershipsFactory', ['$http','API_HOST', function ($http, API_HOST) {
+  .factory('membershipsFactory', ['$http','API_HOST', function ($http, API_HOST) {
         var urlBase =  API_HOST + '/memberships';
         var memebershipsFactory = {};
 

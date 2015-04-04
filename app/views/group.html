@@ -1,0 +1,146 @@
+<div class="row">
+	<div class="col-md-4">
+
+    <div class="profile-image-container">
+      <img ng-src="{{getAvatar(userData)}}"
+           alt="Profile image"/>
+    </div>
+		<h2> Name: {{groupCtrl.group.name}}</h2>
+		<h3> Description:{{groupCtrl.group.description}}</h3>
+		<h3> group email: {{!!groupCtrl.group.group_email_enabled}}  </h3>
+     <button class="btn btn-primary" ng-show="groupCtrl.userMembership.is_admin || groupCtrl.isSuperUser "
+     				 ng-click="groupCtrl.openEditGroup()">
+     			Edit Group</button>
+	</div>
+
+	<div class="col-md-8">
+
+		<div class="row" style="margin-bottom: 5px;" ng-show="groupCtrl.userMembership">
+					<div class="col-md-4"> join date: {{groupCtrl.userMembership.join_date}}</div>
+					<div class="col-md-4"> email subscription: {{groupCtrl.userMembership.group_email_subscribed}} </div>
+						<button class="btn btn-primary col-md-4" ng-click="groupCtrl.openEditMembership(groupCtrl.userMembership)">
+									Edit Membership</button>
+
+		</div>
+
+
+		<div class="row" style="margin-bottom: 5px;" ng-show="groupCtrl.userMembership">
+					<div class="col-md-4"> admin:  {{groupCtrl.userMembership.is_admin}}</div>
+					<div class="col-md-4"> position: {{groupCtrl.userMembership.position}}</div>
+					<button class="btn btn-primary col-md-4" 
+									ng-click="groupCtrl.unsubscribe(groupCtrl.userMembership)">
+									Unsubscribe</button>										
+		</div>
+
+		<div class="row" style="margin-bottom: 5px;" ng-hide="groupCtrl.userMembership">
+					<button class="btn btn-primary col-md-offset-4 col-md-4" 
+									ng-click="groupCtrl.subscribe()">
+									subscribe</button>										
+		</div>
+
+		<hr/>
+
+
+		<h3>Users</h3>	
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>name</th>
+					<th ng-show="groupCtrl.userMembership.is_admin || groupCtrl.isSuperUser ">edit</th>
+					<th ng-show="groupCtrl.userMembership.is_admin || groupCtrl.isSuperUser ">unsubscribe</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="user in groupCtrl.users">
+					<td>
+						<a ui-sref='home.profile-show({id: user.user.id})'>
+							{{user.user.first_name}} {{user.user.last_name}}
+						</a>
+					</td>
+					<td ng-show="groupCtrl.userMembership.is_admin || groupCtrl.isSuperUser ">
+						<button  ng-click="groupCtrl.openEditMembership(user.membership)"
+                            class="btn btn-default">edit</button>
+					</td>
+					<td ng-show="groupCtrl.userMembership.is_admin || groupCtrl.isSuperUser ">
+						<button  ng-click="groupCtrl.unsubscribe(user.membership)"
+                            class="btn btn-default">Unsubscribe</button>
+					</td>						
+				</tr>
+			</tbody>
+		</table>
+
+
+	</div>
+
+</div>
+
+
+<script type="text/ng-template" id="editGroup.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Edit Group</h3>
+    </div>
+    <div class="modal-body">
+		<form >
+		  <div class="form-group">
+		    <label for="name">name</label>
+		    <input ng-model="group.name" type="text" 
+		    			 class="form-control" id="name" placeholder="{{group.name}}">
+		  </div>
+		  <div class="form-group">
+		    <label for="description">description</label>
+		    <input ng-model="group.description" type="text"
+		    			class="form-control" id="description" placeholder="{{group.description}}">
+		  </div>
+		  <div class="form-group">
+		    <label for="groupemail">group email</label>
+		    <button type="button" class="btn btn-success" ng-model="group.group_email_enabled" 
+		    			btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" for="groupemail"> 
+		    			enabled
+		    </button>
+		  </div> 
+		</form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="editMembership.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Edit Membership</h3>
+    </div>
+    <div class="modal-body">
+		<form >
+		  <div class="form-group">
+		    <label for="groupemail">group email</label>
+		    <button type="button" class="btn btn-success" ng-model="membership.group_email_subscribed" 
+		    			btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" for="groupemail"> 
+		    			enabled
+		    </button>
+		  </div>
+
+		  <div ng-show="membership.is_admin || isSuperUser ">
+			  <div class="form-group">
+			    <label for="description">position</label>
+			    <input ng-model="membership.position" type="text"
+			    			class="form-control" id="description" placeholder="{{membership.position}}">
+			  </div>
+			  <div class="form-group">
+			    <label for="isadmin">admin</label>
+			    <button type="button" class="btn btn-success" ng-model="membership.is_admin" 
+			    			btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" for="isadmin"> 
+			    			enabled
+			    </button>
+			  </div> 
+		  </div>
+
+
+		</form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>

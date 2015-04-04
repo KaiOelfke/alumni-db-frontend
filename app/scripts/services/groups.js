@@ -12,6 +12,10 @@ angular.module('alumni-db-frontend')
         var urlBase =  API_HOST + '/groups';
         var groupsFactory = {};
 
+        groupsFactory.getUsers = function  (id) {
+            return $http.get(urlBase + '/' + id + '/users');
+            };
+
         groupsFactory.getGroups = function  () {
             return $http.get(urlBase);
             };

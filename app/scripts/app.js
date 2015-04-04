@@ -181,7 +181,21 @@ angular
             return authorizationService.isAuthorized(authorizedRoles);
           }
         }
-      })      
+      })
+      .state('home.group', {
+        url: '/group/:id',
+        templateUrl: 'views/group.html',
+        controller: 'GroupCtrl',
+        controllerAs: 'groupCtrl',        
+        resolve: {
+          authorizedRoles: function (USER_ROLES) {
+            return USER_ROLES.completedProfile;
+          },
+          authz: function  (authorizedRoles,authorizationService) {
+            return authorizationService.isAuthorized(authorizedRoles);
+          }
+        }  
+      })             
       .state('guest', {
         url: '',
         abstract: true,
@@ -285,5 +299,11 @@ angular
     $rootScope.isOwner = function(uid){
       return $rootScope.user.id === uid;
     };
+
+    $rootScope.isSuperUser = function(){
+      /*jshint camelcase: false */
+      console.log(!!$rootScope.user.is_super_user);
+      return !!$rootScope.user.is_super_user;
+    };    
 
 });
