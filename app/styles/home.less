@@ -131,16 +131,17 @@
 
   /* takes remaining space */
   .navbar-rest {
-    width: auto;
     height: 100%;
     float: none;
-    overflow: hidden;
     text-align: right;
 
     .navbar-element {
       display: inline-block;
       font-size: @navbarElementSize;
       color: @green;
+      outline: 0 none;
+      border: 0;
+      background: none;
 
       a {
         color: @green;
@@ -149,6 +150,20 @@
       a:hover {
         color: @green;
       }
+    }
+
+    .navbar-element:hover {
+      text-decoration: underline;
+    }
+
+    .navbar-element:active,
+    .navbar-element:focus,
+    .navbar-element:active:focus,
+    .navbar-element:focus:active {
+      outline: 0 none;
+      border: 0;
+      background: none;
+      box-shadow: none;
     }
 
     .navbar-element + .navbar-element {

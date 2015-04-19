@@ -2,6 +2,7 @@
 
 /**
  * @ngdoc function
+<<<<<<< HEAD
  * @name alumni-db-frontend.controller:groupsCtrl
  * @description
  * # groupsCtrl

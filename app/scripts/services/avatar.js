@@ -49,7 +49,6 @@ angular.module('alumni-db-frontend')
           if (ENV  === 'development') {
             return 'http://localhost:3000/' + user.avatar.url;
           }
-          return user.avatar.url;
         };
 
         return avatarFactory;
