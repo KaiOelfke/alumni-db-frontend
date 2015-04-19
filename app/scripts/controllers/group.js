@@ -9,7 +9,7 @@
  */
 
 function groupCtrl(groupsFactory, membershipsFactory,
-                    usersFactory, $rootScope, $stateParams, $modal) {
+                    usersFactory, avatarFactory, toaster, $rootScope, $stateParams, $modal) {
     /*jshint validthis: true */
     /*jshint camelcase: false */
     var _this = this;
@@ -19,13 +19,14 @@ function groupCtrl(groupsFactory, membershipsFactory,
     _this.isCollapsed = true;
     _this.users = null;
     _this.userMembership = null;
-    _this.group = null;
+    _this.group = {};
+    _this.uploadingStatus = undefined;
 
     groupsFactory
         .getGroup($stateParams.id)
         .success(function (data, error) {
           _this.group = data;
-          console.log(data, error);          
+          console.log(data, error);
         }).error(function (data, error) {
           console.log(data, error);
         });
@@ -35,7 +36,7 @@ function groupCtrl(groupsFactory, membershipsFactory,
         .then(function (users) {
           _this.users = users.data;
           _this.userMembership = _.find(users.data, function  (user) {
-            return user.user.id === current_user.id; 
+            return user.user.id === current_user.id;
           });
           _this.userMembership = _this.userMembership ? _this.userMembership.membership : false;
 
@@ -46,8 +47,24 @@ function groupCtrl(groupsFactory, membershipsFactory,
         });
 
 
+
+    _this.fileSelected = function (files) {
+      avatarFactory.uploadPicture(files, _this.group.id).then(function (data) {
+        _this.group.picture = data.data.picture;
+        _this.uploadingStatus = undefined;
+      }, function () {
+        _this.uploadingStatus = undefined;
+        toaster.error('Something went wrong');
+      }, function (progress) {
+        _this.uploadingStatus = 'uploading: '+ progress + '%';
+      });
+    };
+
+
+    _this.getPicture = avatarFactory.getGroupPicture;
+
     _this.unsubscribe = function (membership) {
-      
+
 
       var membershipId = membership.id;
 
@@ -56,10 +73,6 @@ function groupCtrl(groupsFactory, membershipsFactory,
          if (_this.userMembership.id === membership.id) {
           _this.userMembership = null;
          }
-
-         _this.userMembership = _.filter(_this.userMembership, function (mem) {
-            return mem.membership.id ===  membershipId;
-         });
 
       }).error(function  (data, err) {
          console.log(err, data, 'error');
@@ -72,7 +85,7 @@ function groupCtrl(groupsFactory, membershipsFactory,
       var membership = {group_id: $stateParams.id, user_id: current_user.id,
                         group_email_subscribed: true };
 
- 
+
       membershipsFactory.insertMembership(membership).success(function  (data, err) {
         console.log(err, data, 'success');
         _this.userMembership = data.data;
@@ -139,15 +152,13 @@ function groupCtrl(groupsFactory, membershipsFactory,
       }, function () {
 
       });
-    };    
-
-
+    };
 }
 
 
 angular.module('alumni-db-frontend')
   .controller('GroupCtrl', ['groupsFactory', 'membershipsFactory',
-                            'usersFactory', '$rootScope', '$stateParams', '$modal', groupCtrl]);
+                            'usersFactory', 'avatarFactory', 'toaster', '$rootScope', '$stateParams', '$modal', groupCtrl]);
 
 
 function editGroupCtrl (groupsFactory, $modalInstance, group, $scope) {

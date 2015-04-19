@@ -1,9 +1,15 @@
 <div class="row">
 	<div class="col-md-4">
-
-    <div class="profile-image-container">
-      <img ng-src="{{getAvatar(userData)}}"
-           alt="Profile image"/>
+        <div class="profile-image-container profile-image-update"
+        ng-file-select ng-model="myFiles"
+        ng-file-change="groupCtrl.fileSelected($files, $event)"
+        ng-capture="'camera'"
+        accept="'image/*'"
+        ng-accept="'image/*'">
+        <img ng-src="{{groupCtrl.getPicture(groupCtrl.group)}}" alt="Group image"/>
+    </div>
+    <div class="sidebar-content">
+        <span class="label label-info">{{groupCtrl.uploadingStatus}}</span>
     </div>
 		<h2> Name: {{groupCtrl.group.name}}</h2>
 		<h3> Description:{{groupCtrl.group.description}}</h3>
@@ -27,21 +33,21 @@
 		<div class="row" style="margin-bottom: 5px;" ng-show="groupCtrl.userMembership">
 					<div class="col-md-4"> admin:  {{groupCtrl.userMembership.is_admin}}</div>
 					<div class="col-md-4"> position: {{groupCtrl.userMembership.position}}</div>
-					<button class="btn btn-primary col-md-4" 
+					<button class="btn btn-primary col-md-4"
 									ng-click="groupCtrl.unsubscribe(groupCtrl.userMembership)">
-									Unsubscribe</button>										
+									Unsubscribe</button>
 		</div>
 
 		<div class="row" style="margin-bottom: 5px;" ng-hide="groupCtrl.userMembership">
-					<button class="btn btn-primary col-md-offset-4 col-md-4" 
+					<button class="btn btn-primary col-md-offset-4 col-md-4"
 									ng-click="groupCtrl.subscribe()">
-									subscribe</button>										
+									subscribe</button>
 		</div>
 
 		<hr/>
 
 
-		<h3>Users</h3>	
+		<h3>Users</h3>
 
 		<table class="table">
 			<thead>
@@ -65,7 +71,7 @@
 					<td ng-show="groupCtrl.userMembership.is_admin || groupCtrl.isSuperUser ">
 						<button  ng-click="groupCtrl.unsubscribe(user.membership)"
                             class="btn btn-default">Unsubscribe</button>
-					</td>						
+					</td>
 				</tr>
 			</tbody>
 		</table>
@@ -84,7 +90,7 @@
 		<form >
 		  <div class="form-group">
 		    <label for="name">name</label>
-		    <input ng-model="group.name" type="text" 
+		    <input ng-model="group.name" type="text"
 		    			 class="form-control" id="name" placeholder="{{group.name}}">
 		  </div>
 		  <div class="form-group">
@@ -94,11 +100,11 @@
 		  </div>
 		  <div class="form-group">
 		    <label for="groupemail">group email</label>
-		    <button type="button" class="btn btn-success" ng-model="group.group_email_enabled" 
-		    			btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" for="groupemail"> 
+		    <button type="button" class="btn btn-success" ng-model="group.group_email_enabled"
+		    			btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" for="groupemail">
 		    			enabled
 		    </button>
-		  </div> 
+		  </div>
 		</form>
     </div>
     <div class="modal-footer">
@@ -115,8 +121,8 @@
 		<form >
 		  <div class="form-group">
 		    <label for="groupemail">group email</label>
-		    <button type="button" class="btn btn-success" ng-model="membership.group_email_subscribed" 
-		    			btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" for="groupemail"> 
+		    <button type="button" class="btn btn-success" ng-model="membership.group_email_subscribed"
+		    			btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" for="groupemail">
 		    			enabled
 		    </button>
 		  </div>
@@ -129,11 +135,11 @@
 			  </div>
 			  <div class="form-group">
 			    <label for="isadmin">admin</label>
-			    <button type="button" class="btn btn-success" ng-model="membership.is_admin" 
-			    			btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" for="isadmin"> 
+			    <button type="button" class="btn btn-success" ng-model="membership.is_admin"
+			    			btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" for="isadmin">
 			    			enabled
 			    </button>
-			  </div> 
+			  </div>
 		  </div>
 
 

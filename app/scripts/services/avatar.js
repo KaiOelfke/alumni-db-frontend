@@ -15,13 +15,13 @@ angular.module('alumni-db-frontend')
 
         var avatarFactory = {};
 
-        avatarFactory.uploadAvatar = function uploadAvatar (files) {
+        var uploadImage = function uploadImage (files, path) {
           var deferred = $q.defer();
           if (files && files.length > 0) {
             var file = files[0];
             $upload.upload({
                 method: 'put',
-                url: API_HOST + '/auth',
+                url: path,
                 file: file
             }).progress(function (evt) {
                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
@@ -36,20 +36,36 @@ angular.module('alumni-db-frontend')
             });
           }
           return deferred.promise;
+        };
 
+        var getImage = function getImage (image) {
+
+          if (! (image && image.url) ) {
+            return '';
+          }
+          if (/amazonaws.com/.test(image.url)) {
+            return image.url;
+          }
+          if (ENV  === 'development') {
+            return 'http://localhost:3000/' + image.url;
+          }
+          return image.url;
+        };
+
+        avatarFactory.uploadPicture = function uploadPicture (files, groupid) {
+          return uploadImage(files, API_HOST + '/groups/' + groupid);
+        };
+
+        avatarFactory.uploadAvatar = function uploadAvatar (files) {
+          return uploadImage(files, API_HOST + '/auth');
+        };
+
+        avatarFactory.getGroupPicture = function getGroupPicture (group) {
+          return getImage(group.picture);
         };
 
         avatarFactory.getUserAvatar = function getUserAvatar (user) {
-          if (! (user.avatar && user.avatar.url) ) {
-            return '';
-          }
-          if (/amazonaws.com/.test(user.avatar.url)) {
-            return user.avatar.url;
-          }
-          if (ENV  === 'development') {
-            return 'http://localhost:3000/' + user.avatar.url;
-          }
-          return user.avatar.url;
+          return getImage(user.avatar);
         };
 
         return avatarFactory;
