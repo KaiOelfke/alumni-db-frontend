@@ -26,7 +26,7 @@
 
   echo $branch_name
 
-  if [ $branch_name -eq "development" ]
+  if [ $branch_name = "development" ]
   then 
     create_tmp_branch
     yes | git push heroku-dev `git subtree split --prefix dist tmp-deploy`:master --force
@@ -35,7 +35,7 @@
     # Remove tmp-deploy
     git branch -D tmp-deploy    
 
-  elif [ $branch_name  -eq "master" ]
+  elif [ $branch_name  = "master" ]
   then
     create_tmp_branch
     yes | git push heroku-prod `git subtree split --prefix dist tmp-deploy`:master --force
