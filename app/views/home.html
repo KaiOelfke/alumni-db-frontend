@@ -35,6 +35,19 @@
               <li><a ui-sref="home.profile-password-update">Change password</a></li>
             </ul>
           </div>
+          <div class="btn-group" role="group">
+            <button 
+              type="button" 
+              class="dropdown-toggle navbar-element" 
+              data-toggle="dropdown">
+              Groups
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a ui-sref="home.memberships">My groups</a></li>
+              <li role="presentation" class="divider"></li>
+              <li><a ui-sref="home.groups">All groups</a></li>
+            </ul>
+          </div>
           <a class="navbar-element alumni-logout" ng-click="handleSignOutBtnClick()">Logout</a>
         </div>
       </div>

@@ -19,21 +19,27 @@ function groupsCtrl(groupsFactory, membershipsFactory,
 
     _this.isCollapsed = true;
 
+    /* First get memberships of current user */
     usersFactory
         .getUserMemberships(current_user.id)
         .then(function (memberships) {
           _memberships = memberships.data.data;
 
+          /* Then get all available groups */
           return groupsFactory.getGroups();
         })
         .then( function (groups) {
 
+          /* For each group, check if user is member of it */
           _.each(groups.data, function (group) {
 
+            /* _find iterates over a collection and returns the first 
+             * element the predicate returns true for
+             */
             group.membership = _.find(_memberships,
-                function (membership) {
-                  return membership.group_id === group.id;
-                });
+              function (membership) {
+                return membership.group_id === group.id;
+              });
           });
 
           console.log(groups.data);

@@ -153,22 +153,6 @@ angular
           }
         }
       })
-      .state('home.groups', {
-        url: '/groups',
-        templateUrl: 'views/groups-show.html',
-        controller: 'GroupsCtrl',
-        resolve: {
-          authorizedRoles: function(USER_ROLES) {
-            return [USER_ROLES.completedProfile];
-          },
-          authz: function(authorizedRoles,authorizationService) {
-            return authorizationService.isAuthorized(authorizedRoles);
-          },
-          data: function() {
-            return ['group0','group1','group2'];
-          }
-        }
-      })
       .state('home.registration', {
         url: '/registration',
         templateUrl: 'views/home-registration/main.html',
@@ -202,7 +186,7 @@ angular
         url: '/group/:id',
         templateUrl: 'views/group.html',
         controller: 'GroupCtrl',
-        controllerAs: 'groupCtrl',        
+        controllerAs: 'groupCtrl',
         resolve: {
           authorizedRoles: function (USER_ROLES) {
             return USER_ROLES.completedProfile;
@@ -210,8 +194,22 @@ angular
           authz: function  (authorizedRoles,authorizationService) {
             return authorizationService.isAuthorized(authorizedRoles);
           }
-        }  
-      })             
+        }
+      })
+      .state('home.memberships', {
+        url: '/memberships',
+        templateUrl: 'views/memberships.html',
+        controller: 'GroupsCtrl',
+        controllerAs: 'groupsCtrl',
+        resolve: {
+          authorizedRoles: function (USER_ROLES) {
+            return USER_ROLES.completedProfile;
+          },
+          authz: function  (authorizedRoles,authorizationService) {
+            return authorizationService.isAuthorized(authorizedRoles);
+          }
+        }
+      })
       .state('guest', {
         url: '',
         abstract: true,
