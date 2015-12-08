@@ -176,6 +176,14 @@ module.exports = function (grunt) {
       }
     },
 
+    jscs: {
+      src: '<%= yeoman.app %>/scripts/controllers/braintree.ctrl.js'
+    },
+
+    ngdocs: {
+      all: ['<%= yeoman.app %>/scripts/controllers/braintree.ctrl.js']
+    },
+
     // Empties folders to start fresh
     clean: {
       dist: {
@@ -409,6 +417,8 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-jscs');
+  grunt.loadNpmTasks('grunt-ngdocs');
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -465,4 +475,8 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
+  grunt.registerTask('codestyle', ['jscs']);
+  grunt.registerTask('docs', ['ngdocs']);
+  
 };

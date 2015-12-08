@@ -210,6 +210,19 @@ angular
           }
         }
       })
+      .state('home.braintree', {
+        url: '/braintree',
+        templateUrl: 'views/braintree.html',
+        controller: 'braintreeCtrl',
+        resolve: {
+          authorizedRoles: function (USER_ROLES) {
+            return USER_ROLES.completedProfile;
+          },
+          authz: function  (authorizedRoles,authorizationService) {
+            return authorizationService.isAuthorized(authorizedRoles);
+          }
+        }
+      })
       .state('guest', {
         url: '',
         abstract: true,
