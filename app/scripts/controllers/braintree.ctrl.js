@@ -10,7 +10,7 @@
   */
 angular
   .module('alumni-db-frontend')
-  .controller('braintreeCtrl', ['braintreeService', '$scope', function(braintreeService, $scope) {
+  .controller('braintreeCtrl', ['braintreeService', '$state', '$scope', function(braintreeService, $state, $scope) {
 
     braintreeService
       .getClientToken()
@@ -24,6 +24,7 @@ angular
               .submitPayment(paymentData)
               .then(function() {
                 console.log('Submitted payment successfully');
+                $state.go('home.premium');
               });
           }
         });

@@ -223,6 +223,20 @@ angular
           }
         }
       })
+      .state('home.premium', {
+        url: '/premium',
+        templateUrl: 'views/premium.html',
+        resolve: {
+          authorizedRoles: function (USER_ROLES) {
+            return [USER_ROLES.registered,
+                    USER_ROLES.confirmedEmail,
+                    USER_ROLES.completedProfile]; // TODO USER_ROLES.isPremium
+          },
+          authz: function  (authorizedRoles,authorizationService) {
+            return authorizationService.isAuthorized(authorizedRoles);
+          }
+        }
+      })
       .state('guest', {
         url: '',
         abstract: true,
