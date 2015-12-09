@@ -1,37 +1,34 @@
-(function() {
-  'use strict';
+'use strict';
 
-  var app = angular.module('alumni-db-frontend');
+/**
+  * @ngdoc controller
+  * @name braintreeCtrl
+  * @requires $scope
+  *
+  * @description
+  * TODO
+  */
+angular
+  .module('alumni-db-frontend')
+  .controller('braintreeCtrl', ['braintreeService', '$scope', function(braintreeService, $scope) {
 
-  /**
-    * @ngdoc controller
-    * @name braintreeCtrl
-    * @requires $scope
-    *
-    * @description
-    * TODO
-    */
-  app.controller('braintreeCtrl', ['$scope', function($scope) {
+    braintreeService
+      .getClientToken()
+      .then(function(clientToken) {
 
-    /**
-      * @ngdoc function
-      * @name braintreeCtrl#someFunction
-      * @methodOf braintreeCtrl
-      *
-      * @description
-      * TODO
-      *
-      * @param {Object} param1
-      * TODO
-      *
-      * @returns {Object}
-      * TODO
-      */
-    $scope.someFunction = function(param1) {
-      console.log('someFunction called', param1);
-      return null;
-    };
+        // Set up braintree dropin
+        braintree.setup(clientToken, 'dropin', {
+          container: 'payment-form',
+          onPaymentMethodReceived: function(paymentData) {
+            braintreeService
+              .submitPayment(paymentData)
+              .then(function() {
+                console.log('Submitted payment successfully');
+              });
+          }
+        });
+      });
+
+    $scope.title = 'Become a premium member!';
 
   }]);
-
-})();

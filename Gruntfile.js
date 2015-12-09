@@ -177,7 +177,7 @@ module.exports = function (grunt) {
     },
 
     jscs: {
-      src: '<%= yeoman.app %>/scripts/controllers/braintree.ctrl.js'
+      src: ['<%= yeoman.app %>/scripts/controllers/braintree.ctrl.js', '<%= yeoman.app %>/scripts/services/braintree.svs.js']
     },
 
     ngdocs: {
