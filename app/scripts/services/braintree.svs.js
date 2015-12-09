@@ -1,17 +1,16 @@
-(function() {
-  'use strict';
+'use strict';
 
-  var app = angular.module('alumni-db-frontend');
-
-  /**
-    * @ngdoc service
-    * @name braintreeService
-    * @requires $q
-    *
-    * @description
-    * TODO
-    */
-  app.service('braintreeService', ['$q', function($q) {
+/**
+  * @ngdoc service
+  * @name braintreeService
+  * @requires $q
+  *
+  * @description
+  * TODO
+  */
+angular
+  .module('alumni-db-frontend')
+  .service('braintreeService', ['$q', function($q) {
 
     var braintreeService = {};
 
@@ -57,5 +56,3 @@
     return braintreeService;
 
   }]);
-
-})();
