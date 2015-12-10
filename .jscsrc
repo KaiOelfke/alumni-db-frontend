@@ -42,7 +42,7 @@
   "requireCommaBeforeLineBreak": true,
   "requireSpaceBeforeBinaryOperators": true,
   "requireSpaceAfterBinaryOperators": true,
-  "requireCamelCaseOrUpperCaseIdentifiers": true,
+  "requireCamelCaseOrUpperCaseIdentifiers": false,
   "requireLineFeedAtFileEnd": true,
   "requireCapitalizedConstructors": true,
   "requireDotNotation": true,
@@ -72,5 +72,12 @@
   "safeContextKeyword": "_this",
   "validateLineBreaks": "LF",
   "validateQuoteMarks": { "mark": "'", "escape": true, "ignoreJSX": true },
+  "validateIndentation": 2,
+  // Custom rules
+  "requirePaddingNewLinesAfterUseStrict": true,
+  "requireLineBreakAfterVariableAssignment": true,
+  "requirePaddingNewLinesInObjects": true,
+  "requireObjectKeysOnNewLine": true,
+  "requireSpaceBeforeObjectValues": true,
   "validateIndentation": 2
 }

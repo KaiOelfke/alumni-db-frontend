@@ -10,10 +10,12 @@ angular.module('alumni-db-frontend').directive('dateFormat', function() {
           ctrl.$setValidity('dateFormat', true);
           return undefined;
         }
+
         var tmp = moment(viewValue);
         if (tmp.isValid()) {
           viewValue = tmp.format('DD.MM.YYYY');
         }
+
         if (moment(viewValue, 'DD.MM.YYYY', true).isValid()) {
           // it is valid
           ctrl.$setValidity('dateFormat', true);

@@ -1,4 +1,3 @@
-(function(){
 'use strict';
 
 /**
@@ -25,8 +24,9 @@ app.controller('ResetCtrl', [
     $scope.handleResetBtnClick = function(passwordResetData) {
       $scope.$broadcast('show-errors-messages-block');
       if ($scope.passwordResetForm.$invalid) {
-        return ;
+        return;
       }
+
       $auth.requestPasswordReset(passwordResetData)
         .then(function() {
           toaster.pop('success', 'Please check you email inbox for further instructions.');
@@ -38,5 +38,3 @@ app.controller('ResetCtrl', [
     };
   }
 ]);
-
-})();

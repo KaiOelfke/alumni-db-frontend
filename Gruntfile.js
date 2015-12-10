@@ -35,7 +35,7 @@ module.exports = function (grunt) {
       },
       js: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:jshint:all'],
+        tasks: ['newer:jshint:all', 'jscs'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
@@ -175,9 +175,8 @@ module.exports = function (grunt) {
         src: ['test/spec/{,*/}*.js']
       }
     },
-
     jscs: {
-      src: ['<%= yeoman.app %>/scripts/controllers/braintree.ctrl.js', '<%= yeoman.app %>/scripts/services/braintree.svs.js']
+      src: ['<%= yeoman.app %>/scripts/*.js', '<%= yeoman.app %>/scripts/**/*.js']
     },
 
     ngdocs: {

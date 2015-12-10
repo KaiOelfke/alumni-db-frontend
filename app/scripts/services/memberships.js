@@ -8,28 +8,29 @@
  * Factory of the alumni-db-frontend
  */
 angular.module('alumni-db-frontend')
-  .factory('membershipsFactory', ['$http','API_HOST', function ($http, API_HOST) {
-        var urlBase =  API_HOST + '/memberships';
-        var memebershipsFactory = {};
+  .factory('membershipsFactory', ['$http', 'API_HOST', function($http, API_HOST) {
+    var urlBase = API_HOST + '/memberships';
+    var memebershipsFactory = {};
 
+    memebershipsFactory.insertMembership = function(membership) {
+      return $http.post(urlBase, {
+        membership: membership
+      });
+    };
 
-        memebershipsFactory.insertMembership = function  (membership) {
-            return $http.post(urlBase, {membership: membership});
-            };
+    memebershipsFactory.destoryMembership = function(id) {
+      return $http.delete(urlBase + '/' + id);
+    };
 
-        memebershipsFactory.destoryMembership = function(id) {
-            return $http.delete(urlBase + '/' + id);
-            };            
+    memebershipsFactory.editMembership = function(id, membership) {
+      return $http.put(urlBase + '/' + id, {
+        membership: membership
+      });
+    };
 
-        memebershipsFactory.editMembership = function(id, membership) {
-            return $http.put(urlBase + '/' + id, {membership: membership});
-            };
+    memebershipsFactory.getMembership = function(id) {
+      return $http.get(urlBase + '/' + id);
+    };
 
-        memebershipsFactory.getMembership = function(id) {
-            return $http.get(urlBase + '/' + id);
-            };
-
-        return memebershipsFactory;
+    return memebershipsFactory;
   }]);
-
-

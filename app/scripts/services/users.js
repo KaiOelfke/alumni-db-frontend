@@ -8,28 +8,27 @@
  * Controller of the alumni-db-frontend
  */
 angular.module('alumni-db-frontend')
-  .factory('usersFactory', ['$http','API_HOST', function ($http, API_HOST) {
-        var urlBase =  API_HOST + '/users';
-        var usersFactory = {};
+  .factory('usersFactory', ['$http', 'API_HOST', function($http, API_HOST) {
+    var urlBase = API_HOST + '/users';
+    var usersFactory = {};
 
-        usersFactory.getUsers = function  () {
-            return $http.get(urlBase);
-            };
+    usersFactory.getUsers = function() {
+      return $http.get(urlBase);
+    };
 
-        usersFactory.insertUser = function  (user) {
-            return $http.post(urlBase, {user: user});
-            };
+    usersFactory.insertUser = function(user) {
+      return $http.post(urlBase, {
+        user: user
+      });
+    };
 
-        usersFactory.getUser = function(id) {
-            return $http.get(urlBase + '/' + id);
-            };
+    usersFactory.getUser = function(id) {
+      return $http.get(urlBase + '/' + id);
+    };
 
-        usersFactory.getUserMemberships = function(id) {
-            return $http.get(urlBase + '/' + id + '/memberships');
-            };
+    usersFactory.getUserMemberships = function(id) {
+      return $http.get(urlBase + '/' + id + '/memberships');
+    };
 
-
-        return usersFactory;
+    return usersFactory;
   }]);
-
-
