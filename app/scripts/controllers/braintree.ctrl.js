@@ -15,7 +15,7 @@ angular
     braintreeService
       .getClientToken()
       .then(function(clientToken) {
-
+        console.log(clientToken);
         // Set up braintree dropin
         braintree.setup(clientToken, 'dropin', {
           container: 'payment-form',

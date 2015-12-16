@@ -12,9 +12,9 @@ angular.module('alumni-db-frontend')
     var urlBase = API_HOST + '/subscriptions';
     var subscriptionsFactory = {};
 
-    subscriptionsFactory.subscribe = function(membership) {
+    subscriptionsFactory.subscribe = function(subscription) {
       return $http.post(urlBase, {
-        membership: membership
+        subscription: subscription
       });
     };
 
@@ -22,9 +22,9 @@ angular.module('alumni-db-frontend')
       return $http.delete(urlBase + '/' + id);
     };
 
-    subscriptionsFactory.editSubscription = function(id, membership) {
+    subscriptionsFactory.editSubscription = function(id, subscription) {
       return $http.put(urlBase + '/' + id, {
-        membership: membership
+        subscription: subscription
       });
     };
 
