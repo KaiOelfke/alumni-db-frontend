@@ -176,7 +176,7 @@ module.exports = function (grunt) {
       }
     },
     jscs: {
-      src: ['<%= yeoman.app %>/scripts/*.js', '<%= yeoman.app %>/scripts/**/*.js']
+      src: ['<%= yeoman.app %>/scripts/*.js', '<%= yeoman.app %>/scripts/**/*.js', 'test/**/*.js']
     },
 
     ngdocs: {

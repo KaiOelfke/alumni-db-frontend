@@ -24,27 +24,40 @@ describe('Controller: SigninCtrl', function() {
 
   // Ignore view requests and transition to 'guest.signin' state
   beforeEach(function() {
+
     // First url is always '' which is why the initial state is 'home'.
     $httpBackend.whenGET('views/home.html').respond(200, '');
+
     // Since the user is not allowed to go to 'home', the next url will
     // be '/' (not sure why) which resolves to the state 'home.start-page'.
     $httpBackend.whenGET('views/users.html').respond(200, '');
+
     // That is of corse also not allowed. We trigger a state transition to
     // 'guest.signin' which is why we land in 'guest' and 'splash.html'
     // is requested.
     $httpBackend.whenGET('views/splash.html').respond(200, '');
+
     // After that, the next state is 'guest.signin' where 'splash-signin.html'
     // is requested. We should check if this is the order of requests we expect.
     $httpBackend.whenGET('views/splash-signin.html').respond(200, '');
+
     // Flush all possible view requests before each test
     $httpBackend.flush();
+
     // Transition to signin state
     $state.go('guest.signin');
+
+    // If a user who has not completed profile signs in, we redirect him
+    // to the state 'home.registration'.
+    $httpBackend.whenGET('views/home-registration/main.html').respond(200, '');
   });
 
+  // Create new scope and compile minimal form element
   beforeEach(function() {
     scope = $rootScope.$new();
-    ctrl = $controller('SigninCtrl', {$scope: scope});
+    ctrl = $controller('SigninCtrl', {
+      $scope: scope
+    });
     form = '<form name="signinForm">' +
       '<input type="email" name="email" ng-model="signinData.email" required/>' +
       '<input type="password" name="password" ng-model="signinData.password" required/>' +
@@ -129,7 +142,7 @@ describe('Controller: SigninCtrl', function() {
     scope.handleSignInBtnClick(scope.signinData);
   });
 
-  it('should post valid non-user data', function() {
+  it('should handle post with valid data of non-user correctly', function() {
     form.email.$setViewValue('bad.hacker@gmail.com');
     form.password.$setViewValue('12345678');
     expect(form.$valid).toBeTruthy();
@@ -138,9 +151,67 @@ describe('Controller: SigninCtrl', function() {
       expect(JSON.parse(data)).toEqual(scope.signinData);
       return [401, '{}', '{}']; // user not found
     });
+
     $httpBackend.flush();
-    // Make sure state has not changed
     expect($state.current.name).toEqual('guest.signin');
+  });
+
+  it('should handle post with valid data of user with completed profile correctly', function() {
+    form.email.$setViewValue('max.mustermann@gmail.com');
+    form.password.$setViewValue('12345678');
+    expect(form.$valid).toBeTruthy();
+    scope.handleSignInBtnClick(scope.signinData);
+    $httpBackend.expectPOST(backendBase + '/auth/sign_in').respond(function(method, url, data) {
+      expect(JSON.parse(data)).toEqual(scope.signinData);
+      var shortUserModel = '{' +
+        '"data": {' +
+          '"id": 1,' +
+          '"email": "max.mustermann@gmail.com",' +
+          '"first_name": "Max",' +
+          '"last_name": "Mustermann",' +
+          '"provider": "email",' +
+          '"uid": "max.mustermann@gmail.com",' +
+          '"registered": true,' +
+          '"confirmed_email": null,' +
+          '"completed_profile": true,' +
+          '"is_super_user": false,' +
+          '"customer_id": ""' +
+        '}' +
+      '}';
+      return [200, shortUserModel, '{}']; // user not found
+    });
+
+    $httpBackend.flush();
+    expect($state.current.name).toEqual('home.start-page');
+  });
+
+  it('should handle post with valid data of user without completed profile correctly', function() {
+    form.email.$setViewValue('max.mustermann@gmail.com');
+    form.password.$setViewValue('12345678');
+    expect(form.$valid).toBeTruthy();
+    scope.handleSignInBtnClick(scope.signinData);
+    $httpBackend.expectPOST(backendBase + '/auth/sign_in').respond(function(method, url, data) {
+      expect(JSON.parse(data)).toEqual(scope.signinData);
+      var shortUserModel = '{' +
+        '"data": {' +
+          '"id": 1,' +
+          '"email": "max.mustermann@gmail.com",' +
+          '"first_name": "Max",' +
+          '"last_name": "Mustermann",' +
+          '"provider": "email",' +
+          '"uid": "max.mustermann@gmail.com",' +
+          '"registered": true,' +
+          '"confirmed_email": null,' +
+          '"completed_profile": false,' +
+          '"is_super_user": false,' +
+          '"customer_id": ""' +
+        '}' +
+      '}';
+      return [200, shortUserModel, '{}']; // user not found
+    });
+
+    $httpBackend.flush();
+    expect($state.current.name).toEqual('home.registration');
   });
 
 });
