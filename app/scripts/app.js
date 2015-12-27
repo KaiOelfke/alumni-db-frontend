@@ -355,8 +355,6 @@ angular
           $state.transitionTo('home.start-page');
         }
       }
-
-      console.log('$stateChangeError - fired when an error occurs during transition.', error);
     });
 
     $rootScope.isOwner = function(uid) {

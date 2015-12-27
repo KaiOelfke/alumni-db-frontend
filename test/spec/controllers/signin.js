@@ -2,6 +2,7 @@
 
 describe('Controller: SigninCtrl', function() {
 
+  var $state;
   var $httpBackend;
   var $controller;
   var $rootScope;
@@ -9,14 +10,39 @@ describe('Controller: SigninCtrl', function() {
   var scope;
   var ctrl;
   var form;
+  var backendBase = 'http://localhost:3000';
 
   beforeEach(module('alumni-db-frontend'));
 
   beforeEach(inject(function($injector) {
+    $state = $injector.get('$state');
     $httpBackend = $injector.get('$httpBackend');
     $controller = $injector.get('$controller');
     $rootScope = $injector.get('$rootScope');
     $compile = $injector.get('$compile');
+  }));
+
+  // Ignore view requests and transition to 'guest.signin' state
+  beforeEach(function() {
+    // First url is always '' which is why the initial state is 'home'.
+    $httpBackend.whenGET('views/home.html').respond(200, '');
+    // Since the user is not allowed to go to 'home', the next url will
+    // be '/' (not sure why) which resolves to the state 'home.start-page'.
+    $httpBackend.whenGET('views/users.html').respond(200, '');
+    // That is of corse also not allowed. We trigger a state transition to
+    // 'guest.signin' which is why we land in 'guest' and 'splash.html'
+    // is requested.
+    $httpBackend.whenGET('views/splash.html').respond(200, '');
+    // After that, the next state is 'guest.signin' where 'splash-signin.html'
+    // is requested. We should check if this is the order of requests we expect.
+    $httpBackend.whenGET('views/splash-signin.html').respond(200, '');
+    // Flush all possible view requests before each test
+    $httpBackend.flush();
+    // Transition to signin state
+    $state.go('guest.signin');
+  });
+
+  beforeEach(function() {
     scope = $rootScope.$new();
     ctrl = $controller('SigninCtrl', {$scope: scope});
     form = '<form name="signinForm">' +
@@ -25,12 +51,11 @@ describe('Controller: SigninCtrl', function() {
       '</form>';
     $compile(form)(scope);
     form = scope.signinForm;
-  }));
+  });
 
-  beforeEach(function() {
-    $httpBackend.when('POST', '/auth/sign_in').respond(function(method, url, data, headers, params) {
-      console.log('responding with', method, url, data, headers, params);
-    });
+  afterEach(function() {
+    $httpBackend.verifyNoOutstandingExpectation();
+    $httpBackend.verifyNoOutstandingRequest();
   });
 
   // The controller should provide an empty object in which email and password
@@ -56,7 +81,6 @@ describe('Controller: SigninCtrl', function() {
   });
 
   it('should have email validity checks', function() {
-    expect(form.email.$pristine).toBeTruthy();
     form.email.$setViewValue('');
     expect(form.email.$pristine).toBeFalsy();
     expect(form.email.$valid).toBeFalsy();
@@ -74,27 +98,49 @@ describe('Controller: SigninCtrl', function() {
 
   // We currently don't check if the password has a minimum length
   it('should have password validity checks', function() {
-    expect(form.password.$pristine).toBeTruthy();
     form.password.$setViewValue('');
     expect(form.password.$pristine).toBeFalsy();
     expect(form.password.$valid).toBeFalsy();
-    form.password.$setViewValue('abc');
+    form.password.$setViewValue('12345678');
     expect(form.password.$valid).toBeTruthy();
   });
 
-  it('should check validity of required input fields', function() {
-    form.$setPristine();
+  it('should have form validity checks', function() {
     // Empty forms are valid by default. We should make sure the
     // user should not be able to submit empty forms by disabling
-    // the submit button for example-
+    // the submit button for example.
     expect(form.$valid).toBeTruthy();
     form.email.$setViewValue('');
     form.password.$setViewValue('');
     expect(form.$valid).toBeFalsy();
     form.email.$setViewValue('max.mustermann@gmail.com');
     expect(form.$valid).toBeFalsy();
-    form.password.$setViewValue('abc');
+    form.password.$setViewValue('12345678');
     expect(form.$valid).toBeTruthy();
+  });
+
+  it('should not post invalid data', function() {
+    form.email.$setViewValue('');
+    form.password.$setViewValue('');
+    expect(form.$valid).toBeFalsy();
+    scope.handleSignInBtnClick(scope.signinData);
+    form.email.$setViewValue('bad.hacker@gmail.com');
+    expect(form.$valid).toBeFalsy();
+    scope.handleSignInBtnClick(scope.signinData);
+  });
+
+  it('should post valid non-user data', function() {
+    form.email.$setViewValue('bad.hacker@gmail.com');
+    form.password.$setViewValue('12345678');
+    expect(form.$valid).toBeTruthy();
+    scope.handleSignInBtnClick(scope.signinData);
+    $httpBackend.expectPOST(backendBase + '/auth/sign_in').respond(function(method, url, data) {
+      expect(JSON.parse(data)).toEqual(scope.signinData);
+      return [401, '{}', '{}']; // user not found
+    });
+    $httpBackend.flush();
+    // Make sure state has not changed
+    expect($state.current.name).toEqual('guest.signin');
   });
 
 });
