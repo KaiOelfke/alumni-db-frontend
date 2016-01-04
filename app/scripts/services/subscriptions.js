@@ -28,8 +28,9 @@ angular.module('alumni-db-frontend')
       });
     };
 
-    subscriptionsFactory.getSubscription = function(id) {
-      return $http.get(urlBase + '/' + id);
+
+    subscriptionsFactory.getSubscription = function(userId) {
+      return $http.get(urlBase + '/' + userId);
     };
 
     return subscriptionsFactory;

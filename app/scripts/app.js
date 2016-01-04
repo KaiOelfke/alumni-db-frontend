@@ -20,6 +20,8 @@ angular
     'ui.bootstrap'
   ])
   .constant('USER_ROLES', {
+    superUser: 'superUser',
+    premium: 'premium',
     registered: 'registered',
     confirmedEmail: 'confirmedEmail',
     completedProfile: 'completedProfile',
@@ -56,6 +58,16 @@ angular
       if (response.completed_profile)
       {
         statuses.push('completedProfile');
+      }
+
+      if (response.is_super_user)
+      {
+        statuses.push('superUser');
+      }
+
+      if (response.is_premium)
+      {
+        statuses.push('premium');
       }
 
       response.statuses = statuses;
@@ -243,10 +255,7 @@ angular
         templateUrl: 'views/premium.html',
         resolve: {
           authorizedRoles: function(USER_ROLES) {
-            return [USER_ROLES.registered,
-              USER_ROLES.confirmedEmail,
-              USER_ROLES.completedProfile
-            ]; // TODO USER_ROLES.isPremium
+            return USER_ROLES.premium;
           },
 
           authz: function(authorizedRoles, authorizationService) {

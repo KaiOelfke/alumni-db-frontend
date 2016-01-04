@@ -10,7 +10,8 @@
   */
 angular
   .module('alumni-db-frontend')
-  .controller('braintreeCtrl', ['braintreeService', '$state', '$scope', function(braintreeService, $state, $scope) {
+  .controller('braintreeCtrl', ['braintreeService', '$state',  '$rootScope', '$scope',
+   function(braintreeService, $state, $rootScope, $scope) {
 
     braintreeService
       .getClientToken()
@@ -19,10 +20,16 @@ angular
         braintree.setup(clientToken, 'dropin', {
           container: 'payment-form',
           onPaymentMethodReceived: function(paymentData) {
+            paymentData.userId = $rootScope.user.id;
             braintreeService
               .submitPayment(paymentData)
-              .then(function() {
+              .then(function(response) {
                 console.log('Submitted payment successfully');
+                // should be wrapped with somewhere else
+                var updatedUser = response.data.data;
+                angular.extend($rootScope.user, updatedUser);
+                $rootScope.user.statuses.push('premium');
+
                 $state.go('home.premium');
               });
           }

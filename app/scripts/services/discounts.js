@@ -32,5 +32,16 @@ angular.module('alumni-db-frontend')
       return $http.get(urlBase + '/' + id);
     };
 
+    discountsFactory.checkCode = function(id, planId, codeId) {
+      /*jshint camelcase: false */
+      return $http.get(urlBase + '/check', {
+        params: {
+            plan_id: planId,
+            code_id: codeId
+        }
+     })
+    };
+
+
     return discountsFactory;
   }]);

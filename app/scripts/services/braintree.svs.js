@@ -56,8 +56,11 @@ angular
       * TODO
       */
     braintreeService.submitPayment = function(paymentData) {
+      /*jshint camelcase: false */
+
       return subscriptionsFactory.subscribe({
-        payment_method_nonce: paymentData.nonce
+        payment_method_nonce: paymentData.nonce,
+        user_id: paymentData.userId
       });
     };
 
