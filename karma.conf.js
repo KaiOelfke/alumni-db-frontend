@@ -27,11 +27,13 @@ module.exports = function(config) {
     ],
     exclude: [],
     port: 9090,
+
     // Browsers to test in
     // possible values: PhantomJS, Chrome, Safari
     browsers: [
       'PhantomJS'
     ],
+
     // Depending on in which browser the tests should be made
     // a different launcher should be loaded
     plugins: [
@@ -41,6 +43,7 @@ module.exports = function(config) {
     ],
     singleRun: false,
     colors: true,
+
     // level of logging
     // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
     logLevel: config.LOG_INFO,
