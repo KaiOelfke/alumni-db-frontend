@@ -35,7 +35,7 @@ module.exports = function (grunt) {
       },
       js: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:jshint:all'],
+        tasks: ['newer:jshint:all', 'newer:jscs'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
@@ -174,6 +174,13 @@ module.exports = function (grunt) {
         },
         src: ['test/spec/{,*/}*.js']
       }
+    },
+    jscs: {
+      src: ['<%= yeoman.app %>/scripts/*.js', '<%= yeoman.app %>/scripts/**/*.js']
+    },
+
+    ngdocs: {
+      all: ['<%= yeoman.app %>/scripts/controllers/braintree.ctrl.js']
     },
 
     // Empties folders to start fresh
@@ -409,6 +416,8 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-jscs');
+  grunt.loadNpmTasks('grunt-ngdocs');
 
   grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
@@ -465,4 +474,8 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
+  grunt.registerTask('codestyle', ['jscs']);
+  grunt.registerTask('docs', ['ngdocs']);
+  
 };

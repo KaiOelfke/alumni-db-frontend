@@ -28,16 +28,20 @@ app.controller('SigninCtrl', [
       $scope.$broadcast('show-errors-messages-block');
 
       if ($scope.signinForm.$invalid) {
-        return ;
+        return;
       }
 
       $auth.submitLogin($scope.signinData)
         .then(function(resp) {
           var user = resp;
           if (user.statuses.indexOf(USER_ROLES.completedProfile) !== -1) {
-            $state.transitionTo('home.start-page', {location:'replace'});
-          }else {
-             $state.transitionTo('home.registration', {location:'replace'});
+            $state.transitionTo('home.start-page', {
+              location: 'replace'
+            });
+          } else {
+            $state.transitionTo('home.registration', {
+              location: 'replace'
+            });
           }
         })
         .catch(function() {

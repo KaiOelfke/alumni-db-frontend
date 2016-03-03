@@ -10,7 +10,6 @@
 
 var app = angular.module('alumni-db-frontend');
 
-
 app.controller('ProfileCtrl', [
   'usersFactory',
   'countriesFactory',
@@ -22,12 +21,13 @@ app.controller('ProfileCtrl', [
   'avatarFactory',
   '$rootScope',
   function(usersFactory, countriesFactory, programTypesFactory,
-           genderFactory, $state, $scope, data, avatarFactory, $rootScope) {
-    var _user  = data.data;
+    genderFactory, $state, $scope, data, avatarFactory, $rootScope) {
+    var _user = data.data;
     /*jshint camelcase: false */
-    if (moment(_user.date_of_birth,'YYYY-MM-DD').isValid()) {
-      _user.date_of_birth = moment(_user.date_of_birth,'YYYY-MM-DD').toDate();
+    if (moment(_user.date_of_birth, 'YYYY-MM-DD').isValid()) {
+      _user.date_of_birth = moment(_user.date_of_birth, 'YYYY-MM-DD').toDate();
     }
+
     _user.country = countriesFactory.getFromAllCountry(_user.country);
     _user.program_type = programTypesFactory.getTypeName(_user.program_type);
     _user.country_of_participation = countriesFactory.getFromAllCountry(_user.country_of_participation);
@@ -58,7 +58,7 @@ app.controller('ProfileUpdateCtrl', [
   '$scope',
   '$rootScope',
   function(countriesFactory, yearsFactory, validationMessagesFactory, $auth,
-           $state, toaster, avatarFactory, $scope, $rootScope) {
+    $state, toaster, avatarFactory, $scope, $rootScope) {
     var _user = $rootScope.user;
     $scope.formValidationMessages = validationMessagesFactory.getValidationMsg;
     $scope.farmValidationTitle = validationMessagesFactory.getValidationTitle;
@@ -76,30 +76,29 @@ app.controller('ProfileUpdateCtrl', [
     $scope.getAllCountries = countriesFactory.getAllCountries();
     $scope.uploadingStatus = undefined;
 
-    $scope.fileSelected = function (files) {
-      avatarFactory.uploadAvatar(files).then(function (data) {
+    $scope.fileSelected = function(files) {
+      avatarFactory.uploadAvatar(files).then(function(data) {
         $scope.tempUserData.avatar = data.data.avatar;
         $scope.uploadingStatus = undefined;
-      }, function () {
+      }, function() {
+
         $scope.uploadingStatus = undefined;
         toaster.error('Something went wrong');
-      }, function (progress) {
-        $scope.uploadingStatus = 'uploading: '+ progress + '%';
+      }, function(progress) {
+
+        $scope.uploadingStatus = 'uploading: ' + progress + '%';
       });
     };
 
-
     $scope.getAvatar = avatarFactory.getUserAvatar;
 
-
-
     /*jshint camelcase: false */
-    if (moment($scope.tempUserData.date_of_birth,'YYYY-MM-DD').isValid()) {
-      $scope.tempUserData.date_of_birth = moment($scope.tempUserData.date_of_birth,'YYYY-MM-DD').toDate();
+    if (moment($scope.tempUserData.date_of_birth, 'YYYY-MM-DD').isValid()) {
+      $scope.tempUserData.date_of_birth = moment($scope.tempUserData.date_of_birth, 'YYYY-MM-DD').toDate();
     }
 
-    if (moment($scope.tempUserData.member_since,'YYYY-MM-DD').isValid()) {
-      $scope.tempUserData.member_since = moment($scope.tempUserData.member_since,'YYYY-MM-DD').toDate();
+    if (moment($scope.tempUserData.member_since, 'YYYY-MM-DD').isValid()) {
+      $scope.tempUserData.member_since = moment($scope.tempUserData.member_since, 'YYYY-MM-DD').toDate();
     }
 
     $scope.submitUpdatedUserData = function(tempUserData) {
@@ -114,12 +113,14 @@ app.controller('ProfileUpdateCtrl', [
 
       if (tempUserData.member_since) {
         offset = tempUserData.member_since.getTimezoneOffset();
-      tempUserData.member_since = new Date(tempUserData.member_since.getTime() - (offset * (60 * 1000)));
-    }
+        tempUserData.member_since = new Date(tempUserData.member_since.getTime() - (offset * (60 * 1000)));
+      }
 
       $scope.userData = tempUserData;
       $auth.updateAccount(tempUserData).then(function() {
-            $state.go('home.profile-show', {id: _user.id});
+          $state.go('home.profile-show', {
+            id: _user.id
+          });
         })
         .catch(function() {
           toaster.pop('error', 'Something went wrong.');
@@ -127,10 +128,10 @@ app.controller('ProfileUpdateCtrl', [
     };
 
     var max = new Date();
-    max.setDate(max.getDate - 365*10);
+    max.setDate(max.getDate - 365 * 10);
     $scope.maxDate = max;
 
-    $scope.open = function($event,opened) {
+    $scope.open = function($event, opened) {
       $event.preventDefault();
       $event.stopPropagation();
 
@@ -147,6 +148,7 @@ app.controller('ProfileUpdateCtrl', [
       if ($scope.updatePasswordForm.$invalid) {
         return;
       }
+
       $auth.updatePassword(passwordData)
         .then(function() {
           toaster.pop('success', 'Password successfully changed.');

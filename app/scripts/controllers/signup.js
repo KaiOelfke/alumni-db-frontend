@@ -1,4 +1,3 @@
-(function(){
 'use strict';
 
 /**
@@ -26,8 +25,9 @@ app.controller('SignupCtrl', [
       $scope.$broadcast('show-errors-messages-block');
 
       if ($scope.signupForm.$invalid) {
-        return ;
+        return;
       }
+
       $auth.submitRegistration(signupData)
         .then(function() {
           $state.go('home.registration');
@@ -38,5 +38,3 @@ app.controller('SignupCtrl', [
     };
   }
 ]);
-
-})();

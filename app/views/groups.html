@@ -1,0 +1,105 @@
+<h3 class="tableViewHeader">Groups</h3>
+
+<div class="table-responsive">
+  <table class="tableView">
+    <tbody>
+      <tr 
+        class="table tableViewRow" 
+        ng-repeat="group in groupsCtrl.groups">
+        <!-- Element image -->
+        <td class="tableImageContainer">
+        </td>
+        <!-- Element description -->
+        <td class="tableDescription">
+          <p class="elementTitle">
+            <a ui-sref='home.group({id: group.id})'>{{ group.name }}</a>
+          </p>
+          <p class="elementDescription">
+            <span class="iconBox">
+              <i class="fa fa-info-circle group-icon"></i>
+            </span>
+            {{ group.description }}
+          </p>
+          <p class="groupDetail">
+            <span class="iconBox">
+              <i class="fa fa-users group-icon"></i>
+            </span>
+            3.14 Members
+          </p>
+          <p class="groupDetail">
+            <span class="iconBox">
+              <i class="fa fa-map-marker group-icon"></i>
+            </span>
+            Unicornland
+          </p>
+        </td>
+        <!-- Element buttons -->
+        <td class="tableViewButtons">
+          <button 
+            ng-click="groupsCtrl.subscribe(group)" 
+            ng-disabled="{{!!group.membership}}" 
+            class="btn btn-default btn-join">
+            Join
+          </button>
+          <button 
+            ng-click="groupsCtrl.unsubscribe(group.membership)" 
+            ng-disabled="{{!group.membership}}" 
+            class="btn btn-default btn-leave">
+            Leave
+          </button>
+          <!-- TODO Change this button to show only for superusers -->
+          <button 
+            ng-show="true" 
+            ng-click="groupsCtrl.delete(group)" 
+            class="btn btn-default btn-delete">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Add new group button for super users -->
+<button 
+  class="btn btn-default btn-add" 
+  ng-click="groupsCtrl.isCollapsed = !groupsCtrl.isCollapsed">
+  <i ng-show="groupsCtrl.isCollapsed"
+    class="fa fa-plus"></i>
+  <i ng-show="!groupsCtrl.isCollapsed"
+    class="fa fa-minus"></i>
+</button>
+<!-- New group form -->
+<div collapse="groupsCtrl.isCollapsed">
+  <form 
+    name="groupForm" 
+    ng-submit="groupsCtrl.addGroup(group)">
+    <div class="form-group">
+      <input 
+        ng-model="group.name" 
+        type="text" 
+        class="form-control" 
+        id="Name" 
+        placeholder="Name">
+    </div>
+    <div class="form-group">
+      <!-- TODO Check what maxlength should be for the textarea -->
+      <textarea
+        ng-model="group.description" 
+        type="text" 
+        class="form-control" 
+        rows="3" 
+        maxlength="140" 
+        id="Description" 
+        placeholder="Description">
+      </textarea>
+    </div>
+    <div class="form-group">
+      <button 
+        type="submit" 
+        class="btn btn-default btn-join">
+        Create
+      </button>
+    </div>
+  </form>
+</div>
