@@ -10,7 +10,7 @@
   */
 angular
   .module('alumni-db-frontend')
-  .service('braintreeService', ['$q', '$http', 'API_HOST', 'subscriptionsFactory', function($q, $http, API_HOST, subscriptionsFactory) {
+  .service('braintreeService', ['$q', '$http', 'API_HOST', 'subscriptionsFactory', function ($q, $http, API_HOST, subscriptionsFactory) {
     var clientTokenUrl = API_HOST + '/subscriptions/client_token';
 
     var braintreeService = {};
@@ -26,10 +26,10 @@ angular
       * @returns {Object}
       * TODO
       */
-    braintreeService.getClientToken = function() {
+    braintreeService.getClientToken = function () {
 
       var def = $q.defer();
-      $http.get(clientTokenUrl).then(function(clientTokenResponse) {
+      $http.get(clientTokenUrl).then(function (clientTokenResponse) {
         if (clientTokenResponse.status !== 200) {
           def.reject(new Error('cann\'t get clienttoken'));
           return;
@@ -55,14 +55,14 @@ angular
       * @returns {Object}
       * TODO
       */
-    braintreeService.submitPayment = function(paymentData) {
+    braintreeService.submitPayment = function (paymentData) {
       /*jshint camelcase: false */
 
       return subscriptionsFactory.subscribe({
         payment_method_nonce: paymentData.nonce,
-        user_id: paymentData.userId
+        user_id: paymentData.userId,
       });
     };
 
     return braintreeService;
-  }]);
+  },]);

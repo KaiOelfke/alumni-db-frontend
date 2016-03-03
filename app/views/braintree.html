@@ -1,8 +1,32 @@
 <h1>{{ title }}</h1>
 
-<p>To be premium member, please choose a payment method and pay 10$.</p>
+<p>Hi there! You can choose to buy one of these plans:</p>
+<table id="plans">
+  <thead>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th>Default</th>
+    <th>Delete flag</th>
+  </thead>
+  <tbody>
+    <tr ng-repeat="plan in plans">
+      <td>{{ plan.id }}</td>
+      <td>{{ plan.name }}</td>
+      <td>{{ plan.description }}</td>
+      <td>{{ plan.price }}</td>
+      <td>{{ plan.default }}</td>
+      <td>{{ plan.delete_flag }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<br/>
+
+<p>To be premium member, please choose a payment method and pay {{ defaultPlan.price }} €.</p>
 
 <form>
   <div id="payment-form"></div>
-  <input type="submit" value="Pay $10">
+  <input type="submit" value="Pay {{ defaultPlan.price }} €">
 </form>
