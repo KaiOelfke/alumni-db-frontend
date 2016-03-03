@@ -195,7 +195,7 @@ module.exports = function (grunt) {
           ]
         }]
       },
-      server: '<%= yeoman.app%>/.tmp'
+      server: '<%= yeoman.app %>/.tmp'
     },
 
     // Add vendor prefixed styles
