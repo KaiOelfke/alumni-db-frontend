@@ -195,7 +195,7 @@ module.exports = function (grunt) {
           ]
         }]
       },
-      server: '.tmp'
+      server: '<%= yeoman.app%>/.tmp'
     },
 
     // Add vendor prefixed styles
@@ -477,5 +477,5 @@ module.exports = function (grunt) {
 
   grunt.registerTask('codestyle', ['jscs']);
   grunt.registerTask('docs', ['ngdocs']);
-  
+
 };
