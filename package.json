@@ -35,11 +35,11 @@
     "grunt-wiredep": "^1.7.0",
     "jshint-stylish": "^0.2.0",
     "karma": "^0.12.37",
-    "karma-phantomjs-launcher": "^0.1.4",
     "karma-chrome-launcher": "^0.2.2",
-    "karma-safari-launcher": "^0.1.1",
     "karma-jasmine": "^0.2.3",
-    "karma-mocha-reporter": "^1.1.3",
+    "karma-mocha-reporter": "^1.2.3",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "karma-safari-launcher": "^0.1.1",
     "load-grunt-tasks": "^0.4.0",
     "time-grunt": "^0.3.1"
   },
@@ -78,8 +78,12 @@
     "disallowTrailingWhitespace": true,
     "requireSpaceAfterComma": true,
     "disallowYodaConditions": true,
-    "disallowKeywords": [ "with" ],
-    "disallowKeywordsOnNewLine": ["else"],
+    "disallowKeywords": [
+      "with"
+    ],
+    "disallowKeywordsOnNewLine": [
+      "else"
+    ],
     "disallowMultipleLineBreaks": true,
     "disallowMultipleLineStrings": true,
     "disallowMultipleVarDecl": true,
@@ -121,14 +125,17 @@
     "requireSemicolons": true,
     "safeContextKeyword": "_this",
     "validateLineBreaks": "LF",
-    "validateQuoteMarks": { "mark": "'", "escape": true, "ignoreJSX": true },
+    "validateQuoteMarks": {
+      "mark": "'",
+      "escape": true,
+      "ignoreJSX": true
+    },
     "validateIndentation": 2,
     "requirePaddingNewLinesAfterUseStrict": true,
     "requireLineBreakAfterVariableAssignment": true,
     "requirePaddingNewLinesInObjects": true,
     "requireObjectKeysOnNewLine": true,
-    "requireSpaceBeforeObjectValues": true,
-    "validateIndentation": 2
+    "requireSpaceBeforeObjectValues": true
   },
   "jshintConfig": {
     "node": true,
