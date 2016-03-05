@@ -9,6 +9,10 @@ angular.module('alumni-db-frontend').directive('compareTo', ['$parse', function(
     link: function(scope, elm, attrs, ctrl) {
       var modelSetter = $parse(attrs.ngModel).assign;
 
+      function getMatchValue() {
+        return scope.otherValue;
+      }
+
       function parser(viewValue) {
         if (viewValue === getMatchValue()) {
           ctrl.$setValidity('compareTo', true);
@@ -21,10 +25,6 @@ angular.module('alumni-db-frontend').directive('compareTo', ['$parse', function(
 
       function formatter(modelValue) {
         return modelValue === undefined ? ctrl.$isEmpty(ctrl.$viewValue) ? undefined : ctrl.$viewValue : modelValue;
-      }
-
-      function getMatchValue() {
-        return scope.otherValue;
       }
 
       scope.$watch(getMatchValue, function() {

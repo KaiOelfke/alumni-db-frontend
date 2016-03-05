@@ -7,7 +7,7 @@
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
@@ -46,7 +46,7 @@ module.exports = function (grunt) {
       },
       styles: {
         files: ['<%= yeoman.app %>/styles/{,*/}*.less'],
-        tasks: ['less:development','autoprefixer']
+        tasks: ['less:development', 'autoprefixer']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -106,11 +106,11 @@ module.exports = function (grunt) {
       }
     },
 
-
     // The actual grunt server settings
     connect: {
       options: {
         port: 9000,
+
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost',
         livereload: 35729
@@ -118,7 +118,7 @@ module.exports = function (grunt) {
       livereload: {
         options: {
           open: true,
-          middleware: function (connect) {
+          middleware: function(connect) {
             return [
               connect.static('.tmp'),
               connect().use(
@@ -133,7 +133,7 @@ module.exports = function (grunt) {
       test: {
         options: {
           port: 9001,
-          middleware: function (connect) {
+          middleware: function(connect) {
             return [
               connect.static('.tmp'),
               connect.static('test'),
@@ -156,10 +156,7 @@ module.exports = function (grunt) {
 
     // Make sure code styles are up to par and there are no obvious mistakes
     jshint: {
-      options: {
-        jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
-      },
+      options: grunt.file.readJSON('package.json').jshintConfig,
       all: {
         src: [
           'Gruntfile.js',
@@ -169,14 +166,11 @@ module.exports = function (grunt) {
         ]
       },
       test: {
-        options: {
-          jshintrc: 'test/.jshintrc'
-        },
         src: ['test/spec/{,*/}*.js']
       }
     },
     jscs: {
-      src: ['<%= yeoman.app %>/scripts/*.js', '<%= yeoman.app %>/scripts/**/*.js']
+      src: ['<%= yeoman.app %>/scripts/*.js', '<%= yeoman.app %>/scripts/**/*.js', 'test/**/*.js']
     },
 
     ngdocs: {
@@ -258,7 +252,7 @@ module.exports = function (grunt) {
       html: ['<%= yeoman.dist %>/{,*/}*.html'],
       css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
       options: {
-        assetsDirs: ['<%= yeoman.dist %>','<%= yeoman.dist %>/images']
+        assetsDirs: ['<%= yeoman.dist %>', '<%= yeoman.dist %>/images']
       }
     },
 
@@ -364,16 +358,17 @@ module.exports = function (grunt) {
             'images/{,*/}*.{webp}',
             'fonts/*'
           ]
-        },{
+        }, {
           expand: true,
           dest: '<%= yeoman.dist %>',
           cwd: 'heroku',
           src: '*',
-          rename: function (dest, src) {
+          rename: function(dest, src) {
             var path = require('path');
             if (src === 'distpackage.json') {
               return path.join(dest, 'package.json');
             }
+
             return path.join(dest, src);
           }
         }, {
@@ -410,7 +405,7 @@ module.exports = function (grunt) {
     // Test settings
     karma: {
       unit: {
-        configFile: 'test/karma.conf.js',
+        configFile: 'karma.conf.js',
         singleRun: true
       }
     }
@@ -419,7 +414,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-jscs');
   grunt.loadNpmTasks('grunt-ngdocs');
 
-  grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
+  grunt.registerTask('serve', 'Compile then start a connect web server', function(target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
@@ -436,7 +431,7 @@ module.exports = function (grunt) {
     ]);
   });
 
-  grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target) {
+  grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function(target) {
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
     grunt.task.run(['serve:' + target]);
   });
@@ -475,6 +470,7 @@ module.exports = function (grunt) {
     'build'
   ]);
 
+  grunt.registerTask('lint', ['jshint']);
   grunt.registerTask('codestyle', ['jscs']);
   grunt.registerTask('docs', ['ngdocs']);
 
