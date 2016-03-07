@@ -13,6 +13,7 @@ angular
   .controller('braintreeCtrl', ['braintreeService', 'plansFactory', '$state',  '$rootScope', '$scope',
    function (braintreeService, plansFactory, $state, $rootScope, $scope) {
 
+    $scope.braintreeReady = false;
      var getDefaultPlan = function(plans) {
        for (var i = 0; i < plans.length; i++) {
          var plan = plans[i];
@@ -49,6 +50,14 @@ angular
 
                 $state.go('home.premium');
               });
+          },
+          onReady: function (integration) {
+            $scope.$apply(function() {
+              $scope.braintreeReady = true;
+            });
+          },
+          onError: function (error) {
+            console.error(error);
           },
         });
       });
