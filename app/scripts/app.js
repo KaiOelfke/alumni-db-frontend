@@ -353,18 +353,14 @@ angular
       event.preventDefault();
       if (error === AUTHZ_EVENTS.notAuthorized) {
         if (fromState.name !== '') {
-          console.error('Not authorized', 'Sorry. You are not allowed to see this page.');
           toaster.pop('warning', 'Not authorized', 'Sorry. You are not allowed to see this page.');
         }
 
         if (!$rootScope.user || !$rootScope.user.statuses) {
-          console.error('no root user or no usr statuses');
           $state.transitionTo('guest.signin');
         } else if ($rootScope.user.statuses.indexOf(USER_ROLES.completedProfile) === -1) {
-          console.error('no completed profile');
           $state.transitionTo('home.registration');
         } else {
-          console.log('transitioning to start-page');
           $state.transitionTo('home.start-page');
         }
       }
