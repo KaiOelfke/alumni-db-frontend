@@ -237,7 +237,7 @@ angular
         }
       })
       .state('home.braintree', {
-        url: '/braintree',
+        url: '/become-premium',
         templateUrl: 'views/braintree.html',
         controller: 'braintreeCtrl',
         resolve: {

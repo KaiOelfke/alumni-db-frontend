@@ -29,6 +29,7 @@
               {{ user.first_name }} {{ user.last_name }}
             </button>
             <ul class="dropdown-menu" role="menu">
+              <li><a ui-sref="home.braintree">Become Premium</a></li>
               <li><a ui-sref="home.profile-show({ id: user.id})">View profile</a></li>
               <li><a ui-sref="home.profile-update">Update profile</a></li>
               <li role="presentation" class="divider"></li>
