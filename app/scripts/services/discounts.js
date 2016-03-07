@@ -36,10 +36,10 @@ angular.module('alumni-db-frontend')
       /*jshint camelcase: false */
       return $http.get(urlBase + '/check', {
         params: {
-            plan_id: planId,
-            code_id: codeId
+          plan_id: planId,
+          code_id: codeId
         }
-     })
+      });
     };
 
 
