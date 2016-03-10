@@ -1,5 +1,7 @@
 'use strict';
 
+// TODO: put all error messages in a seperate factory and get them from there
+
 /**
   * @ngdoc controller
   * @name braintreeCtrl
@@ -10,7 +12,7 @@
   */
 angular
   .module('alumni-db-frontend')
-  .controller('braintreeCtrl', ['braintreeService', 'plansFactory', '$state',  '$rootScope', '$scope', function(braintreeService, plansFactory, $state, $rootScope, $scope) {
+  .controller('braintreeCtrl', ['braintreeService', 'plansFactory', '$state',  '$rootScope', '$scope', 'toaster', function(braintreeService, plansFactory, $state, $rootScope, $scope, toaster) {
 
     $scope.title = 'Become a premium member!';
     $scope.braintreeReady = false;
@@ -21,15 +23,15 @@ angular
       .then(function(plansResponse) {
         $scope.plans = plansResponse.data;
         $scope.defaultPlan = getDefaultPlan($scope.plans);
-      }, function() {
+      }, function errorCallback(response) {
 
-        console.error('Could not get plans');
-        window.alert('Ups, there was an error! Please refresh the website or contact a developer for assistance.');
+        toaster.pop('error', 'Internal application error. Please contact the developers.');
+        console.error('could not get plans', response);
       });
 
     braintreeService
       .getClientToken()
-      .then(function(clientToken) {
+      .then(function successCallback(clientToken) {
         // Set up braintree dropin
         braintree.setup(clientToken, 'dropin', {
           container: 'payment-form',
@@ -47,10 +49,10 @@ angular
             finishPaymentProcess();
           },
         });
-      }, function() {
+      }, function errorCallback(response) {
 
-        console.error('Could not get client token');
-        window.alert('Ups, there was an error! Please refresh the website or contact a developer for assistance.');
+        toaster.pop('error', 'Internal application error. Please contact the developers.');
+        console.error('could not get client token', response);
       });
 
     var getDefaultPlan = function(plans) {
@@ -72,20 +74,19 @@ angular
         paymentData.userId = $rootScope.user.id;
         braintreeService
           .submitPayment(paymentData)
-          .then(function(response) {
+          .then(function successCallback(response) {
             console.log('Submitted payment successfully');
 
             // should be wrapped with somewhere else
             var updatedUser = response.data.data;
             angular.extend($rootScope.user, updatedUser);
             $rootScope.user.statuses.push('premium');
-
             $state.go('home.premium');
-
             $scope.processingPayment = false;
-          }, function() {
+          }, function errorCallback(response) {
 
-            console.error('Something went wrong with braintreeService.submitPayment');
+            processError(response);
+            console.error('could not submit payment', response);
             $scope.processingPayment = false;
           });
       } else {
@@ -93,6 +94,28 @@ angular
         $scope.processingPayment = false;
         $scope.$digest();
       }
+    };
+
+    var processError = function(response) {
+      // console.error the response first
+      console.error('an error occurred', response);
+
+      // extract error message for the user
+      var errorMessage = response.statusText;
+      if (response.data.hasOwnProperty('errors')) {
+        if (response.data.errors.length > 0) {
+          errorMessage = '';
+          for (var i = 0; i < response.data.errors.length; i++) {
+            var msg = response.data.errors[i];
+            errorMessage += msg + ', ';
+          }
+
+          errorMessage = errorMessage.substring(0, errorMessage.length - 2);
+        }
+      }
+
+      // display the human readable error message
+      toaster.pop('error', errorMessage);
     };
 
   }]);
