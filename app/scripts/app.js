@@ -236,6 +236,20 @@ angular
           }
         }
       })
+      .state('home.plan-management', {
+        url: '/plan-management',
+        templateUrl: 'views/plans.html',
+        controller: 'planCtrl',
+        resolve: {
+          authorizedRoles: function(USER_ROLES) {
+            return USER_ROLES.superUser;
+          },
+
+          authz: function(authorizedRoles, authorizationService) {
+            return authorizationService.isAuthorized(authorizedRoles);
+          }
+        }
+      })
       .state('home.braintree', {
         url: '/become-premium',
         templateUrl: 'views/braintree.html',

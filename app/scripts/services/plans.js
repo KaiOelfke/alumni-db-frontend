@@ -18,7 +18,7 @@ angular.module('alumni-db-frontend')
       });
     };
 
-    plansFactory.destoryPlan = function(id) {
+    plansFactory.destroyPlan = function(id) {
       return $http.delete(urlBase + '/' + id);
     };
 
