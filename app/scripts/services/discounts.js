@@ -18,7 +18,7 @@ angular.module('alumni-db-frontend')
       });
     };
 
-    discountsFactory.destoryDiscount = function(id) {
+    discountsFactory.destroyDiscount = function(id) {
       return $http.delete(urlBase + '/' + id);
     };
 
@@ -39,7 +39,7 @@ angular.module('alumni-db-frontend')
           plan_id: planId,
           code_id: codeId
         }
-      });
+     });
     };
 
 

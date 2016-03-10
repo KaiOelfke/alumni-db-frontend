@@ -18,7 +18,7 @@ angular.module('alumni-db-frontend')
       });
     };
 
-    subscriptionsFactory.destorySubscription = function(id) {
+    subscriptionsFactory.destroySubscription = function(id) {
       return $http.delete(urlBase + '/' + id);
     };
 
