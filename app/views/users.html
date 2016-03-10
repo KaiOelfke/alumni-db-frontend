@@ -12,6 +12,7 @@
 				<th>Email</th>
 				<th>First name</th>
 				<th>Last name</th>
+				<th>Premium</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -19,6 +20,13 @@
 				<td>{{ user.email }}</td>
 				<td><a ui-sref="home.profile-show({ id: user.id})">{{ user.first_name }}</a></td>
 				<td>{{ user.last_name }}</td>
+				<td>
+					<span ng-show="user.is_premium">Premium</span>
+					<span ng-show="!user.is_premium && !$root.user.is_super_user">Not Premium</span>
+					<span ng-show="!user.is_premium && $root.user.is_super_user">
+						<button ng-click="makePremium(user)">Make premium</button>
+					</span>
+				</td>
 			</tr>
 		</tbody>
 	</table>
