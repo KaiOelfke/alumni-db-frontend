@@ -27,7 +27,7 @@ describe('Controller: braintreeCtrl', function() {
     $httpBackend.flush();
   });
 
-  // Inject braintree controller and compile braintree drop-in
+  // Inject braintree controller and compile braintree dropin
   beforeEach(function() {
     scope = $rootScope.$new();
     ctrl = $controller('braintreeCtrl', {
@@ -58,8 +58,25 @@ describe('Controller: braintreeCtrl', function() {
     $httpBackend.verifyNoOutstandingRequest();
   });
 
-  it('it should have the title "Become a premium member!"', function() {
-    expect(scope.title).toEqual('Become a premium member!');
+  it('should have a title defined', function() {
+    expect(scope.title).toBeDefined();
   });
+
+  it('should have received at least one plan', function() {
+    expect(scope.plans).toBeDefined();
+    expect(scope.plans.length >= 1).toBeTruthy();
+  });
+
+  it('should have one default plan', function() {
+    expect(scope.defaultPlan).toBeDefined();
+    expect(scope.defaultPlan.default).toBeTruthy();
+    expect(scope.defaultPlan.price).not.toBeLessThan(0);
+  });
+
+  it('should initialize braintree dopin', function() {
+    expect(scope.braintreeReady).toBeTruthy();
+  });
+
+  // it should not initialize dropin with invalid token
 
 });
