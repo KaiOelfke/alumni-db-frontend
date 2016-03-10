@@ -22,6 +22,7 @@ module.exports = function(config) {
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/ng-file-upload/angular-file-upload.js',
       'app/scripts/**/*.js',
+      'https://js.braintreegateway.com/v2/braintree.js',
       'test/mock/**/*.js',
       'test/spec/**/*.js'
     ],
