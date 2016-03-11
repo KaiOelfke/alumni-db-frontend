@@ -13,6 +13,9 @@ angular
   .controller('braintreeCtrl', ['braintreeService', 'plansFactory', '$state',  '$rootScope', '$scope',
    function (braintreeService, plansFactory, $state, $rootScope, $scope) {
 
+    $scope.paymentErrors = [];
+
+
     $scope.braintreeReady = false;
      var getDefaultPlan = function(plans) {
        for (var i = 0; i < plans.length; i++) {
@@ -49,6 +52,8 @@ angular
                 $rootScope.user.statuses.push('premium');
 
                 $state.go('home.premium');
+              }).catch(function(response){
+                $scope.paymentErrors = response.data.errors;
               });
           },
           onReady: function (integration) {
