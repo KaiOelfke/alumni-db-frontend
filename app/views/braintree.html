@@ -26,12 +26,16 @@
 
 <p>To be premium member, please choose a payment method and pay {{ defaultPlan.price }} €.</p>
 
-<form>
+<form ng-submit="processPayment()">
   <div id="payment-form"></div>
-  <input type="submit" value="Pay {{ defaultPlan.price }} €" ng-show="braintreeReady">
+  <input type="submit" value="Pay {{ defaultPlan.price }} €" ng-show="braintreeReady && !processingPayment">
   <div id="payment-errors">
   <ul>
     <li ng-repeat="error in paymentErrors">{{ error.message }}</li>
   </ul>
   </div>
 </form>
+
+braintreeReady: {{ braintreeReady }} <br/>
+processingPayment: {{ processingPayment }} <br/>
+braintreeReady and !processingPayment: {{ braintreeReady && !processingPayment }} <br/>

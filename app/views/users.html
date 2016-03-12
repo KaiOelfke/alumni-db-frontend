@@ -21,7 +21,10 @@
 				<td><a ui-sref="home.profile-show({ id: user.id})">{{ user.first_name }}</a></td>
 				<td>{{ user.last_name }}</td>
 				<td>
-					<span ng-show="user.is_premium">Premium</span>
+					<span ng-show="user.is_premium && !$root.user.is_super_user">Premium</span>
+					<span ng-show="user.is_premium && $root.user.is_super_user">
+						<button ng-click="deletePremium(user)">Delete premium</button>
+					</span>
 					<span ng-show="!user.is_premium && !$root.user.is_super_user">Not Premium</span>
 					<span ng-show="!user.is_premium && $root.user.is_super_user">
 						<button ng-click="makePremium(user)">Make premium</button>

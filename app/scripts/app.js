@@ -191,44 +191,13 @@ angular
           }
         }
       })
-      .state('home.groups', {
-        url: '/groups',
-        templateUrl: 'views/groups.html',
-        controller: 'GroupsCtrl',
-        controllerAs: 'groupsCtrl',
+      .state('home.plan-management', {
+        url: '/plan-management',
+        templateUrl: 'views/plans.html',
+        controller: 'planCtrl',
         resolve: {
           authorizedRoles: function(USER_ROLES) {
-            return USER_ROLES.completedProfile;
-          },
-
-          authz: function(authorizedRoles, authorizationService) {
-            return authorizationService.isAuthorized(authorizedRoles);
-          }
-        }
-      })
-      .state('home.group', {
-        url: '/group/:id',
-        templateUrl: 'views/group.html',
-        controller: 'GroupCtrl',
-        controllerAs: 'groupCtrl',
-        resolve: {
-          authorizedRoles: function(USER_ROLES) {
-            return USER_ROLES.completedProfile;
-          },
-
-          authz: function(authorizedRoles, authorizationService) {
-            return authorizationService.isAuthorized(authorizedRoles);
-          }
-        }
-      })
-      .state('home.memberships', {
-        url: '/memberships',
-        templateUrl: 'views/memberships.html',
-        controller: 'GroupsCtrl',
-        controllerAs: 'groupsCtrl',
-        resolve: {
-          authorizedRoles: function(USER_ROLES) {
-            return USER_ROLES.completedProfile;
+            return USER_ROLES.superUser;
           },
 
           authz: function(authorizedRoles, authorizationService) {
