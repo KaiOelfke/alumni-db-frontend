@@ -8,6 +8,7 @@ before_script:
 script:
   - grunt test
 before_deploy: 
+  - chmod a+x deploy_test.sh  
   - ./deploy_test.sh
 deploy:
   provider: heroku
