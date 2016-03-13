@@ -97,6 +97,13 @@ module.exports = function(grunt) {
           API_HOST: 'http://localhost:3000',
         }
       },
+      staging: {
+        wrap: '\'use strict\';\n\n<%= __ngModule %>',
+        constants: {
+          ENV: 'staging',
+          API_HOST: 'https://alumni-db-backend-dev.herokuapp.com',
+        }
+      },
       production: {
         wrap: '\'use strict\';\n\n<%= __ngModule %>',
         constants: {
@@ -445,7 +452,26 @@ module.exports = function(grunt) {
     'karma'
   ]);
 
-  grunt.registerTask('build', [
+  grunt.registerTask('build-staging', [
+    'clean:dist',
+    'ngconstant:staging',
+    'wiredep',
+    'less:production',
+    'useminPrepare',
+    'concurrent:dist',
+    'autoprefixer',
+    'concat',
+    'ngAnnotate',
+    'copy:dist',
+    'cdnify',
+    'cssmin',
+    'uglify',
+    'filerev',
+    'usemin',
+    'htmlmin'
+  ]);
+
+  grunt.registerTask('build-production', [
     'clean:dist',
     'ngconstant:production',
     'wiredep',

@@ -14,12 +14,6 @@
 
     # Un-ignoring dist for a second.
     sed '/dist/d' .gitignore > .gitignore.new && mv .gitignore.new .gitignore
-
-    # generate dist folder
-    grunt
-    
-    # push to heroku
-    git add --all && git commit -a -m 'Deploy message.'
   }
 
   branch_name=$(git rev-parse --abbrev-ref HEAD)
@@ -29,6 +23,14 @@
   if [ $branch_name = "development" ]
   then 
     create_tmp_branch
+
+    # generate dist folder
+    grunt build-staging
+    
+    # push to heroku
+    git add --all && git commit -a -m 'Deploy message.'
+
+
     yes | git push heroku-dev `git subtree split --prefix dist tmp-deploy`:master --force
     # Switch back to master
     git checkout development
@@ -38,6 +40,13 @@
   elif [ $branch_name  = "master" ]
   then
     create_tmp_branch
+
+    # generate dist folder
+    grunt build-production
+    
+    # push to heroku
+    git add --all && git commit -a -m 'Deploy message.'
+
     yes | git push heroku-prod `git subtree split --prefix dist tmp-deploy`:master --force
     # Switch back to master
     git checkout master
