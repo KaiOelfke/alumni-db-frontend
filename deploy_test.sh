@@ -1,13 +1,12 @@
     
-branch_name=$(git rev-parse --abbrev-ref HEAD)
 
-echo $branch_name
+echo $TRAVIS_BRANCH
 
-if [ $branch_name = "development" ]
+if [ $TRAVIS_BRANCH = "development" ]
 then 
   grunt build-staging
   cd dist
-elif [ $branch_name  = "master" ]
+elif [ $TRAVIS_BRANCH  = "master" ]
 then
   grunt build-production
   cd dist
