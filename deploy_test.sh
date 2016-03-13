@@ -1,6 +1,8 @@
     
 branch_name=$(git rev-parse --abbrev-ref HEAD)
 
+echo branch_name
+
 if [ $branch_name = "development" ]
 then 
   grunt build-staging
