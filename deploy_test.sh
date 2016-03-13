@@ -1,6 +1,4 @@
     
-cd $CI_HOME
-
 branch_name=$(git rev-parse --abbrev-ref HEAD)
 
 if [ $branch_name = "development" ]

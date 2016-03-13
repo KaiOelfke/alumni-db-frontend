@@ -12,6 +12,7 @@ before_deploy:
   - ./deploy_test.sh
 deploy:
   provider: heroku
+  skip_cleanup: true  
   api_key:
     development:   
       secure: "mUfSgjTy+ATLt7izpaQDJjIyEE02kGP9j9MmVROBt9HavEDk3UrAixWEO+eFB7rTkXCcMXqkg5FaobWROJI9NHq+JS3DHuLYhix3pib8HZ7YdCKG0hxdGeufVs3Zf/hyCD1J/reDKcnOi4sguPNrYmhRJcLmTr1dkJP6V5QJ2EU="
