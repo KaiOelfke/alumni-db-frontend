@@ -168,6 +168,7 @@ module.exports = function(grunt) {
         src: [
           'Gruntfile.js',
           '<%= yeoman.app %>/scripts/{,*/}*.js',
+
           // Exclude the auto-generated file from ngconstant task.
           '!<%= yeoman.app %>/scripts/appConfig.js'
         ]
@@ -177,7 +178,13 @@ module.exports = function(grunt) {
       }
     },
     jscs: {
-      src: ['<%= yeoman.app %>/scripts/*.js', '<%= yeoman.app %>/scripts/**/*.js', 'test/**/*.js']
+      src: [
+        'Gruntfile.js',
+        '<%= yeoman.app %>/scripts/*.js',
+        '<%= yeoman.app %>/scripts/**/*.js',
+        'test/**/*.js',
+        '!<%= yeoman.app %>/scripts/appConfig.js'
+      ]
     },
 
     ngdocs: {
@@ -490,14 +497,14 @@ module.exports = function(grunt) {
     'htmlmin'
   ]);
 
-  grunt.registerTask('default', [
-    'newer:jshint',
-    'test',
-    'build'
-  ]);
-
   grunt.registerTask('lint', ['jshint']);
   grunt.registerTask('codestyle', ['jscs']);
   grunt.registerTask('docs', ['ngdocs']);
+
+  grunt.registerTask('default', [
+    'lint',
+    'codestyle',
+    'test'
+  ]);
 
 };

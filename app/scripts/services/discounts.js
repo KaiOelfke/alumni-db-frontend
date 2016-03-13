@@ -39,9 +39,8 @@ angular.module('alumni-db-frontend')
           plan_id: planId,
           code_id: codeId
         }
-     });
+      });
     };
-
 
     return discountsFactory;
   }]);

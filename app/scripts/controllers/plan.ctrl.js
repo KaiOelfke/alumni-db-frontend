@@ -26,7 +26,7 @@ angular
         console.error('Could not get plans');
         window.alert('Ups, there was an error! Please refresh the website or contact a developer for assistance.');
       });
-    
+
     var getDefaultPlan = function(plans) {
       for (var i = 0; i < plans.length; i++) {
         var plan = plans[i];
@@ -62,9 +62,9 @@ angular
           var idx = -1;
 
           for (var i = 0; i < $scope.plans.length; i++) {
-             if ($scope.plans[i].id === tmpPlan.id) {
-                idx = i;
-             }
+            if ($scope.plans[i].id === tmpPlan.id) {
+              idx = i;
+            }
           }
 
           $scope.plans[idx] = tmpPlan;
@@ -93,7 +93,7 @@ angular
         $scope.plans[idx] = plan;
       })
       .error(function(error) {
-          console.error(error);
+        console.error(error);
       });
     };
 

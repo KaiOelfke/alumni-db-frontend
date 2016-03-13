@@ -9,9 +9,8 @@
  */
 angular.module('alumni-db-frontend')
   .controller('UsersCtrl', ['usersFactory', 'subscriptionsFactory', '$scope', function UsersCtrl(usersFactory, subscriptionsFactory, $scope) {
+
     $scope.users = [];
-
-
 
     $scope.makePremium = function(user) {
       var subscription = {

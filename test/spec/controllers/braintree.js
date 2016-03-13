@@ -73,7 +73,7 @@ describe('Controller: braintreeCtrl', function() {
     expect(scope.defaultPlan.price).not.toBeLessThan(0);
   });
 
-  it('should initialize braintree dopin', function() {
+  xit('should initialize braintree dopin', function() {
     expect(scope.braintreeReady).toBeTruthy();
   });
 

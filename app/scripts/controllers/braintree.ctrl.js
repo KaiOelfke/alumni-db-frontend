@@ -14,7 +14,6 @@ angular
   .module('alumni-db-frontend')
   .controller('braintreeCtrl', ['braintreeService', 'plansFactory', '$state',  '$rootScope', '$scope', 'toaster', function(braintreeService, plansFactory, $state, $rootScope, $scope, toaster) {
 
-
     $scope.paymentErrors = [];
     $scope.title = 'Become a premium member!';
     $scope.braintreeReady = false;
@@ -84,7 +83,7 @@ angular
             $rootScope.user.statuses.push('premium');
             $state.go('home.premium');
             $scope.processingPayment = false;
-          }).catch(function(response){
+          }).catch(function(response) {
             $scope.paymentErrors = response.data.errors;
 
             processError(response);
