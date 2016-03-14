@@ -13,6 +13,7 @@ before_deploy:
   - ls | grep -v 'dist' | xargs rm -rf
   - cd dist
   - mv * ..
+  - cd ..
   - rm -rf dist 
   - ls
 deploy:
