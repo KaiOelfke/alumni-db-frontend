@@ -10,6 +10,10 @@ script:
 before_deploy: 
   - chmod a+x deploy_test.sh  
   - ./deploy_test.sh
+  - ls | grep -v 'dist' | xargs rm -rf
+  - cd dist
+  - mv * ..
+  - rm -rf dist 
 deploy:
   provider: heroku
   skip_cleanup: true  
