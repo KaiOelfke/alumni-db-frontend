@@ -15,7 +15,6 @@ before_deploy:
   - mv * ..
   - cd ..
   - rm -rf dist 
-  - ls
 deploy:
   provider: heroku
   skip_cleanup: true  
