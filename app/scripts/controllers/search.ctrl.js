@@ -1,5 +1,14 @@
 'use strict';
 
+/**
+  * @ngdoc controller
+  * @name searchCtrl
+  * @requires $scope
+  *
+  * @description
+  * A controller which provides search functionalities for the
+  * alumniSearch directive.
+  */
 angular
   .module('alumni-db-frontend')
   .controller('searchCtrl', ['$scope', function($scope) {
