@@ -6,16 +6,36 @@
   * @requires $scope
   *
   * @description
-  * A controller which provides search functionalities for the
+  * The controller which provides search functionalities for the
   * alumniSearch directive.
   */
 angular
   .module('alumni-db-frontend')
-  .controller('searchCtrl', ['$scope', function($scope) {
-    const search = function() {
-      console.log('searching for', $scope.searchText);
-    };
+  .controller('searchCtrl', [
+    'searchService',
+    '$scope', function(searchService, $scope) {
 
-    $scope.searchText = '';
-    $scope.search = search;
-  }]);
+      const search = function() {
+        console.log('trying to search for', $scope.searchText);
+        searchService.userSearch($scope.searchText)
+          .then(function successCallback(response) {
+            console.log('search was successfull', response);
+          }, function errorCallback(response) {
+
+            console.log('search failed', response);
+          });
+      };
+
+      /**
+       * Stores the search text input.
+       * @type {String}
+       */
+      $scope.searchText = '';
+
+      /**
+       * Tries to execute a search request with the value stores in
+       * $scope.searchText.
+       * @type {function}
+       */
+      $scope.search = search;
+    }]);
