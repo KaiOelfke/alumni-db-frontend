@@ -232,6 +232,21 @@ angular
           }
         }
       })
+
+      // temporary state to play around with the search view
+      .state('home.search', {
+        url: '/search',
+        templateUrl: 'views/search.html',
+        resolve: {
+          authorizedRoles: function(USER_ROLES) {
+            return USER_ROLES.completedProfile;
+          },
+
+          authz: function(authorizedRoles, authorizationService) {
+            return authorizationService.isAuthorized(authorizedRoles);
+          }
+        }
+      })
       .state('guest', {
         url: '',
         abstract: true,
