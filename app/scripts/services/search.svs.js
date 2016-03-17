@@ -4,7 +4,7 @@
  * @ngdoc service
  * @name searchService
  *
- * @description A service which provides different function to interact
+ * @description A service which provides different functions to interact
  * with the backend search API.
  */
 angular
