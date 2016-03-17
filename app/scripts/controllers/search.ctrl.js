@@ -7,6 +7,6 @@ angular
       console.log('searching for', $scope.searchText);
     };
 
-    $scope.searchText = 'default search text';
+    $scope.searchText = '';
     $scope.search = search;
   }]);
