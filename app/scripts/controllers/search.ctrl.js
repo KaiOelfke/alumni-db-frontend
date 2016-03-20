@@ -96,6 +96,7 @@ angular
       };
 
       $scope.resetSearch = function() {
+        $scope.searchText = '';
         $scope.showResults = false;
         $scope.searchResults = null;
         currentPage = 1;
