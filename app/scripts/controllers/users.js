@@ -13,29 +13,24 @@ angular.module('alumni-db-frontend')
     $scope.users = [];
 
     $scope.makePremium = function(user) {
-      var subscription = {
-        'user_id': user.id
-      };
       var userIdx = $scope.users.indexOf(user);
-      subscriptionsFactory.subscribe(subscription)
-        .success(function(data) {
-          $scope.users[userIdx] = data.data;
-        })
-        .error(function(error) {
-          console.error(error);
+      usersFactory
+        .makePremium(user)
+        .then(function successCallback(user) {
+          $scope.users[userIdx] = user;
+        }, function errorCallback(response) {
+          console.error('could not make user premium', response);
         });
     };
 
     $scope.deletePremium = function(user) {
       var userIdx = $scope.users.indexOf(user);
-      subscriptionsFactory.destroySubscription(user.subscription_id)
-        .success(function() {
-          user.is_premium = false;
-          user.subscription_id = null;
+      usersFactory
+        .deletePremium(user)
+        .then(function successCallback(user) {
           $scope.users[userIdx] = user;
-        })
-        .error(function(error) {
-          console.error(error);
+        }, function errorCallback(response) {
+          console.error('could not delete premium', response);
         });
     };
 
