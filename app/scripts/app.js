@@ -205,9 +205,9 @@ angular
           }
         }
       })
-      .state('home.braintree', {
+      .state('home.become-premium', {
         url: '/become-premium',
-        templateUrl: 'views/braintree.html',
+        templateUrl: 'views/become-premium.html',
         controller: 'braintreeCtrl',
         resolve: {
           authorizedRoles: function(USER_ROLES) {

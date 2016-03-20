@@ -22,14 +22,14 @@
         <!-- Links -->
         <div class="navbar-rest">
           <div class="btn-group" role="group">
-            <button 
-              type="button" 
-              class="dropdown-toggle navbar-element alumni-profile" 
+            <button
+              type="button"
+              class="dropdown-toggle navbar-element alumni-profile"
               data-toggle="dropdown">
               {{ user.first_name }} {{ user.last_name }}
             </button>
             <ul class="dropdown-menu" role="menu">
-              <li><a ui-sref="home.braintree">Become Premium</a></li>
+              <li><a ui-sref="home.become-premium">Become Premium</a></li>
               <li><a ui-sref="home.profile-show({ id: user.id})">View profile</a></li>
               <li><a ui-sref="home.profile-update">Update profile</a></li>
               <li role="presentation" class="divider"></li>
@@ -41,13 +41,9 @@
       </div>
     </div>
   </div>
-  
+
   <div class="home-container">
     <ui-view/>
   </div>
 
 </div>
-
-
-
-

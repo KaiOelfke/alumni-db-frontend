@@ -10,41 +10,27 @@
 angular.module('alumni-db-frontend')
   .controller('UsersCtrl', ['usersFactory', 'subscriptionsFactory', '$scope', function UsersCtrl(usersFactory, subscriptionsFactory, $scope) {
 
-    $scope.users = [];
-
-    $scope.makePremium = function(user) {
-      var subscription = {
-        'user_id': user.id
-      };
-      var userIdx = $scope.users.indexOf(user);
-      subscriptionsFactory.subscribe(subscription)
-        .success(function(data) {
-          $scope.users[userIdx] = data.data;
-        })
-        .error(function(error) {
-          console.error(error);
+    $scope.makePremium = function(users, user) {
+      var userIdx = users.indexOf(user);
+      usersFactory
+        .makePremium(user)
+        .then(function successCallback(user) {
+          // console.log('added premium for user', user);
+          users[userIdx] = user;
+        }, function errorCallback(response) {
+          console.error('could not make user premium', response);
         });
     };
 
-    $scope.deletePremium = function(user) {
-      var userIdx = $scope.users.indexOf(user);
-      subscriptionsFactory.destroySubscription(user.subscription_id)
-        .success(function() {
-          user.is_premium = false;
-          user.subscription_id = null;
-          $scope.users[userIdx] = user;
-        })
-        .error(function(error) {
-          console.error(error);
+    $scope.deletePremium = function(users, user) {
+      var userIdx = users.indexOf(user);
+      usersFactory
+        .deletePremium(user)
+        .then(function successCallback(user) {
+          // console.log('deleted premium for user', user);
+          users[userIdx] = user;
+        }, function errorCallback(response) {
+          console.error('could not delete premium', response);
         });
     };
-
-    usersFactory.getUsers()
-      .success(function(data) {
-
-        $scope.users = data;
-      })
-      .error(function(error) {
-        console.error(error);
-      });
   }]);
