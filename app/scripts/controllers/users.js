@@ -17,6 +17,7 @@ angular.module('alumni-db-frontend')
       usersFactory
         .makePremium(user)
         .then(function successCallback(user) {
+          console.log('added premium for user', user);
           users[userIdx] = user;
         }, function errorCallback(response) {
           console.error('could not make user premium', response);
@@ -28,6 +29,7 @@ angular.module('alumni-db-frontend')
       usersFactory
         .deletePremium(user)
         .then(function successCallback(user) {
+          console.log('deleted premium for user', user);
           users[userIdx] = user;
         }, function errorCallback(response) {
           console.error('could not delete premium', response);

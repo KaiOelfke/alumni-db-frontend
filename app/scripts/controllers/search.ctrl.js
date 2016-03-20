@@ -23,6 +23,12 @@ angular
       $scope.searchText = '';
 
       /**
+       * The results of the search requests will be saved here.
+       * @type {Array.<Object>}
+       */
+      $scope.searchResults;
+
+      /**
        * If showResults is false the default view should be shown.
        * If showResults is true the results should be shown.
        * @type {Boolean}
@@ -59,6 +65,8 @@ angular
         searchService.userSearch($scope.searchText)
           .then(function successCallback(response) {
             console.log('search was successfull', response);
+            $scope.showResults = true;
+            $scope.searchResults = response.data;
           }, function errorCallback(response) {
             // TODO: Display error message with toasters
             console.log('search failed', response);
