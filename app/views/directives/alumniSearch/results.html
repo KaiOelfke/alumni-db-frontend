@@ -12,7 +12,7 @@
       <!-- all users -->
       <tr
         ng-show="!showResults"
-        ng-repeat="user in allUsers">
+        ng-repeat="user in allUsers | orderBy: 'first_name'">
         <td>{{ user.email }}</td>
         <td><a ui-sref="home.profile-show({ id: user.id })">{{ user.first_name }}</a></td>
         <td>{{ user.last_name }}</td>
@@ -31,7 +31,7 @@
       <!-- search results -->
       <tr
 				ng-show="showResults"
-				ng-repeat="user in searchResults | orderBy: 'first_name'">
+				ng-repeat="user in searchResults">
 				<td>{{ user.email }}</td>
         <td><a ui-sref="home.profile-show({ id: user.id })">{{ user.first_name }}</a></td>
         <td>{{ user.last_name }}</td>
