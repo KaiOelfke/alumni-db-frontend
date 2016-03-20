@@ -12,7 +12,7 @@
       <!-- all users -->
       <tr
         ng-show="!showResults"
-        ng-repeat="user in allUsers | orderBy: 'first_name'">
+        ng-repeat="user in allUsers">
         <td>{{ user.email }}</td>
         <td><a ui-sref="home.profile-show({ id: user.id })">{{ user.first_name }}</a></td>
         <td>{{ user.last_name }}</td>
