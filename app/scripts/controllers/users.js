@@ -10,8 +10,6 @@
 angular.module('alumni-db-frontend')
   .controller('UsersCtrl', ['usersFactory', 'subscriptionsFactory', '$scope', function UsersCtrl(usersFactory, subscriptionsFactory, $scope) {
 
-    $scope.users = [];
-
     $scope.makePremium = function(users, user) {
       var userIdx = users.indexOf(user);
       usersFactory
@@ -35,13 +33,4 @@ angular.module('alumni-db-frontend')
           console.error('could not delete premium', response);
         });
     };
-
-    usersFactory.getUsers()
-      .success(function(data) {
-
-        $scope.users = data;
-      })
-      .error(function(error) {
-        console.error(error);
-      });
   }]);
