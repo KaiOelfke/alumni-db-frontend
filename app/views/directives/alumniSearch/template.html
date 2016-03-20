@@ -1,8 +1,13 @@
 <!-- This template is returned by the alumniSearch directive. -->
 <div ng-controller="searchCtrl">
-  <form ng-submit="search()">
+  <form
+    ng-submit="search()"
+    name="searchForm">
     <input ng-model="searchText" name="searchText" type="text" />
-    <input type="submit" name="submit" value="Search" />
+    <button
+      ng-disabled="searchForm.searchText.$pristine || searchText === ''"
+      type="submit"
+      name="submit">Search</button>
     <button type="button" ng-click="resetSearch()">Reset</button>
   </form>
   <alumni-search-results></alumni-search-results>
