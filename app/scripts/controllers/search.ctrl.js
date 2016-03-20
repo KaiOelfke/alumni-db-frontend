@@ -36,6 +36,13 @@ angular
       $scope.showResults = false;
 
       /**
+       * Since the search requests have to be paginated we keep track of
+       * the pages with this variable.
+       * @type {Number}
+       */
+      var currentPage = 1;
+
+      /**
        * Per default this controller will try to get all users and display
        * them. TODO: Do this only if an option has been set.
        */
@@ -69,11 +76,15 @@ angular
 
       $scope.search = function() {
         console.log('trying to search for', $scope.searchText);
-        searchService.userSearch($scope.searchText)
+        searchService.userSearch($scope.searchText, currentPage)
           .then(function successCallback(response) {
             console.log('search was successfull', response);
             $scope.showResults = true;
-            $scope.searchResults = response.data;
+            if (angular.isArray($scope.searchResults)) {
+              $scope.searchResults = $scope.searchResults.concat(response.data);
+            } else {
+              $scope.searchResults = response.data;
+            }
           }, function errorCallback(response) {
             // TODO: Display error message with toasters
             console.log('search failed', response);
@@ -83,5 +94,26 @@ angular
       $scope.resetSearch = function() {
         $scope.showResults = false;
         $scope.searchResults = null;
+        currentPage = 1;
       };
+
+      /**
+       * If there was a previous search this function tries to get
+       * results of the next page and tries to append the new results
+       * to the previous ones.
+       */
+      var searchNextPage = function() {
+        if ($scope.showResults) {
+          // execute this only if there was a search before
+          currentPage += 1;
+          $scope.search();
+        }
+      };
+
+      // if the user has scrolled to the bottom of the page
+      $(window).scroll(function() {
+        if($(window).scrollTop() + $(window).height() == $(document).height()) {
+          searchNextPage();
+        }
+      });
     }]);

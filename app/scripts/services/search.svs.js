@@ -19,10 +19,11 @@ angular
      * @return {Object}            A promise object returned bei the $http
      *                             service.
      */
-    searchService.userSearch = function(searchText) {
+    searchService.userSearch = function(searchText, page) {
       return $http.get(urlBase, {
         params: {
-          text: searchText
+          text: searchText,
+          page: page
         }
       });
     };
