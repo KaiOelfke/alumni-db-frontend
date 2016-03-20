@@ -16,4 +16,10 @@ angular
       restrict: 'E',
       templateUrl: 'views/directives/alumniSearch/template.html'
     };
+  })
+  .directive('alumniSearchResults', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'views/directives/alumniSearch/results.html'
+    };
   });

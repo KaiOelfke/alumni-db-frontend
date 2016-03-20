@@ -23,11 +23,11 @@
 				<td>
 					<span ng-show="user.is_premium && !$root.user.is_super_user">Premium</span>
 					<span ng-show="user.is_premium && $root.user.is_super_user">
-						<button ng-click="deletePremium(user)">Delete premium</button>
+						<button ng-click="deletePremium(users, user)">Delete premium</button>
 					</span>
 					<span ng-show="!user.is_premium && !$root.user.is_super_user">Not Premium</span>
 					<span ng-show="!user.is_premium && $root.user.is_super_user">
-						<button ng-click="makePremium(user)">Make premium</button>
+						<button ng-click="makePremium(users, user)">Make premium</button>
 					</span>
 				</td>
 			</tr>

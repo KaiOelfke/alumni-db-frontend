@@ -12,23 +12,23 @@ angular.module('alumni-db-frontend')
 
     $scope.users = [];
 
-    $scope.makePremium = function(user) {
-      var userIdx = $scope.users.indexOf(user);
+    $scope.makePremium = function(users, user) {
+      var userIdx = users.indexOf(user);
       usersFactory
         .makePremium(user)
         .then(function successCallback(user) {
-          $scope.users[userIdx] = user;
+          users[userIdx] = user;
         }, function errorCallback(response) {
           console.error('could not make user premium', response);
         });
     };
 
-    $scope.deletePremium = function(user) {
-      var userIdx = $scope.users.indexOf(user);
+    $scope.deletePremium = function(users, user) {
+      var userIdx = users.indexOf(user);
       usersFactory
         .deletePremium(user)
         .then(function successCallback(user) {
-          $scope.users[userIdx] = user;
+          users[userIdx] = user;
         }, function errorCallback(response) {
           console.error('could not delete premium', response);
         });
