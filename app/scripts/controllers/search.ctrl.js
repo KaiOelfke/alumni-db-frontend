@@ -67,7 +67,7 @@ angular
       usersFactory
         .getUsers()
         .then(function successCallback(response) {
-          console.log('received all users', response.data);
+          // console.log('received all users', response.data);
           $scope.allUsers = response.data;
         }, function errorCallback(response) {
           // TODO: Display error message with toaster
@@ -79,10 +79,10 @@ angular
         if (forNextPage) {
           page = currentPage;
         }
-        console.log('trying to search for', $scope.searchText, 'with page', page);
+        // console.log('trying to search for', $scope.searchText, 'with page', page);
         searchService.userSearch($scope.searchText, page)
           .then(function successCallback(response) {
-            console.log('search was successfull', response);
+            // console.log('search was successfull', response);
             $scope.showResults = true;
             if (forNextPage) {
               $scope.searchResults = $scope.searchResults.concat(response.data);
