@@ -368,7 +368,7 @@ module.exports = function(grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             '*.html',
-            'views/{,*/}*.html',
+            'views/{,{,*/}*/}*.html',
             'images/{,*/}*.{webp}',
             'fonts/*'
           ]
@@ -457,6 +457,25 @@ module.exports = function(grunt) {
     'ngconstant:development',
     'connect:test',
     'karma'
+  ]);
+
+  grunt.registerTask('build-development', [
+    'clean:dist',
+    'ngconstant:development',
+    'wiredep',
+    'less:production',
+    'useminPrepare',
+    'concurrent:dist',
+    'autoprefixer',
+    'concat',
+    'ngAnnotate',
+    'copy:dist',
+    'cdnify',
+    'cssmin',
+    'uglify',
+    'filerev',
+    'usemin',
+    'htmlmin'
   ]);
 
   grunt.registerTask('build-staging', [
