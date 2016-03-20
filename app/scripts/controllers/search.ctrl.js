@@ -74,13 +74,17 @@ angular
           console.error('could not get all users', response);
         });
 
-      $scope.search = function() {
-        console.log('trying to search for', $scope.searchText);
-        searchService.userSearch($scope.searchText, currentPage)
+      $scope.search = function(forNextPage) {
+        var page = 1;
+        if (forNextPage) {
+          page = currentPage;
+        }
+        console.log('trying to search for', $scope.searchText, 'with page', page);
+        searchService.userSearch($scope.searchText, page)
           .then(function successCallback(response) {
             console.log('search was successfull', response);
             $scope.showResults = true;
-            if (angular.isArray($scope.searchResults)) {
+            if (forNextPage) {
               $scope.searchResults = $scope.searchResults.concat(response.data);
             } else {
               $scope.searchResults = response.data;
@@ -106,7 +110,7 @@ angular
         if ($scope.showResults) {
           // execute this only if there was a search before
           currentPage += 1;
-          $scope.search(); // apending results is handled there
+          $scope.search(true); // apending results is handled there
         }
       };
 
