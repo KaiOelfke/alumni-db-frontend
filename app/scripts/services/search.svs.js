@@ -10,7 +10,7 @@
 angular
   .module('alumni-db-frontend')
   .service('searchService', ['$http', 'API_HOST', function($http, API_HOST) {
-    const urlBase = API_HOST + '/search';
+    var urlBase = API_HOST + '/search';
     var searchService = {};
 
     /**

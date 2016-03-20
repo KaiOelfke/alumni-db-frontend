@@ -26,7 +26,7 @@ angular
        * The results of the search requests will be saved here.
        * @type {Array.<Object>}
        */
-      $scope.searchResults;
+      $scope.searchResults = null;
 
       /**
        * If showResults is false the default view should be shown.
@@ -46,21 +46,21 @@ angular
        * Per default this controller will try to get all users and display
        * them. TODO: Do this only if an option has been set.
        */
-      $scope.allUsers;
+      $scope.allUsers = null;
 
       /**
        * Tries to execute a search request with the value stores in
        * $scope.searchText.
        * @type {function}
        */
-      $scope.search;
+      $scope.search = null;
 
       /**
        * If called it should revert back to the default view and clear all
        * previous search results.
        * @type {function}
        */
-      $scope.resetSearch;
+      $scope.resetSearch = null;
 
       // Initialize variables
 
@@ -99,20 +99,20 @@ angular
 
       /**
        * If there was a previous search this function tries to get
-       * results of the next page and tries to append the new results
+       * results for the next page and tries to append the new results
        * to the previous ones.
        */
       var searchNextPage = function() {
         if ($scope.showResults) {
           // execute this only if there was a search before
           currentPage += 1;
-          $scope.search();
+          $scope.search(); // apending results is handled there
         }
       };
 
       // if the user has scrolled to the bottom of the page
       $(window).scroll(function() {
-        if($(window).scrollTop() + $(window).height() == $(document).height()) {
+        if($(window).scrollTop() + $(window).height() === $(document).height()) {
           searchNextPage();
         }
       });

@@ -138,6 +138,7 @@
   },
   "jshintConfig": {
     "node": true,
+    "jQuery": true,
     "browser": true,
     "esnext": true,
     "bitwise": true,
