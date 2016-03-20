@@ -6,6 +6,7 @@
   <form ng-submit="search()">
     <input ng-model="searchText" name="searchText" type="text" />
     <input type="submit" name="submit" value="Search" />
+    <button type="button" ng-click="resetSearch()">Reset</button>
   </form>
   <alumni-search-results></alumni-search-results>
 </div>

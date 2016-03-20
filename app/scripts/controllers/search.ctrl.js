@@ -48,6 +48,13 @@ angular
        */
       $scope.search;
 
+      /**
+       * If called it should revert back to the default view and clear all
+       * previous search results.
+       * @type {function}
+       */
+      $scope.resetSearch;
+
       // Initialize variables
 
       usersFactory
@@ -71,5 +78,10 @@ angular
             // TODO: Display error message with toasters
             console.log('search failed', response);
           });
+      };
+
+      $scope.resetSearch = function() {
+        $scope.showResults = false;
+        $scope.searchResults = null;
       };
     }]);
