@@ -17,6 +17,14 @@ angular
     $scope.tmpPlan = {};
 
     plansFactory
+      .getPlan(1124141241)
+      .then(function(response) {
+        console.log(response);
+      }, function(error) {
+        console.error(error);
+      });
+
+    plansFactory
       .getAllPlans()
       .then(function(plansResponse) {
         $scope.plans = plansResponse.data;

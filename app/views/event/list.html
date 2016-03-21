@@ -1,3 +1,24 @@
-list.html
+<h1>list.html</h1>
 
-{{ test }}
+<button type="button" name="create-event">
+  <a ui-sref="home.event-create">Create event</a>
+</button>
+
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Description</th>
+    </thead>
+    <tbody>
+      <tr
+        ng-repeat="event in events">
+        <td>{{ event.id }}</td>
+        <td>{{ event.name }}</td>
+        <td>{{ event.description }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
