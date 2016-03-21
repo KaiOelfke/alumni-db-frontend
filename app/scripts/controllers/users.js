@@ -18,6 +18,7 @@ angular.module('alumni-db-frontend')
           // console.log('added premium for user', user);
           users[userIdx] = user;
         }, function errorCallback(response) {
+          // TODO: Use toaster to display this error message
           console.error('could not make user premium', response);
         });
     };
@@ -30,6 +31,7 @@ angular.module('alumni-db-frontend')
           // console.log('deleted premium for user', user);
           users[userIdx] = user;
         }, function errorCallback(response) {
+          // TODO: Use toaster to display this error message
           console.error('could not delete premium', response);
         });
     };

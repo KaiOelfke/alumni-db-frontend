@@ -79,9 +79,11 @@ angular
         if (forNextPage) {
           page = currentPage;
         }
+
         // console.log('trying to search for', $scope.searchText, 'with page', page);
         searchService.userSearch($scope.searchText, page)
           .then(function successCallback(response) {
+
             // console.log('search was successfull', response);
             $scope.showResults = true;
             if (forNextPage) {
@@ -117,7 +119,7 @@ angular
 
       // if the user has scrolled to the bottom of the page
       $(window).scroll(function() {
-        if($(window).scrollTop() + $(window).height() === $(document).height()) {
+        if ($(window).scrollTop() + $(window).height() === $(document).height()) {
           searchNextPage();
         }
       });

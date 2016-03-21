@@ -40,8 +40,10 @@ angular.module('alumni-db-frontend')
         .then(function successCallback(response) {
           def.resolve(response.data.data); // return user data
         }, function errorCallback(response) {
+
           def.reject(response);
         });
+
       return def.promise;
     };
 
@@ -54,8 +56,10 @@ angular.module('alumni-db-frontend')
           user.subscription_id = null;
           def.resolve(user);
         }, function errorCallback(response) {
+
           def.reject(response);
         });
+
       return def.promise;
     };
 

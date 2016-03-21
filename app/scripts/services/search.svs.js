@@ -16,7 +16,7 @@ angular
     /**
      * Executes a simple search for a user by a given text without any filters.
      * @param  {string} searchText The search text to use.
-     * @return {Object}            A promise object returned bei the $http
+     * @return {Object}            A promise object returned by the $http
      *                             service.
      */
     searchService.userSearch = function(searchText, page) {
