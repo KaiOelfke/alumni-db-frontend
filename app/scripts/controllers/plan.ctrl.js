@@ -51,7 +51,7 @@ angular
     $scope.savePlan = function(tmpPlan) {
       $scope.tmpPlanFormVisible = false;
       $scope.tmpPlan = {};
-      if (tmpPlan.default === null)
+      if (!tmpPlan.default)
       {
         tmpPlan.default = false;
       }

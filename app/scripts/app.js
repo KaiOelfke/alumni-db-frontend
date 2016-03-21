@@ -205,9 +205,9 @@ angular
           }
         }
       })
-      .state('home.events', {
-        url: '/events',
-        templateUrl: 'views/events/list.html',
+      .state('home.event', {
+        url: '/event',
+        templateUrl: 'views/event/list.html',
         controller: 'eventCtrl',
         resolve: {
           authorizedRoles: function(USER_ROLES) {
