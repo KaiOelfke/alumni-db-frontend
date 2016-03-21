@@ -45,6 +45,17 @@ angular
         return def.promise;
       };
 
+      eventService.getEvent = function(id) {
+        var def = $q.defer();
+        if (id < events.length) {
+          def.resolve(events[id]);
+        } else {
+          def.reject('No event found with id ' + id);
+        }
+
+        return def.promise;
+      };
+
       /**
        * Executes a request to get all events.
        * @return {Object}            A promise object returned by the $http

@@ -207,8 +207,8 @@ angular
       })
       .state('home.event', {
         url: '/event',
-        templateUrl: 'views/event/list.html',
-        controller: 'eventCtrl',
+        templateUrl: 'views/event/event-list.html',
+        controller: 'eventListCtrl',
         resolve: {
           authorizedRoles: function(USER_ROLES) {
             return USER_ROLES.superUser;
@@ -222,7 +222,7 @@ angular
       .state('home.event-create', {
         url: '/event/create',
         templateUrl: 'views/event/event-create.html',
-        controller: 'eventCtrl',
+        controller: 'eventCreateCtrl',
         resolve: {
           authorizedRoles: function(USER_ROLES) {
             return USER_ROLES.superUser;
@@ -230,6 +230,24 @@ angular
 
           authz: function(authorizedRoles, authorizationService) {
             return authorizationService.isAuthorized(authorizedRoles);
+          }
+        }
+      })
+      .state('home.event-show', {
+        url: '/event/:id',
+        templateUrl: 'views/event/event-show.html',
+        controller: 'eventShowCtrl',
+        resolve: {
+          authorizedRoles: function(USER_ROLES) {
+            return USER_ROLES.superUser;
+          },
+
+          authz: function(authorizedRoles, authorizationService) {
+            return authorizationService.isAuthorized(authorizedRoles);
+          },
+
+          data: function(eventService, $stateParams) {
+            return eventService.getEvent($stateParams.id);
           }
         }
       })
