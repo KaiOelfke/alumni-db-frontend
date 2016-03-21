@@ -205,6 +205,20 @@ angular
           }
         }
       })
+      .state('home.events', {
+        url: '/events',
+        templateUrl: 'views/events/list.html',
+        controller: 'eventCtrl',
+        resolve: {
+          authorizedRoles: function(USER_ROLES) {
+            return USER_ROLES.superUser;
+          },
+
+          authz: function(authorizedRoles, authorizationService) {
+            return authorizationService.isAuthorized(authorizedRoles);
+          }
+        }
+      })
       .state('home.become-premium', {
         url: '/become-premium',
         templateUrl: 'views/become-premium.html',
