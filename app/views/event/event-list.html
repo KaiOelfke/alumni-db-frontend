@@ -33,6 +33,13 @@
   </table>
 </div>
 
+<!-- Edit event view -->
+<div
+  ng-show="editedEvent"
+  ng-include="'/views/event/partials/form-event-edit.html'"
+  class="form-view">
+</div>
+
 <hr>
 
 <!-- Show/hide action buttons -->

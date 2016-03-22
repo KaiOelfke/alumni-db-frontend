@@ -30,11 +30,21 @@ angular
 
       $scope.newEvent = null;
 
+      $scope.editedEvent = null;
+
       $scope.toggleCreateEventView = function() {
         if ($scope.newEvent) {
           $scope.newEvent = null;
         } else {
           $scope.newEvent = {};
+        }
+      };
+
+      $scope.toggleEditEventView = function(event) {
+        if ($scope.editedEvent) {
+          $scope.editedEvent = null;
+        } else {
+          $scope.editedEvent = angular.extend({}, event);
         }
       };
 
@@ -57,6 +67,19 @@ angular
           .removeEvent(event.id)
           .then(function successCallback() {
             toaster.pop('success', 'successfully removed event');
+            requestAllEvents();
+          }, function errorCallback(error) {
+
+            toaster.pop('error', error);
+          });
+      };
+
+      $scope.editEvent = function(event) {
+        eventService
+          .editEvent(event.id, event)
+          .then(function successCallback() {
+            toaster.pop('success', 'event successfully edited');
+            $scope.toggleEditEventView();
             requestAllEvents();
           }, function errorCallback(error) {
 
