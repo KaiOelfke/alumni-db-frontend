@@ -1,4 +1,6 @@
-<h5>event-show.html</h5>
+<h5><a ui-sref="home.event">← All events</a></h5>
+
+<hr>
 
 <!-- Show create fee view button for super users -->
 <p>
@@ -60,6 +62,8 @@
   </div>
 </div>
 
+<hr>
+
 <!-- Event information -->
 <h1>{{ event.name }}</h1>
 
@@ -97,6 +101,8 @@
     </thead>
   </table>
 </div>
+
+<hr>
 
 <!-- Edit fee view for super users -->
 <div ng-show="feeToEdit">
