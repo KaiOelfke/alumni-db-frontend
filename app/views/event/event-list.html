@@ -2,12 +2,6 @@
 
 <hr>
 
-<button type="button" name="create-event">
-  <a ui-sref="home.event-create">Create event</a>
-</button>
-
-<hr>
-
 <div class="table-responsive">
   <table class="table">
     <thead>
@@ -37,5 +31,24 @@
       </tr>
     </tbody>
   </table>
+</div>
 
+<hr>
+
+<!-- Show/hide action buttons -->
+<p>
+  <button
+    ng-click="toggleCreateEventView()"
+    type="button"
+    name="createEvent">
+      <span ng-show="!newEvent">Create event</span>
+      <span ng-show="newEvent">Close create event view</span>
+    </button>
+</p>
+
+<!-- Edit event view -->
+<div
+  ng-show="newEvent"
+  ng-include="'/views/event/partials/form-event-create.html'"
+  class="form-view">
 </div>

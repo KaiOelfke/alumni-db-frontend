@@ -28,6 +28,29 @@ angular
           });
       };
 
+      $scope.newEvent = null;
+
+      $scope.toggleCreateEventView = function() {
+        if ($scope.newEvent) {
+          $scope.newEvent = null;
+        } else {
+          $scope.newEvent = {};
+        }
+      };
+
+      $scope.createEvent = function(event) {
+        eventService
+          .createEvent(event)
+          .then(function successCallback() {
+            toaster.pop('success', 'successfully created event');
+            $scope.toggleCreateEventView();
+            requestAllEvents();
+          }, function errorCallback(error) {
+
+            toaster.pop('error', error);
+          });
+      };
+
       // entry point
       requestAllEvents();
 
