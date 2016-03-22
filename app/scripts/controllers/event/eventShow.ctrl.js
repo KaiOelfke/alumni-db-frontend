@@ -34,6 +34,8 @@ angular
 
       $scope.newFee = null;
 
+      $scope.editedEvent = null;
+
       $scope.feeToEdit = null;
 
       $scope.clearFeeForm = function() {
@@ -53,6 +55,14 @@ angular
           $scope.feeToEdit = null;
         } else {
           $scope.feeToEdit = angular.extend({}, fee);
+        }
+      };
+
+      $scope.toggleEditEventView = function() {
+        if ($scope.editedEvent) {
+          $scope.editedEvent = null;
+        } else {
+          $scope.editedEvent = angular.extend({}, $scope.event);
         }
       };
 

@@ -1,0 +1,37 @@
+<form ng-submit="" name="editEventForm" novalidate>
+  <p>
+    <b>Event name:</b>
+    <input
+      ng-model="editedEvent.name"
+      name="name"
+      type="text"
+      required>
+  </p>
+  <p>
+    <b>Event description:</b>
+    <input
+      ng-model="editedEvent.description"
+      name="description"
+      type="text"
+      required>
+  </p>
+  <p>
+    <button
+      ng-click="toggleEditEventView()"
+      type="button"
+      name="cancel">Cancel</button>
+    <button
+      ng-disabled="editEventForm.$invalid"
+      type="submit"
+      name="create">Save</button>
+  </p>
+  <div class="debug">
+    <p>editEventForm: {{ editEventForm }}</p>
+    <p>editEventForm.$valid: {{ editEventForm.$valid }}</p>
+    <p>editEventForm.name.$valid: {{ editEventForm.name.$valid }}</p>
+    <p>editEventForm.description.$valid: {{ editEventForm.description.$valid }}</p>
+    <p>editedEvent: {{ editedEvent }}</p>
+    <p>editedEvent.name: {{ editedEvent.name }}</p>
+    <p>editedEvent.description: {{ editedEvent.description }}</p>
+  </div>
+</form>

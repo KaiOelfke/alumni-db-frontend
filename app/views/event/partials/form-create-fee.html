@@ -29,6 +29,10 @@
       type="button"
       name="clearCreate">Clear</button>
     <button
+      ng-click="toggleCreateFeeView()"
+      type="button"
+      name="clearCreate">Cancel</button>
+    <button
       ng-disabled="createFeeForm.$invalid"
       type="submit"
       name="create">Add fee to event</button>

@@ -5,15 +5,29 @@
 <!-- Show create fee view button for super users -->
 <p>
   <button
+    ng-click="toggleEditEventView()"
+    type="button"
+    name="editEvent">
+      <span ng-show="!editedEvent">Edit event</span>
+      <span ng-show="editedEvent">Close edit event view</span>
+    </button>
+  <button
     ng-click="toggleCreateFeeView()"
     type="button"
     name="createFee">
-      <span ng-show="!newFee">Create new fee</span>
-      <span ng-show="newFee">Close</span>
+      <span ng-show="!newFee">Create fee</span>
+      <span ng-show="newFee">Close create fee view</span>
     </button>
 </p>
 
-<!-- Create fee view for super users -->
+<!-- Edit event view -->
+<div
+  ng-show="editedEvent"
+  ng-include="'/views/event/partials/form-edit-event.html'"
+  class="form-view">
+</div>
+
+<!-- Create fee view -->
 <div
   ng-show="newFee"
   ng-include="'/views/event/partials/form-create-fee.html'"
@@ -28,7 +42,7 @@
 
 <hr>
 
-<!-- Edit fee view for super users -->
+<!-- Edit fee view -->
 <div
   ng-show="feeToEdit"
   ng-include="'/views/event/partials/form-edit-fee.html'"
