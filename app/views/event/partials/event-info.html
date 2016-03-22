@@ -1,0 +1,36 @@
+<h1>{{ event.name }}</h1>
+
+<p>{{ event.description }}</p>
+
+<p><b>Fees:</b></p>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <th>Fee id</th>
+      <th>Event id</th>
+      <th>Fee Name</th>
+      <th>Fee price</th>
+      <th>Fee deadline</th>
+      <th>Actions</th>
+      <tbody>
+        <tr ng-repeat="fee in fees">
+          <td>{{ fee.id }}</td>
+          <td>{{ fee.event_id }}</td>
+          <td>{{ fee.name }}</td>
+          <td>{{ fee.price }}</td>
+          <td>{{ fee.deadline }}</td>
+          <td>
+            <button
+              ng-click="removeFee(fee)"
+              type="button"
+              name="removeFee">Remove</button>
+              <button
+                ng-click="toggleEditFeeView(fee)"
+                type="button"
+                name="editFee">Edit</button>
+          </td>
+        </tr>
+      </tbody>
+    </thead>
+  </table>
+</div>
