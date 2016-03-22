@@ -37,7 +37,7 @@ angular
       $scope.feeToEdit = null;
 
       $scope.clearFeeForm = function() {
-        $scope.newFee = null;
+        $scope.newFee = {};
       };
 
       $scope.toggleCreateFeeView = function() {
