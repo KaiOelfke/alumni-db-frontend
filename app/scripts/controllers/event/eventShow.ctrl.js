@@ -13,9 +13,23 @@ angular
   .controller('eventShowCtrl', [
     'eventService',
     '$scope',
-    '$state',
-    'toaster', function(eventService, $scope, $state, toaster) {
+    'data',
+    'toaster', function(eventService, $scope, data, toaster) {
 
-      $scope.test = 'Hello, world!';
+      $scope.event = data;
+
+      $scope.newFee = null;
+
+      $scope.toggleCreateFeeMenu = function() {
+        if ($scope.newFee) {
+          $scope.newFee = null;
+        } else {
+          $scope.newFee = {};
+        }
+      };
+
+      $scope.createFee = function(fee) {
+        console.log('creating new fee', fee);
+      };
 
     }]);

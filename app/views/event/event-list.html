@@ -15,7 +15,9 @@
       <tr
         ng-repeat="event in events">
         <td>{{ event.id }}</td>
-        <td>{{ event.name }}</td>
+        <td>
+          <a ui-sref="home.event-show({ id: event.id })">{{ event.name }}</a>
+        </td>
         <td>{{ event.description }}</td>
       </tr>
     </tbody>
