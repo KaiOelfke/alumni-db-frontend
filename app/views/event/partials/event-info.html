@@ -2,8 +2,7 @@
 
 <p>{{ event.description }}</p>
 
-<p><b>Fees:</b></p>
-<div class="table-responsive">
+<div class="table-responsive" ng-show="fees.length > 0">
   <table class="table">
     <thead>
       <th>Fee id</th>

@@ -83,7 +83,6 @@ angular
           .createFee(fee)
           .then(function successCallback() {
             toaster.pop('success', 'successfully created fee');
-            $scope.clearFeeForm();
             $scope.toggleCreateFeeView();
             refreshFees();
           }, function errorCallback(error) {

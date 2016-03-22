@@ -2,7 +2,20 @@
 
 <hr>
 
-<!-- Show create fee view button for super users -->
+<!-- Event information -->
+<div ng-include="'/views/event/partials/event-info.html'">
+</div>
+
+<!-- Edit fee view -->
+<div
+  ng-show="feeToEdit"
+  ng-include="'/views/event/partials/form-fee-edit.html'"
+  class="form-view">
+</div>
+
+<hr>
+
+<!-- Show/hide action buttons -->
 <p>
   <button
     ng-click="toggleEditEventView()"
@@ -23,28 +36,15 @@
 <!-- Edit event view -->
 <div
   ng-show="editedEvent"
-  ng-include="'/views/event/partials/form-edit-event.html'"
+  ng-include="'/views/event/partials/form-event-edit.html'"
   class="form-view">
 </div>
 
 <!-- Create fee view -->
 <div
   ng-show="newFee"
-  ng-include="'/views/event/partials/form-create-fee.html'"
+  ng-include="'/views/event/partials/form-fee-create.html'"
   class="form-view">
 </div>
 
 <hr>
-
-<!-- Event information -->
-<div ng-include="'/views/event/partials/event-info.html'">
-</div>
-
-<hr>
-
-<!-- Edit fee view -->
-<div
-  ng-show="feeToEdit"
-  ng-include="'/views/event/partials/form-edit-fee.html'"
-  class="form-view">
-</div>
