@@ -67,6 +67,29 @@ angular
         return def.promise;
       };
 
+      eventService.removeEvent = function(event_id) {
+        var def = $q.defer();
+        var eventFound = false;
+        var res = [];
+        for (var i = 0; i < events.length; i++) {
+          var currentEvent = events[i];
+          if (currentEvent.id !== event_id) {
+            res.push(currentEvent);
+          } else {
+            eventFound = true;
+          }
+        }
+
+        if (eventFound) {
+          events = res;
+          def.resolve();
+        } else {
+          def.reject();
+        }
+
+        return def.promise;
+      };
+
       /**
        * Executes a request to get all events.
        * @return {Object}            A promise object returned by the $http

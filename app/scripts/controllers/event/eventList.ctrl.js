@@ -51,6 +51,19 @@ angular
           });
       };
 
+      $scope.removeEvent = function(event) {
+        console.log('removing event', event);
+        eventService
+          .removeEvent(event.id)
+          .then(function successCallback() {
+            toaster.pop('success', 'successfully removed event');
+            requestAllEvents();
+          }, function errorCallback(error) {
+
+            toaster.pop('error', error);
+          });
+      };
+
       // entry point
       requestAllEvents();
 
