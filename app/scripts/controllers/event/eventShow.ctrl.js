@@ -35,6 +35,10 @@ angular
 
       $scope.newFee = null;
 
+      $scope.clearFeeForm = function() {
+        $scope.newFee = {};
+      };
+
       $scope.toggleCreateFeeMenu = function() {
         if ($scope.newFee) {
           $scope.newFee = null;

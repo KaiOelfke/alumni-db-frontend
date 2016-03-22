@@ -37,6 +37,10 @@
     </p>
     <p>
       <button
+        ng-click="clearFeeForm()"
+        type="button"
+        name="clearFeeForm">Clear</button>
+      <button
         ng-disabled="form.$invalid"
         type="submit"
         name="create">Add fee to event</button>
