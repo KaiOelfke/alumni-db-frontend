@@ -1,5 +1,6 @@
 <h5>event-show.html</h5>
 
+<!-- Show create fee menu button for super users -->
 <p>
   <button
     ng-click="toggleCreateFeeMenu()"
@@ -7,6 +8,7 @@
     name="createFee">Toggle create fee menu</button>
 </p>
 
+<!-- Create fee menu for super users -->
 <div ng-show="newFee">
   <form ng-submit="createFee(newFee)" name="form" novalidate>
     <p>
@@ -54,6 +56,29 @@
   </div>
 </div>
 
+<!-- Event information -->
 <h1>{{ event.name }}</h1>
 
 <p>{{ event.description }}</p>
+
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <th>Fee id</th>
+      <th>Event id</th>
+      <th>Fee Name</th>
+      <th>Fee price</th>
+      <th>Fee deadline</th>
+      <tbody>
+        <tr ng-repeat="fee in fees">
+          <td>{{ fee.id }}</td>
+          <td>{{ fee.event_id }}</td>
+          <td>{{ fee.name }}</td>
+          <td>{{ fee.price }}</td>
+          <td>{{ fee.deadline }}</td>
+        </tr>
+      </tbody>
+    </thead>
+  </table>
+
+</div>

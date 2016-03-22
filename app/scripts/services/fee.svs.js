@@ -15,12 +15,14 @@ angular
 
       var fees = [
         {
+          id: 0,
           event_id: 0,
           name: 'first fee',
           price: 10,
           deadline: 'some deadline'
         },
         {
+          id: 1,
           event_id: 1,
           name: 'second fee',
           price: 20,

@@ -16,9 +16,9 @@ angular
     'data',
     'toaster', function(feeService, $scope, data, toaster) {
 
-      $scope.event = data;
+      $scope.event = data.event;
 
-      console.log('received data', data);
+      $scope.fees = data.fees;
 
       $scope.newFee = null;
 
