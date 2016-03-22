@@ -260,8 +260,10 @@ angular
                       fees: fees
                     };
                   }, function errorCallback(error) {
-                    // TODO: Make a state change
-                    console.error(error);
+                    return {
+                      event: event,
+                      fees: []
+                    }
                   });
               }, function errorCallback(error) {
                 // TODO: Make a state change

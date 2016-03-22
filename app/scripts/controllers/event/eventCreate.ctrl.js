@@ -19,11 +19,12 @@ angular
       $scope.newEvent = {};
 
       $scope.createEvent = function(event) {
-        console.log('creating event, event');
         eventService
           .insertEvent(event)
-          .then(function successCallback() {
-            toaster.pop('success', 'Event successfully created.');
+          .then(function successCallback(event) {
+            $state.go('home.event-show', {
+              id: event.id
+            });
           }, function errorCallback(response) {
             // TODO: Use toaster to display this error message
             console.error('could not create event', response);
