@@ -11,10 +11,11 @@
 angular
   .module('alumni-db-frontend')
   .controller('eventShowCtrl', [
+    'eventService',
     'feeService',
     '$scope',
     'data',
-    'toaster', function(feeService, $scope, data, toaster) {
+    'toaster', function(eventService, feeService, $scope, data, toaster) {
 
       var refreshFees = function() {
         feeService
@@ -25,6 +26,16 @@ angular
           }, function errorCallback() {
 
             $scope.fees = [];
+          });
+      };
+
+      var refreshEvent = function() {
+        eventService
+          .getEvent($scope.event.id)
+          .then(function successCallback(event) {
+            $scope.event = event;
+          }, function errorCallback(error) {
+            toaster.pop('error', error);
           });
       };
 
@@ -105,7 +116,19 @@ angular
 
             toaster.pop('error', error);
           });
-        console.log('should edit fee', fee);
+      };
+
+      $scope.editEvent = function(event) {
+        eventService
+          .editEvent(event.id, event)
+          .then(function successCallback() {
+            toaster.pop('success', 'event successfully edited');
+            $scope.toggleEditEventView();
+            refreshEvent();
+          }, function errorCallback(error) {
+
+            toaster.pop('error', error);
+          });
       };
 
     }]);
