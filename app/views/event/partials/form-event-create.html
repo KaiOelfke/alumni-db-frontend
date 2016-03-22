@@ -1,0 +1,33 @@
+<form ng-submit="createEvent(newEvent)" name="form" novalidate>
+  <p>
+    <b>Name:</b>
+    <input
+      ng-model="newEvent.name"
+      name="name"
+      type="text"
+      required>
+  </p>
+  <p>
+    <b>Description:</b>
+    <input
+      ng-model="newEvent.description"
+      name="description"
+      type="text"
+      required>
+  </p>
+  <p>
+    <button
+      ng-disabled="form.$invalid"
+      type="submit"
+      name="create">Create event</button>
+  </p>
+</form>
+
+<div class="debug">
+  <p>form: {{ form }}</p>
+  <p>form.$valid: {{ form.$valid }}</p>
+  <p>form.name.$valid: {{ form.name.$valid }}</p>
+  <p>form.description.$valid: {{ form.description.$valid }}</p>
+  <p>newEvent: {{ newEvent }}</p>
+  <p>newEvent.name: {{ newEvent.name }}</p>
+</div>

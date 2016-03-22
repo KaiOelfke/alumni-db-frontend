@@ -1,4 +1,6 @@
-<form ng-submit="editEvent(editedEvent)" name="editEventForm" novalidate>
+<form
+  ng-submit="editEvent(editedEvent)"
+  name="editEventForm" novalidate>
   <p>
     <b>Event name:</b>
     <input
@@ -25,6 +27,7 @@
       type="submit"
       name="create">Save</button>
   </p>
+
   <div class="debug">
     <p>editEventForm: {{ editEventForm }}</p>
     <p>editEventForm.$valid: {{ editEventForm.$valid }}</p>
