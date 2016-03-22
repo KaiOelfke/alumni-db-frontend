@@ -2,10 +2,9 @@
 
 /**
  * @ngdoc service
- * @name searchService
+ * @name eventService
  *
- * @description A service which provides different functions to interact
- * with the backend search API.
+ * @description TODO: Write description for eventService
  */
 angular
   .module('alumni-db-frontend')
@@ -27,7 +26,7 @@ angular
         }
       ];
 
-      // var urlBase = API_HOST + '/events';
+      // var urlBase = API_HOST + '/event';
       var eventService = {};
 
       /**

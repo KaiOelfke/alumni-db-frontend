@@ -11,12 +11,14 @@
 angular
   .module('alumni-db-frontend')
   .controller('eventShowCtrl', [
-    'eventService',
+    'feeService',
     '$scope',
     'data',
-    'toaster', function(eventService, $scope, data, toaster) {
+    'toaster', function(feeService, $scope, data, toaster) {
 
       $scope.event = data;
+
+      console.log('received data', data);
 
       $scope.newFee = null;
 

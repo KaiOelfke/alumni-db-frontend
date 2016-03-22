@@ -246,8 +246,25 @@ angular
             return authorizationService.isAuthorized(authorizedRoles);
           },
 
-          data: function(eventService, $stateParams) {
-            return eventService.getEvent($stateParams.id);
+          data: function(eventService, feeService, $stateParams) {
+            return eventService
+              .getEvent($stateParams.id)
+              .then(function successCallback(event) {
+                return feeService
+                  .getFeesForEvent(event.id)
+                  .then(function successCallback(fees) {
+                    return {
+                      event: event,
+                      fees: fees
+                    };
+                  }, function errorCallback(error) {
+
+                    console.error(error);
+                  });
+              }, function errorCallback(error) {
+
+                console.error(error);
+              });
           }
         }
       })
