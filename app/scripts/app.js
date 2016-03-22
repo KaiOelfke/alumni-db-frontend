@@ -258,11 +258,11 @@ angular
                       fees: fees
                     };
                   }, function errorCallback(error) {
-
+                    // TODO: Make a state change
                     console.error(error);
                   });
               }, function errorCallback(error) {
-
+                // TODO: Make a state change
                 console.error(error);
               });
           }

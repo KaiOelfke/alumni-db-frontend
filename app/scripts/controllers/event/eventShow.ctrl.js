@@ -16,6 +16,19 @@ angular
     'data',
     'toaster', function(feeService, $scope, data, toaster) {
 
+      var refreshFees = function() {
+        console.log('refreshing fees');
+        feeService
+          .getFeesForEvent($scope.event.id)
+          .then(function successCallback(fees) {
+            console.log('received new fees', fees);
+            $scope.fees = fees;
+          }, function errorCallback(error) {
+            // TODO: Use toaster for this
+            console.error(error);
+          });
+      };
+
       $scope.event = data.event;
 
       $scope.fees = data.fees;
@@ -31,7 +44,18 @@ angular
       };
 
       $scope.createFee = function(fee) {
-        console.log('creating new fee', fee);
+        fee.event_id = $scope.event.id;
+        feeService
+          .createFee(fee)
+          .then(function successCallback() {
+            // TODO: Use toaster for this
+            console.log('successfully created fee');
+            // TODO: clear form
+            refreshFees();
+          }, function errorCallback(error) {
+            // TODO: Use toaster for this
+            console.error(error);
+          });
       };
 
     }]);

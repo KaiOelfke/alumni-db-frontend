@@ -52,5 +52,14 @@ angular
         return def.promise;
       };
 
+      feeService.createFee = function(fee) {
+        var def = $q.defer();
+        var id = fees.length;
+        fee.id = id;
+        fees.push(fee);
+        def.resolve(fee);
+        return def.promise;
+      };
+
       return feeService;
     }]);
