@@ -35,7 +35,7 @@ angular
        * @return {Object}       A promise object returned by the $http
        *                        service.
        */
-      eventService.insertEvent = function(event) {
+      eventService.createEvent = function(event) {
         var def = $q.defer();
         var tmpEvent = angular.extend({}, event);
         tmpEvent.id = events.length;

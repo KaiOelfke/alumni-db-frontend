@@ -20,7 +20,7 @@ angular
 
       $scope.createEvent = function(event) {
         eventService
-          .insertEvent(event)
+          .createEvent(event)
           .then(function successCallback(event) {
             $state.go('home.event-show', {
               id: event.id
