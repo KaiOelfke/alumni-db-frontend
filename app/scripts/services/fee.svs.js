@@ -84,5 +84,17 @@ angular
         return def.promise;
       };
 
+      feeService.editFee = function(id, fee) {
+        var def = $q.defer();
+        if (id < fees.length) {
+          fees[id] = fee;
+          def.resolve();
+        } else {
+          def.reject('No fee found with id ' + id);
+        }
+
+        return def.promise;
+      };
+
       return feeService;
     }]);

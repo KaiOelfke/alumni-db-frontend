@@ -36,11 +36,11 @@ angular
 
       $scope.feeToEdit = null;
 
-      $scope.clear = function(model) {
-        $scope[model] = {};
+      $scope.clearFeeForm = function() {
+        $scope.newFee = null;
       };
 
-      $scope.toggleCreateFeeMenu = function() {
+      $scope.toggleCreateFeeView = function() {
         if ($scope.newFee) {
           $scope.newFee = null;
         } else {
@@ -48,7 +48,7 @@ angular
         }
       };
 
-      $scope.toggleEditFeeMenu = function(fee) {
+      $scope.toggleEditFeeView = function(fee) {
         if ($scope.feeToEdit) {
           $scope.feeToEdit = null;
         } else {
@@ -63,7 +63,7 @@ angular
           .then(function successCallback() {
             toaster.pop('success', 'successfully created fee');
             $scope.clearFeeForm();
-            $scope.toggleCreateFeeMenu();
+            $scope.toggleCreateFeeView();
             refreshFees();
           }, function errorCallback(error) {
 
@@ -85,6 +85,16 @@ angular
       };
 
       $scope.editFee = function(fee) {
+        feeService
+          .editFee(fee.id, fee)
+          .then(function successCallback() {
+            toaster.pop('success', 'fee successfully edited');
+            $scope.toggleEditFeeView();
+            refreshFees();
+          }, function errorCallback(error) {
+
+            toaster.pop('error', error);
+          });
         console.log('should edit fee', fee);
       };
 
