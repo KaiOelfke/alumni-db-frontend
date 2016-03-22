@@ -74,6 +74,7 @@
       <th>Fee Name</th>
       <th>Fee price</th>
       <th>Fee deadline</th>
+      <th>Actions</th>
       <tbody>
         <tr ng-repeat="fee in fees">
           <td>{{ fee.id }}</td>
@@ -81,6 +82,12 @@
           <td>{{ fee.name }}</td>
           <td>{{ fee.price }}</td>
           <td>{{ fee.deadline }}</td>
+          <td>
+            <button
+              ng-click="removeFee(fee)"
+              type="button"
+              name="removeFee">Remove</button>
+          </td>
         </tr>
       </tbody>
     </thead>

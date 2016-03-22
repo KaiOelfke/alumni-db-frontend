@@ -205,6 +205,8 @@ angular
           }
         }
       })
+
+      // TODO: make this an abstract state
       .state('home.event', {
         url: '/event',
         templateUrl: 'views/event/event-list.html',

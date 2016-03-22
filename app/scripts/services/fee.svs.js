@@ -61,5 +61,28 @@ angular
         return def.promise;
       };
 
+      feeService.removeFee = function(fee_id) {
+        var def = $q.defer();
+        var feeFound = false;
+        var res = [];
+        for (var i = 0; i < fees.length; i++) {
+          var currentFee = fees[i];
+          if (currentFee.id !== fee_id) {
+            res.push(currentFee);
+          } else {
+            feeFound = true;
+          }
+        }
+
+        if (feeFound) {
+          fees = res;
+          def.resolve();
+        } else {
+          def.reject();
+        }
+
+        return def.promise;
+      };
+
       return feeService;
     }]);
