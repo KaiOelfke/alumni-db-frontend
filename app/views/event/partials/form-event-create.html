@@ -17,6 +17,14 @@
   </p>
   <p>
     <button
+      ng-click="newEvent = {}"
+      type="button"
+      name="clearEvent">Clear</button>
+    <button
+      ng-click="toggleCreateEventView()"
+      type="button"
+      name="cancelCreateEvent">Cancel</button>
+    <button
       ng-disabled="form.$invalid"
       type="submit"
       name="create">Create event</button>
