@@ -10,7 +10,7 @@
 
 <!-- Create fee menu for super users -->
 <div ng-show="newFee">
-  <form ng-submit="createFee(newFee)" name="form" novalidate>
+  <form ng-submit="createFee(newFee)" name="createFeeForm" novalidate>
     <p>
       <b>Fee name:</b>
       <input
@@ -37,22 +37,22 @@
     </p>
     <p>
       <button
-        ng-click="clearFeeForm()"
+        ng-click="clear('newFee')"
         type="button"
-        name="clearFeeForm">Clear</button>
+        name="clearCreate">Clear</button>
       <button
-        ng-disabled="form.$invalid"
+        ng-disabled="createFeeForm.$invalid"
         type="submit"
         name="create">Add fee to event</button>
     </p>
   </form>
 
   <div class="debug">
-    <p>form: {{ form }}</p>
-    <p>form.$valid: {{ form.$valid }}</p>
-    <p>form.name.$valid: {{ form.name.$valid }}</p>
-    <p>form.price.$valid: {{ form.price.$valid }}</p>
-    <p>form.deadline.$valid: {{ form.deadline.$valid }}</p>
+    <p>createFeeForm: {{ createFeeForm }}</p>
+    <p>createFeeForm.$valid: {{ createFeeForm.$valid }}</p>
+    <p>createFeeForm.name.$valid: {{ createFeeForm.name.$valid }}</p>
+    <p>createFeeForm.price.$valid: {{ createFeeForm.price.$valid }}</p>
+    <p>createFeeForm.deadline.$valid: {{ createFeeForm.deadline.$valid }}</p>
     <p>newFee: {{ newFee }}</p>
     <p>newFee.name: {{ newFee.name }}</p>
     <p>newFee.price: {{ newFee.price }}</p>
@@ -87,10 +87,63 @@
               ng-click="removeFee(fee)"
               type="button"
               name="removeFee">Remove</button>
+              <button
+                ng-click="toggleEditFeeMenu(fee)"
+                type="button"
+                name="editFee">Edit</button>
           </td>
         </tr>
       </tbody>
     </thead>
   </table>
-
 </div>
+
+<!-- Create fee menu for super users -->
+<div ng-show="feeToEdit">
+  <form ng-submit="editFee(feeToEdit)" name="editFeeForm" novalidate>
+    <p>
+      <b>Fee name:</b>
+      <input
+        ng-model="feeToEdit.name"
+        name="name"
+        type="text"
+        required>
+    </p>
+    <p>
+      <b>Fee price:</b>
+      <input
+        ng-model="feeToEdit.price"
+        name="price"
+        type="text"
+        required>
+    </p>
+    <p>
+      <b>Fee deadline:</b>
+      <input
+        ng-model="feeToEdit.deadline"
+        name="deadline"
+        type="text"
+        required>
+    </p>
+    <p>
+      <button
+        ng-click="clear('feeToEdit')"
+        type="button"
+        name="clearEdit">Clear</button>
+      <button
+        ng-disabled="editFeeForm.$invalid"
+        type="submit"
+        name="create">Save</button>
+    </p>
+    <div class="debug">
+      <p>editFeeForm: {{ editFeeForm }}</p>
+      <p>editFeeForm.$valid: {{ editFeeForm.$valid }}</p>
+      <p>editFeeForm.name.$valid: {{ editFeeForm.name.$valid }}</p>
+      <p>editFeeForm.price.$valid: {{ editFeeForm.price.$valid }}</p>
+      <p>editFeeForm.deadline.$valid: {{ editFeeForm.deadline.$valid }}</p>
+      <p>feeToEdit: {{ feeToEdit }}</p>
+      <p>feeToEdit.name: {{ feeToEdit.name }}</p>
+      <p>feeToEdit.price: {{ feeToEdit.price }}</p>
+      <p>feeToEdit.deadline: {{ feeToEdit.deadline }}</p>
+    </div>
+  </form>

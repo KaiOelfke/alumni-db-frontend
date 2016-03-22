@@ -259,11 +259,12 @@ angular
                       event: event,
                       fees: fees
                     };
-                  }, function errorCallback(error) {
+                  }, function errorCallback() {
+
                     return {
                       event: event,
                       fees: []
-                    }
+                    };
                   });
               }, function errorCallback(error) {
                 // TODO: Make a state change
