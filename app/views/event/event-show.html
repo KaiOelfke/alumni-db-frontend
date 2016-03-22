@@ -7,11 +7,14 @@
   <button
     ng-click="toggleCreateFeeView()"
     type="button"
-    name="createFee">Toggle create fee view</button>
+    name="createFee">
+      <span ng-show="!newFee">Create new fee</span>
+      <span ng-show="newFee">Close</span>
+    </button>
 </p>
 
 <!-- Create fee view for super users -->
-<div ng-show="newFee">
+<div ng-show="newFee" class="form-view">
   <form ng-submit="createFee(newFee)" name="createFeeForm" novalidate>
     <p>
       <b>Fee name:</b>
@@ -105,7 +108,7 @@
 <hr>
 
 <!-- Edit fee view for super users -->
-<div ng-show="feeToEdit">
+<div ng-show="feeToEdit" class="form-view">
   <form ng-submit="editFee(feeToEdit)" name="editFeeForm" novalidate>
     <p>
       <b>Fee name:</b>
@@ -132,6 +135,10 @@
         required>
     </p>
     <p>
+      <button
+        ng-click="toggleEditFeeView()"
+        type="button"
+        name="cancel">Cancel</button>
       <button
         ng-disabled="editFeeForm.$invalid"
         type="submit"
