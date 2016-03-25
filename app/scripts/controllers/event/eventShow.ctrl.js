@@ -35,6 +35,7 @@ angular
           .then(function successCallback(event) {
             $scope.event = event;
           }, function errorCallback(error) {
+
             toaster.pop('error', error);
           });
       };

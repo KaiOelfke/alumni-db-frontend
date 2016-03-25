@@ -67,8 +67,8 @@ angular
       usersFactory
         .getUsers()
         .then(function successCallback(response) {
-          // console.log('received all users', response.data);
-          $scope.allUsers = response.data;
+          console.log('received all users', response.data);
+          $scope.allUsers = response.data.data;
         }, function errorCallback(response) {
           // TODO: Display error message with toaster
           console.error('could not get all users', response);
