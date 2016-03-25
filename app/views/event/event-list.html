@@ -2,45 +2,47 @@
 
 <hr>
 
-<div class="table-responsive">
-  <table class="table">
-    <thead>
-      <th>Id</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Actions</th>
-    </thead>
-    <tbody>
-      <tr
-        ng-repeat="event in events">
-        <td>{{ event.id }}</td>
-        <td>
-          <a ui-sref="home.event-show({ id: event.id })">{{ event.name }}</a>
-        </td>
-        <td>{{ event.description }}</td>
-        <td>
-          <button
-            ng-click="removeEvent(event)"
-            type="button"
-            name="removeEvent">Remove</button>
+<div class="all-events" ng-show="events">
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </thead>
+      <tbody>
+        <tr
+          ng-repeat="event in events">
+          <td>{{ event.id }}</td>
+          <td>
+            <a ui-sref="home.event-show({ id: event.id })">{{ event.name }}</a>
+          </td>
+          <td>{{ event.description }}</td>
+          <td>
             <button
-              ng-click="toggleEditEventView(event)"
+              ng-click="removeEvent(event)"
               type="button"
-              name="editEvent">Edit</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+              name="removeEvent">Remove</button>
+              <button
+                ng-click="toggleEditEventView(event)"
+                type="button"
+                name="editEvent">Edit</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- Edit event view -->
+  <div
+    ng-show="editedEvent"
+    ng-include="'/views/event/partials/form-event-edit.html'"
+    class="form-view">
+  </div>
+
+  <hr>
 </div>
 
-<!-- Edit event view -->
-<div
-  ng-show="editedEvent"
-  ng-include="'/views/event/partials/form-event-edit.html'"
-  class="form-view">
-</div>
-
-<hr>
 
 <!-- Show/hide action buttons -->
 <p>
