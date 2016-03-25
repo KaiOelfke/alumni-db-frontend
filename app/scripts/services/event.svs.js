@@ -36,12 +36,20 @@ angular
        *                        service.
        */
       eventService.createEvent = function(event) {
-        var def = $q.defer();
-        var tmpEvent = angular.extend({}, event);
-        tmpEvent.id = events.length;
-        events.push(tmpEvent);
-        def.resolve(tmpEvent);
-        return def.promise;
+        var deferred = $q.defer();
+        $http
+          .post(urlBase, {
+            event: event
+          })
+          .then(function successCallback() {
+            deferred.resolve();
+          }, function errorCallback(response) {
+
+            // TODO: figure out what to pass as a error message
+            deferred.reject(response);
+          });
+
+        return deferred.promise;
       };
 
       eventService.getEvent = function(id) {
