@@ -53,14 +53,18 @@ angular
       };
 
       eventService.getEvent = function(id) {
-        var def = $q.defer();
-        if (id < events.length) {
-          def.resolve(events[id]);
-        } else {
-          def.reject('No event found with id ' + id);
-        }
+        var deferred = $q.defer();
+        $http
+          .get(urlBase + '/' + id)
+          .then(function successCallback(response) {
+            deferred.resolve(response.data.data);
+          }, function errorCallback(response) {
 
-        return def.promise;
+            // TODO: figure out what to pass as a error message
+            deferred.reject(response);
+          });
+
+        return deferred.promise;
       };
 
       eventService.editEvent = function(id, event) {
