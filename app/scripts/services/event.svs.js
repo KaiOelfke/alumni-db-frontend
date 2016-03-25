@@ -26,7 +26,7 @@ angular
         }
       ];
 
-      // var urlBase = API_HOST + '/event';
+      var urlBase = API_HOST + '/events';
       var eventService = {};
 
       /**
@@ -96,9 +96,17 @@ angular
        *                             service.
        */
       eventService.getAllEvents = function() {
-        var def = $q.defer();
-        def.resolve(events);
-        return def.promise;
+        var deferred = $q.defer();
+        $http
+          .get(urlBase)
+          .then(function successCallback(response) {
+            deferred.resolve(response.data.data);
+          }, function errorCallback(response) {
+
+            deferred.reject(response);
+          });
+
+        return deferred.promise;
       };
 
       return eventService;
