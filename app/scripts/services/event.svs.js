@@ -45,7 +45,7 @@ angular
             deferred.resolve();
           }, function errorCallback(response) {
 
-            // TODO: figure out what to pass as a error message
+            // TODO: figure out what to pass as an error message
             deferred.reject(response);
           });
 
@@ -60,7 +60,7 @@ angular
             deferred.resolve(response.data.data);
           }, function errorCallback(response) {
 
-            // TODO: figure out what to pass as a error message
+            // TODO: figure out what to pass as an error message
             deferred.reject(response);
           });
 
@@ -68,15 +68,20 @@ angular
       };
 
       eventService.editEvent = function(id, event) {
-        var def = $q.defer();
-        if (id < events.length) {
-          events[id] = event;
-          def.resolve();
-        } else {
-          def.reject('No events found with id ' + id);
-        }
+        var deferred = $q.defer();
+        $http
+          .put(urlBase + '/' + id, {
+            event: event
+          })
+          .then(function successCallback(response) {
+            deferred.resolve(response.data.data);
+          }, function errorCallback(response) {
 
-        return def.promise;
+            // TODO: figure out what to pass as an error message
+            deferred.reject(response);
+          });
+
+        return deferred.promise;
       };
 
       eventService.removeEvent = function(event_id) {
