@@ -22,7 +22,7 @@ app.controller('ProfileCtrl', [
   '$rootScope',
   function(usersFactory, countriesFactory, programTypesFactory,
     genderFactory, $state, $scope, data, avatarFactory, $rootScope) {
-    var _user = data.data;
+    var _user = data.data.data;
     /*jshint camelcase: false */
     if (moment(_user.date_of_birth, 'YYYY-MM-DD').isValid()) {
       _user.date_of_birth = moment(_user.date_of_birth, 'YYYY-MM-DD').toDate();
