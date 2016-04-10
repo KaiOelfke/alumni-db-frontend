@@ -87,6 +87,17 @@ angular
           });
       };
 
+      $scope.eventsAvailable = function() {
+        if ($scope.events) {
+          for (var i = 0; i < $scope.events.length; i++) {
+            if (!$scope.events[i].delete_flag) {
+              return true;
+            }
+          }
+        }
+        return false;
+      };
+
       // entry point
       requestAllEvents();
 

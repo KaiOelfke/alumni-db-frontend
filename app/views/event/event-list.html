@@ -2,7 +2,7 @@
 
 <hr>
 
-<div class="all-events" ng-show="events">
+<div class="all-events" ng-show="events && eventsAvailable()">
   <div class="table-responsive">
     <table class="table">
       <thead>
@@ -13,7 +13,8 @@
       </thead>
       <tbody>
         <tr
-          ng-repeat="event in events">
+          ng-repeat="event in events"
+          ng-show="!event.delete_flag">
           <td>{{ event.id }}</td>
           <td>
             <a ui-sref="home.event-show({ id: event.id })">{{ event.name }}</a>
