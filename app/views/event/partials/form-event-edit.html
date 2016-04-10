@@ -14,8 +14,42 @@
     <input
       ng-model="editedEvent.description"
       name="description"
-      type="text"
-      required>
+      type="text">
+  </p>
+  <p>
+    <b>Event Location:</b>
+    <input
+      ng-model="editedEvent.location"
+      name="location"
+      type="text">
+  </p>
+  <p>
+    <b>Event Dates:</b>
+    <input
+      ng-model="editedEvent.dates"
+      name="dates"
+      type="text">
+  </p>
+  <p>
+    <b>Event Agenda:</b>
+    <input
+      ng-model="editedEvent.agenda"
+      name="agenda"
+      type="text">
+  </p>
+  <p>
+    <b>Event Contact email:</b>
+    <input
+      ng-model="editedEvent.contact_email"
+      name="contact_email"
+      type="text">
+  </p>
+  <p>
+    <b>Event Published:</b>
+    <input
+      ng-model="editedEvent.published"
+      name="published"
+      type="checkbox">
   </p>
   <p>
     <button
@@ -33,6 +67,11 @@
     <p>editEventForm.$valid: {{ editEventForm.$valid }}</p>
     <p>editEventForm.name.$valid: {{ editEventForm.name.$valid }}</p>
     <p>editEventForm.description.$valid: {{ editEventForm.description.$valid }}</p>
+    <p>editEventForm.location.$valid: {{ editEventForm.location.$valid }}</p>
+    <p>editEventForm.dates.$valid: {{ editEventForm.dates.$valid }}</p>
+    <p>editEventForm.agenda.$valid: {{ editEventForm.agenda.$valid }}</p>
+    <p>editEventForm.contact_email.$valid: {{ editEventForm.contact_email.$valid }}</p>
+    <p>editEventForm.published.$valid: {{ editEventForm.description.$valid }}</p>
     <p>editedEvent: {{ editedEvent }}</p>
     <p>editedEvent.name: {{ editedEvent.name }}</p>
     <p>editedEvent.description: {{ editedEvent.description }}</p>

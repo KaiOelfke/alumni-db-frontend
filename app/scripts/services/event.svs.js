@@ -13,6 +13,16 @@ angular
     'API_HOST',
     '$q', function($http, API_HOST, $q) {
 
+      var serializeEvent = function(event) {
+        for (var key in event) {
+          if (event[key] === '') {
+            event[key] = null;
+          }
+        }
+
+        return event;
+      };
+
       var urlBase = API_HOST + '/events';
       var eventService = {};
 
@@ -26,10 +36,9 @@ angular
         var deferred = $q.defer();
         $http
           .post(urlBase, {
-            event: event
+            event: serializeEvent(event)
           })
           .then(function successCallback(resp) {
-            console.log('response', resp);
             deferred.resolve(resp);
           }, function errorCallback(response) {
 
@@ -59,7 +68,7 @@ angular
         var deferred = $q.defer();
         $http
           .put(urlBase + '/' + id, {
-            event: event
+            event: serializeEvent(event)
           })
           .then(function successCallback(response) {
             deferred.resolve(response.data.data);
