@@ -12,8 +12,42 @@
     <input
       ng-model="newEvent.description"
       name="description"
-      type="text"
-      required>
+      type="text">
+  </p>
+  <p>
+    <b>Location:</b>
+    <input
+      ng-model="newEvent.location"
+      name="location"
+      type="text">
+  </p>
+  <p>
+    <b>Dates:</b>
+    <input
+      ng-model="newEvent.dates"
+      name="dates"
+      type="text">
+  </p>
+  <p>
+    <b>Agenda:</b>
+    <input
+      ng-model="newEvent.agenda"
+      name="agenda"
+      type="text">
+  </p>
+  <p>
+    <b>Contact email:</b>
+    <input
+      ng-model="newEvent.contact_email"
+      name="contact_email"
+      type="text">
+  </p>
+  <p>
+    <b>Published:</b>
+    <input
+      ng-model="newEvent.published"
+      name="published"
+      type="checkbox">
   </p>
   <p>
     <button
@@ -36,6 +70,11 @@
   <p>form.$valid: {{ form.$valid }}</p>
   <p>form.name.$valid: {{ form.name.$valid }}</p>
   <p>form.description.$valid: {{ form.description.$valid }}</p>
+  <p>form.location.$valid: {{ form.location.$valid }}</p>
+  <p>form.dates.$valid: {{ form.dates.$valid }}</p>
+  <p>form.agenda.$valid: {{ form.agenda.$valid }}</p>
+  <p>form.contact_email.$valid: {{ form.contact_email.$valid }}</p>
+  <p>form.published.$valid: {{ form.description.$valid }}</p>
   <p>newEvent: {{ newEvent }}</p>
   <p>newEvent.name: {{ newEvent.name }}</p>
 </div>

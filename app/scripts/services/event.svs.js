@@ -13,19 +13,6 @@ angular
     'API_HOST',
     '$q', function($http, API_HOST, $q) {
 
-      var events = [
-        {
-          id: 0,
-          name: 'Cool Event',
-          description: 'This is a cool event, bitch!'
-        },
-        {
-          id: 1,
-          name: 'Coolest Event',
-          description: 'This is the coolest event, BITCH!'
-        }
-      ];
-
       var urlBase = API_HOST + '/events';
       var eventService = {};
 
@@ -41,8 +28,9 @@ angular
           .post(urlBase, {
             event: event
           })
-          .then(function successCallback() {
-            deferred.resolve();
+          .then(function successCallback(resp) {
+            console.log('response', resp);
+            deferred.resolve(resp);
           }, function errorCallback(response) {
 
             // TODO: figure out what to pass as an error message
@@ -85,26 +73,19 @@ angular
       };
 
       eventService.removeEvent = function(event_id) {
-        var def = $q.defer();
-        var eventFound = false;
-        var res = [];
-        for (var i = 0; i < events.length; i++) {
-          var currentEvent = events[i];
-          if (currentEvent.id !== event_id) {
-            res.push(currentEvent);
-          } else {
-            eventFound = true;
-          }
-        }
+        var deferred = $q.defer();
+        $http
+          .delete(urlBase + '/' + event_id)
+          .then(function successCallback(response) {
+            console.log('delete success', response);
+            deferred.resolve();
+          }, function errorCallback(response) {
 
-        if (eventFound) {
-          events = res;
-          def.resolve();
-        } else {
-          def.reject();
-        }
+            // TODO: figure out what to pass as an error message
+            deferred.reject(response);
+          });
 
-        return def.promise;
+        return deferred.promise;
       };
 
       /**
