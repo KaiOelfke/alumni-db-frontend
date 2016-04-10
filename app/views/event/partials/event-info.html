@@ -1,6 +1,11 @@
 <h1>{{ event.name }}</h1>
 
-<p>{{ event.description }}</p>
+<p><b>Description</b>: {{ event.description }}</p>
+<p><b>Location</b>: {{ event.location }}</p>
+<p><b>Dates</b>: {{ event.dates }}</p>
+<p><b>Agenda</b>: {{ event.agenda }}</p>
+<p><b>Contact email</b>: {{ event.contact_email }}</p>
+<p><b>Published</b>: {{ event.published }}</p>
 
 <div class="table-responsive" ng-show="fees.length > 0">
   <table class="table">
