@@ -19,13 +19,13 @@ angular
 
       participationService.createParticipation = function(event_id, user_id) {
         var deferred = $q.defer();
-        var eventKey = event_id + "";
+        var eventKey = event_id +'';
         if (!participations[eventKey]) {
           participations[eventKey] = [user_id];
           deferred.resolve();
         } else {
           if (participations[eventKey].indexOf(user_id) === -1) {
-            participations[eventKey].push(user_id)
+            participations[eventKey].push(user_id);
           } else {
             deferred.reject();
           }
@@ -35,24 +35,19 @@ angular
 
       participationService.getParticipationsForEvent = function(event_id) {
         var deferred = $q.defer();
-        var eventKey = event_id + "";
+        var eventKey = event_id + '';
         if (participations.hasOwnProperty(eventKey)) {
-          deferred.resolve(participations[eventKey])
+          deferred.resolve(participations[eventKey]);
         } else {
           deferred.reject();
         }
         return deferred.promise;
       };
 
-      participationService.removeParticipation = function(event_id) {
+      // TODO: implement this function
+      participationService.removeParticipation = function() {
         var deferred = $q.defer();
-        var eventKey = event_id + "";
-        if (participations.hasOwnProperty(eventKey)) {
-          participations[eventKey] = null;
-          deferred.resolve();
-        } else {
-          deferred.reject();
-        }
+        deferred.resolve();
         return deferred.promise;
       };
 

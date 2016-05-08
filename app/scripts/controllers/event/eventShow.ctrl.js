@@ -1,5 +1,8 @@
 'use strict';
 
+// TODO: get participation for current user and this event
+// to show either Enter button or Leave button
+
 /**
   * @ngdoc controller
   * @name eventShowCtrl
@@ -13,9 +16,12 @@ angular
   .controller('eventShowCtrl', [
     'eventService',
     'feeService',
+    'braintreeService',
+    'participationService',
+    '$rootScope',
     '$scope',
     'data',
-    'toaster', function(eventService, feeService, $scope, data, toaster) {
+    'toaster', function(eventService, feeService, braintreeService, participationService, $rootScope, $scope, data, toaster) {
 
       var refreshFees = function() {
         feeService
@@ -76,6 +82,34 @@ angular
         } else {
           $scope.editedEvent = angular.extend({}, $scope.event);
         }
+      };
+
+      // TODO: implement this function
+      $scope.toggleEnterEvent = function(event, fee) {
+        console.log('event', event);
+        console.log('fee', fee);
+        console.log('user', $rootScope.user);
+        participationService
+          .createParticipation(event.id, $rootScope.user.id)
+          .then(function successCallback() {
+            console.log('success');
+          }, function errorCallback() {
+            console.log('error');
+          });
+      };
+
+      // TODO: implement this function
+      $scope.toggleLeaveEvent = function(event, fee) {
+        console.log('event', event);
+        console.log('fee', fee);
+        console.log('user', $rootScope.user);
+        participationService
+          .removeParticipation(event.id, $rootScope.user.id)
+          .then(function successCallback() {
+            console.log('success');
+          }, function errorCallback() {
+            console.log('error');
+          });
       };
 
       $scope.createFee = function(fee) {

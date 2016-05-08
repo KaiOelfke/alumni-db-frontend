@@ -28,10 +28,18 @@
               ng-click="removeFee(fee)"
               type="button"
               name="removeFee">Remove</button>
-              <button
-                ng-click="toggleEditFeeView(fee)"
-                type="button"
-                name="editFee">Edit</button>
+            <button
+              ng-click="toggleEditFeeView(fee)"
+              type="button"
+              name="editFee">Edit</button>
+            <button
+              ng-click="toggleEnterEvent(event, fee)"
+              type="button"
+              name="enterEvent">Enter</button>
+            <button
+              ng-click="toggleLeaveEvent(event, fee)"
+              type="button"
+              name="leaveEvent">Leave</button>
           </td>
         </tr>
       </tbody>
