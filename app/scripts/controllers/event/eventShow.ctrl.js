@@ -165,4 +165,12 @@ angular
           });
       };
 
+      $scope.getEventLogo = function(event) {
+        return eventService.getEventLogo(event);
+      };
+
+      $scope.getEventHeader = function(event) {
+        return eventService.getEventHeader(event);
+      };
+
     }]);

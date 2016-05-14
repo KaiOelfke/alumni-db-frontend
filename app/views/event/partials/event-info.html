@@ -1,3 +1,13 @@
+<p><img
+  ng-src="{{ getEventHeader(event) }}"
+  alt="{{ event.name }} Header"
+  style="height: 200px;" /></p>
+
+<p><img
+  ng-src="{{ getEventLogo(event) }}"
+  alt="{{ event.name }} Logo"
+  style="height: 200px;" /></p>
+
 <h1>{{ event.name }}</h1>
 
 <p><b>Description</b>: {{ event.description }}</p>
