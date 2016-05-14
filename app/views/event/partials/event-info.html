@@ -28,6 +28,8 @@
       <th>Fee Name</th>
       <th>Fee price</th>
       <th>Fee deadline</th>
+      <th>Is early bird fee</th>
+      <th>Is honoris fee</th>
       <th>Actions</th>
       <tbody>
         <tr ng-repeat="fee in fees">
@@ -36,6 +38,8 @@
           <td>{{ fee.name }}</td>
           <td>{{ fee.price }}</td>
           <td>{{ fee.deadline }}</td>
+          <td>{{ fee.is_early_bird_fee }}</td>
+          <td>{{ fee.is_honoris_fee }}</td>
           <td>
             <button
               ng-click="removeFee(fee)"

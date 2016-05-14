@@ -24,6 +24,22 @@
       required>
   </p>
   <p>
+    <b>Early bird fee:</b>
+    <input
+      ng-model="newFee.is_early_bird_fee"
+      name="is_early_bird_fee"
+      type="checkbox"
+      required>
+  </p>
+  <p>
+    <b>Honoris fee:</b>
+    <input
+      ng-model="newFee.is_honoris_fee"
+      name="is_honoris_fee"
+      type="checkbox"
+      required>
+  </p>
+  <p>
     <button
       ng-click="clearFeeForm()"
       type="button"
@@ -45,8 +61,12 @@
   <p>createFeeForm.name.$valid: {{ createFeeForm.name.$valid }}</p>
   <p>createFeeForm.price.$valid: {{ createFeeForm.price.$valid }}</p>
   <p>createFeeForm.deadline.$valid: {{ createFeeForm.deadline.$valid }}</p>
+  <p>createFeeForm.is_early_bird_fee.$valid: {{ createFeeForm.is_early_bird_fee.$valid }}</p>
+  <p>createFeeForm.is_honoris_fee.$valid: {{ createFeeForm.is_honoris_fee.$valid }}</p>
   <p>newFee: {{ newFee }}</p>
   <p>newFee.name: {{ newFee.name }}</p>
   <p>newFee.price: {{ newFee.price }}</p>
   <p>newFee.deadline: {{ newFee.deadline }}</p>
+  <p>newFee.is_early_bird_fee: {{ newFee.is_early_bird_fee }}</p>
+  <p>newFee.is_honoris_fee: {{ newFee.is_honoris_fee }}</p>
 </div>
