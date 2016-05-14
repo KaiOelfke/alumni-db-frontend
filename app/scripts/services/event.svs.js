@@ -116,5 +116,13 @@ angular
         return deferred.promise;
       };
 
+      eventService.getEventLogo = function() {
+        return 'https://placeholdit.imgix.net/~text?txtsize=64&txt=event_logo&w=400&h=400';
+      };
+
+      eventService.getEventHeader = function() {
+        return 'https://placeholdit.imgix.net/~text?txtsize=64&txt=event_header&w=800&h=200';
+      };
+
       return eventService;
     }]);
