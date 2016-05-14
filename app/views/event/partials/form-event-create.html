@@ -36,10 +36,31 @@
       type="text"></textarea>
   </p>
   <p>
+    <b>Slogan:</b>
+    <input
+      ng-model="newEvent.slogan"
+      name="slogan"
+      type="text">
+  </p>
+  <p>
     <b>Contact email:</b>
     <input
       ng-model="newEvent.contact_email"
       name="contact_email"
+      type="text">
+  </p>
+  <p>
+    <b>Contact phone:</b>
+    <input
+      ng-model="newEvent.contact_phone"
+      name="contact_phone"
+      type="text">
+  </p>
+  <p>
+    <b>Facebook URL:</b>
+    <input
+      ng-model="newEvent.facebook_url"
+      name="facebook_url"
       type="text">
   </p>
   <p>
@@ -73,7 +94,10 @@
   <p>form.location.$valid: {{ form.location.$valid }}</p>
   <p>form.dates.$valid: {{ form.dates.$valid }}</p>
   <p>form.agenda.$valid: {{ form.agenda.$valid }}</p>
+  <p>form.slogan.$valid: {{ form.slogan.$valid }}</p>
   <p>form.contact_email.$valid: {{ form.contact_email.$valid }}</p>
+  <p>form.contact_phone.$valid: {{ form.contact_phone.$valid }}</p>
+  <p>form.facebook_url.$valid: {{ form.facebook_url.$valid }}</p>
   <p>form.published.$valid: {{ form.description.$valid }}</p>
   <p>newEvent: {{ newEvent }}</p>
   <p>newEvent.name: {{ newEvent.name }}</p>
