@@ -71,6 +71,27 @@
       type="checkbox">
   </p>
   <p>
+    <b>Type:</b>
+    <label>
+      <input
+        ng-model="newEvent.etype"
+        name="etype1"
+        type="radio"
+        value="without_application"
+        required>
+      Without application
+    </label>
+    <label>
+      <input
+        ng-model="newEvent.etype"
+        name="etype2"
+        type="radio"
+        value="with_application"
+        required>
+      With application
+    </label>
+  </p>
+  <p>
     <button
       ng-click="newEvent = {}"
       type="button"
@@ -99,6 +120,8 @@
   <p>form.contact_phone.$valid: {{ form.contact_phone.$valid }}</p>
   <p>form.facebook_url.$valid: {{ form.facebook_url.$valid }}</p>
   <p>form.published.$valid: {{ form.description.$valid }}</p>
+  <p>form.etype.$valid: {{ form.etype.$valid }}</p>
   <p>newEvent: {{ newEvent }}</p>
   <p>newEvent.name: {{ newEvent.name }}</p>
+  <p>newEvent.etype: {{ newEvent.etype }}</p>
 </div>
