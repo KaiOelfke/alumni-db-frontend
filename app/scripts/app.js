@@ -213,7 +213,7 @@ angular
         controller: 'eventListCtrl',
         resolve: {
           authorizedRoles: function(USER_ROLES) {
-            return USER_ROLES.superUser;
+            return [USER_ROLES.completedProfile];
           },
 
           authz: function(authorizedRoles, authorizationService) {
@@ -241,7 +241,7 @@ angular
         controller: 'eventShowCtrl',
         resolve: {
           authorizedRoles: function(USER_ROLES) {
-            return USER_ROLES.superUser;
+            return [USER_ROLES.completedProfile];
           },
 
           authz: function(authorizedRoles, authorizationService) {

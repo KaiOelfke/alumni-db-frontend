@@ -66,6 +66,7 @@ angular
 
       eventService.editEvent = function(id, event) {
         var deferred = $q.defer();
+        console.log('updating', serializeEvent(event));
         $http
           .put(urlBase + '/' + id, {
             event: serializeEvent(event)

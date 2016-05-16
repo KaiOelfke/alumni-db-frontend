@@ -9,7 +9,7 @@
         <th>Id</th>
         <th>Name</th>
         <th>Description</th>
-        <th>Actions</th>
+        <th ng-show="$root.user.is_super_user">Actions</th>
       </thead>
       <tbody>
         <tr
@@ -20,7 +20,7 @@
             <a ui-sref="home.event-show({ id: event.id })">{{ event.name }}</a>
           </td>
           <td>{{ event.description }}</td>
-          <td>
+          <td ng-show="$root.user.is_super_user">
             <button
               ng-click="removeEvent(event)"
               type="button"
@@ -36,7 +36,7 @@
   </div>
   <!-- Edit event view -->
   <div
-    ng-show="editedEvent"
+    ng-show="$root.user.is_super_user && editedEvent"
     ng-include="'/views/event/partials/form-event-edit.html'"
     class="form-view">
   </div>
@@ -44,21 +44,22 @@
   <hr>
 </div>
 
+<div ng-show="$root.user.is_super_user">
+  <!-- Show/hide action buttons -->
+  <p>
+    <button
+      ng-click="toggleCreateEventView()"
+      type="button"
+      name="createEvent">
+        <span ng-show="!newEvent">Create event</span>
+        <span ng-show="newEvent">Close create event view</span>
+      </button>
+  </p>
 
-<!-- Show/hide action buttons -->
-<p>
-  <button
-    ng-click="toggleCreateEventView()"
-    type="button"
-    name="createEvent">
-      <span ng-show="!newEvent">Create event</span>
-      <span ng-show="newEvent">Close create event view</span>
-    </button>
-</p>
-
-<!-- Edit event view -->
-<div
-  ng-show="newEvent"
-  ng-include="'/views/event/partials/form-event-create.html'"
-  class="form-view">
+  <!-- Edit event view -->
+  <div
+    ng-show="newEvent"
+    ng-include="'/views/event/partials/form-event-create.html'"
+    class="form-view">
+  </div>
 </div>

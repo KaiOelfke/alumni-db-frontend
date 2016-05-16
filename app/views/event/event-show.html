@@ -6,45 +6,47 @@
 <div ng-include="'/views/event/partials/event-info.html'">
 </div>
 
-<!-- Edit fee view -->
-<div
-  ng-show="feeToEdit"
-  ng-include="'/views/event/partials/form-fee-edit.html'"
-  class="form-view">
+<div ng-show="$root.user.is_super_user">
+  <!-- Edit fee view -->
+  <div
+    ng-show="feeToEdit"
+    ng-include="'/views/event/partials/form-fee-edit.html'"
+    class="form-view">
+  </div>
+
+  <hr>
+
+  <!-- Show/hide action buttons -->
+  <p>
+    <button
+      ng-click="toggleEditEventView()"
+      type="button"
+      name="editEvent">
+        <span ng-show="!editedEvent">Edit event</span>
+        <span ng-show="editedEvent">Close edit event view</span>
+      </button>
+    <button
+      ng-click="toggleCreateFeeView()"
+      type="button"
+      name="createFee">
+        <span ng-show="!newFee">Create fee</span>
+        <span ng-show="newFee">Close create fee view</span>
+      </button>
+  </p>
+
+  <!-- Edit event view -->
+  <div
+    ng-show="editedEvent"
+    ng-include="'/views/event/partials/form-event-edit.html'"
+    class="form-view">
+  </div>
+
+  <!-- Create fee view -->
+  <div
+    ng-show="$root.user.is_super_user && newFee"
+    ng-include="'/views/event/partials/form-fee-create.html'"
+    class="form-view">
+  </div>
+
+  <hr>
 </div>
-
-<hr>
-
-<!-- Show/hide action buttons -->
-<p>
-  <button
-    ng-click="toggleEditEventView()"
-    type="button"
-    name="editEvent">
-      <span ng-show="!editedEvent">Edit event</span>
-      <span ng-show="editedEvent">Close edit event view</span>
-    </button>
-  <button
-    ng-click="toggleCreateFeeView()"
-    type="button"
-    name="createFee">
-      <span ng-show="!newFee">Create fee</span>
-      <span ng-show="newFee">Close create fee view</span>
-    </button>
-</p>
-
-<!-- Edit event view -->
-<div
-  ng-show="editedEvent"
-  ng-include="'/views/event/partials/form-event-edit.html'"
-  class="form-view">
-</div>
-
-<!-- Create fee view -->
-<div
-  ng-show="newFee"
-  ng-include="'/views/event/partials/form-fee-create.html'"
-  class="form-view">
-</div>
-
-<hr>

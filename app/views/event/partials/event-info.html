@@ -43,10 +43,12 @@
           <td>{{ fee.is_honoris_fee }}</td>
           <td>
             <button
+              ng-show="$root.user.is_super_user"
               ng-click="removeFee(fee)"
               type="button"
               name="removeFee">Remove</button>
             <button
+              ng-show="$root.user.is_super_user"
               ng-click="toggleEditFeeView(fee)"
               type="button"
               name="editFee">Edit</button>
