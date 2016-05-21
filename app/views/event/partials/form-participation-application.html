@@ -1,6 +1,6 @@
 <p>Application form:</p>
 
-<form ng-submit="apply(newApplication)" name="applicationForm" novalidate>
+<form ng-submit="apply()" name="form" novalidate>
   <p>
     <b>First name:</b>
     <input
@@ -47,7 +47,7 @@
     <b>Motivation text:</b>
     <textarea
       ng-model="newApplication.motivation_text"
-      name="motivation_text"
+      name="motivationText"
       type="text"
       required></textarea>
   </p>
@@ -57,8 +57,16 @@
       type="button"
       name="clearApplication">Clear</button>
     <button
-      ng-disabled="applicationForm.$invalid"
+      ng-disabled="form.$invalid"
       type="submit"
       name="apply">Apply</button>
   </p>
 </form>
+
+<div class="debug">
+  <p>form: {{ form }}</p>
+  <p>form.$valid: {{ form.$valid }}</p>
+  <p>form.motivationText.$valid: {{ form.motivationText.$valid }}</p>
+  <p>newApplication: {{ newApplication }}</p>
+  <p>newApplication['motivation_text']: {{ newApplication['motivation_text'] }}</p>
+</div>

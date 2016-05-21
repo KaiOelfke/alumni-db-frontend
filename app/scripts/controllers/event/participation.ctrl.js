@@ -20,8 +20,11 @@ angular
         $scope.newApplication = {};
       };
 
-      $scope.apply = function(newApplication) {
-        var request = angular.extend({ userId: $rootScope.user.id }, newApplication);
+      $scope.apply = function() {
+        var request = {
+          userId: $rootScope.user.id
+        };
+        request = angular.extend(request, $scope.newApplication);
         console.log('need to apply with object', request);
       };
 
@@ -31,6 +34,7 @@ angular
           function successCallback(event) {
             $scope.event = event;
           },
+
           // TODO: use toaster for displaying this error message
           function errorCallback(response) {
             console.error(displayErrors.convertErrorResponse(response));
