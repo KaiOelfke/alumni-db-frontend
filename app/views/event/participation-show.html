@@ -10,8 +10,23 @@
 
 <hr>
 
-<!-- application form -->
-<div ng-show="event.etype === 'with_application'"
-     ng-include="'/views/event/partials/form-participation-application.html'"
-     class="form-view">
+<div ng-show="event.etype === 'with_application'">
+  <!-- already have a code? / cancel button --->
+  <button ng-click="toggleEnterCodeView()">
+    <span ng-show="!enteredCode">Already have a code? Enter code here.</span>
+    <span ng-show="enteredCode">Cancel</span>
+  </button>
+
+  <!-- enter code form -->
+  <div ng-show="enteredCode !== null"
+       ng-include="'/views/event/partials/form-participation-code-enter.html'"
+       class="form-view">
+  </div>
+
+  <hr>
+
+  <!-- application form -->
+  <div ng-include="'/views/event/partials/form-participation-application.html'"
+       class="form-view">
+  </div>
 </div>

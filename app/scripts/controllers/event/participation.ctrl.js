@@ -8,13 +8,44 @@ angular
     '$state',
     '$stateParams',
     'eventService',
-    'displayErrors', function($rootScope, $scope, $state, $stateParams, eventService, displayErrors) {
+    'feeService',
+    'codeService',
+    'displayErrors', function($rootScope, $scope, $state, $stateParams, eventService, feeService, codeService, displayErrors) {
 
       $scope.eventId = $stateParams.id;
 
       $scope.event;
 
+      $scope.enteredCode = null;
+
       $scope.newApplication = {};
+
+      $scope.toggleEnterCodeView = function() {
+        if ($scope.enteredCode) {
+          $scope.enteredCode = null;
+        } else {
+          $scope.enteredCode = {};
+        }
+      };
+
+      $scope.enterCode = function() {
+        console.log('entered code', $scope.enteredCode);
+      };
+
+      $scope.createCode = function() {
+        codeService
+          .createCode($scope.newCode)
+          .then(
+            function successCallback() {
+              console.log('success');
+            },
+
+            // TODO: use toaster for displaying this error message
+            function errorCallback(response) {
+              console.error(displayErrors.convertErrorResponse(response));
+            }
+          );
+      };
 
       $scope.clearApplicationForm = function() {
         $scope.newApplication = {};
