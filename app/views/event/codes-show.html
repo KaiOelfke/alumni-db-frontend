@@ -1,0 +1,31 @@
+<h5><a ui-sref="home.event-show({ id: eventId })">← Back to event</a></h5>
+
+<hr>
+
+<h3>{{ event.name }} codes</h3>
+
+<hr>
+
+<button
+  ng-click="toggleCreateCodeView()"
+  type="button"
+  name="createCode">
+    <span ng-show="!newFee">Create code</span>
+    <span ng-show="newFee">Close create code view</span>
+  </button>
+
+<div
+  ng-show="newCode"
+  ng-include="'/views/event/partials/form-code-create.html'"
+  class="form-view">
+</div>
+
+<hr>
+
+<h4>All codes for this event:</h4>
+
+<table ng-show="codes && codes.length > 0">
+  <tr ng-repeat="code in codes">
+    <!-- TODO: display the code here -->
+  </tr>
+</table>

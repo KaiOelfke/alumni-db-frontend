@@ -287,6 +287,20 @@ angular
           }
         }
       })
+      .state('home.event-codes', {
+        url: '/event/:id/codes',
+        templateUrl: 'views/event/codes-show.html',
+        controller: 'codesCtrl',
+        resolve: {
+          authorizedRoles: function(USER_ROLES) {
+            return USER_ROLES.superUser;
+          },
+
+          authz: function(authorizedRoles, authorizationService) {
+            return authorizationService.isAuthorized(authorizedRoles);
+          }
+        }
+      })
       .state('home.become-premium', {
         url: '/become-premium',
         templateUrl: 'views/become-premium.html',
