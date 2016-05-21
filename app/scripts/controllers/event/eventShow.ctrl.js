@@ -20,8 +20,11 @@ angular
     'participationService',
     '$rootScope',
     '$scope',
+    '$stateParams',
     'data',
-    'toaster', function(eventService, feeService, braintreeService, participationService, $rootScope, $scope, data, toaster) {
+    'toaster', function(eventService, feeService, braintreeService, participationService, $rootScope, $scope, $stateParams, data, toaster) {
+
+      $scope.eventId = $stateParams.id;
 
       var refreshFees = function() {
         feeService
@@ -82,36 +85,6 @@ angular
         } else {
           $scope.editedEvent = angular.extend({}, $scope.event);
         }
-      };
-
-      // TODO: implement this function
-      $scope.toggleEnterEvent = function(event, fee) {
-        console.log('event', event);
-        console.log('fee', fee);
-        console.log('user', $rootScope.user);
-        participationService
-          .createParticipation(event.id, $rootScope.user.id)
-          .then(function successCallback() {
-            console.log('success');
-          }, function errorCallback() {
-
-            console.log('error');
-          });
-      };
-
-      // TODO: implement this function
-      $scope.toggleLeaveEvent = function(event, fee) {
-        console.log('event', event);
-        console.log('fee', fee);
-        console.log('user', $rootScope.user);
-        participationService
-          .removeParticipation(event.id, $rootScope.user.id)
-          .then(function successCallback() {
-            console.log('success');
-          }, function errorCallback() {
-
-            console.log('error');
-          });
       };
 
       $scope.createFee = function(fee) {

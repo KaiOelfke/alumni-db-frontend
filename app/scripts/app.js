@@ -273,6 +273,20 @@ angular
           }
         }
       })
+      .state('home.event-participate', {
+        url: '/event/:id/participate',
+        templateUrl: 'views/event/participation-show.html',
+        controller: 'participationCtrl',
+        resolve: {
+          authorizedRoles: function(USER_ROLES) {
+            return [USER_ROLES.completedProfile];
+          },
+
+          authz: function(authorizedRoles, authorizationService) {
+            return authorizationService.isAuthorized(authorizedRoles);
+          }
+        }
+      })
       .state('home.become-premium', {
         url: '/become-premium',
         templateUrl: 'views/become-premium.html',
