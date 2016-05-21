@@ -1,5 +1,11 @@
 <h5><a ui-sref="home.event-show({ id: eventId })">← Back to event</a></h5>
 
+<hr>
+
 <div>
-  <h1>participation-show.html</h1>
+  <h3>To participate in {{ event.name }} you need to:</h3>
+  <div>
+    <span ng-show="event.etype === 'with_application'">apply for it.</span>
+    <span ng-show="event.etype === 'without_application'">pay a fee.</span>
+  </div>
 </div>
