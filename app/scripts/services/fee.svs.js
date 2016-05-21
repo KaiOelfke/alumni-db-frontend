@@ -11,89 +11,93 @@ angular
   .service('feeService', [
     '$http',
     'API_HOST',
-    '$q', function($http, API_HOST, $q) {
+    'displayErrors',
+    '$q', function($http, API_HOST, displayErrors, $q) {
 
-      var fees = [
-        {
-          id: 0,
-          event_id: 0,
-          name: 'first fee',
-          price: 10,
-          deadline: 'some deadline'
-        },
-        {
-          id: 1,
-          event_id: 1,
-          name: 'second fee',
-          price: 20,
-          deadline: 'some other deadline'
-        }
-      ];
-
-      // var urlBase = API_HOST + '/fee';
+      var urlBase = API_HOST + '/events/fees';
       var feeService = {};
 
       feeService.getFeesForEvent = function(event_id) {
-        var def = $q.defer();
-        var res = [];
-        for (var i = 0; i < fees.length; i++) {
-          var currentFee = fees[i];
-          if (currentFee.event_id === event_id) {
-            res.push(currentFee);
-          }
-        }
+        var deferred = $q.defer();
+        $http
+          .get(urlBase, {
+            params: {
+              'event_id': event_id
+            }
+          })
+          .then(function successCallback(resp) {
+              deferred.resolve(resp);
+            },
 
-        if (res.length > 0) {
-          def.resolve(res);
-        } else {
-          def.reject('No fees found for event_id ' + event_id);
-        }
+            function errorCallback(response) {
+              deferred.reject(displayErrors.convertErrorResponse(response));
+            });
 
-        return def.promise;
+        return deferred.promise;
       };
 
       feeService.createFee = function(fee) {
-        var def = $q.defer();
-        var id = fees.length;
-        fee.id = id;
-        fees.push(fee);
-        def.resolve(fee);
-        return def.promise;
+        var deferred = $q.defer();
+        $http
+          .post(urlBase, {
+            fee: fee
+          })
+          .then(function successCallback(resp) {
+              deferred.resolve(resp);
+            },
+
+            function errorCallback(response) {
+              deferred.reject(displayErrors.convertErrorResponse(response));
+            });
+
+        return deferred.promise;
+      };
+
+      feeService.showFee = function(fee_id) {
+        var deferred = $q.defer();
+        $http
+          .get(urlBase + '/' + fee_id)
+          .then(function successCallback(resp) {
+              deferred.resolve(resp);
+            },
+
+            function errorCallback(response) {
+              deferred.reject(displayErrors.convertErrorResponse(response));
+            });
+
+        return deferred.promise;
       };
 
       feeService.removeFee = function(fee_id) {
-        var def = $q.defer();
-        var feeFound = false;
-        var res = [];
-        for (var i = 0; i < fees.length; i++) {
-          var currentFee = fees[i];
-          if (currentFee.id !== fee_id) {
-            res.push(currentFee);
-          } else {
-            feeFound = true;
-          }
-        }
+        var deferred = $q.defer();
+        $http
+          .delete(urlBase + '/' + fee_id)
+          .then(function successCallback(resp) {
+              deferred.resolve(resp);
+            },
 
-        if (feeFound) {
-          fees = res;
-          def.resolve();
-        } else {
-          def.reject();
-        }
+            function errorCallback(response) {
+              deferred.reject(displayErrors.convertErrorResponse(response));
+            });
 
-        return def.promise;
+        return deferred.promise;
       };
 
-      feeService.editFee = function(id, fee) {
-        var def = $q.defer();
-        if (id < fees.length) {
-          fees[id] = fee;
-          def.resolve();
-        } else {
-          def.reject('No fee found with id ' + id);
-        }
+      feeService.editFee = function(fee_id, fee) {
+        var deferred = $q.defer();
+        $http
+          .put(urlBase + '/' + fee_id, {
+            fee: fee
+          })
+          .then(function successCallback(resp) {
+              deferred.resolve(resp);
+            },
 
-        return def.promise;
+            function errorCallback(response) {
+              deferred.reject(displayErrors.convertErrorResponse(response));
+            });
+
+        return deferred.promise;
       };
 
       return feeService;
