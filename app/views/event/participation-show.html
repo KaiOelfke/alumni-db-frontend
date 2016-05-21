@@ -2,10 +2,16 @@
 
 <hr>
 
+<h3>To participate in {{ event.name }} you need to:</h3>
 <div>
-  <h3>To participate in {{ event.name }} you need to:</h3>
-  <div>
-    <span ng-show="event.etype === 'with_application'">apply for it.</span>
-    <span ng-show="event.etype === 'without_application'">pay a fee.</span>
-  </div>
+  <span ng-show="event.etype === 'with_application'">apply for it.</span>
+  <span ng-show="event.etype === 'without_application'">pay a fee.</span>
+</div>
+
+<hr>
+
+<!-- application form -->
+<div ng-show="event.etype === 'with_application'"
+     ng-include="'/views/event/partials/form-participation-application.html'"
+     class="form-view">
 </div>
