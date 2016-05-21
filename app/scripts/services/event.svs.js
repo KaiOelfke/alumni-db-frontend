@@ -11,7 +11,8 @@ angular
   .service('eventService', [
     '$http',
     'API_HOST',
-    '$q', function($http, API_HOST, $q) {
+    'displayErrors',
+    '$q', function($http, API_HOST, displayErrors, $q) {
 
       var serializeEvent = function(event) {
         for (var key in event) {
@@ -42,8 +43,7 @@ angular
             deferred.resolve(resp);
           }, function errorCallback(response) {
 
-            // TODO: figure out what to pass as an error message
-            deferred.reject(response);
+            deferred.reject(displayErrors.convertErrorResponse(response));
           });
 
         return deferred.promise;
@@ -57,8 +57,7 @@ angular
             deferred.resolve(response.data.data);
           }, function errorCallback(response) {
 
-            // TODO: figure out what to pass as an error message
-            deferred.reject(response);
+            deferred.reject(displayErrors.convertErrorResponse(response));
           });
 
         return deferred.promise;
@@ -66,7 +65,6 @@ angular
 
       eventService.editEvent = function(id, event) {
         var deferred = $q.defer();
-        console.log('updating', serializeEvent(event));
         $http
           .put(urlBase + '/' + id, {
             event: serializeEvent(event)
@@ -75,8 +73,7 @@ angular
             deferred.resolve(response.data.data);
           }, function errorCallback(response) {
 
-            // TODO: figure out what to pass as an error message
-            deferred.reject(response);
+            deferred.reject(displayErrors.convertErrorResponse(response));
           });
 
         return deferred.promise;
@@ -86,13 +83,11 @@ angular
         var deferred = $q.defer();
         $http
           .delete(urlBase + '/' + event_id)
-          .then(function successCallback(response) {
-            console.log('delete success', response);
+          .then(function successCallback() {
             deferred.resolve();
           }, function errorCallback(response) {
 
-            // TODO: figure out what to pass as an error message
-            deferred.reject(response);
+            deferred.reject(displayErrors.convertErrorResponse(response));
           });
 
         return deferred.promise;
@@ -111,17 +106,17 @@ angular
             deferred.resolve(response.data.data);
           }, function errorCallback(response) {
 
-            deferred.reject(response);
+            deferred.reject(displayErrors.convertErrorResponse(response));
           });
 
         return deferred.promise;
       };
 
-      eventService.getEventLogo = function(event) {
+      eventService.getEventLogo = function() {
         return 'https://placeholdit.imgix.net/~text?txtsize=64&txt=event_logo&w=400&h=400';
       };
 
-      eventService.getEventHeader = function(event) {
+      eventService.getEventHeader = function() {
         return 'https://placeholdit.imgix.net/~text?txtsize=64&txt=event_header&w=800&h=200';
       };
 
