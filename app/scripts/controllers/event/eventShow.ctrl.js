@@ -94,6 +94,7 @@ angular
           .then(function successCallback() {
             console.log('success');
           }, function errorCallback() {
+
             console.log('error');
           });
       };
@@ -108,6 +109,7 @@ angular
           .then(function successCallback() {
             console.log('success');
           }, function errorCallback() {
+
             console.log('error');
           });
       };

@@ -19,7 +19,7 @@ angular
 
       participationService.createParticipation = function(event_id, user_id) {
         var deferred = $q.defer();
-        var eventKey = event_id +'';
+        var eventKey = event_id.toString();
         if (!participations[eventKey]) {
           participations[eventKey] = [user_id];
           deferred.resolve();
@@ -27,9 +27,11 @@ angular
           if (participations[eventKey].indexOf(user_id) === -1) {
             participations[eventKey].push(user_id);
           } else {
+
             deferred.reject();
           }
         }
+
         return deferred.promise;
       };
 
@@ -39,8 +41,10 @@ angular
         if (participations.hasOwnProperty(eventKey)) {
           deferred.resolve(participations[eventKey]);
         } else {
+
           deferred.reject();
         }
+
         return deferred.promise;
       };
 

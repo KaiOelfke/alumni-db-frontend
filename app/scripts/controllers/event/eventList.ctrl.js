@@ -95,6 +95,7 @@ angular
             }
           }
         }
+
         return false;
       };
 
