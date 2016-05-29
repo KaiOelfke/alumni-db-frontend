@@ -83,7 +83,7 @@ app.controller('ProfileUpdateCtrl', [
       }, function() {
 
         $scope.uploadingStatus = undefined;
-        toaster.error('Something went wrong');
+        toaster.pop('error', 'Something went wrong.');
       }, function(progress) {
 
         $scope.uploadingStatus = 'uploading: ' + progress + '%';
