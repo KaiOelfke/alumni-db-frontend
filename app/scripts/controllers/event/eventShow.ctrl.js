@@ -30,7 +30,6 @@ angular
         feeService
           .getFeesForEvent($scope.event.id)
           .then(function successCallback(fees) {
-            console.log('received new fees', fees);
             $scope.fees = fees;
           }, function errorCallback() {
 
