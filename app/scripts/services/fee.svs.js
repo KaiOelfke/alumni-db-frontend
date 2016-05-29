@@ -26,7 +26,7 @@ angular
             }
           })
           .then(function successCallback(resp) {
-              deferred.resolve(resp);
+              deferred.resolve(resp.data.data);
             },
 
             function errorCallback(response) {
