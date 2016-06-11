@@ -18,11 +18,12 @@ angular
     'feeService',
     'braintreeService',
     'participationService',
+    'eventImagesFactory',
     '$rootScope',
     '$scope',
     '$stateParams',
     'data',
-    'toaster', function(eventService, feeService, braintreeService, participationService, $rootScope, $scope, $stateParams, data, toaster) {
+    'toaster', function(eventService, feeService, braintreeService, participationService, eventImagesFactory, $rootScope, $scope, $stateParams, data, toaster) {
 
       $scope.eventId = $stateParams.id;
 
@@ -57,6 +58,12 @@ angular
       $scope.editedEvent = null;
 
       $scope.feeToEdit = null;
+
+      $scope.uploadingStatus = null;
+
+      $scope.logoUploadSuccess = false;
+
+      $scope.logoUploadError = false;
 
       $scope.clearFeeForm = function() {
         $scope.newFee = {};
@@ -137,6 +144,25 @@ angular
 
             toaster.pop('error', error);
           });
+      };
+
+      $scope.logoFileSelected = function(file) {
+        console.log('File selected:', file);
+        eventImagesFactory.uploadImage(file).then(function(data) {
+          console.log('event logo uploaded:', data);
+          $scope.logoUploadError = false;
+          $scope.logoUploadSuccess = true;
+        }, function(errorObject) {
+
+          $scope.uploadingStatus = undefined;
+          console.error('event logo upload failed:', errorObject);
+          $scope.logoUploadError = true;
+          $scope.logoUploadSuccess = false;
+        }, function(progress) {
+
+          $scope.uploadingStatus = 'uploading: ' + progress + '%';
+          console.log('event logo upload progress:', progress);
+        });
       };
 
       $scope.getEventLogo = function(event) {

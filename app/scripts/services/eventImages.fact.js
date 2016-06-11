@@ -2,21 +2,18 @@
 
 /**
  * @ngdoc factory
- * @name avatarFactory
- * @requires ENV
- * @requires Upload
- * @requires API_HOST
- * @requires $q
+ * @name eventImagesFactory
  *
  * @description
  * TODO
  */
-angular.module('alumni-db-frontend')
-  .factory('avatarFactory', ['ENV', 'Upload', 'API_HOST', '$q', function(ENV, Upload, API_HOST, $q) {
+angular
+  .module('alumni-db-frontend')
+  .factory('eventImagesFactory', ['ENV', 'Upload', 'API_HOST', '$q', function(ENV, Upload, API_HOST, $q) {
 
-    var avatarFactory = {};
+    var eventImagesFactory = {};
 
-    avatarFactory.uploadAvatar = function uploadAvatar(file) {
+    eventImagesFactory.uploadImage = function(file) {
       var deferred = $q.defer();
       Upload.upload({
         method: 'put',
@@ -39,19 +36,20 @@ angular.module('alumni-db-frontend')
       return deferred.promise;
     };
 
-    avatarFactory.getUserAvatar = function getUserAvatar(user) {
-      if (!(user.avatar && user.avatar.url)) {
+    eventImagesFactory.getEventLogo = function(event) {
+      if (!event || !(event.logo_photo && event.logo_photo.url)) {
         return '';
       }
 
-      if (/amazonaws.com/.test(user.avatar.url)) {
-        return user.avatar.url;
+      if (/amazonaws.com/.test(event.logo_photo.url)) {
+        return event.logo_photo.url;
       }
 
       if (ENV === 'development') {
-        return 'http://localhost:3000/' + user.avatar.url;
+        return 'http://localhost:3000/' + event.logo_photo.url;
       }
     };
 
-    return avatarFactory;
+    return eventImagesFactory;
+
   }]);
