@@ -25,20 +25,10 @@
               ng-click="removeEvent(event)"
               type="button"
               name="removeEvent">Remove</button>
-              <button
-                ng-click="toggleEditEventView(event)"
-                type="button"
-                name="editEvent">Edit</button>
           </td>
         </tr>
       </tbody>
     </table>
-  </div>
-  <!-- Edit event view -->
-  <div
-    ng-show="$root.user.is_super_user && editedEvent"
-    ng-include="'/views/event/partials/form-event-edit.html'"
-    class="form-view">
   </div>
 
   <hr>
@@ -56,7 +46,7 @@
       </button>
   </p>
 
-  <!-- Edit event view -->
+  <!-- Create event view -->
   <div
     ng-show="newEvent"
     ng-include="'/views/event/partials/form-event-create.html'"
