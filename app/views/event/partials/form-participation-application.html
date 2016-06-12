@@ -52,6 +52,17 @@
       required></textarea>
   </p>
   <p>
+    <b>CV:</b>
+    <label>
+      <button type="button" ngf-select="cvFileSelected($file)">Select file...</button>
+    </label>
+    <span>
+      <span ng-show="cvUploadingStatus">Status: {{ cvUploadingStatus }}</span>
+      <span ng-show="cvUploadSuccess">File upload successful!</span>
+      <span ng-show="cvUploadError">File upload failed!</span>
+    </span>
+  </p>
+  <p>
     <button
       ng-click="clearApplicationForm()"
       type="button"

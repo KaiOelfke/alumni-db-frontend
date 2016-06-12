@@ -10,7 +10,8 @@ angular
     'eventService',
     'feeService',
     'codeService',
-    'displayErrors', function($rootScope, $scope, $state, $stateParams, eventService, feeService, codeService, displayErrors) {
+    'attachmentFactory',
+    'displayErrors', function($rootScope, $scope, $state, $stateParams, eventService, feeService, codeService, attachmentFactory, displayErrors) {
 
       $scope.eventId = $stateParams.id;
 
@@ -19,6 +20,14 @@ angular
       $scope.enteredCode = null;
 
       $scope.newApplication = {};
+
+      $scope.cvUploadingStatus = null;
+
+      $scope.cvUploadSuccess = false;
+
+      $scope.cvUploadError = false;
+
+      $scope.cvFileSelected
 
       $scope.toggleEnterCodeView = function() {
         if ($scope.enteredCode) {
@@ -57,6 +66,25 @@ angular
         };
         request = angular.extend(request, $scope.newApplication);
         console.log('need to apply with object', request);
+      };
+
+      $scope.cvFileSelected = function(file) {
+        console.log('File selected:', file);
+        attachmentFactory.uploadFile(file).then(function(data) {
+          console.log('cv file uploaded:', data);
+          $scope.cvUploadError = false;
+          $scope.cvUploadSuccess = true;
+        }, function(errorObject) {
+
+          $scope.cvUploadingStatus = undefined;
+          console.error('cv upload failed:', errorObject);
+          $scope.cvUploadError = true;
+          $scope.cvUploadSuccess = false;
+        }, function(progress) {
+
+          $scope.cvUploadingStatus = 'uploading: ' + progress + '%';
+          console.log('cv upload progress:', progress);
+        });
       };
 
       eventService
