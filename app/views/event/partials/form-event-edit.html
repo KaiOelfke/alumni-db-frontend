@@ -92,9 +92,20 @@
       <button type="button" ngf-select="logoFileSelected($file)">Select file...</button>
     </label>
     <span>
-      <span ng-show="uploadingStatus">Status: {{ uploadingStatus }}</span>
+      <span ng-show="logoUploadingStatus">Status: {{ uploadingStatus }}</span>
       <span ng-show="logoUploadSuccess">File upload successful!</span>
       <span ng-show="logoUploadError">File upload failed!</span>
+    </span>
+  </p>
+  <p>
+    <b>Event header:</b>
+    <label>
+      <button type="button" ngf-select="headerFileSelected($file)">Select file...</button>
+    </label>
+    <span>
+      <span ng-show="headerUploadingStatus">Status: {{ uploadingStatus }}</span>
+      <span ng-show="headerUploadSuccess">File upload successful!</span>
+      <span ng-show="headerUploadError">File upload failed!</span>
     </span>
   </p>
   <p>

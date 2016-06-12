@@ -59,11 +59,17 @@ angular
 
       $scope.feeToEdit = null;
 
-      $scope.uploadingStatus = null;
+      $scope.logoUploadingStatus = null;
 
       $scope.logoUploadSuccess = false;
 
       $scope.logoUploadError = false;
+
+      $scope.headerUploadingStatus = null;
+
+      $scope.headerUploadSuccess = false;
+
+      $scope.headerUploadError = false;
 
       $scope.clearFeeForm = function() {
         $scope.newFee = {};
@@ -148,7 +154,7 @@ angular
 
       $scope.logoFileSelected = function(file) {
         console.log('File selected:', file);
-        eventImagesFactory.uploadImage(file).then(function(data) {
+        eventImagesFactory.uploadLogo(file).then(function(data) {
           console.log('event logo uploaded:', data);
           $scope.logoUploadError = false;
           $scope.logoUploadSuccess = true;
@@ -157,10 +163,29 @@ angular
           $scope.uploadingStatus = undefined;
           console.error('event logo upload failed:', errorObject);
           $scope.logoUploadError = true;
-          $scope.logoUploadSuccess = false;
+          $scope.logoUploadingStatus = false;
         }, function(progress) {
 
-          $scope.uploadingStatus = 'uploading: ' + progress + '%';
+          $scope.logoUploadingStatus = 'uploading: ' + progress + '%';
+          console.log('event logo upload progress:', progress);
+        });
+      };
+
+      $scope.headerFileSelected = function(file) {
+        console.log('File selected:', file);
+        eventImagesFactory.uploadHeader(file).then(function(data) {
+          console.log('event logo uploaded:', data);
+          $scope.headerUploadError = false;
+          $scope.headerUploadSuccess = true;
+        }, function(errorObject) {
+
+          $scope.headerUploadingStatus = undefined;
+          console.error('event logo upload failed:', errorObject);
+          $scope.headerUploadError = true;
+          $scope.headerUploadSuccess = false;
+        }, function(progress) {
+
+          $scope.headerUploadingStatus = 'uploading: ' + progress + '%';
           console.log('event logo upload progress:', progress);
         });
       };
