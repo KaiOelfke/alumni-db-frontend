@@ -89,7 +89,7 @@
   <p>
     <b>Event logo:</b>
     <label>
-      <button type="button" ngf-select="logoFileSelected($file)">Select file...</button>
+      <button type="button" ngf-select="logoFileSelected($file)" accept="image/*">Select file...</button>
     </label>
     <span>
       <span ng-show="logoUploadingStatus">Status: {{ uploadingStatus }}</span>
@@ -100,7 +100,7 @@
   <p>
     <b>Event header:</b>
     <label>
-      <button type="button" ngf-select="headerFileSelected($file)">Select file...</button>
+      <button type="button" ngf-select="headerFileSelected($file)" accept="image/*">Select file...</button>
     </label>
     <span>
       <span ng-show="headerUploadingStatus">Status: {{ uploadingStatus }}</span>
