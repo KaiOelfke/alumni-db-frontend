@@ -26,6 +26,7 @@ angular
             // TODO: Use toaster to display this error message
             console.error('could not receive response', response);
           });
+        $scope.confirmDeleteID = -1;
       };
 
       $scope.newEvent = null;
@@ -52,6 +53,11 @@ angular
       };
 
       $scope.removeEvent = function(event) {
+        $scope.confirmDeleteID = event.id;
+        
+      };
+
+      $scope.confirmRemove = function(event) {
         console.log('removing event', event);
         eventService
           .removeEvent(event.id)
@@ -59,7 +65,6 @@ angular
             toaster.pop('success', 'successfully removed event');
             requestAllEvents();
           }, function errorCallback(error) {
-
             toaster.pop('error', error);
           });
       };

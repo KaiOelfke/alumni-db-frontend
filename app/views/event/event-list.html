@@ -23,8 +23,14 @@
           <td ng-show="$root.user.is_super_user">
             <button
               ng-click="removeEvent(event)"
+              ng-show="event.id != confirmDeleteID"
               type="button"
               name="removeEvent">Remove</button>
+            <button
+              ng-click="confirmRemove(event)"
+              ng-show="event.id == confirmDeleteID"
+              type="button"
+              name="removeEvent">Confirm removal</button>
           </td>
         </tr>
       </tbody>
