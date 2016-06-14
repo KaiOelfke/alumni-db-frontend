@@ -2,7 +2,7 @@
 
 angular
   .module('alumni-db-frontend')
-  .controller('participationCtrl', [
+  .controller('eventSignupCtrl', [
     '$rootScope',
     '$scope',
     '$state',
@@ -19,6 +19,8 @@ angular
       $scope.enteredCode = null;
 
       $scope.newApplication = {};
+
+      $scope.newParticipation = {};
 
       $scope.toggleEnterCodeView = function() {
         if ($scope.enteredCode) {
@@ -49,6 +51,18 @@ angular
 
       $scope.clearApplicationForm = function() {
         $scope.newApplication = {};
+      };
+
+      $scope.clearParticipationForm = function() {
+        $scope.newParticipation = {};
+      };
+
+      $scope.participate = function() {
+        var request = {
+          userId: $rootScope.user.id
+        };
+        request = angular.extend(request, $scope.newParticipation);
+        console.log('need to apply with object', request);
       };
 
       $scope.apply = function() {

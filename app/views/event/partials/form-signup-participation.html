@@ -1,0 +1,129 @@
+<p>Participation form:</p>
+
+<form ng-submit="participate()" name="form" novalidate>
+  <p>
+    <b>First name:</b>
+    <input
+      type="text"
+      value="{{ $root.user.first_name }}"
+      disabled>
+  </p>
+  <p>
+    <b>Last name:</b>
+    <input
+      type="text"
+      value="{{ $root.user.last_name }}"
+      disabled>
+  </p>
+  <p>
+    <b>Email:</b>
+    <input
+      type="text"
+      value="{{ $root.user.email }}"
+      disabled>
+  </p>
+  <p>
+    <b>Date of birth:</b>
+    <input
+      type="text"
+      value="{{ $root.user.date_of_birth }}"
+      disabled>
+  </p>
+  <p>
+    <b>Country:</b>
+    <input
+      type="text"
+      value="{{ $root.user.country }}"
+      disabled>
+  </p>
+  <p>
+    <b>Mobile phone:</b>
+    <input
+      type="text"
+      value="{{ $root.user.mobile_phone }}"
+      disabled>
+  </p>
+  <p>
+    <b>Gender (Room arrangement):</b>
+    <div class="checkbox-row">
+      <div
+        class="btn btn-checkbox"
+        ng-class="{active: !tempUserData.gender}"
+        ng-click="tempUserData.gender=0;"
+        disabled>
+        Male
+      </div>
+      <div
+        class="btn btn-checkbox"
+        ng-class="{active: tempUserData.gender}"
+        ng-click="tempUserData.gender=1"
+        disabled>
+        Female
+      </div>
+    </div>
+  </p>
+  <p>
+    <b>Arrival:</b>
+    <textarea
+      ng-model="newParticipation.arrival_text"
+      name="arrivalText"
+      type="text"
+      required></textarea>
+  </p>
+  <p>
+    <b>Departure:</b>
+    <textarea
+      ng-model="newParticipation.departure_text"
+      name="departureText"
+      type="text"
+      required></textarea>
+  </p>
+  <p>
+    <b>Diet options</b>
+    <label>
+      <input
+        ng-model="newParticipation.vegetarian"
+        name="vegetarian"
+        type="checkbox">
+        Vegetarian
+    </label>
+  </p>
+
+  <p>
+    <b>Special diets:</b>
+    <textarea
+      ng-model="newParticipation.specialDiets_text"
+      name="specialDietsText"
+      type="text"></textarea>
+  </p>
+  <p>
+    <b>Extra nights:</b>
+    <textarea
+      ng-model="newParticipation.extraNights_text"
+      name="extraNightsText"
+      type="text"></textarea>
+  </p>
+  <p>
+    <b>Other inquiries:</b>
+    <textarea
+      ng-model="newParticipation.inquiries_text"
+      name="inquiriesText"
+      type="text"></textarea>
+  </p>
+  <p>
+    <button
+      ng-click="clearParticipationForm()"
+      type="button"
+      name="clearParticipation">Clear</button>
+    <button
+      ng-disabled="form.$invalid"
+      type="submit"
+      name="participate">Participate</button>
+  </p>
+</form>
+
+<div class="debug">
+  <p>form: {{ form }}</p>
+  <p>form.$valid: {{ form.$valid }}</p>
+  <p>newParticipation: {{ newParticipation }}</p>
+</div>

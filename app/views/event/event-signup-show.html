@@ -2,16 +2,16 @@
 
 <hr>
 
-<h3>To participate in {{ event.name }} you need to:</h3>
+<h3>To signup in {{ event.name }} you need to:</h3>
 <div>
   <span ng-show="event.etype === 'with_application'">apply for it.</span>
-  <span ng-show="event.etype === 'without_application'">pay a fee.</span>
+  <span ng-show="event.etype === 'without_application'">fill in the participation form.</span>
 </div>
 
 <hr>
 
 <div ng-show="event.etype === 'with_application'">
-  <!-- already have a code? / cancel button --->
+  <!-- already have a code? / cancel button -->
   <button ng-click="toggleEnterCodeView()">
     <span ng-show="!enteredCode">Already have a code? Enter code here.</span>
     <span ng-show="enteredCode">Cancel</span>
@@ -19,14 +19,22 @@
 
   <!-- enter code form -->
   <div ng-show="enteredCode !== null"
-       ng-include="'/views/event/partials/form-participation-code-enter.html'"
+       ng-include="'/views/event/partials/form-signup-code-enter.html'"
        class="form-view">
   </div>
 
   <hr>
 
   <!-- application form -->
-  <div ng-include="'/views/event/partials/form-participation-application.html'"
+  <div ng-include="'/views/event/partials/form-signup-application.html'"
+       class="form-view">
+  </div>
+</div>
+
+<div ng-show="event.etype === 'without_application'">
+
+  <!-- participation form -->
+  <div ng-include="'/views/event/partials/form-signup-participation.html'"
        class="form-view">
   </div>
 </div>

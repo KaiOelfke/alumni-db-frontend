@@ -273,10 +273,10 @@ angular
           }
         }
       })
-      .state('home.event-participate', {
-        url: '/event/:id/participate',
-        templateUrl: 'views/event/participation-show.html',
-        controller: 'participationCtrl',
+      .state('home.event-signup', {
+        url: '/event/:id/signup',
+        templateUrl: 'views/event/event-signup-show.html',
+        controller: 'eventSignupCtrl',
         resolve: {
           authorizedRoles: function(USER_ROLES) {
             return [USER_ROLES.completedProfile];
