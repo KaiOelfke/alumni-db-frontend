@@ -12,13 +12,15 @@
   */
 angular
   .module('alumni-db-frontend')
-  .controller('braintreeCtrl', ['braintreeService', 'plansFactory', '$state',  '$rootScope', '$scope', 'toaster', function(braintreeService, plansFactory, $state, $rootScope, $scope, toaster) {
+  .controller('braintreeCtrl', ['braintreeService', 'data', 'plansFactory', '$state', '$rootScope', '$scope', 'toaster', function(braintreeService, data, plansFactory, $state, $rootScope, $scope, toaster) {
 
     $scope.paymentErrors = [];
     $scope.title = 'Become a premium member!';
     $scope.braintreeReady = false;
     $scope.processingPayment = false;
 
+    $scope.event = data.event;
+    
     plansFactory
       .getAllPlans()
       .then(function(plansResponse) {

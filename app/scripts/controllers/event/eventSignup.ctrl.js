@@ -32,6 +32,15 @@ angular
 
       $scope.enterCode = function() {
         console.log('entered code', $scope.enteredCode);
+        //TODO: Validate code
+        if ($scope.enteredCode.code.length > 3) {
+          //valid code
+          $scope.enteredCode.valid = true;
+        } else {
+          // false code
+          $scope.enteredCode.valid = false;
+
+        }
       };
 
       $scope.createCode = function() {
@@ -58,11 +67,13 @@ angular
       };
 
       $scope.participate = function() {
+        //TODO: Integreate backend, add completion handlers
+        $scope.participationComplete = true;
         var request = {
           userId: $rootScope.user.id
         };
         request = angular.extend(request, $scope.newParticipation);
-        console.log('need to apply with object', request);
+        console.log('need to participate with object', request);
       };
 
       $scope.apply = function() {

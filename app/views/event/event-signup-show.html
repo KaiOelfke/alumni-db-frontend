@@ -10,7 +10,7 @@
 
 <hr>
 
-<div ng-show="event.etype === 'with_application'">
+<div ng-show="event.etype === 'with_application' && !enteredCode.valid">
   <!-- already have a code? / cancel button -->
   <button ng-click="toggleEnterCodeView()">
     <span ng-show="!enteredCode">Already have a code? Enter code here.</span>
@@ -18,7 +18,7 @@
   </button>
 
   <!-- enter code form -->
-  <div ng-show="enteredCode !== null"
+  <div ng-show="enteredCode !== null && !enteredCode.valid"
        ng-include="'/views/event/partials/form-signup-code-enter.html'"
        class="form-view">
   </div>
@@ -27,14 +27,20 @@
 
   <!-- application form -->
   <div ng-include="'/views/event/partials/form-signup-application.html'"
+       ng-show="!enteredCode.valid"
        class="form-view">
   </div>
 </div>
 
-<div ng-show="event.etype === 'without_application'">
+<div ng-show="!participationComplete && (event.etype === 'without_application' || enteredCode.valid)">
 
   <!-- participation form -->
   <div ng-include="'/views/event/partials/form-signup-participation.html'"
        class="form-view">
   </div>
+</div>
+
+<!-- payment -->
+<div ng-show="participationComplete">
+  <a ui-sref="home.event-payment({ id: eventId })">Payment</a>
 </div>

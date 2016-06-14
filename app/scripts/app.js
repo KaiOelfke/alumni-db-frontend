@@ -287,6 +287,32 @@ angular
           }
         }
       })
+      .state('home.event-payment', {
+        url: '/event/:id/payment',
+        templateUrl: 'views/event/event-payment.html',
+        controller: 'braintreeCtrl',
+        resolve: {
+          authorizedRoles: function(USER_ROLES) {
+            return [USER_ROLES.completedProfile];
+          },
+
+          authz: function(authorizedRoles, authorizationService) {
+            return authorizationService.isAuthorized(authorizedRoles);
+          },
+          data: function(eventService, $stateParams) {
+            return eventService
+              .getEvent($stateParams.id)
+              .then(function successCallback(event) {
+                return {
+                  event: event
+                };
+              }, function errorCallback(error) {
+                // TODO: Make a state change
+                console.error(error);
+              });
+          }
+        }
+      })
       .state('home.event-codes', {
         url: '/event/:id/codes',
         templateUrl: 'views/event/codes-show.html',
