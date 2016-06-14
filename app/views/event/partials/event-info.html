@@ -30,6 +30,7 @@
 
 <button
   type="button"
+  ng-show="$root.user.is_super_user"
   name="codes">
   <a ui-sref="home.event-codes({ id: eventId })">Codes</a>
 </button>
