@@ -20,7 +20,7 @@ angular
     $scope.processingPayment = false;
 
     $scope.event = data.event;
-    
+
     plansFactory
       .getAllPlans()
       .then(function(plansResponse) {

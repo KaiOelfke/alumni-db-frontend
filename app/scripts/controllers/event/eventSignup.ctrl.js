@@ -32,7 +32,8 @@ angular
 
       $scope.enterCode = function() {
         console.log('entered code', $scope.enteredCode);
-        //TODO: Validate code
+
+        // TODO: Validate code
         if ($scope.enteredCode.code.length > 3) {
           //valid code
           $scope.enteredCode.valid = true;
