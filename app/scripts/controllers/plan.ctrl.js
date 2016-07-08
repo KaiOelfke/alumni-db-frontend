@@ -12,6 +12,8 @@ angular
   .module('alumni-db-frontend')
   .controller('planCtrl', ['plansFactory', '$state',  '$rootScope', '$scope', function(plansFactory, $state, $rootScope, $scope) {
 
+    var getDefaultPlan;
+
     $scope.title = 'Become a premium member!';
     $scope.tmpPlanFormVisible = false;
     $scope.tmpPlan = {};
@@ -27,7 +29,7 @@ angular
         window.alert('Ups, there was an error! Please refresh the website or contact a developer for assistance.');
       });
 
-    var getDefaultPlan = function(plans) {
+    getDefaultPlan = function(plans) {
       for (var i = 0; i < plans.length; i++) {
         var plan = plans[i];
         if (plan.default) {

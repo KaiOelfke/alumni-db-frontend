@@ -14,6 +14,10 @@ angular
   .module('alumni-db-frontend')
   .controller('braintreeCtrl', ['braintreeService', 'data', 'plansFactory', '$state', '$rootScope', '$scope', 'toaster', function(braintreeService, data, plansFactory, $state, $rootScope, $scope, toaster) {
 
+    var getDefaultPlan;
+    var finishPaymentProcess;
+    var processError;
+
     $scope.paymentErrors = [];
     $scope.title = 'Become a premium member!';
     $scope.braintreeReady = false;
@@ -57,7 +61,7 @@ angular
         console.error('could not get client token', response);
       });
 
-    var getDefaultPlan = function(plans) {
+    getDefaultPlan = function(plans) {
       for (var i = 0; i < plans.length; i++) {
         var plan = plans[i];
         if (plan.default) {
@@ -71,7 +75,7 @@ angular
       return true;
     };
 
-    var finishPaymentProcess = function(paymentData) {
+    finishPaymentProcess = function(paymentData) {
       if (paymentData) {
         paymentData.userId = $rootScope.user.id;
         braintreeService
@@ -99,7 +103,7 @@ angular
       }
     };
 
-    var processError = function(response) {
+    processError = function(response) {
       // console.error the response first
       console.error('an error occurred', response);
 
