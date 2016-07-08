@@ -19,12 +19,9 @@ angular
 
       codeService.getCodesForEvent = function(event_id) {
         var deferred = $q.defer();
+        var url = API_HOST + '/events/' + event_id + '/fee_codes';
         $http
-          .get(urlBase, {
-            params: {
-              'event_id': event_id
-            }
-          })
+          .get(url)
           .then(function successCallback(resp) {
               deferred.resolve(resp);
             },

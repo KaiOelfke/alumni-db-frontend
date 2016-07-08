@@ -16,7 +16,7 @@ angular
 
       $scope.fees = data.fees;
 
-      $scope.codes;
+      $scope.codes = data.codes;
 
       $scope.newCode;
 
