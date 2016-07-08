@@ -14,7 +14,7 @@ angular
     'displayErrors',
     '$q', function($http, API_HOST, displayErrors, $q) {
 
-      var urlBase = API_HOST + '/events/fee_codes';
+      var urlBase = API_HOST + '/fee_codes';
       var codeService = {};
 
       codeService.getCodesForEvent = function(event_id) {
@@ -36,11 +36,12 @@ angular
         return deferred.promise;
       };
 
-      codeService.createCode = function(code) {
+      codeService.createCode = function(user_id, fee_id) {
         var deferred = $q.defer();
         $http
           .post(urlBase, {
-            cpde: code
+            user_id: user_id,
+            fee_id: fee_id
           })
           .then(function successCallback(resp) {
               deferred.resolve(resp);

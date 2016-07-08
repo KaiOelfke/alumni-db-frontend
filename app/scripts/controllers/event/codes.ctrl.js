@@ -8,11 +8,13 @@ angular
     '$state',
     '$stateParams',
     'eventService',
-    'displayErrors', function($rootScope, $scope, $state, $stateParams, eventService, displayErrors) {
+    'displayErrors',
+    'data',
+    'codeService', function($rootScope, $scope, $state, $stateParams, eventService, displayErrors, data, codeService) {
 
-      $scope.eventId = $stateParams.id;
+      $scope.event = data.event;
 
-      $scope.event;
+      $scope.fees = data.fees;
 
       $scope.codes;
 
@@ -31,20 +33,16 @@ angular
       };
 
       $scope.createCode = function() {
-        console.log('need to create code', $scope.newCode);
+        var user_id = $rootScope.user.id;
+        var fee_id = $scope.newCode.fee_id;
+        codeService
+          .createCode(user_id, fee_id)
+          .then(function successCallback(response) {
+            console.log('successfully created code:', response);
+          }, function errorCallback(errorMessage) {
+            // TODO: Use toaster for this
+            console.error(errorMessage);
+          });
       };
-
-      eventService
-        .getEvent($scope.eventId)
-        .then(
-          function successCallback(event) {
-            $scope.event = event;
-          },
-
-          // TODO: use toaster for displaying this error message
-          function errorCallback(response) {
-            console.error(displayErrors.convertErrorResponse(response));
-          }
-        );
 
     }]);

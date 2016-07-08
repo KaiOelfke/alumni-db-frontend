@@ -299,6 +299,7 @@ angular
           authz: function(authorizedRoles, authorizationService) {
             return authorizationService.isAuthorized(authorizedRoles);
           },
+
           data: function(eventService, $stateParams) {
             return eventService
               .getEvent($stateParams.id)
@@ -324,6 +325,30 @@ angular
 
           authz: function(authorizedRoles, authorizationService) {
             return authorizationService.isAuthorized(authorizedRoles);
+          },
+
+          data: function(eventService, feeService, $stateParams) {
+            return eventService
+              .getEvent($stateParams.id)
+              .then(function successCallback(event) {
+                return feeService
+                  .getFeesForEvent(event.id)
+                  .then(function successCallback(fees) {
+                    return {
+                      event: event,
+                      fees: fees
+                    };
+                  }, function errorCallback() {
+
+                    return {
+                      event: event,
+                      fees: []
+                    };
+                  });
+              }, function errorCallback(error) {
+                // TODO: Make a state change
+                console.error(error);
+              });
           }
         }
       })

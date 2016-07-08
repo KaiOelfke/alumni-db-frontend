@@ -1,13 +1,37 @@
-<p>Create code form:</p>
-
 <form ng-submit="createCode()" name="form" novalidate>
   <p>
-    <b>Hello:</b>
-    <input
-      ng-model="newCode.hello"
-      name="hello"
-      type="text"
-      required>
+    <b>Create code for fee:</b>
+    <table class="table">
+      <thead>
+        <th></th>
+        <th>Fee id</th>
+        <th>Event id</th>
+        <th>Fee Name</th>
+        <th>Fee price</th>
+        <th>Fee deadline</th>
+        <th>Is early bird fee</th>
+        <th>Is honoris fee</th>
+        <tbody>
+          <tr ng-repeat="fee in fees">
+            <td>
+              <input
+                name="selectedFee"
+                ng-model="newCode.fee_id"
+                type="radio"
+                ng-value="{{ fee.id }}"
+                required>
+            </td>
+            <td>{{ fee.id }}</td>
+            <td>{{ fee.event_id }}</td>
+            <td>{{ fee.name }}</td>
+            <td>{{ fee.price }}</td>
+            <td>{{ fee.deadline }}</td>
+            <td>{{ fee.is_early_bird_fee }}</td>
+            <td>{{ fee.is_honoris_fee }}</td>
+          </tr>
+        </tbody>
+      </thead>
+    </table>
   </p>
   <p>
     <button
@@ -24,7 +48,7 @@
 <div class="debug">
   <p>form: {{ form }}</p>
   <p>form.$valid: {{ form.$valid }}</p>
-  <p>form.hello.$valid: {{ form.hello.$valid }}</p>
+  <p>form.selectedFee.$valid: {{ form.selectedFee.$valid }}</p>
   <p>newCode: {{ newCode }}</p>
-  <p>newCode.hello: {{ newCode.hello }}</p>
+  <p>newCode.fee_id: {{ newCode.fee_id }}</p>
 </div>
