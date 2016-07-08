@@ -30,7 +30,6 @@ module.exports = function(config) {
     port: 9090,
 
     // Browsers to test in
-    // possible values: PhantomJS, Chrome, Safari
     browsers: [
       'PhantomJS'
     ],
