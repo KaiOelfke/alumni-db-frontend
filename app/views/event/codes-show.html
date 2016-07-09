@@ -24,8 +24,27 @@
 
 <h4>All codes for this event:</h4>
 
-<table ng-show="codes && codes.length > 0">
-  <tr ng-repeat="code in codes">
-    <!-- TODO: display the code here -->
-  </tr>
-</table>
+<div class="table-responsive" ng-show="codes.length > 0">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Code id</th>
+      <th>Fee id</th>
+      <th>User id</th>
+      <th>Code</th>
+      <th>Actions</th>
+    </tr>
+    <tr ng-repeat="code in codes">
+      <td>{{ code.id }}</td>
+      <td>{{ code.fee_id }}</td>
+      <td>{{ code.user_id }}</td>
+      <td>{{ code.fee_code }}</td>
+      <td>
+        <button
+          ng-click="removeCode(code)"
+          type="button"
+          name="removeCode">Remove</button>
+      </td>
+    </tr>
+  </table>
+</div>

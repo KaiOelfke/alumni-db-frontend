@@ -18,6 +18,20 @@ angular
 
       $scope.codes = data.codes;
 
+      // dummy codes
+      $scope.codes = [
+        {
+          id: 0,
+          fee_id: 3,
+          fee_code: '1234-5678-1234-5678'
+        },
+        {
+          id: 1,
+          fee_id: 3,
+          fee_code: '0987-6543-8765-5432'
+        }
+      ];
+
       $scope.newCode;
 
       $scope.toggleCreateCodeView = function() {
@@ -43,6 +57,10 @@ angular
             // TODO: Use toaster for this
             console.error(errorMessage);
           });
+      };
+
+      $scope.removeCode = function(code) {
+        $scope.codes = $scope.codes.pop();
       };
 
     }]);
