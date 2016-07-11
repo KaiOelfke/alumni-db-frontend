@@ -12,7 +12,7 @@
   */
 angular
   .module('alumni-db-frontend')
-  .controller('braintreeCtrl', ['braintreeService', 'data', 'plansFactory', '$state', '$rootScope', '$scope', 'toaster', function(braintreeService, data, plansFactory, $state, $rootScope, $scope, toaster) {
+  .controller('braintreeCtrl', ['braintreeService', 'plansFactory', '$state', '$rootScope', '$scope', 'toaster', 'data', function(braintreeService, plansFactory, $state, $rootScope, $scope, toaster, data) {
 
     var getDefaultPlan;
     var finishPaymentProcess;
@@ -23,8 +23,12 @@ angular
     $scope.braintreeReady = false;
     $scope.processingPayment = false;
 
-    $scope.event = data.event;
-
+    //TODO: Split event payment and premium payment
+    if (data != null)
+    {
+      $scope.event = data.event;  
+    }
+    
     plansFactory
       .getAllPlans()
       .then(function(plansResponse) {

@@ -24,6 +24,8 @@ describe('Controller: braintreeCtrl', function() {
   beforeEach(function() {
     $httpBackend.whenGET('views/splash.html').respond(200, '');
     $httpBackend.whenGET('views/splash-signin.html').respond(200, '');
+    $httpBackend.whenGET('views/home.html').respond(200, '');
+    $httpBackend.whenGET('views/users.html').respond(200, '');
     $httpBackend.flush();
   });
 
@@ -31,7 +33,8 @@ describe('Controller: braintreeCtrl', function() {
   beforeEach(function() {
     scope = $rootScope.$new();
     ctrl = $controller('braintreeCtrl', {
-      $scope: scope
+      $scope: scope,
+      data: null
     });
     form = '<form>' +
       '<div id="payment-form"></div>' +
