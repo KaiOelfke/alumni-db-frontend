@@ -1,52 +1,68 @@
-'use strict';
-
-module.exports = function(config) {
-
+module.exports = function (config) {
   config.set({
-    autoWatch: true,
-    basePath: './',
-    frameworks: ['jasmine'],
-    reporters: ['mocha'],
-    files: [
-      'bower_components/angular/angular.js',
-      'bower_components/angular-mocks/angular-mocks.js',
-      'bower_components/angular-cookies/angular-cookies.js',
-      'bower_components/angular-resource/angular-resource.js',
-      'bower_components/angular-cookie/angular-cookie.js',
-      'bower_components/ng-token-auth/dist/ng-token-auth.js',
-      'bower_components/angular-messages/angular-messages.js',
-      'bower_components/angular-ui-router/release/angular-ui-router.js',
-      'bower_components/moment/moment.js',
-      'bower_components/angular-animate/angular-animate.js',
-      'bower_components/angularjs-toaster/toaster.js',
-      'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-      'bower_components/ng-file-upload/ng-file-upload.js',
-      'app/scripts/**/*.js',
-      'https://js.braintreegateway.com/v2/braintree.js',
-      'test/mock/**/*.js',
-      'test/spec/**/*.js'
-    ],
+    // base path used to resolve all patterns
+    basePath: '',
+
+    // frameworks to use
+    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
+    frameworks: ['mocha', 'chai'],
+
+    // list of files/patterns to load in the browser
+    files: [{ pattern: 'spec.bundle.js', watched: false }],
+
+    // files to exclude
     exclude: [],
-    port: 9090,
 
-    // Browsers to test in
-    // possible values: PhantomJS, Chrome, Safari
-    browsers: [
-      'PhantomJS'
-    ],
-
-    // Depending on in which browser the tests should be made
-    // a different launcher should be loaded
     plugins: [
-      'karma-phantomjs-launcher',
-      'karma-jasmine',
-      'karma-mocha-reporter'
+      require("karma-chai"),
+      require("karma-chrome-launcher"),
+      require("karma-mocha"),
+      require("karma-mocha-reporter"),
+      require("karma-sourcemap-loader"),
+      require("karma-webpack")
     ],
-    singleRun: false,
+
+    // preprocess matching files before serving them to the browser
+    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
+    preprocessors: { 'spec.bundle.js': ['webpack', 'sourcemap'] },
+
+    webpack: {
+      devtool: 'inline-source-map',
+      module: {
+        loaders: [
+          { test: /\.js/, exclude: [/app\/lib/, /node_modules/], loader: 'babel' },
+          { test: /\.html/, loader: 'raw' },
+          { test: /\.styl$/, loader: 'style!css!stylus' },
+          { test: /\.css$/, loader: 'style!css' }
+        ]
+      }
+    },
+
+    webpackServer: {
+      noInfo: true // prevent console spamming when running in Karma!
+    },
+
+    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
+    reporters: ['mocha'],
+
+    // web server port
+    port: 9876,
+
+    // enable colors in the output
     colors: true,
 
     // level of logging
-    // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
+    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_INFO,
+
+    // toggle whether to watch files and rerun tests upon incurring changes
+    autoWatch: false,
+
+    // start these browsers
+    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
+    browsers: ['Chrome'],
+
+    // if true, Karma runs tests once and exits
+    singleRun: true
   });
 };

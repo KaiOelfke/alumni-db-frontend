@@ -1,0 +1,31 @@
+<nav 
+     md-colors="{background: '{{$ctrl.dynamicTheme}}-primary-500-1'}"
+     class="navbar">
+  <div class="content" layout="row">
+
+    <div class="logo" md-colors="{color: '{{$ctrl.dynamicNavTextTheme}}-accent-900-1'}" flex>
+      <span>Alumni Connect</span>
+    </div>
+
+    <md-nav-bar
+        class="md-flex"
+        md-selected-nav-item="$ctrl.currentNavItem" 
+        nav-bar-aria-label="navigation links">
+      <md-nav-item md-nav-sref="home" name="home">
+        home
+      </md-nav-item>        
+      <md-nav-item md-nav-sref="events" name="events">
+        events
+      </md-nav-item>
+      <md-nav-item md-nav-sref="premium" name="premium">
+        premium
+      </md-nav-item>
+      <md-nav-item md-nav-sref="profile" name="profile">
+        profile
+      </md-nav-item>
+
+      <!--<md-nav-item md-nav-href="signup" name="page5">Page Five</md-nav-item>-->
+    </md-nav-bar>
+  </div>
+
+</nav>

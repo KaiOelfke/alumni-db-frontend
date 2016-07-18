@@ -1,0 +1,53 @@
+
+
+<div class="signup" layout="column" layout-align="center center">
+  <header>
+    <logo></logo>
+  </header>
+
+  <md-card class="form" layout-padding flex>
+
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">Sign Up</span>
+      </md-card-title-text>
+    </md-card-title>
+
+    <form name="signupForm">
+      <md-input-container class="md-block">
+        <label>Email</label>
+        <input type="email"
+               required
+               name="email" ng-model="project.email">
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label>Password</label>
+        <input required name="password" ng-model="project.password">
+      </md-input-container>
+      <md-input-container class="md-block">
+        <label>Confirm Password</label>
+        <input required name="confirm password" ng-model="project.cpassword">
+      </md-input-container>
+
+    </form>
+
+    <md-card-actions layout="row" layout-align="end">
+      <md-button flex>Sign Up</md-button>
+    </md-card-actions>
+
+  </md-card>
+
+  <footer>
+    <p>
+    Already have an account?
+    <a href="/signin">Log In</a>
+    </p>
+  </footer>
+
+
+</div>
+
+
+
+
+

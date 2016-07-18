@@ -1,0 +1,59 @@
+<div  class="premium" 
+      md-theme="premium"
+      layout="column" layout-fill>
+
+  <md-toolbar class="md-tall">
+      <span flex></span>
+      <h3 class="content md-toolbar-tools">
+        <span class="md-flex title">Premium</span>
+        <span flex></span>
+      </h3>
+
+  </md-toolbar>
+
+  <md-card>
+    <div layout="row">
+      <div flex>
+        <img ng-src="http://i.imgur.com/y7HTjEz.jpg" alt="Washed Out">
+      </div>
+
+
+      <div flex layout="column">
+        <div layout="column">
+
+          <md-card-title>
+            <md-card-title-text>
+              <span class="md-headline">Premium Features</span>
+            </md-card-title-text>
+          </md-card-title>
+
+          <md-list flex>
+            <md-list-item ng-repeat="reason in $ctrl.reasons">
+              <md-icon  md-font-set="material-icons"
+                        class="md-avatar-icon">
+                check_circle
+              </md-icon>
+                <p> {{ reason.content }} </p>
+            </md-list-item>
+          </md-list>
+        </div>
+
+        <md-card-actions flex
+          layout="row"
+          layout-align="end end">
+            <md-button class="md-raised md-accent">
+              Pay
+            </md-button>
+        </md-card-actions>
+      </div>
+
+    </div>
+
+
+
+
+
+
+  </md-card>
+
+</div>

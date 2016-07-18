@@ -1,0 +1,885 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"prem",
+				"isPremium"
+			],
+			[
+				"subsc",
+				"subscribred"
+			],
+			[
+				"delete",
+				"delete_flag"
+			],
+			[
+				"du",
+				"default_plan"
+			],
+			[
+				"be",
+				"be_success"
+			],
+			[
+				"err",
+				"errors"
+			],
+			[
+				"su",
+				"success"
+			],
+			[
+				"user",
+				"userIds"
+			],
+			[
+				"fu",
+				"function"
+			],
+			[
+				"cus",
+				"customer_id"
+			],
+			[
+				"sub",
+				"subscriptions"
+			],
+			[
+				"sup",
+				"subscription_id"
+			],
+			[
+				"dis",
+				"discounts"
+			],
+			[
+				"pla",
+				"plan_id"
+			],
+			[
+				"subr",
+				"subscription"
+			],
+			[
+				"update",
+				"updateEinstance"
+			],
+			[
+				"da",
+				"datasourceId"
+			],
+			[
+				"mar",
+				"margin-right"
+			],
+			[
+				"dat",
+				"datasource"
+			],
+			[
+				"data",
+				"datasources"
+			],
+			[
+				"q",
+				"query"
+			],
+			[
+				"fi",
+				"filter"
+			],
+			[
+				"req",
+				"required"
+			],
+			[
+				"dataso",
+				"datasourceId"
+			],
+			[
+				"new",
+				"newUpdates"
+			],
+			[
+				"fo",
+				"form	Tag"
+			],
+			[
+				"qc",
+				"qc_id"
+			],
+			[
+				"print",
+				"printjson"
+			],
+			[
+				"for",
+				"forin	Array Comprehension"
+			],
+			[
+				"dast",
+				"datasource_id"
+			],
+			[
+				"eatt",
+				"eattributes"
+			],
+			[
+				"das",
+				"datasourceId"
+			],
+			[
+				"convert",
+				"convertToArray"
+			],
+			[
+				"evet",
+				"event_id"
+			],
+			[
+				"eve",
+				"event"
+			],
+			[
+				"find",
+				"findOne"
+			],
+			[
+				"col",
+				"collection"
+			],
+			[
+				"eisn",
+				"einstances"
+			],
+			[
+				"url",
+				"urlBuilder"
+			],
+			[
+				"job",
+				"jobName"
+			],
+			[
+				"attr",
+				"attributeParamHash"
+			],
+			[
+				"coll",
+				"collectionName"
+			],
+			[
+				"chec",
+				"checkQC"
+			],
+			[
+				"einst",
+				"einstancesCount"
+			],
+			[
+				"inser",
+				"insertBatch"
+			],
+			[
+				"qcs",
+				"qcshub"
+			],
+			[
+				"upa",
+				"updates"
+			],
+			[
+				"loca",
+				"localeFormat"
+			],
+			[
+				"event",
+				"eventTimestamp"
+			],
+			[
+				"time",
+				"timestamp"
+			],
+			[
+				"A",
+				"NotAllowedCharacters"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "app/scripts/services/discounts.js",
+			"settings":
+			{
+				"buffer_size": 1160,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/scripts/services/braintree.svs.js",
+			"settings":
+			{
+				"buffer_size": 1534,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/scripts/services/plans.js",
+			"settings":
+			{
+				"buffer_size": 834,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/scripts/services/subscriptions.js",
+			"settings":
+			{
+				"buffer_size": 980,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/scripts/controllers/braintree.ctrl.js",
+			"settings":
+			{
+				"buffer_size": 1181,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/scripts/app.js",
+			"settings":
+			{
+				"buffer_size": 11063,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 113.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"subli",
+				"SublimeLint: Next Error"
+			],
+			[
+				"sub",
+				"SublimeLint: Show All Errors"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 475.0
+	},
+	"console":
+	{
+		"height": 139.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"dh = hashlib.sha256(by).hexdigest(); ",
+			"by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); ",
+			"urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); ",
+			"pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path();",
+			"h",
+			"h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d';",
+			"import urllib.request,os,hashlib;",
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/ahmed/workspace/almnidb/alumni-db-frontend",
+		"/home/ahmed/workspace/almnidb/alumni-db-frontend/app",
+		"/home/ahmed/workspace/almnidb/alumni-db-frontend/app/scripts",
+		"/home/ahmed/workspace/almnidb/alumni-db-frontend/app/scripts/controllers",
+		"/home/ahmed/workspace/almnidb/alumni-db-frontend/app/scripts/services",
+		"/home/ahmed/workspace/almnidb/alumni-db-frontend/app/styles"
+	],
+	"file_history":
+	[
+		"/home/ahmed/workspace/almnidb/alumni-db-frontend/.sublime-project",
+		"/home/ahmed/workspace/almnidb/alumni-db-frontend/app/scripts/services/memberships.js",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/spec/controllers/subscriptions/discounts_controller_spec.rb",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/spec/factories/subscriptions/subscription.rb",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/app/controllers/subscriptions/plans_controller.rb",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/spec/factories/subscriptions/discount.rb",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/spec/factories/subscriptions/plan.rb",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/config/routes.rb",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/app/models/membership.rb",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/spec/support/request_helpers.rb",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/app/controllers/subscriptions/discounts_controller.rb",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/app/models/subscriptions/subscription.rb",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/spec/controllers/subscriptions/plans_controller_spec.rb",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/app/models/subscriptions/discount.rb",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/.sublime-project",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/spec/controllers/subscriptions/subscriptions_controller_spec.rb",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/asdas",
+		"/home/ahmed/workspace/almnidb/alumni-db-frontend/.jscsrc",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/app/models/user.rb",
+		"/home/ahmed/.config/sublime-text-3/Packages/User/SublimeLint.sublime-settings",
+		"/home/ahmed/workspace/almnidb/alumni-db-frontend/app/scripts/services/subscriptions.js",
+		"/home/ahmed/workspace/almnidb/alumni-db-frontend/app/scripts/services/plans.js",
+		"/home/ahmed/workspace/almnidb/alumni-db-frontend/app/scripts/services/discounts.js",
+		"/home/ahmed/workspace/almnidb/alumni-db-frontend/app/views/premium.html",
+		"/home/ahmed/workspace/almnidb/alumni-db-frontend/app/views/discounts.html",
+		"/home/ahmed/workspace/almnidb/alumni-db-frontend/app/views/plans.html",
+		"/home/ahmed/workspace/almnidb/alumni-db-frontend/Gruntfile.js",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/config/environment.rb",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/app/controllers/subscriptions/subscriptions_controller.rb",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/db/migrate/20151209193631_braintree_integration.rb",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/app/models/subscription/discount.rb",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/app/controllers/groups_controller.rb",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/db/seeds.rb",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/app/controllers/subscriptions_controller.rb",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/app/models/subscription/subscription.rb",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/app/controllers/users_controller.rb",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/.env",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/config/initializers/braintree.rb",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/app/controllers/subscriptions",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/app/models/discount.rb",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/app/models/plan.rb",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/app/models/subscription.rb",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/Gemfile",
+		"/home/ahmed/workspace/almnidb/alumni-db-backend/db/migrate/20151209131046_add_braintree_customer_id_to_users.rb",
+		"/home/ahmed/projects/innoscale/docs/asd.js",
+		"/home/ahmed/projects/innoscale/docs/asd2.js",
+		"/home/ahmed/workspace/innoscale/datarocket/modules/hub/src/analysis/qcanalysis.coffee",
+		"/home/ahmed/workspace/innoscale/datarocket/modules/hub/src/server.coffee",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/components/sidenav/sidenav.directive.js",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/index.module.js",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/index.route.js",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/components/menu/menu.service.js",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/components/datasources/datasources.service.js",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/components/datasources/datasource.controller.js",
+		"/home/ahmed/projects/innoscale/simulator/server/src/index.js",
+		"/home/ahmed/projects/innoscale/simulator/server/src/Simulator.js",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/components/datasources/datasource.less",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/components/datasources/datasource.html",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/components/datasources/hub.service.js",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/components/datasources/datasources.controller.js",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/components/datasources/einstances.service.js",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/components/datasources/datasources.html",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/components/datasources/datasources-create.html",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/index.config.js",
+		"/home/ahmed/projects/innoscale/simulator/client/gulp/scripts.js",
+		"/home/ahmed/projects/innoscale/simulator/client/bower_components/angular-data-table/release/dataTable.js",
+		"/home/ahmed/projects/innoscale/simulator/server/src/worker.js",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/components/qualitycriterions/qualitycriterions.controller.js",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/components/qualitycriterions/qualitycriterions.service.js",
+		"/home/ahmed/projects/innoscale/simulator/server/package.json",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/components/datasources/datasources.less",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/components/qualitycriterions/qualitycriterions.less",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/components/qualitycriterions/qualitycriterions.html",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/main/main.html",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/index.run.js",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/components/sidenav/sidenav.html",
+		"/home/ahmed/projects/innoscale/simulator/client/bower.json",
+		"/home/ahmed/projects/innoscale/simulator/client/src/index.html",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/main/main.controller.js",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/components/sidenav/sidenav.less",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/components/sidenav/huamnizedoc.filter.js",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/components/navbar/navbar.html",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/components/sidenav/huamnizeDoc.filter.js",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/components/sidenav/nospace.filter.js",
+		"/home/ahmed/projects/innoscale/simulator/client/src/app/components/webDevTec/webDevTec.service.js",
+		"/home/ahmed/projects/innoscale/simulator/client/js/reducers/Sample.js",
+		"/home/ahmed/projects/innoscale/simulator/client/js/containers/App.js",
+		"/home/ahmed/projects/innoscale/simulator/client/index.html",
+		"/home/ahmed/projects/innoscale/simulator/client/package.json",
+		"/home/ahmed/projects/innoscale/simulator/client/js/store/configureStore.js",
+		"/home/ahmed/projects/innoscale/simulator/client/js/index.js",
+		"/home/ahmed/projects/innoscale/simulator/client/app/elements/routing.html",
+		"/home/ahmed/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/ahmed/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/ahmed/workspace/innoscale/datarocket/modules/inusion3.0/src/analysis/qcanalysis.js",
+		"/home/ahmed/workspace/innoscale/datarocket/src/collections/qCAnalysisReport.coffee",
+		"/home/ahmed/projects/innoscale/hub/src/index.js",
+		"/home/ahmed/projects/innoscale/hub/package.json",
+		"/home/ahmed/projects/innoscale/hub/src/Jobmanager.js",
+		"/home/ahmed/workspace/innoscale/datarocket/modules/inusion3.0/src/requests/RequestProcessQCAModification.coffee",
+		"/home/ahmed/workspace/innoscale/datarocket/src/client/views/qualitycriterionanalysis/qcanalysis_qualityCriterions.coffee",
+		"/home/ahmed/workspace/innoscale/datarocket/src/client/views/qualitycriterionanalysis/qcanalysis.coffee",
+		"/home/ahmed/workspace/innoscale/datarocket/modules/inusion3.0/src/server.coffee",
+		"/home/ahmed/workspace/innoscale/datarocket/src/server/innoxmlGenerator.coffee",
+		"/home/ahmed/workspace/innoscale/datarocket/src/server/util.coffee",
+		"/home/ahmed/workspace/innoscale/datarocket/src/server/requests.coffee",
+		"/home/ahmed/workspace/innoscale/datarocket/src/client/views/qualitycriterion/qualitycriterion_middle.coffee",
+		"/home/ahmed/workspace/innoscale/datarocket/src/public/templates/innoxml2_template_process_qca_modification.xml",
+		"/home/ahmed/workspace/innoscale/datarocket/src/lib/commandlist.coffee",
+		"/home/ahmed/workspace/innoscale/datarocket/src/public/templates/innoxml2_template_process_qc_analysis.xml",
+		"/home/ahmed/workspace/innoscale/datarocket/src/server/api.coffee",
+		"/home/ahmed/workspace/innoscale/datarocket/modules/inusion3.0/src/requests/RequestAnalyseBusinessObject.coffee",
+		"/home/ahmed/workspace/innoscale/datarocket/src/client/views/analysis/analysis_menu.html",
+		"/home/ahmed/workspace/innoscale/datarocket/src/client/views/analysis/analysis_menu.coffee",
+		"/home/ahmed/workspace/innoscale/datarocket/src/client/views/analysis/analysis_process_modal.coffee",
+		"/home/ahmed/projects/innoscale/ba/3/qcanaylsis/src/main/java/de/innoscale/qcanaylsis/AppMongodb.java",
+		"/home/ahmed/projects/innoscale/ba/5/qcanalyzer/src/main/java/de/innoscale/qcanalyzer/SplitBolt.java",
+		"/home/ahmed/projects/innoscale/ba/5/qcanalyzer/src/main/java/de/innoscale/qcanalyzer/PaserBolt.java",
+		"/home/ahmed/projects/innoscale/ba/5/qcanalyzer/src/main/java/de/innoscale/qcanalyzer/qcs/ZIPBolt.java",
+		"/home/ahmed/projects/innoscale/ba/5/qcanalyzer/src/main/java/de/innoscale/qcanalyzer/qcs/RegexBolt.java",
+		"/home/ahmed/projects/innoscale/ba/5/qcanalyzer/src/main/java/de/innoscale/qcanalyzer/qcs/PhoneBolt.java",
+		"/home/ahmed/projects/innoscale/ba/5/qcanalyzer/src/main/java/de/innoscale/qcanalyzer/qcs/NotAllowedCharactersBolt.java",
+		"/home/ahmed/projects/innoscale/ba/5/qcanalyzer/src/main/java/de/innoscale/qcanalyzer/qcs/ComparisonBolt.java",
+		"/home/ahmed/projects/innoscale/ba/5/qcanalyzer/src/main/java/de/innoscale/qcanalyzer/qcs/DateBolt.java",
+		"/home/ahmed/projects/innoscale/ba/5/qcanalyzer/src/main/java/de/innoscale/qcanalyzer/qcs/EmailBolt.java",
+		"/home/ahmed/projects/innoscale/ba/5/qcanalyzer/src/main/java/de/innoscale/qcanalyzer/qcs/IBANBolt.java",
+		"/home/ahmed/projects/innoscale/ba/5/qcanalyzer/src/main/java/de/innoscale/qcanalyzer/qcs/IsEmptyBolt.java",
+		"/home/ahmed/projects/innoscale/ba/5/qcanalyzer/src/main/java/de/innoscale/qcanalyzer/qcs/LengthBolt.java"
+	],
+	"find":
+	{
+		"height": 41.0
+	},
+	"find_in_files":
+	{
+		"height": 94.0,
+		"where_history":
+		[
+			"/home/ahmed/workspace/innoscale/datarocket/modules/hub/src",
+			"/home/ahmed/projects/innoscale/simulator/client/bower_components/angular-data-table/release",
+			"/home/ahmed/projects/innoscale/simulator/client/gulp",
+			"/home/ahmed/projects/innoscale/simulator/client/js",
+			"/home/ahmed/workspace/innoscale/datarocket/src/client/views/analysis"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"USER_ROLES",
+			"isPremium",
+			"Braintree::Test",
+			"Braintree::ClientToken.fake-valid-nonce",
+			"subsciption",
+			"discount",
+			"newDiscount",
+			"json",
+			"find",
+			"put",
+			"let",
+			"steht die Abkürzung",
+			"preset",
+			"jsc",
+			"preset",
+			"airb",
+			"new_subscription",
+			"params",
+			"payment_method_nonce",
+			"? ",
+			"success",
+			"Subscriptions::Plan",
+			"Subscriptions::",
+			"?",
+			"membership",
+			"memebershipsFactory",
+			"memebership",
+			"membership",
+			"Membership",
+			"membership",
+			"memberships",
+			"Membership",
+			"jscs",
+			"-",
+			"@_subscription",
+			"new_subscription",
+			"subsciption",
+			"_subscription",
+			"group",
+			"Group",
+			"plan",
+			"plans",
+			":code, ",
+			"group",
+			"discount",
+			"group",
+			"Group",
+			"group",
+			"Group",
+			"group",
+			"discount_create_params",
+			"qcinit",
+			"init",
+			"matchGroupCollection",
+			"processQualityCriterions",
+			"this.qcs",
+			"$scope",
+			"100",
+			"$scope",
+			"PUT",
+			"updateEinstance",
+			"insertEinstancesToDatasources",
+			"edit",
+			"anaylsisService",
+			"datasources",
+			"length",
+			"style=\"fill:rgba(0, 0, 0, 0.54);transform:translateY(-2px)\"",
+			"$scope.query",
+			"einstaces",
+			"update",
+			"this",
+			"$scope",
+			"babelHelpers",
+			"babel",
+			"datasource",
+			"DatasourcesController",
+			"DatasourceController",
+			"DatasourcesController",
+			"datasource_id",
+			"datasourceId",
+			"insertEinstances",
+			"console.log",
+			"log",
+			"console.log",
+			"getQCs",
+			"qualitycriterions",
+			"qualityCriterionsService",
+			"id",
+			"datasources",
+			"DatasourceController",
+			"DatasourcesController",
+			"openedSection",
+			"EAEAEA",
+			" #EAEAEA",
+			"#EAEAEA",
+			"#185694",
+			"#106CC8",
+			"#106cc8",
+			"#106CC8",
+			"docs-menu",
+			"var",
+			"malarkey",
+			"Directive",
+			"directive",
+			"Directive",
+			"self",
+			"isSectionSelected: function",
+			": function",
+			"toggleSelectSection: ",
+			":",
+			"findDOMNode",
+			"React.render",
+			"printjs",
+			"convertToArray",
+			"filterEAttributeValues",
+			"[]",
+			"qcReportEntries",
+			"qcReport[datasourceId]",
+			"sArray",
+			"updatedFailedQCsArray",
+			"CsArray",
+			"qualityCriterion",
+			"SessionValue",
+			"getSessionValue",
+			"SessionValue",
+			"has",
+			"hasda",
+			"qcReportEntries"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "app/scripts/services/discounts.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1160,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								514,
+								514
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/scripts/services/braintree.svs.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1534,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1312,
+								1312
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": -0.0,
+						"translation.y": 612.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/scripts/services/plans.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 834,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								656,
+								656
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 102.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/scripts/services/subscriptions.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 980,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								408,
+								408
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/scripts/controllers/braintree.ctrl.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1181,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								908,
+								908
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/scripts/app.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11063,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7382,
+								7382
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 4118.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 29.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 86.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": ".sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 380.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
