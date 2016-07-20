@@ -17,7 +17,8 @@ angular
     'ui.router',
     'toaster',
     'angularFileUpload',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ngFileSaver'
   ])
   .constant('USER_ROLES', {
     superUser: 'superUser',
