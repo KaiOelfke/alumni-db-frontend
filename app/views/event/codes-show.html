@@ -1,4 +1,4 @@
-<h5><a ui-sref="home.event-show({ id: eventId })">← Back to event</a></h5>
+<h5><a ui-sref="home.event-show({ id: event.id })">← Back to event</a></h5>
 
 <hr>
 
@@ -38,7 +38,7 @@
       <td>{{ code.id }}</td>
       <td>{{ code.fee_id }}</td>
       <td>{{ code.user_id }}</td>
-      <td>{{ code.fee_code }}</td>
+      <td>{{ code.code }}</td>
       <td>
         <button
           ng-click="removeCode(code)"

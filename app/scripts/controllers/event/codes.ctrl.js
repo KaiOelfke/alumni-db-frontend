@@ -17,21 +17,7 @@ angular
       $scope.fees = data.fees;
 
       $scope.codes = data.codes;
-
-      // dummy codes
-      $scope.codes = [
-        {
-          id: 0,
-          fee_id: 3,
-          fee_code: '1234-5678-1234-5678'
-        },
-        {
-          id: 1,
-          fee_id: 3,
-          fee_code: '0987-6543-8765-5432'
-        }
-      ];
-
+      
       $scope.newCode;
 
       $scope.toggleCreateCodeView = function() {
@@ -52,7 +38,7 @@ angular
         codeService
           .createCode(user_id, fee_id)
           .then(function successCallback(response) {
-            console.log('successfully created code:', response);
+            $scope.codes.push(response.data.data)
           }, function errorCallback(errorMessage) {
             // TODO: Use toaster for this
             console.error(errorMessage);
