@@ -17,7 +17,8 @@
     "ng-file-upload": "~3.2.4",
     "font-awesome": "~4.3.0",
     "lodash": "~3.6.0",
-    "braintree-web": "^2.21.0"
+    "braintree-web": "^2.21.0",
+    "angular-file-saver": "^1.1.2"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",
@@ -25,6 +26,6 @@
   },
   "resolutions": {
     "angular": "~1.2.0"
-  },  
+  },
   "appPath": "app"
 }
