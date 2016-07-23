@@ -39,7 +39,8 @@ angular
         codeService
           .createCode(user_id, fee_id)
           .then(function successCallback(response) {
-            $scope.codes.push(response.data.data);
+            $scope.newCode = null;
+            getAllCodes();
           }, function errorCallback(errorMessage) {
             toaster.pop('error', errorMessage);
           });
