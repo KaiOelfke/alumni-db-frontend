@@ -1,54 +1,64 @@
-<form ng-submit="createCode()" name="form" novalidate>
-  <p>
-    <b>Create code for fee:</b>
-    <table class="table">
-      <thead>
-        <th></th>
-        <th>Fee id</th>
-        <th>Event id</th>
-        <th>Fee Name</th>
-        <th>Fee price</th>
-        <th>Fee deadline</th>
-        <th>Is early bird fee</th>
-        <th>Is honoris fee</th>
-        <tbody>
-          <tr ng-repeat="fee in fees">
-            <td>
-              <input
-                name="selectedFee"
-                ng-model="newCode.fee_id"
-                type="radio"
-                ng-value="{{ fee.id }}"
-                required>
-            </td>
-            <td>{{ fee.id }}</td>
-            <td>{{ fee.event_id }}</td>
-            <td>{{ fee.name }}</td>
-            <td>{{ fee.price }}</td>
-            <td>{{ fee.deadline }}</td>
-            <td>{{ fee.is_early_bird_fee }}</td>
-            <td>{{ fee.is_honoris_fee }}</td>
-          </tr>
-        </tbody>
-      </thead>
-    </table>
-  </p>
-  <p>
-    <button
-      ng-click="clearCreateCodeForm()"
-      type="button"
-      name="clearCode">Clear</button>
-    <button
-      ng-disabled="form.$invalid"
-      type="submit"
-      name="createCode">Create code</button>
-  </p>
-</form>
+<div ng-show="!fees || fees.length === 0">
+  <h1>Not so fast!</h1>
+  <p>You can only create codes for event fees.</p>
+  <p>Please go back and create at least one fee for this event.</p>
+  <p>After that you can create as many codes for that fee as you want.</p>
+</div>
 
-<div class="debug">
-  <p>form: {{ form }}</p>
-  <p>form.$valid: {{ form.$valid }}</p>
-  <p>form.selectedFee.$valid: {{ form.selectedFee.$valid }}</p>
-  <p>newCode: {{ newCode }}</p>
-  <p>newCode.fee_id: {{ newCode.fee_id }}</p>
+<div ng-show="fees && fees.length > 0">
+  <form ng-submit="createCode()" name="form" novalidate>
+    <p>
+      <b>Create code for fee:</b>
+      <table class="table">
+        <thead>
+          <th></th>
+          <th>Fee id</th>
+          <th>Event id</th>
+          <th>Fee Name</th>
+          <th>Fee price</th>
+          <th>Fee deadline</th>
+          <th>Is early bird fee</th>
+          <th>Is honoris fee</th>
+          <tbody>
+            <tr ng-repeat="fee in fees">
+              <td>
+                <input
+                  name="selectedFee"
+                  ng-model="newCode.fee_id"
+                  type="radio"
+                  ng-value="{{ fee.id }}"
+                  required>
+              </td>
+              <td>{{ fee.id }}</td>
+              <td>{{ fee.event_id }}</td>
+              <td>{{ fee.name }}</td>
+              <td>{{ fee.price }}</td>
+              <td>{{ fee.deadline }}</td>
+              <td>{{ fee.is_early_bird_fee }}</td>
+              <td>{{ fee.is_honoris_fee }}</td>
+            </tr>
+          </tbody>
+        </thead>
+      </table>
+    </p>
+    <p>
+      <button
+        ng-click="clearCreateCodeForm()"
+        type="button"
+        name="clearCode">Clear</button>
+      <button
+        ng-disabled="form.$invalid"
+        type="submit"
+        name="createCode">Create code</button>
+    </p>
+  </form>
+
+  <div class="debug">
+    <p>form: {{ form }}</p>
+    <p>form.$valid: {{ form.$valid }}</p>
+    <p>form.selectedFee.$valid: {{ form.selectedFee.$valid }}</p>
+    <p>newCode: {{ newCode }}</p>
+    <p>newCode.fee_id: {{ newCode.fee_id }}</p>
+  </div>
+
 </div>

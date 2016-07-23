@@ -10,14 +10,15 @@ angular
     'eventService',
     'displayErrors',
     'data',
-    'codeService', function($rootScope, $scope, $state, $stateParams, eventService, displayErrors, data, codeService) {
+    'codeService',
+    'toaster', function($rootScope, $scope, $state, $stateParams, eventService, displayErrors, data, codeService, toaster) {
 
       $scope.event = data.event;
 
       $scope.fees = data.fees;
 
       $scope.codes = data.codes;
-      
+
       $scope.newCode;
 
       $scope.toggleCreateCodeView = function() {
@@ -38,15 +39,30 @@ angular
         codeService
           .createCode(user_id, fee_id)
           .then(function successCallback(response) {
-            $scope.codes.push(response.data.data)
+            $scope.codes.push(response.data.data);
           }, function errorCallback(errorMessage) {
-            // TODO: Use toaster for this
-            console.error(errorMessage);
+            toaster.pop('error', errorMessage);
           });
       };
 
       $scope.removeCode = function(code) {
-        $scope.codes = $scope.codes.pop();
+        codeService
+          .removeCode(code.id)
+          .then(function successCallback(response) {
+            getAllCodes();
+          }, function errorCallback(errorMessage) {
+            toaster.pop('error', errorMessage);
+          });
       };
+
+      var getAllCodes = function() {
+        codeService
+          .getCodesForEvent($scope.event.id)
+          .then(function successCallback(response) {
+            $scope.codes = response;
+          }, function errorCallback(errorMessage) {
+            toaster.pop('error', errorMessage);
+          });
+      }
 
     }]);

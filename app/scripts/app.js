@@ -377,7 +377,8 @@ angular
           authz: function(authorizedRoles, authorizationService) {
             return authorizationService.isAuthorized(authorizedRoles);
           },
-          data: function () {
+
+          data: function() {
             return null;
           }
         }

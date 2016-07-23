@@ -39,7 +39,7 @@ angular
           .post(urlBase, {
             fee_code: {
               user_id: user_id,
-              fee_id: fee_id  
+              fee_id: fee_id
             }
           })
           .then(function successCallback(resp) {
@@ -83,22 +83,6 @@ angular
         return deferred.promise;
       };
 
-      // codeService.editCode = function(code_id, code) {
-      //   var deferred = $q.defer();
-      //   $http
-      //     .put(urlBase + '/' + code_id, {
-      //       code: code
-      //     })
-      //     .then(function successCallback(resp) {
-      //         deferred.resolve(resp);
-      //       },
-
-      //       function errorCallback(response) {
-      //         deferred.reject(displayErrors.convertErrorResponse(response));
-      //       });
-
-      //   return deferred.promise;
-      // };
-
       return codeService;
+
     }]);

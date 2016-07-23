@@ -141,15 +141,15 @@ html, body {
     .steps .step.active {
         cursor: auto;
         background: #f0f0f0;
-    }    
+    }
 
     .steps .step.active:after {
         background: #f0f0f0;
-    }    
+    }
 
     .ordered.steps .step.active:before{
         color: rgba(0,0,0,.85);
-    }    
+    }
 
     :after, :before {
         box-sizing: border-box;
@@ -291,7 +291,7 @@ html, body {
     background-color: fade(@green, 10%);
 }
 
-.btn-leave, 
+.btn-leave,
 .btn-leave:hover {
     color: @orange;
     border-color: @orange;
@@ -301,12 +301,12 @@ html, body {
     background-color: fade(@orange, 10%);
 }
 
-.btn-join:disabled, 
+.btn-join:disabled,
 .btn-leave:disabled {
     color: @gray;
 }
 
-.btn-delete, 
+.btn-delete,
 .btn-delete:hover {
     color: @red;
     border-color: @red;
@@ -387,4 +387,8 @@ textarea {
 .groupInfoElementDesc.info {
     display: inline;
     background-color: red;
+}
+
+.isDeleted {
+  opacity: .5;
 }

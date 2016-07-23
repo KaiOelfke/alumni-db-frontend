@@ -24,11 +24,11 @@ angular
     $scope.processingPayment = false;
 
     //TODO: Split event payment and premium payment
-    if (data != null)
+    if (data !== null)
     {
-      $scope.event = data.event;  
+      $scope.event = data.event;
     }
-    
+
     plansFactory
       .getAllPlans()
       .then(function(plansResponse) {

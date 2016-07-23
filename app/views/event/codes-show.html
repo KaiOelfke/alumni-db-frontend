@@ -10,8 +10,8 @@
   ng-click="toggleCreateCodeView()"
   type="button"
   name="createCode">
-    <span ng-show="!newFee">Create code</span>
-    <span ng-show="newFee">Close create code view</span>
+    <span ng-show="!newCode">Create code</span>
+    <span ng-show="newCode">Close create code view</span>
   </button>
 
 <div
@@ -32,18 +32,21 @@
       <th>Fee id</th>
       <th>User id</th>
       <th>Code</th>
+      <th>Is deleted?</th>
       <th>Actions</th>
     </tr>
     <tr ng-repeat="code in codes">
-      <td>{{ code.id }}</td>
-      <td>{{ code.fee_id }}</td>
-      <td>{{ code.user_id }}</td>
-      <td>{{ code.code }}</td>
+      <td ng-class="{isDeleted: code.delete_flag}">{{ code.id }}</td>
+      <td ng-class="{isDeleted: code.delete_flag}">{{ code.fee_id }}</td>
+      <td ng-class="{isDeleted: code.delete_flag}">{{ code.user_id }}</td>
+      <td ng-class="{isDeleted: code.delete_flag}">{{ code.code }}</td>
+      <td ng-class="{isDeleted: code.delete_flag}">{{ code.delete_flag }}</td>
       <td>
         <button
           ng-click="removeCode(code)"
           type="button"
-          name="removeCode">Remove</button>
+          name="removeCode"
+          ng-disabled="code.delete_flag">Remove</button>
       </td>
     </tr>
   </table>
