@@ -6,10 +6,8 @@ let profileModule = angular.module('profile', [
   uiRouter
 ])
 
-.config(($stateProvider, $urlRouterProvider) => {
+.config(($stateProvider) => {
   "ngInject";
-
-  $urlRouterProvider.otherwise('/');
 
   $stateProvider
     .state('profile', {

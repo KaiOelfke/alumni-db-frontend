@@ -6,10 +6,8 @@ let eventsModule = angular.module('events', [
   uiRouter
 ])
 
-.config(($stateProvider, $urlRouterProvider) => {
+.config(($stateProvider) => {
   "ngInject";
-
-  $urlRouterProvider.otherwise('/');
 
   $stateProvider
     .state('events', {

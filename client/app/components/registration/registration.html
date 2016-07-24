@@ -3,64 +3,177 @@
     <logo></logo>
   </header>
 
+
   <md-card flex="nogrow" style="width: 800px; margin: 40px auto">
 
     <md-stepper-card-content class="md-no-padding">
-      <md-steppers 
-          md-dynamic-height
-          md-disable-tabs-behavior="true"
-          md-stretch-steppers="always"
-          md-selected="selected"
-          md-stretch-steppers="always">
-          <md-step label="Step 1">
+      <md-stepper 
+          id="stepper-registration"
+          md-mobile-step-text="$ctrl.isMobileStepText" 
+          md-linear="true"
+          md-alternative="true">
+          <md-step md-label="Personal Information">
             <md-step-body>
-                <form name="step1" 
-                      ng-submit="vm.submitCurrentStep(vm.stepData[0].data)">
+                <form name="pinformation"
+                    novalidate
+                    ng-submit="$ctrl.submitCurrentStep($ctrl.stepData[0].data)">
                     <div class="md-padding">
                         <div layout="row" layout-align="center top">
-                            <div flex="nogrow" style="width: 400px">
-                                <h4>Please enter your user name and password</h4>
-                                <md-input-container class="md-block">
-                                    <label>Your user name here</label>
-                                    <input  ng-disabled="vm.stepData[0].data.completed" 
-                                            name="username"
-                                            ng-model="vm.stepData[0].data.username" required/>
-                                </md-input-container>
-                                <md-input-container class="md-block">
-                                    <label>Your password here</label>
-                                    <input  ng-disabled="vm.stepData[0].data.completed"        type="password" 
-                                            name="username"
-                                            ng-model="vm.stepData[0].data.password" required/>
-                                </md-input-container>
+                            <div flex>
+                                <!-- 1 row -->
+                                <div layout-gt-sm="row">
+
+                                  <md-input-container
+                                      class="md-block" flex-gt-sm>
+                                      <label>First name</label>
+                                      <input
+                                            name="firstname"
+                                            ng-model="$ctrl.stepData[0].data.firstname"
+                                            required/>
+                                      <div ng-messages="pinformation.firstname.$error">
+                                        <div ng-message="required">First name is required.</div>
+                                      </div>                                          
+                                  </md-input-container>
+
+                                  <div flex="5" hide-xs="" hide-sm="">
+                                    <!-- Spacer //-->
+                                  </div>
+
+                                  <md-input-container
+                                      class="md-block" flex-gt-sm>
+                                      <label>Last name</label>
+                                      <input
+                                            name="lastname"
+                                            ng-model="$ctrl.stepData[0].data.lastname"
+                                            required/>
+                                      <div ng-messages="pinformation.lastname.$error">
+                                        <div ng-message="required">Last name is required.</div>
+                                      </div>
+                                  </md-input-container>
+
+                                </div>
+
+                                <!-- 2 row -->
+
+                                <div layout-gt-sm="row">
+                                
+                                  <md-input-container 
+                                      class="md-block" flex-gt-sm>
+                                      <label>Country</label>
+                                      <md-select 
+                                          required
+                                          name="country"
+                                          ng-model="$ctrl.stepData[0].data.country">
+                                          
+                                        <md-option  ng-repeat="country in $ctrl.countries"
+                                                    value="{{country.abbrev}}">
+                                          {{country.abbrev}}
+                                        </md-option>
+                                      </md-select>
+                                      <div ng-messages="pinformation.country.$error">
+                                        <div ng-message="required">Country is required.</div>
+                                      </div>
+
+                                  </md-input-container>
+
+                                  <div flex="5" hide-xs="" hide-sm="">
+                                    <!-- Spacer //-->
+                                  </div>
+
+                                  <md-input-container class="md-block" flex-gt-sm>
+                                    <label>City</label>
+                                    <input
+                                          name="city"
+                                          ng-model="$ctrl.stepData[0].data.city"
+                                          required/>
+                                    <div ng-messages="pinformation.city.$error">
+                                      <div ng-message="required">City is required.</div>
+                                    </div>
+
+                                  </md-input-container>
+                                </div>
+
+                                <!-- 3 row -->
+
+                                <div layout-gt-sm="row">
+                                  <md-input-container class="md-block" flex-gt-sm>
+                                      <label>Birthday</label>
+                                      <input
+                                            name="birthday"
+                                            ng-model="$ctrl.stepData[0].data.birthday"
+                                            required/>
+                                      <div ng-messages="pinformation.birthday.$error">
+                                        <div ng-message="required">Birthday is required.</div>
+                                      </div>
+                                  </md-input-container>
+
+                                  <div flex="5" hide-xs="" hide-sm="">
+                                    <!-- Spacer //-->
+                                  </div>
+
+                                  <div
+                                      class="md-block"
+                                      layout="row"
+                                        layout-align="start center" flex-gt-sm>
+                                      <p style="padding: 0px 15px 0px 0px;">Gender</p>
+                                      <md-radio-group 
+                                        layout="row"
+                                        layout-align="start center"
+                                        ng-model="$ctrl.stepData[0].data.gender"
+                                        name="gender">
+                                        <md-radio-button value="female">Female</md-radio-button>
+                                        <md-radio-button value="male"> Male </md-radio-button>
+                                      </md-radio-group>
+
+                                  </div>
+
                             </div>
                         </div>
                     </div>
                     <md-step-actions layout="row">
                         <div flex layout="row" layout-align="end top">
-                            <md-button  class="md-warn">CANCEL</md-button>
                             <md-button  type="submit"
-                                        class="md-primary md-raised">NEXT</md-button>
+                                        class="md-primary md-raised"
+                                        ng-disabled="pinformation.$invalid"
+                                        ng-click="$ctrl.nextStep()">NEXT</md-button>
                         </div>
                     </md-step-actions>
                 </form>
             </md-step-body>
           </md-step>
-          <md-step label="Step 2">
-              <md-content>asdwq</md-content>
-          </md-step>
-          <md-step label="Finish">
-              <md-content>qweas</md-content>
+          <md-step md-label="Create an group">
+              <md-step-body>
+                  <md-input-container>
+                      <label>Username</label>
+                      <input type="text" ng-model="user.name">
+                  </md-input-container>
+
+                  <md-input-container>
+                      <label>Email</label>
+                      <input type="email" ng-model="user.email">
+                  </md-input-container>
+
+                  <md-input-container>
+                      <label>Password</label>
+                      <input type="password" ng-model="user.password">
+                  </md-input-container>
+
+                  <md-input-container>
+                      <label>Confirm password</label>
+                      <input type="password" ng-model="user.confirmPassword">
+                  </md-input-container>
+              </md-step-body>
+
+              <md-step-actions>
+                  <md-button class="md-primary md-raised" ng-click="vm.nextStep();">Continue</md-button>
+                  <md-button class="md-primary" ng-click="vm.previousStep();">Back</md-button>
+              </md-step-actions>
           </md-step>
       </md-steppers>
     </md-stepper-card-content>
-  </md-card>
-  <footer>
-    <p>
-    Don't have an account?
-    <a href="/signup">Sign Up</a>
-    </p>
-  </footer>
 
+
+  </md-card>
 
 </div>
 

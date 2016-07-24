@@ -6,14 +6,12 @@ let newEventModule = angular.module('new-event', [
   uiRouter
 ])
 
-.config(($stateProvider, $urlRouterProvider) => {
+.config(($stateProvider) => {
   "ngInject";
-
-  $urlRouterProvider.otherwise('/');
 
   $stateProvider
     .state('new-event', {
-      url: '/event/new',
+      url: '/events/edit',
       template: '<new-event></new-event>'
     });
 })

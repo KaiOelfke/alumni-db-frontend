@@ -7,9 +7,7 @@ class NavbarController {
     this.currentNavItem = 'home';
     this.dynamicNavTextTheme = 'nav';
     this.dynamicTheme = 'home';
-
-
-
+    this.isShow = true;
 
     $rootScope.$on('$stateChangeSuccess', 
         (event, toState) => {
@@ -23,6 +21,7 @@ class NavbarController {
                 break;
             case 'events':
             case 'event':
+                this.currentNavItem = 'events';
                 this.dynamicNavTextTheme = 'navDark';
                 this.dynamicTheme = 'events';
                 break; 
@@ -34,6 +33,12 @@ class NavbarController {
                 this.dynamicNavTextTheme = 'nav';
                 this.dynamicTheme = 'premium';
                 break;
+            case 'signin':
+            case 'signup':
+            case 'registration':
+            case 'unauthorized':
+            case 'notfound':
+                this.isShow = false;
           }
         }
     );  

@@ -1,9 +1,9 @@
-<div class="event" layout="column" layout-fill>
+<div class="event" md-theme="events" layout="column" layout-fill>
 
   <md-toolbar class="md-tall">
       <span flex></span>
       <h3 class="content md-toolbar-tools">
-        <span class="md-flex title">Profile</span>
+        <span class="md-flex title">Event</span>
         <span flex></span>
 
         <md-button class="md-fab md-hue-2" aria-label="Edit">  
@@ -15,31 +15,26 @@
   </md-toolbar>
 
   <md-card>
-    <img ng-src="http://www.freedigitalphotos.net/images/img/homepage/87357.jpg" class="md-card-image" alt="Washed Out">
+    <img ng-src="http://www.jaeurope.org/images/site1/events/JA_Alumni_Conference_formatted.jpg" class="md-card-image" alt="Washed Out">
     <md-card-title>
       <md-card-title-text>
-        <span class="md-headline">Mark Mustermann</span>
-        <span class="md-subhead">Live Lazy, Live Long</span>
+        <span class="md-headline">JA Alumni Leadership Conference</span>
+        <span class="md-subhead">Stuttgart, Germany</span>
       </md-card-title-text>
-      <md-card-title-media>
-        <div class="md-media-lg card-media">
-          <img ng-src="http://188.166.146.18/wp-content/uploads/2016/03/xx-Marks-LinkedIn-profile-pic-300x300.jpg" class="md-card-image" alt="Washed Out">
-        </div>
-      </md-card-title-media>
     </md-card-title>
 
     <md-card-content>
       <form name="signinForm">
         <div layout-gt-xs="row">
           <md-input-container class="md-block" flex>
-            <label>First Name</label>
-            <input type="email"
-                   disabled
-                   name="email"  ng-model="project.email">
+            <label>Where</label>
+            <input type="text"
+                    disabled
+                   name="location" ng-model="project.email">
           </md-input-container>
 
           <md-input-container class="md-block" flex>
-            <label>Last Name</label>
+            <label>Agenda</label>
             <input type="email"
                    disabled
                    name="email"  ng-model="project.email">
@@ -48,20 +43,17 @@
         </div>
 
         <md-input-container class="md-block">
-          <label>First Name</label>
+          <label>Etc.</label>
           <input type="email"
                  disabled
                  name="email"  ng-model="project.email">
         </md-input-container>
-        <md-input-container class="md-block">
-          <label>Password</label>
-          <input disabled name="password" ng-model="project.password">
-        </md-input-container>
+
       </form>
     </md-card-content>
     <md-card-actions layout="row" layout-align="end center">
-      <md-button>Action 1</md-button>
-      <md-button>Action 2</md-button>
+      <md-button class="md-raised md-accent">participate</md-button>
+      <md-button class="md-raised md-accent">attend</md-button>
     </md-card-actions>
   </md-card>
 

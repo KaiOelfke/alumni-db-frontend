@@ -1,6 +1,7 @@
-<nav 
-     md-colors="{background: '{{$ctrl.dynamicTheme}}-primary-500-1'}"
-     class="navbar">
+<nav
+    ng-show="$ctrl.isShow"
+    md-colors="{background: '{{$ctrl.dynamicTheme}}-primary-500-1'}"
+    class="navbar">
   <div class="content" layout="row">
 
     <div class="logo" md-colors="{color: '{{$ctrl.dynamicNavTextTheme}}-accent-900-1'}" flex>
