@@ -7,6 +7,7 @@
     "angular": "^1.5.0",
     "angular-acl": "^0.1.2",
     "angular-cookie": "^4.1.0",
+    "angular-messages": "^1.5.0",
     "angular-ui-router": "^0.2.15",
     "braintree-web": "^2.27.0",
     "material-steppers": "^1.0.2",
