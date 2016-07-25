@@ -17,12 +17,16 @@ let signupModule = angular.module('signup', [
         'acl' : ['$q', 'AclService', ($q, AclService) => {
           if(AclService.can('signup')){
             // Has proper permissions
-            return true;
+            return $q.resolve('asdsd');
           } else {
             // Does not have permission
             return $q.reject('Unauthorized');
           }
-        }]
+        }],
+
+        user: ($auth) => {
+          return $auth.validateUser();
+        }
       }      
     });
 })

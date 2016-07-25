@@ -6,7 +6,7 @@
   </header>
 
   <md-card class="form" flex>
-    <md-progress-linear md-mode="query" ></md-progress-linear>
+    <md-progress-linear md-mode="query" ng-disabled="$ctrl.notQuering" ></md-progress-linear>
     <div layout-padding>
       <md-card-title>
         <md-card-title-text>
@@ -19,21 +19,34 @@
           <label>Email</label>
           <input type="email"
                  required
-                 name="email" ng-model="$ctrl.email">
+                 name="email" ng-model="$ctrl.signupForm.email">
+          <div ng-messages="signupForm.email.$error">
+            <div ng-message="required">Email is required.</div>
+          </div>                 
         </md-input-container>
         <md-input-container class="md-block">
           <label>Password</label>
-          <input required name="password" ng-model="$ctrl.password">
+          <input type="password" required minlength="8" name="password" ng-model="$ctrl.signupForm.password">
+          <div ng-messages="signupForm.password.$error">
+            <div ng-message="required">Password is required.</div>
+            <div ng-message="minlength">The length of the password should be at least 8.</div>
+          </div>
         </md-input-container>
         <md-input-container class="md-block">
           <label>Confirm Password</label>
-          <input required name="confirm password" ng-model="$ctrl.cpassword">
+          <input type="password" required name="confirm_password" 
+                  match="$ctrl.signupForm.password"
+                  ng-model="$ctrl.signupForm.password_confirmation">
+          <div ng-messages="signupForm.confirm_password.$error">
+            <div ng-message="match">Confirm Password doesn't match password.</div>
+            <div ng-message="required">Confirm Password is required.</div>
+          </div>
         </md-input-container>
-
       </form>
-
       <md-card-actions layout="row" layout-align="end">
-        <md-button flex>Sign Up</md-button>
+        <md-button  type="submit"
+                    ng-click="$ctrl.submitSignup()" 
+                    flex ng-disabled="signupForm.$invalid">Sign Up</md-button>
       </md-card-actions>
     </div>
   </md-card>

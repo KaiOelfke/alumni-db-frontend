@@ -12,7 +12,19 @@ let eventsModule = angular.module('events', [
   $stateProvider
     .state('events', {
       url: '/events',
-      template: '<events></events>'
+      template: '<events></events>',
+      resolve: {
+        'acl' : ['$q', 'AclService', ($q, AclService) => {
+          if(AclService.can('events')){
+            // Has proper permissions
+            return true;
+          } else {
+            // Does not have permission
+            return $q.reject('Unauthorized');
+          }
+        }]
+      },
+      
     });
 })
 

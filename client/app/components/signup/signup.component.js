@@ -4,7 +4,8 @@ import './signup.less';
 
 let signupComponent = {
   restrict: 'E',
-  bindings: {},
+  bindings: {user: '<',
+			 acl: '<'},
   template,
   controller
 };

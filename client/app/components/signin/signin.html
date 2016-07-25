@@ -7,8 +7,8 @@
     <logo></logo>
   </header>
 
-  <md-card class="form"  flex>
-    <md-progress-linear md-mode="query" ></md-progress-linear>
+  <md-card class="form" flex>
+    <md-progress-linear md-mode="query" ng-disabled="$ctrl.notQuering"></md-progress-linear>
     <div layout-padding>
       
       <md-card-title>
@@ -22,16 +22,21 @@
           <label>Email</label>
           <input type="email"
                  required
-                 name="email" ng-model="$ctrl.email">
+                 name="email" ng-model="$ctrl.signinForm.email">
         </md-input-container>
         <md-input-container class="md-block">
           <label>Password</label>
-          <input required name="password" ng-model="$ctrl.password">
+          <input required type="password" name="password" ng-model="$ctrl.signinForm.password">
         </md-input-container>
       </form>
 
       <md-card-actions layout="row" layout-align="end">
-        <md-button flex>Signin</md-button>
+        <md-button  
+                    type="submit"
+                    ng-click="$ctrl.submitLogin()"
+                    ng-disabled="signinForm.$invalid" flex>
+          Signin
+        </md-button>
       </md-card-actions>
 
 

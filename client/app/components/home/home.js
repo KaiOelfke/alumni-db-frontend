@@ -17,7 +17,7 @@ let homeModule = angular.module('home', [
       template: '<home></home>',
       resolve: {
         'acl' : ['$q', 'AclService', ($q, AclService) => {
-          if(AclService.can('registration')){
+          if(AclService.can('home')){
             // Has proper permissions
             return true;
           } else {

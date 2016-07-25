@@ -26,12 +26,60 @@ angular.module('app', [
     Common,
     Components
   ])
-  .config(($locationProvider, $mdThemingProvider, AclServiceProvider) => {
+  .config(($locationProvider, $mdThemingProvider, $authProvider, AclServiceProvider) => {
     "ngInject";
 
     // @see: https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions
     // #how-to-configure-your-server-to-work-with-html5mode
     $locationProvider.html5Mode(true).hashPrefix('!');
+
+    const formatConvertar = (response) => {
+      response = response.data;
+      var statuses = [];
+
+      /*jshint camelcase: false */
+
+      if (response.registered)
+      {
+        statuses.push('registered');
+      }
+
+      if (response.confirmed_email)
+      {
+        statuses.push('confirmedEmail');
+      }
+
+      if (response.completed_profile)
+      {
+        statuses.push('completedProfile');
+      }
+
+      if (response.is_super_user)
+      {
+        statuses.push('superUser');
+      }
+
+      if (response.is_premium)
+      {
+        statuses.push('premium');
+      }
+
+      response.statuses = statuses;
+      return response;
+    };
+
+    $authProvider.configure({
+      apiUrl: 'http://localhost:3000',
+      accountUpdatePath: '/users',
+      storage: 'localStorage',
+      passwordResetSuccessUrl: window.location.origin + '/#/password-update',
+      handleLoginResponse: formatConvertar,
+      handleAccountUpdateResponse: formatConvertar,
+      handleTokenValidationResponse: formatConvertar,
+      passwordResetPath: '/auth/password/',
+      passwordUpdatePath: '/auth/password/'
+    });
+
 
     const aclConfig = {
       storage: 'localStorage',
@@ -94,22 +142,26 @@ angular.module('app', [
 
   })
 
-  .run((AclService, $rootScope, $state) => {
+  .run((AclService, $rootScope, $state, $mdToast) => {
     "ngInject";
 
     const aclData = {
-      guest: ['signin', 'signup', 'registration'],
+      guest: ['signin', 'signup'],
       notRegisteredUser: ['logout', 'registration'],
       registeredUser: ['logout', 'home']
     }
     
-    AclService.setAbilities(aclData);
     AclService.attachRole('guest');
+
+    AclService.setAbilities(aclData);
 
     $rootScope.$on('$stateChangeError', (event, toState, toParams,
                                          fromState, fromParams, rejection) => {
-      if (rejection === 'Unauthorized') {
-        $state.go('unauthorized');
+      if (rejection === 'Unauthorized') { 
+        $mdToast.show($mdToast.simple()
+          .highlightClass('md-warn')
+          .textContent('Not authroized.'));
+        //$state.go('unauthorized');
       } else {
         $state.go('404');        
       }
