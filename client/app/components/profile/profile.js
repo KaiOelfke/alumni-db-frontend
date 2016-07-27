@@ -12,12 +12,18 @@ let profileModule = angular.module('profile', [
   $stateProvider
     .state('profile', {
       url: '/profile',
-      component: 'profile'
+      component: 'profile',
+      onEnter: (AclService, $state) => {
+        if (AclService.can('profile')) {
+            return true;
+        }
+        return $state.target('unauthorized');
+      }
     });
 })
 
 .component('profile', profileComponent)
-  
+
 .name;
 
 export default profileModule;

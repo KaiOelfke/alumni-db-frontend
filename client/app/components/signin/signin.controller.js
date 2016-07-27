@@ -1,10 +1,12 @@
 class SigninController {
-  constructor($auth, $mdToast) {
+  constructor($auth, $mdToast, AclService) {
     'ngInject';
     this.$auth = $auth;
     this.$mdToast = $mdToast;
+  }
+
+  $onInit() {
     this.notQuering = true;
-    console.log(this);
     this.signinForm = {
       email: '',
       password: ''
@@ -16,13 +18,20 @@ class SigninController {
     this
       .$auth
       .submitLogin(this.signinForm)
-      .then((resp) => {
+      .then((user) => {
         this.notQuering = true;
         this.$mdToast.show(this.$mdToast.simple()
                               .textContent('Successfully logged in.'));
+        AclService.detachRole('guest');
+        if (user.statuses.indexOf("completedProfile") > -1) {
+          AclService.attachRole('registeredUser');
+        } else {
+          AclService.attachRole('notRegisteredUser');
+          $state.go('registration');
+        }
       })
       .catch((resp) => {
-        this.notQuering = true;        
+        this.notQuering = true;
         this.$mdToast.show(this.$mdToast.simple()
                               .highlightClass('md-warn')
                               .textContent('Failed to logging in!'));

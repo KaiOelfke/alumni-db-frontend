@@ -6,31 +6,24 @@ let homeModule = angular.module('home', [
   uiRouter
 ])
 
-.config(($stateProvider, $urlRouterProvider) => {
+.config(($stateProvider) => {
   "ngInject";
-
-  $urlRouterProvider.otherwise('/404');
 
   $stateProvider
     .state('home', {
       url: '/',
       component: 'home',
-      resolve: {
-        'acl' : ['$q', 'AclService', ($q, AclService) => {
-          if(AclService.can('home')){
-            // Has proper permissions
+      onEnter: (AclService, $state) => {
+        if (AclService.can('home')) {
             return true;
-          } else {
-            // Does not have permission
-            return $q.reject('Unauthorized');
-          }
-        }]
-      },
+        }
+        return $state.target('unauthorized');
+      }
     });
 })
 
 .component('home', homeComponent)
-  
+
 .name;
 
 export default homeModule;

@@ -26,12 +26,13 @@ angular.module('app', [
     Common,
     Components
   ])
-  .config(($locationProvider, $mdThemingProvider, $authProvider, AclServiceProvider) => {
+  .config(($locationProvider, $urlRouterProvider, $mdThemingProvider, $authProvider, AclServiceProvider) => {
     "ngInject";
 
     // @see: https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions
     // #how-to-configure-your-server-to-work-with-html5mode
     $locationProvider.html5Mode(true).hashPrefix('!');
+    $urlRouterProvider.otherwise('/404');
 
     const formatConvertar = (response) => {
       response = response.data;
@@ -102,7 +103,7 @@ angular.module('app', [
       'A100': 'ffffff',
       'A200': 'ffffff',
       'A400': 'ffffff',
-      'A700': 'ffffff',      
+      'A700': 'ffffff',
       'contrastDefaultColor': 'light',
       'contrastDarkColors': ['50', '100',
         '200', '300', '400', 'A100'],
@@ -120,7 +121,7 @@ angular.module('app', [
 
     $mdThemingProvider.theme('nav')
       .primaryPalette('whitepalette')
-      .accentPalette('whitepalette');      
+      .accentPalette('whitepalette');
 
 
     $mdThemingProvider.theme('events')
@@ -144,40 +145,14 @@ angular.module('app', [
 
   .run((AclService, $rootScope, $state, $mdToast) => {
     "ngInject";
-
     const aclData = {
       guest: ['signin', 'signup'],
       notRegisteredUser: ['logout', 'registration'],
-      registeredUser: ['logout', 'home']
+      registeredUser: ['logout', 'home'],
+      premium: ['home', 'events', 'event']
     }
-    
     AclService.attachRole('guest');
-
     AclService.setAbilities(aclData);
-
-
-    $rootScope.$on('$stateChangeSuccess', (event, toState, toParams,
-                                         fromState, fromParams, rejection) => {
-      console.log('cganges');
-    });
-
-    $rootScope.$on('$stateChangeError', (event, toState, toParams,
-                                         fromState, fromParams, rejection) => {
-      if (rejection === 'Unauthorized') { 
-        $mdToast.show($mdToast.simple()
-          .highlightClass('md-warn')
-          .textContent('Not authroized.'));
-        //$state.go('unauthorized');
-      } else {
-        $state.go('404');        
-      }
-    });
-
-
-    // listen to ng-token-auth and change roles corresponding to current user
-
-
-  
   })
 
   .component('app', AppComponent);

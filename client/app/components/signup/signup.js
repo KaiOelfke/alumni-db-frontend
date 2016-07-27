@@ -8,27 +8,22 @@ let signupModule = angular.module('signup', [
 
 .config(($stateProvider) => {
   "ngInject";
-  
+
   $stateProvider
     .state('signup', {
       url: '/signup',
       component: 'signup',
-      resolve: {
-        acl : ($q, AclService) => {
-          if(AclService.can('signup')){
-            // Has proper permissions
-            return $q.resolve('asdsd');
-          } else {
-            // Does not have permission
-            return $q.reject('Unauthorized');
-          }
+      onEnter: (AclService, $state) => {
+        if (AclService.can('signup')) {
+            return true;
         }
-      }      
+        return $state.target('unauthorized');
+      }
     });
 })
 
 .component('signup', signupComponent)
-  
+
 .name;
 
 export default signupModule;

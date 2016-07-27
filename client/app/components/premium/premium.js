@@ -12,12 +12,18 @@ let premiumModule = angular.module('premium', [
   $stateProvider
     .state('premium', {
       url: '/premium',
-      component: 'premium'
+      component: 'premium',
+      onEnter: (AclService, $state) => {
+        if (AclService.can('premium')) {
+            return true;
+        }
+        return $state.target('unauthorized');
+      }
     });
 })
 
 .component('premium', premiumComponent)
-  
+
 .name;
 
 export default premiumModule;

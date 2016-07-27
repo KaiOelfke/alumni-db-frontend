@@ -14,16 +14,11 @@ let signinModule = angular.module('signin', [
     .state('signin', {
       url: '/signin',
       component: 'signin',
-      resolve: {
-        acl : ($q, AclService) => {
-          if(AclService.can('signin')){
-            // Has proper permissions
+      onEnter: (AclService, $state) => {
+        if (AclService.can('signin')) {
             return true;
-          } else {
-            // Does not have permission
-            return $q.reject('Unauthorized');
-          }
         }
+        return $state.target('unauthorized');
       }
     });
 })
@@ -33,53 +28,23 @@ let signinModule = angular.module('signin', [
 
   $rootScope.$on('auth:login-error',
       (ev, reason ) => {
-      //console.log('auth failed because', reason.errors[0]);
   });
 
   $rootScope.$on('auth:invalid',
       (ev) => {
-    AclService.attachRole('guest');
   });
 
   $rootScope.$on('auth:validation-error',
       (ev) => {
-    AclService.attachRole('guest');
   });
-
 
   $rootScope.$on('auth:validation-success',
       (ev, user) => {
-        AclService.detachRole('guest');
-        console.log('1231231', user);
-      if (user.statuses.indexOf("completedProfile") > -1) {
-        console.log('213', user);
-
-        AclService.attachRole('registeredUser');
-      } else {
-        console.log('213123123', user);
-
-        AclService.attachRole('notRegisteredUser');
-
-        $state.go('registration');
-      }
   });
 
-  // if the user hasn't completed his profile
-  // he should be redirected to registration state
   $rootScope.$on('auth:login-success',
       (ev, user) => {
-        AclService.detachRole('guest');
 
-      if (user.statuses.indexOf("completedProfile") > -1) {
-        AclService.attachRole('registeredUser');
-
-        $state.go('home');
-      } else {
-        AclService.attachRole('notRegisteredUser');
-
-
-        $state.go('registration');
-      }
   });
 
 
@@ -87,7 +52,7 @@ let signinModule = angular.module('signin', [
 
 
 .component('signin', signinComponent)
-  
+
 .name;
 
 export default signinModule;

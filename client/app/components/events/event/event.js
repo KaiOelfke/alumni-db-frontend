@@ -12,12 +12,18 @@ let eventModule = angular.module('event', [
   $stateProvider
     .state('event', {
       url: '/events/:eventId',
-      component: 'event'
+      component: 'event',
+      onEnter: (AclService, $state) => {
+        if (AclService.can('event')) {
+            return true;
+        }
+        return $state.target('unauthorized');
+      }
     });
 })
 
 .component('event', eventComponent)
-  
+
 .name;
 
 export default eventModule;

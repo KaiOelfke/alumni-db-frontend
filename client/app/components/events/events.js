@@ -13,23 +13,17 @@ let eventsModule = angular.module('events', [
     .state('events', {
       url: '/events',
       component: 'events',
-      resolve: {
-        'acl' : ['$q', 'AclService', ($q, AclService) => {
-          if(AclService.can('events')){
-            // Has proper permissions
+      onEnter: (AclService, $state) => {
+        if (AclService.can('events')) {
             return true;
-          } else {
-            // Does not have permission
-            return $q.reject('Unauthorized');
-          }
-        }]
-      },
-      
+        }
+        return $state.target('unauthorized');
+      }
     });
 })
 
 .component('events', eventsComponent)
-  
+
 .name;
 
 export default eventsModule;

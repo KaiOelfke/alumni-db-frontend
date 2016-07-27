@@ -12,12 +12,12 @@ let notfoundModule = angular.module('notfound', [
   $stateProvider
     .state('notfound', {
       url: '/404',
-      component: 'notfound',
+      component: 'notfound'
     });
 })
 
 .component('notfound', notfoundComponent)
-  
+
 .name;
 
 export default notfoundModule;
