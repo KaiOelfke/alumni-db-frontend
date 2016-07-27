@@ -1,5 +1,5 @@
 class SignupController {
-  constructor($auth, $mdToast) {
+  constructor($auth, $mdToast, $rootScope) {
     "ngInject";
     this.$auth = $auth;
     this.$mdToast = $mdToast;
@@ -11,7 +11,6 @@ class SignupController {
       confirm_password: ''
     };
     console.log(this);
-
   }
 
   submitSignup() {

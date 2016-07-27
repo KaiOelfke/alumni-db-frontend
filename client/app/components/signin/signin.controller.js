@@ -1,10 +1,10 @@
 class SigninController {
-  constructor($auth, $mdToast, validateUser) {
+  constructor($auth, $mdToast) {
     'ngInject';
     this.$auth = $auth;
     this.$mdToast = $mdToast;
     this.notQuering = true;
-    console.log(validateUser);
+    console.log(this);
     this.signinForm = {
       email: '',
       password: ''

@@ -12,7 +12,7 @@ let eventsModule = angular.module('events', [
   $stateProvider
     .state('events', {
       url: '/events',
-      template: '<events></events>',
+      component: 'events',
       resolve: {
         'acl' : ['$q', 'AclService', ($q, AclService) => {
           if(AclService.can('events')){

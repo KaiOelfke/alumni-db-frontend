@@ -12,7 +12,7 @@ let notfoundModule = angular.module('notfound', [
   $stateProvider
     .state('notfound', {
       url: '/404',
-      template: '<notfound></notfound>',
+      component: 'notfound',
     });
 })
 

@@ -12,9 +12,9 @@ let signupModule = angular.module('signup', [
   $stateProvider
     .state('signup', {
       url: '/signup',
-      template: '<signup></signup>',
+      component: 'signup',
       resolve: {
-        'acl' : ['$q', 'AclService', ($q, AclService) => {
+        acl : ($q, AclService) => {
           if(AclService.can('signup')){
             // Has proper permissions
             return $q.resolve('asdsd');
@@ -22,10 +22,6 @@ let signupModule = angular.module('signup', [
             // Does not have permission
             return $q.reject('Unauthorized');
           }
-        }],
-
-        user: ($auth) => {
-          return $auth.validateUser();
         }
       }      
     });

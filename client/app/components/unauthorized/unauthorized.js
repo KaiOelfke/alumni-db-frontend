@@ -11,7 +11,7 @@ let unauthorizedModule = angular.module('unauthorized', [
   $stateProvider
     .state('unauthorized', {
       url: '/unauthorized',
-      template: '<unauthorized></unauthorized>',
+      component: 'unauthorized',
     });
 })
 

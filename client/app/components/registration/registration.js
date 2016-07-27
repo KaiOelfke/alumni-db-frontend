@@ -25,7 +25,7 @@ let registrationModule = angular.module('registration', [
   $stateProvider
     .state('registration', {
       url: '/registration',
-      template: '<registration></registration>',
+      component: 'registration',
       resolve: {
         'acl' : ['$q', 'AclService', ($q, AclService) => {
           if(AclService.can('registration')){

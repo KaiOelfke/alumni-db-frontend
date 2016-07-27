@@ -12,7 +12,7 @@ let premiumModule = angular.module('premium', [
   $stateProvider
     .state('premium', {
       url: '/premium',
-      template: '<premium></premium>'
+      component: 'premium'
     });
 })
 

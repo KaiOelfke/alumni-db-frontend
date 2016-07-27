@@ -12,7 +12,7 @@ let newEventModule = angular.module('new-event', [
   $stateProvider
     .state('new-event', {
       url: '/events/edit',
-      template: '<new-event></new-event>'
+      component: 'new-event'
     });
 })
 

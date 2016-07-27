@@ -155,6 +155,12 @@ angular.module('app', [
 
     AclService.setAbilities(aclData);
 
+
+    $rootScope.$on('$stateChangeSuccess', (event, toState, toParams,
+                                         fromState, fromParams, rejection) => {
+      console.log('cganges');
+    });
+
     $rootScope.$on('$stateChangeError', (event, toState, toParams,
                                          fromState, fromParams, rejection) => {
       if (rejection === 'Unauthorized') { 

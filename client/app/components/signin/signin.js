@@ -13,9 +13,9 @@ let signinModule = angular.module('signin', [
   $stateProvider
     .state('signin', {
       url: '/signin',
-      template: '<signin></signin>',
+      component: 'signin',
       resolve: {
-        'acl' : ['$q', 'AclService', ($q, AclService) => {
+        acl : ($q, AclService) => {
           if(AclService.can('signin')){
             // Has proper permissions
             return true;
@@ -23,10 +23,7 @@ let signinModule = angular.module('signin', [
             // Does not have permission
             return $q.reject('Unauthorized');
           }
-        }],
-        validateUser: ['$auth', ($auth) => {
-          return $auth.validateUser();
-        }]
+        }
       }
     });
 })

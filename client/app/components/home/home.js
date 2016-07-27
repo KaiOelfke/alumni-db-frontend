@@ -14,7 +14,7 @@ let homeModule = angular.module('home', [
   $stateProvider
     .state('home', {
       url: '/',
-      template: '<home></home>',
+      component: 'home',
       resolve: {
         'acl' : ['$q', 'AclService', ($q, AclService) => {
           if(AclService.can('home')){

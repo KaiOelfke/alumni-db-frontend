@@ -12,7 +12,7 @@ let profileModule = angular.module('profile', [
   $stateProvider
     .state('profile', {
       url: '/profile',
-      template: '<profile></profile>'
+      component: 'profile'
     });
 })
 
