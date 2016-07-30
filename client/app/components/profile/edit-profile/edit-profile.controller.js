@@ -1,8 +1,5 @@
-class ProfileController {
-  constructor($state) {
-    'ngInject';
-
-    this.$state = $state;
+class EditProfileController {
+  constructor() {
     this.name = 'profile';
     this.searchText = null;
     this.selectedItem = null;
@@ -27,10 +24,6 @@ class ProfileController {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-  editProfile() {
-    this.$state.go('edit-profile');
-  }
-
 }
 
-export default ProfileController;
+export default EditProfileController;

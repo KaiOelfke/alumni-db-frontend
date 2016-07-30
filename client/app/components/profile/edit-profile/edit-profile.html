@@ -1,17 +1,12 @@
-<div  class="profile"
+<div  class="edit-profile"
       md-theme="profile"
       layout="column" layout-fill>
 
   <md-toolbar class="md-tall">
       <span flex></span>
       <h3 class="content md-toolbar-tools">
-        <span class="md-flex title">Profile</span>
+        <span class="md-flex title">Edit Profile</span>
         <span flex></span>
-
-        <md-button ng-click="$ctrl.editProfile()" class="md-fab md-hue-2" aria-label="Edit">  
-            <md-icon md-font-set="material-icons"> mode_edit </md-icon>        
-        </md-button>
-
       </h3>
 
   </md-toolbar>
@@ -186,9 +181,9 @@
 
       </form>
     </md-card-content>
-    <md-card-actions ng-show="false" layout="row" layout-align="end center">
-      <md-button>Action 1</md-button>
-      <md-button>Action 2</md-button>
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button>Save</md-button>
+      <md-button>Cancel</md-button>
     </md-card-actions>
   </md-card>
 

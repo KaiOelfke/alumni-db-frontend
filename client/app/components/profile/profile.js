@@ -13,11 +13,30 @@ let profileModule = angular.module('profile', [
     .state('profile', {
       url: '/profile',
       component: 'profile',
-      onEnter: (AclService, $state) => {
-        if (AclService.can('profile')) {
-            return true;
+      onEnter: (AclService, $auth, $state) => {
+        return $auth
+            .validateUser()
+            .then((user) => {
+                AclService.detachRole('guest');
+                
+                if (user.statuses.indexOf("completedProfile") > -1) {
+                  AclService.attachRole('registeredUser');
+                } else {
+                  AclService.attachRole('notRegisteredUser');
+                }
+
+                if (AclService.can('profile')) {
+                    return true;
+                }
+
+                return $state.target('unauthorized');
+
+            }, () => $state.target('unauthorized'));
+      },
+      resolve: {
+        user: ($auth) => {
+          return $auth.validateUser();
         }
-        return $state.target('unauthorized');
       }
     });
 })

@@ -78,7 +78,8 @@ angular.module('app', [
       handleAccountUpdateResponse: formatConvertar,
       handleTokenValidationResponse: formatConvertar,
       passwordResetPath: '/auth/password/',
-      passwordUpdatePath: '/auth/password/'
+      passwordUpdatePath: '/auth/password/',
+      validateOnPageLoad: false,
     });
 
 
@@ -148,7 +149,7 @@ angular.module('app', [
     const aclData = {
       guest: ['signin', 'signup'],
       notRegisteredUser: ['logout', 'registration'],
-      registeredUser: ['logout', 'home'],
+      registeredUser: ['logout', 'home', 'events', 'event', 'profile', 'edit-profile'],
       premium: ['home', 'events', 'event']
     }
     AclService.attachRole('guest');

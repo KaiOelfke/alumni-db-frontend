@@ -1,8 +1,8 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-import eventsComponent from './events.component';
+import editProfileComponent from './edit-profile.component';
 
-let eventsModule = angular.module('events', [
+let editProfileModule = angular.module('edit-profile', [
   uiRouter
 ])
 
@@ -10,9 +10,9 @@ let eventsModule = angular.module('events', [
   "ngInject";
 
   $stateProvider
-    .state('events', {
-      url: '/events',
-      component: 'events',
+    .state('edit-profile', {
+      url: '/profile/edit',
+      component: 'editProfile',
       onEnter: (AclService, $auth, $state) => {
         return $auth
             .validateUser()
@@ -25,19 +25,24 @@ let eventsModule = angular.module('events', [
                   AclService.attachRole('notRegisteredUser');
                 }
 
-                if (AclService.can('events')) {
+                if (AclService.can('edit-profile')) {
                     return true;
                 }
 
                 return $state.target('unauthorized');
 
             }, () => $state.target('unauthorized'));
+      },
+      resolve: {
+        user: ($auth) => {
+          return $auth.validateUser();
+        }
       }
     });
 })
 
-.component('events', eventsComponent)
+.component('editProfile', editProfileComponent)
 
 .name;
 
-export default eventsModule;
+export default editProfileModule;

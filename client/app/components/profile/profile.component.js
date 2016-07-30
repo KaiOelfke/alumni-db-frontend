@@ -4,7 +4,7 @@ import './profile.less';
 
 let profileComponent = {
   restrict: 'E',
-  bindings: {},
+  bindings: {user: '<'},
   template,
   controller
 };

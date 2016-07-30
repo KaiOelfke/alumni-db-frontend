@@ -1,8 +1,10 @@
 class SigninController {
-  constructor($auth, $mdToast, AclService) {
+  constructor($auth, $mdToast, AclService, $state) {
     'ngInject';
     this.$auth = $auth;
     this.$mdToast = $mdToast;
+    this.AclService = AclService;
+    this.$state = $state;
   }
 
   $onInit() {
@@ -22,12 +24,14 @@ class SigninController {
         this.notQuering = true;
         this.$mdToast.show(this.$mdToast.simple()
                               .textContent('Successfully logged in.'));
-        AclService.detachRole('guest');
+        this.AclService.detachRole('guest');
+        console.log('signin', user);
         if (user.statuses.indexOf("completedProfile") > -1) {
-          AclService.attachRole('registeredUser');
+          this.AclService.attachRole('registeredUser');
+          this.$state.go('home');
         } else {
-          AclService.attachRole('notRegisteredUser');
-          $state.go('registration');
+          this.AclService.attachRole('notRegisteredUser');
+          this.$state.go('registration');
         }
       })
       .catch((resp) => {

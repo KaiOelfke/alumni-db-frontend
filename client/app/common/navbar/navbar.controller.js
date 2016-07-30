@@ -15,10 +15,12 @@ class NavbarController {
     this.dynamicTheme = 'home';
     this.isShow = true;
 
-    this.$transitions.onSuccess( { to: '*' }, (transition)  => {
-      const toState = transition.to();
 
-      
+    this.$transitions.onEnter( {}, (AuditService, state, transition)  => {
+      console.log(AuditService, state, transition)
+      const toState = state;
+
+      this.isShow = true;
       this.currentNavItem = toState.name;
 
       switch (toState.name) {
@@ -32,9 +34,11 @@ class NavbarController {
             this.dynamicNavTextTheme = 'navDark';
             this.dynamicTheme = 'events';
             break; 
-        case 'profile': 
+        case 'profile':
+        case 'edit-profile':
             this.dynamicNavTextTheme = 'navDark';
             this.dynamicTheme = 'profile';
+            this.currentNavItem = 'profile';
             break;
         case 'premium': 
             this.dynamicNavTextTheme = 'nav';
