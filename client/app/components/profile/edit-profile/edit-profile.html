@@ -15,8 +15,9 @@
     <img ng-src="http://www.freedigitalphotos.net/images/img/homepage/87357.jpg" class="md-card-image" alt="Washed Out">
     <md-card-title>
       <md-card-title-text>
-        <span class="md-headline">{{$ctrl.user.fullname}}</span>
-        <span class="md-subhead">Live Lazy, Live Long</span>
+        <span class="md-headline">{{ $ctrl.user.fullname }}</span>
+        <span class="md-subhead">{{ $ctrl.user.short_bio }}</span>
+  
       </md-card-title-text>
       <md-card-title-media>
         <div class="md-media-lg card-media">
@@ -26,28 +27,41 @@
     </md-card-title>
 
     <md-card-content>
-      <form name="signinForm">
-        <!-- 1 row -->
+      <form name="profileForm">
 
-        <div layout-gt-xs="row">
-          <md-input-container class="md-block" flex>
-            <label>First Name</label>
-            <input type="text"
-                   disabled
-                   name="first_name"  ng-model="$ctrl.user.first_name">
+        <!-- 1 row -->
+        <h3 class="md-subhead">Personal</h3>
+
+        <div layout-gt-sm="row">
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Birthday</label>
+              <input
+                    name="birthday"
+                    ng-model="$ctrl.user.date_of_birth"
+                    ng-pattern="$ctrl.dateCheckRegex"
+                    required/>
+              <div ng-messages="profileForm.birthday.$error">
+                <div ng-message="pattern">DD.MM.YYYY - Example 01.01.1990</div>
+                <div ng-message="required">Birthday is required.</div>
+              </div>
           </md-input-container>
 
           <div flex="5" hide-xs="" hide-sm="">
             <!-- Spacer //-->
           </div>
-          
-          <md-input-container class="md-block" flex>
-            <label>Last Name</label>
-            <input type="text"
-                   disabled
-                   name="last_name"  ng-model="$ctrl.user.last_name">
-          </md-input-container>
 
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <md-radio-group 
+                layout="row"
+                layout-align="start center"
+                ng-model="$ctrl.user.gender"
+                name="gender">
+                <md-radio-button value="1">Female</md-radio-button>
+                <md-radio-button value="0">Male</md-radio-button>
+              </md-radio-group>
+          </md-input-container>
         </div>
 
 
@@ -58,9 +72,18 @@
           <md-input-container 
               class="md-block" flex-gt-sm>
               <label>Country</label>
-              <input type="text"
-                     disabled
-                     name="country"  ng-model="$ctrl.user.country">
+              <md-select 
+                  required
+                  name="country"
+                  ng-model="$ctrl.user.country">
+                <md-option  ng-repeat="country in $ctrl.countries"
+                            value="{{country.abbrev}}">
+                  {{country.name}}
+                </md-option>
+              </md-select>
+              <div ng-messages="profileForm.country.$error">
+                <div ng-message="required">Country is required.</div>
+              </div>
           </md-input-container>
 
           <div flex="5" hide-xs="" hide-sm="">
@@ -71,8 +94,10 @@
               class="md-block" flex-gt-sm>
               <label>City</label>
               <input type="text"
-                     disabled
                      name="city"  ng-model="$ctrl.user.city">
+              <div ng-messages="profileForm.city.$error">
+                <div ng-message="required">City is required.</div>
+              </div>                              
           </md-input-container>
 
         </div>
@@ -82,10 +107,9 @@
         <div layout-gt-sm="row">
           <md-input-container 
               class="md-block" flex-gt-sm>
-              <label>Birthday</label>
+              <label>University Major</label>
               <input type="text"
-                     disabled
-                     name="birthday"  ng-model="$ctrl.user.date_of_birth">
+                     name="university_major"  ng-model="$ctrl.user.university_major">
           </md-input-container>
 
           <div flex="5" hide-xs="" hide-sm="">
@@ -93,13 +117,103 @@
           </div>
           <md-input-container 
               class="md-block" flex-gt-sm>
-              <label>Gender</label>
+              <label>University Name</label>
               <input type="text"
-                     disabled
-                     name="birthday" ng-model="$ctrl.user.gender">
+                     name="university_name" ng-model="$ctrl.user.university_name">
           </md-input-container>
         </div>
 
+        <div layout-gt-sm="row">
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Founded startups</label>
+              <textarea ng-model="$ctrl.user.founded_company_name" rows="3"></textarea>
+          </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Job position</label>
+              <input type="text"
+                     name="current_job_position"  ng-model="$ctrl.user.current_job_position">
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Working place</label>
+              <input type="text"
+                     name="current_company_name"
+                     ng-model="$ctrl.user.current_company_name">
+          </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Interests</label>
+              <textarea ng-model="$ctrl.user.interests" rows="5"></textarea>
+          </md-input-container>
+        </div>
+
+
+        <h3 class="md-subhead">Connection</h3>
+
+        <div layout-gt-sm="row">
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Mobile Phone</label>
+              <input type="text"
+                     name="mobile_phone"  ng-model="$ctrl.user.mobile_phone">
+          </md-input-container>
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>          
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Skype</label>
+              <input type="text"
+                     name="skype"  ng-model="$ctrl.user.skype_id">
+          </md-input-container>
+      
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Facebook</label>
+              <input type="text"
+                     name="facebook_url"  ng-model="$ctrl.user.facebook_url">
+          </md-input-container>
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>          
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Twitter</label>
+              <input type="text"
+                     name="twitter_url"  ng-model="$ctrl.user.twitter_url">
+          </md-input-container>
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>          
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Linkedin</label>
+              <input type="text"
+                     name="linkedin_url"  ng-model="$ctrl.user.linkedin_url">
+          </md-input-container>      
+        </div>
+
+
+
+
+        <h3 class="md-subhead">JA-YE</h3>
+        
         <!-- 4 row -->
 
         <div layout-gt-sm="row">
@@ -114,11 +228,10 @@
                 layout="row"
                 layout-align="start center"
                 ng-model="$ctrl.user.program_type"
-                disabled
                 name="program_type">
-                <md-radio-button disabled value="0">Company</md-radio-button>
-                <md-radio-button disabled value="1">Startup</md-radio-button>
-                <md-radio-button disabled value="2">Other</md-radio-button>
+                <md-radio-button value="0">Company</md-radio-button>
+                <md-radio-button value="1">Startup</md-radio-button>
+                <md-radio-button value="2">Other</md-radio-button>
               </md-radio-group>
           </div>
 
@@ -130,9 +243,18 @@
           <md-input-container 
               class="md-block" flex-gt-sm>
               <label>In which country did you participate?</label>
-              <input type="text"
-                     disabled
-                     name="country_of_participation" ng-model="$ctrl.user.country_of_participation">
+              <md-select 
+                  required
+                  name="country_of_participation"
+                  ng-model="$ctrl.user.country_of_participation">
+                <md-option  ng-repeat="country in $ctrl.countries"
+                            value="{{country.abbrev}}">
+                  {{country.name}}
+                </md-option>
+              </md-select>
+              <div ng-messages="profileForm.country_of_participation.$error">
+                <div ng-message="required">Country Of Participation is required.</div>
+              </div>
           </md-input-container>
 
           <div flex="5" hide-xs="" hide-sm="">
@@ -144,24 +266,30 @@
             <input
                   name="institution"
                   ng-model="$ctrl.user.institution"
-                  disabled
                   required/>
-
           </md-input-container>
 
         </div>
 
-        <!-- 3 row -->
+        <!-- 5 row -->
         <div layout-gt-sm="row">
         
           <md-input-container 
               class="md-block" flex-gt-sm>
               <label>In which year did you participate?</label>
-              <input
-                    name="year_of_participation"
-                    disabled
-                    ng-model="$ctrl.user.year_of_participation"
-                    required/>              
+              <md-select 
+                  required
+                  name="year_of_participation"
+                  ng-model="$ctrl.user.year_of_participation">
+                  
+                <md-option  ng-repeat="country in $ctrl.countries"
+                            value="{{country.abbrev}}">
+                  {{country.name}}
+                </md-option>
+              </md-select>
+              <div ng-messages="profileForm.year_of_participation.$error">
+                <div ng-message="required">Year of participation is required.</div>
+              </div>
           </md-input-container>
 
           <div flex="5" hide-xs="" hide-sm="">
@@ -173,14 +301,43 @@
             <input
                   name="student_company_name"
                   ng-model="$ctrl.user.student_company_name"
-                  disabled
                   required/>
           </md-input-container>
         </div>
 
+        <!-- 6 row -->
+
+        <h3 class="md-subhead">Alumni</h3>
+
+        <div layout-gt-sm="row">
+        
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Member since</label>
+              <input
+                    name="member_since"
+                    ng-model="$ctrl.user.member_since"
+                    ng-pattern="$ctrl.dateCheckRegex"/>
+              <div ng-messages="profileForm.member_since.$error">
+                <div ng-message="pattern">DD.MM.YYYY - Example 01.01.1990</div>
+              </div>              
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Position</label>
+            <input
+                  name="student_company_name"
+                  ng-model="$ctrl.user.alumni_position"/>
+          </md-input-container>
+        </div>
 
       </form>
     </md-card-content>
+
     <md-card-actions layout="row" layout-align="end center">
       <md-button>Save</md-button>
       <md-button>Cancel</md-button>

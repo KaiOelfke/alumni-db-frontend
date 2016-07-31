@@ -10,6 +10,7 @@ import Events from './events/events';
 import Event from './events/event/event';
 import Unauthorized from './unauthorized/unauthorized';
 import Notfound from './notfound/notfound';
+import User from './users/user/user';
 
 let componentModule = angular.module('app.components', [
   Home,
@@ -22,7 +23,8 @@ let componentModule = angular.module('app.components', [
   Events,
   Event,
   Unauthorized,
-  Notfound
+  Notfound,
+  User
 ])
   
 .name;

@@ -1,6 +1,7 @@
 class HomeController {
-  constructor(Search, $q) {
+  constructor(Search, $state, $q) {
     'ngInject';
+    this.$state = $state;
     this.search = Search;
     this.$q = $q;
     this.name = 'home';
@@ -12,15 +13,6 @@ class HomeController {
       page: 1
     };
     this.users = [];
-    this.todos = [];
-    for (var i = 0; i < 10; i++) {
-      this.todos.push({
-        what: "Brunch this weekend?",
-        who: "Min Li Chan",
-        notes: "I'll be in your neighborhood doing errands."
-      });
-    }
-
   }
 
   searchTextChange() {

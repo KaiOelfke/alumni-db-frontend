@@ -30,7 +30,10 @@
 
   <md-card class="search-results" ng-show="$ctrl.users.length" flex layout-fill>
     <md-list>
-      <md-list-item class="md-3-line" ng-repeat="user in $ctrl.users">
+      <md-list-item 
+        ui-sref="user({userId: user.id})"
+        target=“_blank”
+        class="md-3-line" ng-repeat="user in $ctrl.users">
         <img ng-src="{{user.avatar.url}}" class="md-avatar" alt="{{user.first_name}}" />
         <div class="md-list-item-text">
           <h3>{{user.first_name}} {{user.last_name}}</h3>

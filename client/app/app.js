@@ -11,6 +11,8 @@ import ngMessages from "angular-messages";
 import Common from './common/common';
 import Components from './components/components';
 import AppComponent from './app.component';
+
+import 'font-awesome/css/font-awesome.css'
 import 'normalize.css';
 import 'angular-material/angular-material.css';
 import 'material-steppers/dist/material-steppers.css';
@@ -149,7 +151,7 @@ angular.module('app', [
     const aclData = {
       guest: ['signin', 'signup'],
       notRegisteredUser: ['logout', 'registration'],
-      registeredUser: ['logout', 'home', 'events', 'event', 'profile', 'edit-profile'],
+      registeredUser: ['logout', 'home', 'events', 'event', 'profile', 'edit-profile', 'showUser'],
       premium: ['home', 'events', 'event']
     }
     AclService.attachRole('guest');

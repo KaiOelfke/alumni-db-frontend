@@ -101,7 +101,7 @@
                                       <label>Birthday</label>
                                       <input
                                             name="birthday"
-                                            ng-model="$ctrl.stepData[0].data.birthday"
+                                            ng-model="$ctrl.stepData[0].data.date_of_birth"
                                             ng-pattern="$ctrl.dateCheckRegex"
                                             required/>
                                       <div ng-messages="pinformation.birthday.$error">
@@ -236,7 +236,6 @@
                                       <div ng-messages="prog.information.year_of_participation.$error">
                                         <div ng-message="required">Year of participation is required.</div>
                                       </div>
-
                                   </md-input-container>
 
                                   <div flex="5" hide-xs="" hide-sm="">

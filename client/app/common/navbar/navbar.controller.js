@@ -24,9 +24,11 @@ class NavbarController {
       this.currentNavItem = toState.name;
 
       switch (toState.name) {
+        case 'user':
         case 'home':
             this.dynamicNavTextTheme = 'nav';
             this.dynamicTheme = 'home';
+            this.currentNavItem = 'home';            
             break;
         case 'events':
         case 'event':
