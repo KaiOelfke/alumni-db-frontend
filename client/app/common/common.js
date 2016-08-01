@@ -6,6 +6,7 @@ import Logo from './logo/logo';
 import ValidationMatch from './validation-match/validation-match';
 import Search from './search/search';
 import Users from './users/users';
+import ProfileUtilities from './profile-utilities/profile-utilities';
 
 let commonModule = angular.module('app.common', [
   Navbar,
@@ -14,7 +15,8 @@ let commonModule = angular.module('app.common', [
   Logo,
   ValidationMatch,
   Users,
-  Search
+  Search,
+  ProfileUtilities
 ])
   
 .name;

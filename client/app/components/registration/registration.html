@@ -14,7 +14,7 @@
           md-alternative="true">
           <md-step md-label="Personal Information">
             <md-step-body>
-                <md-progress-linear md-mode="query" ></md-progress-linear>
+                <md-progress-linear ng-disabled="$ctrl.notQuery" md-mode="query" ></md-progress-linear>
                 <form name="pinformation"
                     novalidate
                     ng-submit="$ctrl.submitCurrentStep($ctrl.stepData[0].data)">
@@ -29,7 +29,7 @@
                                       <label>First name</label>
                                       <input
                                             name="firstname"
-                                            ng-model="$ctrl.stepData[0].data.firstname"
+                                            ng-model="$ctrl.stepData[0].data.first_name"
                                             required/>
                                       <div ng-messages="pinformation.firstname.$error">
                                         <div ng-message="required">First name is required.</div>
@@ -45,7 +45,7 @@
                                       <label>Last name</label>
                                       <input
                                             name="lastname"
-                                            ng-model="$ctrl.stepData[0].data.lastname"
+                                            ng-model="$ctrl.stepData[0].data.last_name"
                                             required/>
                                       <div ng-messages="pinformation.lastname.$error">
                                         <div ng-message="required">Last name is required.</div>
@@ -67,8 +67,8 @@
                                           ng-model="$ctrl.stepData[0].data.country">
                                           
                                         <md-option  ng-repeat="country in $ctrl.countries"
-                                                    value="{{country.abbrev}}">
-                                          {{country.abbrev}}
+                                                    value="{{country.code}}">
+                                          {{country.name}}
                                         </md-option>
                                       </md-select>
                                       <div ng-messages="pinformation.country.$error">
@@ -124,8 +124,8 @@
                                         layout-align="start center"
                                         ng-model="$ctrl.stepData[0].data.gender"
                                         name="gender">
-                                        <md-radio-button value="female">Female</md-radio-button>
-                                        <md-radio-button value="male"> Male </md-radio-button>
+                                        <md-radio-button value="1">Female</md-radio-button>
+                                        <md-radio-button value="0"> Male </md-radio-button>
                                       </md-radio-group>
 
                                   </div>
@@ -146,7 +146,7 @@
           </md-step>
           <md-step md-label="Create an group">
               <md-step-body>
-                <md-progress-linear md-mode="query" ></md-progress-linear>
+                <md-progress-linear ng-disabled="$ctrl.notQuery" md-mode="query" ></md-progress-linear>
                 <form name="prog.information"
                     novalidate
                     ng-submit="$ctrl.submitCurrentStep($ctrl.stepData[1].data)">
@@ -188,9 +188,9 @@
                                           name="country_of_participation"
                                           ng-model="$ctrl.stepData[1].data.country_of_participation">
                                           
-                                        <md-option  ng-repeat="country in $ctrl.countries"
-                                                    value="{{country.abbrev}}">
-                                          {{country.abbrev}}
+                                        <md-option  ng-repeat="country in $ctrl.permittedCountries"
+                                                    value="{{country.code}}">
+                                          {{country.name}}
                                         </md-option>
                                       </md-select>
                                       <div ng-messages="prog.information.country_of_participation.$error">
@@ -228,9 +228,9 @@
                                           name="year_of_participation"
                                           ng-model="$ctrl.stepData[1].data.year_of_participation">
                                           
-                                        <md-option  ng-repeat="country in $ctrl.countries"
-                                                    value="{{country.abbrev}}">
-                                          {{country.abbrev}}
+                                        <md-option  ng-repeat="year in $ctrl.years"
+                                                    value="{{year}}">
+                                          {{year}}
                                         </md-option>
                                       </md-select>
                                       <div ng-messages="prog.information.year_of_participation.$error">

@@ -73,11 +73,10 @@
               class="md-block" flex-gt-sm>
               <label>Country</label>
               <md-select 
-                  required
                   name="country"
                   ng-model="$ctrl.user.country">
                 <md-option  ng-repeat="country in $ctrl.countries"
-                            value="{{country.abbrev}}">
+                            value="{{country.code}}">
                   {{country.name}}
                 </md-option>
               </md-select>
@@ -244,15 +243,14 @@
               class="md-block" flex-gt-sm>
               <label>In which country did you participate?</label>
               <md-select 
-                  required
-                  name="country_of_participation"
+                  name="countryOfParticipation"
                   ng-model="$ctrl.user.country_of_participation">
-                <md-option  ng-repeat="country in $ctrl.countries"
-                            value="{{country.abbrev}}">
+                <md-option  ng-repeat="country in $ctrl.permittedCountries"
+                            value="{{country.code}}">
                   {{country.name}}
                 </md-option>
               </md-select>
-              <div ng-messages="profileForm.country_of_participation.$error">
+              <div ng-messages="profileForm.countryOfParticipation.$error">
                 <div ng-message="required">Country Of Participation is required.</div>
               </div>
           </md-input-container>
@@ -267,6 +265,9 @@
                   name="institution"
                   ng-model="$ctrl.user.institution"
                   required/>
+            <div ng-messages="profileForm.institution.$error">
+              <div ng-message="required">Institution is required.</div>
+            </div>                  
           </md-input-container>
 
         </div>
@@ -278,16 +279,15 @@
               class="md-block" flex-gt-sm>
               <label>In which year did you participate?</label>
               <md-select 
-                  required
-                  name="year_of_participation"
+                  name="yearOfPrticipation"
                   ng-model="$ctrl.user.year_of_participation">
                   
-                <md-option  ng-repeat="country in $ctrl.countries"
-                            value="{{country.abbrev}}">
-                  {{country.name}}
+                <md-option  ng-repeat="year in $ctrl.years"
+                            value="{{year}}">
+                  {{year}}
                 </md-option>
               </md-select>
-              <div ng-messages="profileForm.year_of_participation.$error">
+              <div ng-messages="profileForm.yearOfPrticipation.$error">
                 <div ng-message="required">Year of participation is required.</div>
               </div>
           </md-input-container>
@@ -299,9 +299,13 @@
           <md-input-container class="md-block" flex-gt-sm>
             <label>What was the name of your student company?</label>
             <input
-                  name="student_company_name"
+                  name="studentCompanyName"
                   ng-model="$ctrl.user.student_company_name"
                   required/>
+            <div ng-messages="prog.information.studentCompanyName.$error">
+              <div ng-message="required">Student company name is required.</div>
+            </div>
+
           </md-input-container>
         </div>
 
@@ -339,8 +343,8 @@
     </md-card-content>
 
     <md-card-actions layout="row" layout-align="end center">
-      <md-button>Save</md-button>
-      <md-button>Cancel</md-button>
+      <md-button ng-disabled="profileForm.$invalid" ng-click="$ctrl.saveEdit()">Save</md-button>
+      <md-button ng-click="$ctrl.cancelEdit()">Cancel</md-button>
     </md-card-actions>
   </md-card>
 

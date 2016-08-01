@@ -1,8 +1,9 @@
 class SignupController {
-  constructor($auth, $mdToast, $rootScope) {
+  constructor($auth, $mdToast, $rootScope, $state) {
     "ngInject";
     this.$auth = $auth;
     this.$mdToast = $mdToast;
+    this.$state = $state;
     this.notQuering = true;
 
     this.signupForm = {
@@ -17,12 +18,13 @@ class SignupController {
     this.notQuering = false;
     this.$auth
       .submitRegistration(this.signupForm)
-      .then(function(resp) {
+      .then((resp) => {
         this.notQuering = true;
+        this.$state.go('registration');
         this.$mdToast.show(this.$mdToast.simple()
                       .textContent('Successfully signed up.'));
       })
-      .catch(function(resp) {
+      .catch((resp) =>  {
         this.notQuering = true;
         this.$mdToast.show(this.$mdToast.simple()
                         .highlightClass('md-warn')

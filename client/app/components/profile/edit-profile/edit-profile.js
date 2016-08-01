@@ -34,14 +34,28 @@ let editProfileModule = angular.module('edit-profile', [
             }, () => $state.target('unauthorized'));
       },
       resolve: {
-        user: ($auth) => {
-          return $auth.validateUser();
+        user: ($auth, $q) => {
+          return $auth.validateUser().catch(() => $q.reject('unauthorized'));;
         }
       }
     });
 })
 
 .component('editProfile', editProfileComponent)
+
+.run(($transitions, $state) => {
+  'ngInject';
+
+  $transitions.onError({to: 'edit-profile'}, ($transition$, $error$) => {
+
+    $transition$.promise.catch((error) => {
+      if (error === 'unauthorized') {
+        $state.go('unauthorized');
+      }
+    });
+
+  });
+})
 
 .name;
 

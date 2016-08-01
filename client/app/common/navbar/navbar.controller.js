@@ -1,10 +1,13 @@
 class NavbarController {
-  constructor($rootScope, $state, $transitions) {
+  constructor($rootScope, $state, $transitions, $mdToast, $auth, AclService) {
     "ngInject";
 
+    this.AclService = AclService;
     this.$state = $state;
     this.$transitions = $transitions;
     this.$rootScope = $rootScope;
+    this.$auth = $auth;
+    this.$mdToast = $mdToast;
   }
 
   $onInit(){
@@ -38,6 +41,7 @@ class NavbarController {
             break; 
         case 'profile':
         case 'edit-profile':
+        case 'change-password':
             this.dynamicNavTextTheme = 'navDark';
             this.dynamicTheme = 'profile';
             this.currentNavItem = 'profile';
@@ -56,6 +60,18 @@ class NavbarController {
       
     });
 
+  }
+
+  logout() {
+    return this.$auth.signOut()
+      .then(() => {
+        this.$state.go('signin');
+      })
+      .catch(() => {
+        this.$mdToast.show(
+            this.$mdToast.simple()
+              .textContent('Couldn\'t complete your request.'));
+      });
   }
 
   goto(state) {

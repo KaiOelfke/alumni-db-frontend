@@ -14,11 +14,30 @@ let signinModule = angular.module('signin', [
     .state('signin', {
       url: '/signin',
       component: 'signin',
-      onEnter: (AclService, $state) => {
-        if (AclService.can('signin')) {
-            return true;
-        }
-        return $state.target('unauthorized');
+      onEnter: ($auth, AclService, $state) => {
+        AclService.flushRoles();
+        
+        return $auth
+            .validateUser()
+            .then((user) => {
+                if (user.statuses.indexOf("completedProfile") > -1) {
+                  AclService.attachRole('registeredUser');
+                } else {
+                  AclService.attachRole('notRegisteredUser');
+                }
+
+                if (AclService.can('signin')) {
+                  return true;
+                }
+
+                return $state.target('unauthorized');
+            }, () => {
+              AclService.attachRole('guest');
+              if (AclService.can('signin')) {
+                return true;
+              }
+              return $state.target('unauthorized');
+            });
       }
     });
 })

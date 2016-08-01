@@ -24,11 +24,25 @@ let registrationModule = angular.module('registration', [
     .state('registration', {
       url: '/registration',
       component: 'registration',
-      onEnter: (AclService, $state) => {
-        if (AclService.can('registration')) {
-            return true;
-        }
-        return $state.target('unauthorized');
+      onEnter: (AclService, $state, $auth) => {
+        return $auth
+            .validateUser()
+            .then((user) => {
+                AclService.detachRole('guest');
+                
+                if (user.statuses.indexOf("completedProfile") > -1) {
+                  AclService.attachRole('registeredUser');
+                } else {
+                  AclService.attachRole('notRegisteredUser');
+                }
+
+                if (AclService.can('registration')) {
+                    return true;
+                }
+
+                return $state.target('unauthorized');
+
+            }, () => $state.target('unauthorized'));
       }
     });
 })

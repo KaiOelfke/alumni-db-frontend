@@ -5,6 +5,7 @@ import Signup from './signup/signup';
 import Registration from './registration/registration';
 import Profile from './profile/profile';
 import EditProfile from './profile/edit-profile/edit-profile';
+import ChangePassword from './profile/change-password/change-password';
 import Permium from './premium/premium';
 import Events from './events/events';
 import Event from './events/event/event';
@@ -24,7 +25,8 @@ let componentModule = angular.module('app.components', [
   Event,
   Unauthorized,
   Notfound,
-  User
+  User,
+  ChangePassword
 ])
   
 .name;

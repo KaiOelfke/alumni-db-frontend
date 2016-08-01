@@ -51,25 +51,25 @@ let userModule = angular.module('user', [
       }
 
     });
-}).run(($transitions, $state) => {
+})
+
+.component('user', userComponent)
+
+.run(($transitions, $state) => {
   'ngInject';
 
-  $transitions.onError({to: 'user'},($transition$, $error$) => {
+  $transitions.onError({to: 'user'}, ($transition$, $error$) => {
 
     $transition$.promise.catch((error) => {
       if (error === 'unauthorized') {
-
         $state.go('unauthorized');
       } else {
         $state.go('notfound');
       }
     });
 
-  })
-
+  });
 })
-
-.component('user', userComponent)
 
 .name;
 

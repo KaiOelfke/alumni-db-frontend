@@ -1,8 +1,8 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-import profileComponent from './profile.component';
+import changePasswordComponent from './change-password.component';
 
-let profileModule = angular.module('profile', [
+let changePasswordModule = angular.module('change-password', [
   uiRouter
 ])
 
@@ -10,9 +10,9 @@ let profileModule = angular.module('profile', [
   "ngInject";
 
   $stateProvider
-    .state('profile', {
-      url: '/profile',
-      component: 'profile',
+    .state('change-password', {
+      url: '/profile/change-password',
+      component: 'changePassword',
       onEnter: (AclService, $auth, $state) => {
         return $auth
             .validateUser()
@@ -25,8 +25,8 @@ let profileModule = angular.module('profile', [
                   AclService.attachRole('notRegisteredUser');
                 }
 
-                if (AclService.can('profile')) {
-                    return true;
+                if (AclService.can('change-password')) {
+                  return true;
                 }
 
                 return $state.target('unauthorized');
@@ -41,12 +41,10 @@ let profileModule = angular.module('profile', [
     });
 })
 
-.component('profile', profileComponent)
-
 .run(($transitions, $state) => {
   'ngInject';
 
-  $transitions.onError({to: 'profile'}, ($transition$, $error$) => {
+  $transitions.onError({to: 'change-password'}, ($transition$, $error$) => {
 
     $transition$.promise.catch((error) => {
       if (error === 'unauthorized') {
@@ -57,6 +55,9 @@ let profileModule = angular.module('profile', [
   });
 })
 
+
+.component('changePassword', changePasswordComponent)
+
 .name;
 
-export default profileModule;
+export default changePasswordModule;

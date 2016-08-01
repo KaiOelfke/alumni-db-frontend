@@ -1,12 +1,13 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-import ngMaterial from "angular-material";
-import mdSteppers from "material-steppers/dist/material-steppers.js";
-import angularACL from "angular-acl/angular-acl";
-import ngTokenAuth from "ng-token-auth";
-import braintree from "braintree-web";
-import angularCookie from "angular-cookie";
-import ngMessages from "angular-messages";
+import ngMaterial from 'angular-material';
+import mdSteppers from 'material-steppers/dist/material-steppers.js';
+import angularACL from 'angular-acl/angular-acl';
+import ngTokenAuth from 'ng-token-auth';
+import braintree from 'braintree-web';
+import angularCookie from 'angular-cookie';
+import ngMessages from 'angular-messages';
+import moment from 'moment';
 
 import Common from './common/common';
 import Components from './components/components';
@@ -38,7 +39,24 @@ angular.module('app', [
 
     const formatConvertar = (response) => {
       response = response.data;
-      var statuses = [];
+
+      if (response.date_of_birth) {
+
+        const dateOfBirth = moment(response.date_of_birth, "YYYY-MM-DD");
+
+        response.date_of_birth = dateOfBirth.format("DD.MM.YYYY");
+      }
+
+      if (response.member_since) {
+        const memberSince = moment(response.member_since, "YYYY-MM-DD");
+
+        response.member_since = memberSince.format("DD.MM.YYYY");
+      }
+
+      
+
+
+      const statuses = [];
 
       /*jshint camelcase: false */
 
@@ -146,16 +164,18 @@ angular.module('app', [
 
   })
 
-  .run((AclService, $rootScope, $state, $mdToast) => {
+  .run((AclService, $rootScope, $state, $mdToast, $transitions) => {
     "ngInject";
     const aclData = {
       guest: ['signin', 'signup'],
       notRegisteredUser: ['logout', 'registration'],
-      registeredUser: ['logout', 'home', 'events', 'event', 'profile', 'edit-profile', 'showUser'],
+      registeredUser: ['logout', 'home', 'events', 'event', 'profile', 'change-password', 'edit-profile', 'showUser'],
       premium: ['home', 'events', 'event']
     }
     AclService.attachRole('guest');
     AclService.setAbilities(aclData);
+
+
   })
 
   .component('app', AppComponent);
