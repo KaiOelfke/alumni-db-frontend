@@ -303,6 +303,11 @@
       </form>
     </md-card-content>
     <md-card-actions layout="row" layout-align="end center">
+      <md-button ng-disabled="$ctrl.confirmationButton"
+                 ng-hide="$ctrl.user.confirmed_email"
+                 ng-click="$ctrl.resendConfirmationEmail()">
+                 Send Confirmation Email
+      </md-button>
       <md-button ui-sref="change-password()">Change Password</md-button>
       <md-button ui-sref="edit-profile()">Edit Profile</md-button>
     </md-card-actions>

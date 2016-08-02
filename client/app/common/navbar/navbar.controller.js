@@ -55,6 +55,8 @@ class NavbarController {
         case 'registration':
         case 'unauthorized':
         case 'notfound':
+        case 'confirmation':
+        case 'reset-password':
             this.isShow = false;
       }
       

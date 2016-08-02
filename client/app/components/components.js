@@ -12,6 +12,8 @@ import Event from './events/event/event';
 import Unauthorized from './unauthorized/unauthorized';
 import Notfound from './notfound/notfound';
 import User from './users/user/user';
+import Confirmation from './confirmation/confirmation';
+import RestPassword from './reset-password/reset-password';
 
 let componentModule = angular.module('app.components', [
   Home,
@@ -26,7 +28,9 @@ let componentModule = angular.module('app.components', [
   Unauthorized,
   Notfound,
   User,
-  ChangePassword
+  ChangePassword,
+  Confirmation,
+  RestPassword
 ])
   
 .name;

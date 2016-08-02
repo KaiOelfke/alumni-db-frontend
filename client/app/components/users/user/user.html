@@ -8,7 +8,8 @@
         <span class="md-flex title">Profile</span>
         <span flex></span>
 
-        <md-button ng-click="$ctrl.editProfile()" class="md-fab md-hue-2" aria-label="Edit">  
+        <md-button ng-click="$ctrl.editProfile()"
+                   ng-show="$ctrl.showEdit()" class="md-fab md-hue-2" aria-label="Edit">  
             <md-icon md-font-set="material-icons"> mode_edit </md-icon>
         </md-button>
 

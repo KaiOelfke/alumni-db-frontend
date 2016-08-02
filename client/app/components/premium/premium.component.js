@@ -4,7 +4,7 @@ import './premium.less';
 
 let premiumComponent = {
   restrict: 'E',
-  bindings: {},
+  bindings: {user: '<'},
   template,
   controller
 };

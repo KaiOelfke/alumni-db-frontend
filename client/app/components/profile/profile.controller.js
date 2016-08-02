@@ -1,15 +1,18 @@
 class ProfileController {
-  constructor($state) {
+  constructor($state, Users, $mdToast) {
     'ngInject';
 
     this.$state = $state;
-    this.name = 'profile';
-    this.searchText = null;
-    this.selectedItem = null;
+
+    this.Users = Users;
+    this.$mdToast = $mdToast;
 
   }
 
   $onInit() {
+    this.searchText = null;
+    this.selectedItem = null;    
+    this.confirmationButton = false;
     this.user.fullname = `${this.capitalizeFirstLetter(this.user.first_name)} 
                           ${this.capitalizeFirstLetter(this.user.last_name)}`;
   }
@@ -22,6 +25,26 @@ class ProfileController {
     this.$state.go('edit-profile');
   }
 
+  resendConfirmationEmail() {
+    this.confirmationButton = true;
+
+    this.Users.sendConfirmationEmail()
+         .then(() => {
+          this.confirmationButton = false;
+          this.$mdToast.show(
+                this.$mdToast.simple()
+                    .textContent('Email sent!'));
+
+        })
+        .catch(() => {
+          this.confirmationButton = false; 
+          this.$mdToast.show(
+                this.$mdToast.simple()
+                    .highlightClass('md-warn')
+                    .textContent('Couldn\'t send the email!'));
+        })
+
+  }
 }
 
 export default ProfileController;

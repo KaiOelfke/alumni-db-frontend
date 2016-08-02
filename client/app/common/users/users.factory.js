@@ -1,22 +1,31 @@
 let UsersFactory = function ($http) {
   'ngInject';
 
-  const urlBase = 'http://localhost:3000' + '/users';
+  const APIUrl = 'http://localhost:3000';
+  const urlBase = APIUrl + '/users';
   const usersFactory = {};
+  const confirm_success_url = window.location.origin + '/profile/email-confirmation';
+  const config_name = 'default';
 
-  usersFactory.getUsers = function() {
+  usersFactory.getUsers = () => {
     return $http.get(urlBase);
   };
 
-  usersFactory.insertUser = function(user) {
+  usersFactory.insertUser = (user) => {
     return $http.post(urlBase, {
       user: user
     });
   };
 
-  usersFactory.getUser = function(id) {
+  usersFactory.getUser = (id) => {
     return $http.get(urlBase + '/' + id);
   };
+
+  usersFactory.sendConfirmationEmail = () => {
+    return $http.post(APIUrl + '/auth/confirmation',
+                     {confirm_success_url,
+                      config_name});
+  }
 
   return usersFactory;
 };

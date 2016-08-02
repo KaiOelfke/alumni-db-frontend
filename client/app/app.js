@@ -4,7 +4,6 @@ import ngMaterial from 'angular-material';
 import mdSteppers from 'material-steppers/dist/material-steppers.js';
 import angularACL from 'angular-acl/angular-acl';
 import ngTokenAuth from 'ng-token-auth';
-import braintree from 'braintree-web';
 import angularCookie from 'angular-cookie';
 import ngMessages from 'angular-messages';
 import moment from 'moment';
@@ -93,7 +92,8 @@ angular.module('app', [
       apiUrl: 'http://localhost:3000',
       accountUpdatePath: '/users',
       storage: 'localStorage',
-      passwordResetSuccessUrl: window.location.origin + '/#/password-update',
+      confirmationSuccessUrl: window.location.origin + '/profile/email-confirmation',
+      passwordResetSuccessUrl: window.location.origin + '/profile/change-password',
       handleLoginResponse: formatConvertar,
       handleAccountUpdateResponse: formatConvertar,
       handleTokenValidationResponse: formatConvertar,
@@ -167,10 +167,13 @@ angular.module('app', [
   .run((AclService, $rootScope, $state, $mdToast, $transitions) => {
     "ngInject";
     const aclData = {
-      guest: ['signin', 'signup'],
+      guest: ['signin', 'signup', 'reset-password'],
       notRegisteredUser: ['logout', 'registration'],
-      registeredUser: ['logout', 'home', 'events', 'event', 'profile', 'change-password', 'edit-profile', 'showUser'],
-      premium: ['home', 'events', 'event']
+      registeredUser: ['logout', 'premium', 'home',
+                       'events', 'event', 'profile',
+                       'change-password', 'edit-profile',
+                       'showUser'],
+      premium: ['enter-event']
     }
     AclService.attachRole('guest');
     AclService.setAbilities(aclData);

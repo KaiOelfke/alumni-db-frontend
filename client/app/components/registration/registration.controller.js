@@ -1,11 +1,12 @@
 class RegistrationController {
-  constructor($mdStepper, ProfileUtilities, $auth, $mdToast, $state) {
+  constructor($mdStepper, ProfileUtilities, Users, $auth, $mdToast, $state) {
     "ngInject";
     this.$mdStepper = $mdStepper;
     this.ProfileUtilities = ProfileUtilities;
     this.$mdToast = $mdToast;
     this.$auth = $auth;
     this.$state = $state;
+    this.Users = Users;
   }
 
   $onInit() {
@@ -68,9 +69,18 @@ class RegistrationController {
     this.notQuery = false;
     this.$auth.updateAccount(profileData)
       .then((user) => {
-        console.log(user);
-        this.notQuery = true;
-        this.$state.go('home');
+        this.Users
+            .sendConfirmationEmail()
+            .then((resp) => {
+              console.log('success email confirmation', resp);
+              this.notQuery = true;
+              this.$state.go('home');
+            })
+            .catch((err) => {
+              console.log('error email confirmation', err);
+              this.notQuery = true;
+              this.$state.go('home');
+            });
       })
       .catch((err) => {
         console.log(err);
@@ -80,12 +90,9 @@ class RegistrationController {
                   .highlightClass('md-warn')
                   .textContent('Couldn\'t complete your request!'));
       });
-    // call the registration api
-    // if success then go to home
-    // change the roles to registeredUser
 
-    // if not display a notification.
-    // stay in the same page.
+
+
   }
 
 }

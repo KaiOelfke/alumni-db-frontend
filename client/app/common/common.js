@@ -7,6 +7,7 @@ import ValidationMatch from './validation-match/validation-match';
 import Search from './search/search';
 import Users from './users/users';
 import ProfileUtilities from './profile-utilities/profile-utilities';
+import Premium from './premium/premium';
 
 let commonModule = angular.module('app.common', [
   Navbar,
@@ -16,7 +17,8 @@ let commonModule = angular.module('app.common', [
   ValidationMatch,
   Users,
   Search,
-  ProfileUtilities
+  ProfileUtilities,
+  Premium
 ])
   
 .name;
