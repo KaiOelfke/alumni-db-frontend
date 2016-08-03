@@ -13,6 +13,7 @@
     "font-awesome": "^4.6.3",
     "material-steppers": "^1.0.2",
     "moment": "^2.14.1",
+    "ng-file-upload": "^12.0.4",
     "ng-token-auth": "0.0.29",
     "normalize.css": "^3.0.3"
   },

@@ -12,204 +12,32 @@
   </md-toolbar>
 
   <md-card>
-    <img ng-src="http://www.freedigitalphotos.net/images/img/homepage/87357.jpg" class="md-card-image" alt="Washed Out">
+    <md-progress-linear md-mode="query" ng-show="$ctrl.isUploading"></md-progress-linear>
+
+    <div class="md-card-image cover-image-box"
+          style="background: url('http://www.freedigitalphotos.net/images/img/homepage/87357.jpg');">
+      <div ngf-select="$ctrl.changeCoverImage($file)" class="md-card-image cover-image-overlay">
+        <md-icon md-font-set="fa" md-font-icon="fa-upload"></md-icon>
+      </div>
+    </div>
+    
     <md-card-title>
       <md-card-title-text>
         <span class="md-headline">{{ $ctrl.user.fullname }}</span>
-        <span class="md-subhead">{{ $ctrl.user.short_bio }}</span>
-  
       </md-card-title-text>
       <md-card-title-media>
-        <div class="md-media-lg card-media">
-          <img ng-src="http://188.166.146.18/wp-content/uploads/2016/03/xx-Marks-LinkedIn-profile-pic-300x300.jpg" class="md-card-image" alt="Washed Out">
+
+        <div class="md-media-lg card-media overlay-box">
+          <img ng-src="{{$ctrl.user.avatar.url}}" class="md-card-image" alt="Washed Out">
+          <div ngf-select="$ctrl.changeAvatar($file)" class="md-media-lg overlay">
+            <md-icon md-font-set="fa" md-font-icon="fa-upload"></md-icon>
+          </div>          
         </div>
       </md-card-title-media>
     </md-card-title>
 
     <md-card-content>
       <form name="profileForm">
-
-        <!-- 1 row -->
-        <h3 class="md-subhead">Personal</h3>
-
-        <div layout-gt-sm="row">
-          <md-input-container 
-              class="md-block" flex-gt-sm>
-              <label>Birthday</label>
-              <input
-                    name="birthday"
-                    ng-model="$ctrl.user.date_of_birth"
-                    ng-pattern="$ctrl.dateCheckRegex"
-                    required/>
-              <div ng-messages="profileForm.birthday.$error">
-                <div ng-message="pattern">DD.MM.YYYY - Example 01.01.1990</div>
-                <div ng-message="required">Birthday is required.</div>
-              </div>
-          </md-input-container>
-
-          <div flex="5" hide-xs="" hide-sm="">
-            <!-- Spacer //-->
-          </div>
-
-          <md-input-container 
-              class="md-block" flex-gt-sm>
-              <md-radio-group 
-                layout="row"
-                layout-align="start center"
-                ng-model="$ctrl.user.gender"
-                name="gender">
-                <md-radio-button value="1">Female</md-radio-button>
-                <md-radio-button value="0">Male</md-radio-button>
-              </md-radio-group>
-          </md-input-container>
-        </div>
-
-
-        <!-- 2 row -->
-
-        <div layout-gt-sm="row">
-        
-          <md-input-container 
-              class="md-block" flex-gt-sm>
-              <label>Country</label>
-              <md-select 
-                  name="country"
-                  ng-model="$ctrl.user.country">
-                <md-option  ng-repeat="country in $ctrl.countries"
-                            value="{{country.code}}">
-                  {{country.name}}
-                </md-option>
-              </md-select>
-              <div ng-messages="profileForm.country.$error">
-                <div ng-message="required">Country is required.</div>
-              </div>
-          </md-input-container>
-
-          <div flex="5" hide-xs="" hide-sm="">
-            <!-- Spacer //-->
-          </div>
-          
-          <md-input-container 
-              class="md-block" flex-gt-sm>
-              <label>City</label>
-              <input type="text"
-                     name="city"  ng-model="$ctrl.user.city">
-              <div ng-messages="profileForm.city.$error">
-                <div ng-message="required">City is required.</div>
-              </div>                              
-          </md-input-container>
-
-        </div>
-
-        <!-- 3 row -->
-
-        <div layout-gt-sm="row">
-          <md-input-container 
-              class="md-block" flex-gt-sm>
-              <label>University Major</label>
-              <input type="text"
-                     name="university_major"  ng-model="$ctrl.user.university_major">
-          </md-input-container>
-
-          <div flex="5" hide-xs="" hide-sm="">
-            <!-- Spacer //-->
-          </div>
-          <md-input-container 
-              class="md-block" flex-gt-sm>
-              <label>University Name</label>
-              <input type="text"
-                     name="university_name" ng-model="$ctrl.user.university_name">
-          </md-input-container>
-        </div>
-
-        <div layout-gt-sm="row">
-          <md-input-container 
-              class="md-block" flex-gt-sm>
-              <label>Founded startups</label>
-              <textarea ng-model="$ctrl.user.founded_company_name" rows="3"></textarea>
-          </md-input-container>
-        </div>
-
-        <div layout-gt-sm="row">
-          <md-input-container 
-              class="md-block" flex-gt-sm>
-              <label>Job position</label>
-              <input type="text"
-                     name="current_job_position"  ng-model="$ctrl.user.current_job_position">
-          </md-input-container>
-
-          <div flex="5" hide-xs="" hide-sm="">
-            <!-- Spacer //-->
-          </div>
-
-          <md-input-container 
-              class="md-block" flex-gt-sm>
-              <label>Working place</label>
-              <input type="text"
-                     name="current_company_name"
-                     ng-model="$ctrl.user.current_company_name">
-          </md-input-container>
-        </div>
-
-        <div layout-gt-sm="row">
-          <md-input-container 
-              class="md-block" flex-gt-sm>
-              <label>Interests</label>
-              <textarea ng-model="$ctrl.user.interests" rows="5"></textarea>
-          </md-input-container>
-        </div>
-
-
-        <h3 class="md-subhead">Connection</h3>
-
-        <div layout-gt-sm="row">
-          <md-input-container 
-              class="md-block" flex-gt-sm>
-              <label>Mobile Phone</label>
-              <input type="text"
-                     name="mobile_phone"  ng-model="$ctrl.user.mobile_phone">
-          </md-input-container>
-          <div flex="5" hide-xs="" hide-sm="">
-            <!-- Spacer //-->
-          </div>          
-          <md-input-container 
-              class="md-block" flex-gt-sm>
-              <label>Skype</label>
-              <input type="text"
-                     name="skype"  ng-model="$ctrl.user.skype_id">
-          </md-input-container>
-      
-        </div>
-
-        <div layout-gt-sm="row">
-          <md-input-container 
-              class="md-block" flex-gt-sm>
-              <label>Facebook</label>
-              <input type="text"
-                     name="facebook_url"  ng-model="$ctrl.user.facebook_url">
-          </md-input-container>
-          <div flex="5" hide-xs="" hide-sm="">
-            <!-- Spacer //-->
-          </div>          
-          <md-input-container 
-              class="md-block" flex-gt-sm>
-              <label>Twitter</label>
-              <input type="text"
-                     name="twitter_url"  ng-model="$ctrl.user.twitter_url">
-          </md-input-container>
-          <div flex="5" hide-xs="" hide-sm="">
-            <!-- Spacer //-->
-          </div>          
-          <md-input-container 
-              class="md-block" flex-gt-sm>
-              <label>Linkedin</label>
-              <input type="text"
-                     name="linkedin_url"  ng-model="$ctrl.user.linkedin_url">
-          </md-input-container>      
-        </div>
-
-
-
 
         <h3 class="md-subhead">JA-YE</h3>
         
@@ -339,6 +167,194 @@
           </md-input-container>
         </div>
 
+        <!-- 1 row -->
+        <h3 class="md-subhead">Personal</h3>
+
+        <div layout-gt-sm="row">
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Birthday</label>
+              <input
+                    name="birthday"
+                    ng-model="$ctrl.user.date_of_birth"
+                    ng-pattern="$ctrl.dateCheckRegex"
+                    required/>
+              <div ng-messages="profileForm.birthday.$error">
+                <div ng-message="pattern">DD.MM.YYYY - Example 01.01.1990</div>
+                <div ng-message="required">Birthday is required.</div>
+              </div>
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <md-radio-group 
+                layout="row"
+                layout-align="start center"
+                ng-model="$ctrl.user.gender"
+                name="gender">
+                <md-radio-button value="1">Female</md-radio-button>
+                <md-radio-button value="0">Male</md-radio-button>
+              </md-radio-group>
+          </md-input-container>
+        </div>
+
+
+        <!-- 2 row -->
+
+        <div layout-gt-sm="row">
+        
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Country</label>
+              <md-select 
+                  name="country"
+                  ng-model="$ctrl.user.country">
+                <md-option  ng-repeat="country in $ctrl.countries"
+                            value="{{country.code}}">
+                  {{country.name}}
+                </md-option>
+              </md-select>
+              <div ng-messages="profileForm.country.$error">
+                <div ng-message="required">Country is required.</div>
+              </div>
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+          
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>City</label>
+              <input type="text"
+                     name="city"  ng-model="$ctrl.user.city">
+              <div ng-messages="profileForm.city.$error">
+                <div ng-message="required">City is required.</div>
+              </div>                              
+          </md-input-container>
+
+        </div>
+
+        <!-- 3 row -->
+
+        <div layout-gt-sm="row">
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>University Major</label>
+              <input type="text"
+                     name="university_major"  ng-model="$ctrl.user.university_major">
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>University Name</label>
+              <input type="text"
+                     name="university_name" ng-model="$ctrl.user.university_name">
+          </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Founded startups</label>
+              <textarea ng-model="$ctrl.user.founded_company_name" rows="3"></textarea>
+          </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Job position</label>
+              <input type="text"
+                     name="current_job_position"  ng-model="$ctrl.user.current_job_position">
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Working place</label>
+              <input type="text"
+                     name="current_company_name"
+                     ng-model="$ctrl.user.current_company_name">
+          </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Interests</label>
+              <textarea ng-model="$ctrl.user.interests" rows="5"></textarea>
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Short Biography</label>
+              <textarea ng-model="$ctrl.user.short_bio" rows="5"></textarea>
+          </md-input-container>
+        </div>
+
+
+        <h3 class="md-subhead">Connection</h3>
+
+        <div layout-gt-sm="row">
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Mobile Phone</label>
+              <input type="text"
+                     name="mobile_phone"  ng-model="$ctrl.user.mobile_phone">
+          </md-input-container>
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>          
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Skype</label>
+              <input type="text"
+                     name="skype"  ng-model="$ctrl.user.skype_id">
+          </md-input-container>
+      
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Facebook</label>
+              <input type="text"
+                     name="facebook_url"  ng-model="$ctrl.user.facebook_url">
+          </md-input-container>
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>          
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Twitter</label>
+              <input type="text"
+                     name="twitter_url"  ng-model="$ctrl.user.twitter_url">
+          </md-input-container>
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>          
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Linkedin</label>
+              <input type="text"
+                     name="linkedin_url"  ng-model="$ctrl.user.linkedin_url">
+          </md-input-container>      
+        </div>
       </form>
     </md-card-content>
 

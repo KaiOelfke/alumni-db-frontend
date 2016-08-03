@@ -1,9 +1,11 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
+import ngFileUpload from 'ng-file-upload';
 import profileComponent from './profile.component';
 
 let profileModule = angular.module('profile', [
-  uiRouter
+  uiRouter,
+  ngFileUpload
 ])
 
 .config(($stateProvider) => {

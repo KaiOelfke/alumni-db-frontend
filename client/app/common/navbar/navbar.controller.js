@@ -20,7 +20,6 @@ class NavbarController {
 
 
     this.$transitions.onEnter( {}, (AuditService, state, transition)  => {
-      console.log(AuditService, state, transition)
       const toState = state;
 
       this.isShow = true;

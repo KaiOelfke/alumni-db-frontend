@@ -1,4 +1,4 @@
-let UsersFactory = function ($http) {
+let UsersFactory = function ($http, Upload) {
   'ngInject';
 
   const APIUrl = 'http://localhost:3000';
@@ -13,13 +13,29 @@ let UsersFactory = function ($http) {
 
   usersFactory.insertUser = (user) => {
     return $http.post(urlBase, {
-      user: user
+      user
     });
   };
 
   usersFactory.getUser = (id) => {
     return $http.get(urlBase + '/' + id);
   };
+
+  usersFactory.changeAvatar = (file) => {
+    return Upload.upload({
+      url: urlBase,
+      method: 'PUT',
+      data: {avatar: file}
+    });
+  }
+
+  // not implemented in backend
+  usersFactory.changeCover = (file) => {
+    return Upload.upload({
+      url: urlBase,
+      data: {user: {cover: file}}
+    });
+  }
 
   usersFactory.sendConfirmationEmail = () => {
     return $http.post(APIUrl + '/auth/confirmation',

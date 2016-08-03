@@ -56,13 +56,122 @@
       </md-card-title-text>
       <md-card-title-media>
         <div class="md-media-lg card-media">
-          <img ng-src="http://188.166.146.18/wp-content/uploads/2016/03/xx-Marks-LinkedIn-profile-pic-300x300.jpg" class="md-card-image" alt="Washed Out">
+          <img ng-src="{{$ctrl.user.avatar.url}}" class="md-card-image" alt="Washed Out">
         </div>
       </md-card-title-media>
     </md-card-title>
 
     <md-card-content>
-      <form name="signinForm">
+      <form name="profileForm">
+
+        <h3 class="md-subhead">JA-YE</h3>
+        
+        <!-- 4 row -->
+
+        <div layout-gt-sm="row">
+          <div
+              class="md-block"
+              layout="row"
+              layout-align="start center" flex-gt-sm>
+              <p style="padding: 0px 15px 0px 0px;">
+                Which JA-YE Program did you participate in?
+              </p>
+              <md-radio-group 
+                layout="row"
+                layout-align="start center"
+                ng-model="$ctrl.user.program_type"
+                disabled
+                name="program_type">
+                <md-radio-button disabled value="0">Company</md-radio-button>
+                <md-radio-button disabled value="1">Startup</md-radio-button>
+                <md-radio-button disabled value="2">Other</md-radio-button>
+              </md-radio-group>
+          </div>
+
+        </div>
+
+        <!-- 5 row -->
+
+        <div layout-gt-sm="row">
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>In which country did you participate?</label>
+              <input type="text"
+                     disabled
+                     name="country_of_participation" ng-model="$ctrl.user.country_of_participation">
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>At which school or university did you participate?</label>
+            <input
+                  name="institution"
+                  ng-model="$ctrl.user.institution"
+                  disabled
+                  required/>
+
+          </md-input-container>
+
+        </div>
+
+        <!-- 5 row -->
+        <div layout-gt-sm="row">
+        
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>In which year did you participate?</label>
+              <input
+                    name="year_of_participation"
+                    disabled
+                    ng-model="$ctrl.user.year_of_participation"
+                    required/>              
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>What was the name of your student company?</label>
+            <input
+                  name="student_company_name"
+                  ng-model="$ctrl.user.student_company_name"
+                  disabled
+                  required/>
+          </md-input-container>
+        </div>
+
+        <!-- 6 row -->
+
+        <h3 class="md-subhead">Alumni</h3>
+
+        <div layout-gt-sm="row">
+        
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Member since</label>
+              <input
+                    name="year_of_participation"
+                    disabled
+                    ng-model="$ctrl.user.member_since"/>              
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Position</label>
+            <input
+                  name="student_company_name"
+                  ng-model="$ctrl.user.alumni_position"
+                  disabled/>
+          </md-input-container>
+        </div>
+
 
         <!-- 1 row -->
         <h3 class="md-subhead">Personal</h3>
@@ -189,114 +298,6 @@
               <input type="text"
                      disabled
                      name="mobile_phone"  ng-model="$ctrl.user.mobile_phone">
-          </md-input-container>
-        </div>
-
-        <h3 class="md-subhead">JA-YE</h3>
-        
-        <!-- 4 row -->
-
-        <div layout-gt-sm="row">
-          <div
-              class="md-block"
-              layout="row"
-              layout-align="start center" flex-gt-sm>
-              <p style="padding: 0px 15px 0px 0px;">
-                Which JA-YE Program did you participate in?
-              </p>
-              <md-radio-group 
-                layout="row"
-                layout-align="start center"
-                ng-model="$ctrl.user.program_type"
-                disabled
-                name="program_type">
-                <md-radio-button disabled value="0">Company</md-radio-button>
-                <md-radio-button disabled value="1">Startup</md-radio-button>
-                <md-radio-button disabled value="2">Other</md-radio-button>
-              </md-radio-group>
-          </div>
-
-        </div>
-
-        <!-- 5 row -->
-
-        <div layout-gt-sm="row">
-          <md-input-container 
-              class="md-block" flex-gt-sm>
-              <label>In which country did you participate?</label>
-              <input type="text"
-                     disabled
-                     name="country_of_participation" ng-model="$ctrl.user.country_of_participation">
-          </md-input-container>
-
-          <div flex="5" hide-xs="" hide-sm="">
-            <!-- Spacer //-->
-          </div>
-
-          <md-input-container class="md-block" flex-gt-sm>
-            <label>At which school or university did you participate?</label>
-            <input
-                  name="institution"
-                  ng-model="$ctrl.user.institution"
-                  disabled
-                  required/>
-
-          </md-input-container>
-
-        </div>
-
-        <!-- 5 row -->
-        <div layout-gt-sm="row">
-        
-          <md-input-container 
-              class="md-block" flex-gt-sm>
-              <label>In which year did you participate?</label>
-              <input
-                    name="year_of_participation"
-                    disabled
-                    ng-model="$ctrl.user.year_of_participation"
-                    required/>              
-          </md-input-container>
-
-          <div flex="5" hide-xs="" hide-sm="">
-            <!-- Spacer //-->
-          </div>
-
-          <md-input-container class="md-block" flex-gt-sm>
-            <label>What was the name of your student company?</label>
-            <input
-                  name="student_company_name"
-                  ng-model="$ctrl.user.student_company_name"
-                  disabled
-                  required/>
-          </md-input-container>
-        </div>
-
-        <!-- 6 row -->
-
-        <h3 class="md-subhead">Alumni</h3>
-
-        <div layout-gt-sm="row">
-        
-          <md-input-container 
-              class="md-block" flex-gt-sm>
-              <label>Member since</label>
-              <input
-                    name="year_of_participation"
-                    disabled
-                    ng-model="$ctrl.user.member_since"/>              
-          </md-input-container>
-
-          <div flex="5" hide-xs="" hide-sm="">
-            <!-- Spacer //-->
-          </div>
-
-          <md-input-container class="md-block" flex-gt-sm>
-            <label>Position</label>
-            <input
-                  name="student_company_name"
-                  ng-model="$ctrl.user.alumni_position"
-                  disabled/>
           </md-input-container>
         </div>
 
