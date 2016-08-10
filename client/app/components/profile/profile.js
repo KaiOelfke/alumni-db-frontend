@@ -12,9 +12,9 @@ let profileModule = angular.module('profile', [
   "ngInject";
 
   $stateProvider
-    .state('profile', {
+    .state('userPanel.profile', {
       url: '/profile',
-      component: 'profile',
+      component: 'userPanelProfile',
       onEnter: (AclService, $auth, $state) => {
         return $auth
             .validateUser()
@@ -43,12 +43,12 @@ let profileModule = angular.module('profile', [
     });
 })
 
-.component('profile', profileComponent)
+.component('userPanelProfile', profileComponent)
 
 .run(($transitions, $state) => {
   'ngInject';
 
-  $transitions.onError({to: 'profile'}, ($transition$, $error$) => {
+  $transitions.onError({to: 'userPanel.profile'}, ($transition$, $error$) => {
 
     $transition$.promise.catch((error) => {
       if (error === 'unauthorized') {

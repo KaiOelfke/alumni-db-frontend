@@ -10,9 +10,9 @@ let changePasswordModule = angular.module('change-password', [
   "ngInject";
 
   $stateProvider
-    .state('change-password', {
+    .state('userPanel.change-password', {
       url: '/profile/change-password',
-      component: 'changePassword',
+      component: 'userPanelChangePassword',
       onEnter: (AclService, $auth, $state) => {
         return $auth
             .validateUser()
@@ -44,7 +44,7 @@ let changePasswordModule = angular.module('change-password', [
 .run(($transitions, $state) => {
   'ngInject';
 
-  $transitions.onError({to: 'change-password'}, ($transition$, $error$) => {
+  $transitions.onError({to: 'userPanel.change-password'}, ($transition$, $error$) => {
 
     $transition$.promise.catch((error) => {
       if (error === 'unauthorized') {
@@ -56,7 +56,7 @@ let changePasswordModule = angular.module('change-password', [
 })
 
 
-.component('changePassword', changePasswordComponent)
+.component('userPanelChangePassword', changePasswordComponent)
 
 .name;
 

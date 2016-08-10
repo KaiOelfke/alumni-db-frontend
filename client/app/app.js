@@ -7,6 +7,8 @@ import ngTokenAuth from 'ng-token-auth';
 import angularCookie from 'angular-cookie';
 import ngMessages from 'angular-messages';
 import moment from 'moment';
+import angularMaterialDataTable from 'angular-material-data-table';
+import ngResource from 'angular-resource';
 
 import Common from './common/common';
 import Components from './components/components';
@@ -16,10 +18,13 @@ import 'font-awesome/css/font-awesome.css'
 import 'normalize.css';
 import 'angular-material/angular-material.css';
 import 'material-steppers/dist/material-steppers.css';
+import 'angular-material-data-table/dist/md-data-table.css';
 
 angular.module('app', [
     ngMaterial,
     ngMessages,
+    angularMaterialDataTable,
+    ngResource,
     'mdSteppers',
     'mm.acl',
     angularCookie,

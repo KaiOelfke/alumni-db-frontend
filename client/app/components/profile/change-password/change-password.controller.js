@@ -15,7 +15,7 @@ class ChangePasswordController {
   }
 
   cancelChangePassword() {
-    this.$state.go('profile');
+    this.$state.go('userPanel.profile');
   }
 
   changePassword() {
@@ -28,7 +28,7 @@ class ChangePasswordController {
       this.$mdToast.show(
             this.$mdToast.simple()
                 .textContent('Your Password changed successfully.'));
-      this.$state.go('profile');
+      this.$state.go('userPanel.profile');
     })
     .catch(() => {
         this.notQuering = true;

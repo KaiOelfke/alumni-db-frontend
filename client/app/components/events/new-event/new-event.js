@@ -10,13 +10,13 @@ let newEventModule = angular.module('new-event', [
   "ngInject";
 
   $stateProvider
-    .state('new-event', {
+    .state('userPanelNewEvent', {
       url: '/events/edit',
-      component: 'new-event'
+      component: 'userPanel.new-event'
     });
 })
 
-.component('new-event', newEventComponent)
+.component('userPanelNewEvent', newEventComponent)
   
 .name;
 

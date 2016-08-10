@@ -11,56 +11,57 @@ class NavbarController {
   }
 
   $onInit(){
-
     this.name = 'navbar';
-    this.currentNavItem = 'home';
+    this.currentNavItem = 'userPanel.home';
     this.dynamicNavTextTheme = 'nav';
     this.dynamicTheme = 'home';
     this.isShow = true;
 
-
-    this.$transitions.onEnter( {}, (AuditService, state, transition)  => {
-      const toState = state;
-
-      this.isShow = true;
-      this.currentNavItem = toState.name;
-
-      switch (toState.name) {
-        case 'user':
-        case 'home':
-            this.dynamicNavTextTheme = 'nav';
-            this.dynamicTheme = 'home';
-            this.currentNavItem = 'home';            
-            break;
-        case 'events':
-        case 'event':
-            this.currentNavItem = 'events';
-            this.dynamicNavTextTheme = 'navDark';
-            this.dynamicTheme = 'events';
-            break; 
-        case 'profile':
-        case 'edit-profile':
-        case 'change-password':
-            this.dynamicNavTextTheme = 'navDark';
-            this.dynamicTheme = 'profile';
-            this.currentNavItem = 'profile';
-            break;
-        case 'premium': 
-            this.dynamicNavTextTheme = 'nav';
-            this.dynamicTheme = 'premium';
-            break;
-        case 'signin':
-        case 'signup':
-        case 'registration':
-        case 'unauthorized':
-        case 'notfound':
-        case 'confirmation':
-        case 'reset-password':
-            this.isShow = false;
-      }
-      
+    this.refresh(this.$state.current);
+    
+    this.$transitions.onBefore( {}, (transition)  => {
+      transition.promise.then(this.refresh.bind(this));
     });
+  }
 
+
+  refresh(state) {
+    this.currentNavItem = state.name;
+    this.isShow = true;
+
+    switch (state.name) {
+      case 'userPanel.user':
+      case 'userPanel.home':
+          this.dynamicNavTextTheme = 'nav';
+          this.dynamicTheme = 'home';
+          this.currentNavItem = 'userPanel.home';  
+          break;
+      case 'userPanel.events':
+      case 'userPanel.event':
+          this.currentNavItem = 'userPanel.events';
+          this.dynamicNavTextTheme = 'navDark';
+          this.dynamicTheme = 'events';
+          break; 
+      case 'userPanel.profile':
+      case 'userPanel.edit-profile':
+      case 'userPanel.change-password':
+          this.dynamicNavTextTheme = 'navDark';
+          this.dynamicTheme = 'profile';
+          this.currentNavItem = 'userPanel.profile';
+          break;
+      case 'userPanel.premium': 
+          this.dynamicNavTextTheme = 'nav';
+          this.dynamicTheme = 'premium';
+          break;
+      case 'signin':
+      case 'signup':
+      case 'registration':
+      case 'unauthorized':
+      case 'notfound':
+      case 'confirmation':
+      case 'reset-password':
+          this.isShow = false;
+    }
   }
 
   logout() {

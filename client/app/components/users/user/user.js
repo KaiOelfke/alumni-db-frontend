@@ -10,9 +10,9 @@ let userModule = angular.module('user', [
   "ngInject";
 
   $stateProvider
-    .state('user', {
+    .state('userPanel.user', {
       url: '/user/:userId',
-      component: 'user',
+      component: 'userPanel.user',
       onEnter: (AclService, $state, $transition$, $auth) => {
         const user = $transition$.getResolveValue('user');
 
@@ -53,12 +53,12 @@ let userModule = angular.module('user', [
     });
 })
 
-.component('user', userComponent)
+.component('userPanel.user', userComponent)
 
 .run(($transitions, $state) => {
   'ngInject';
 
-  $transitions.onError({to: 'user'}, ($transition$, $error$) => {
+  $transitions.onError({to: 'userPanel.user'}, ($transition$, $error$) => {
 
     $transition$.promise.catch((error) => {
       if (error === 'unauthorized') {

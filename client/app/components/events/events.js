@@ -10,9 +10,9 @@ let eventsModule = angular.module('events', [
   "ngInject";
 
   $stateProvider
-    .state('events', {
+    .state('userPanel.events', {
       url: '/events',
-      component: 'events',
+      component: 'userPanelEvents',
       onEnter: (AclService, $auth, $state) => {
         return $auth
             .validateUser()
@@ -36,7 +36,7 @@ let eventsModule = angular.module('events', [
     });
 })
 
-.component('events', eventsComponent)
+.component('userPanelEvents', eventsComponent)
 
 .name;
 

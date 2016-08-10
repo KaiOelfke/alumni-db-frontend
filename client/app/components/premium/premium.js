@@ -10,9 +10,9 @@ let premiumModule = angular.module('premium', [
   "ngInject";
 
   $stateProvider
-    .state('premium', {
+    .state('userPanel.premium', {
       url: '/premium',
-      component: 'premium',
+      component: 'userPanelPremium',
       onEnter: (AclService, $state, $auth) => {
         return $auth
             .validateUser()
@@ -41,13 +41,13 @@ let premiumModule = angular.module('premium', [
     });
 })
 
-.component('premium', premiumComponent)
+.component('userPanelPremium', premiumComponent)
 
 
 .run(($transitions, $state) => {
   'ngInject';
 
-  $transitions.onError({to: 'premium'}, ($transition$, $error$) => {
+  $transitions.onError({to: 'userPanel.premium'}, ($transition$, $error$) => {
 
     $transition$.promise.catch((error) => {
       if (error === 'unauthorized') {

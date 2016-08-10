@@ -11,7 +11,7 @@ let resetPasswordModule = angular.module('resetPassword', [
 
 
   $stateProvider
-    .state('reset-password', {
+    .state('userPanel.reset-password', {
       url: '/reset-password',
       component: 'resetPassword',
       onEnter: ($auth, AclService, $state) => {

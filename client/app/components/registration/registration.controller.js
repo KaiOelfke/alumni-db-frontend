@@ -74,12 +74,12 @@ class RegistrationController {
             .then((resp) => {
               console.log('success email confirmation', resp);
               this.notQuery = true;
-              this.$state.go('home');
+              this.$state.go('userPanel.home');
             })
             .catch((err) => {
               console.log('error email confirmation', err);
               this.notQuery = true;
-              this.$state.go('home');
+              this.$state.go('userPanel.home');
             });
       })
       .catch((err) => {

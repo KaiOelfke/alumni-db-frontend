@@ -1,0 +1,61 @@
+<div id="subscriptions">
+  <md-card>
+
+    <md-toolbar class="md-table-toolbar md-default" ng-hide="$ctrl.selected.length">
+      <div class="md-toolbar-tools">
+        <span>Plans</span>
+        <div flex></div>
+        <md-button class="md-icon-button" ng-click="$ctrl.add()">
+          <md-tooltip>
+            Add Plan
+          </md-tooltip>
+          <md-icon>add</md-icon>
+        </md-button>
+
+        <md-button class="md-icon-button" ng-click="$ctrl.refresh()">
+          <md-tooltip>
+            Refresh
+          </md-tooltip>
+          <md-icon>refresh</md-icon>
+        </md-button>
+
+      </div>
+    </md-toolbar>
+    
+    <md-toolbar class="md-table-toolbar alternate" ng-show="$ctrl.selected.length">
+      <div class="md-toolbar-tools">
+        <span>{{$ctrl.selected.length}} {{$ctrl.selected.length > 1 ? 'Plans' : 'Plan'}} selected</span>
+      </div>
+    </md-toolbar>
+
+    <md-table-container>
+      <table md-table  ng-model="$ctrl.selected" md-progress="$ctrl.promise">
+        <thead md-head>
+          <tr md-row>
+            <th md-column><span>Name</span></th>
+            <th md-column><span>Price</span></th>
+            <th md-column><span>Default</span></th>            
+            <th md-column><span>Edit</span></th>
+            <th md-column><span>Delete</span></th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr md-row 
+              ng-repeat="plan in $ctrl.plans.data track by plan.id">
+            <td md-cell>{{plan.name}}</td>
+            <td md-cell>{{plan.price}}</td>
+            <td md-cell>{{plan.default}}</td>
+            <td md-cell ng-click="$ctrl.edit($event, plan)">
+              <md-icon>edit</md-icon>
+            </td>
+            <td md-cell ng-click="$ctrl.remove($event, plan)">
+              <md-icon>delete</md-icon>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+
+  </md-card>
+
+</div>

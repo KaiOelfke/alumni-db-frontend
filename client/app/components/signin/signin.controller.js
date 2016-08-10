@@ -28,7 +28,7 @@ class SigninController {
         console.log('signin', user);
         if (user.statuses.indexOf("completedProfile") > -1) {
           this.AclService.attachRole('registeredUser');
-          this.$state.go('home');
+          this.$state.go('userPanel.home');
         } else {
           this.AclService.attachRole('notRegisteredUser');
           this.$state.go('registration');

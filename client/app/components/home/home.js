@@ -11,9 +11,9 @@ let homeModule = angular.module('home', [
   "ngInject";
 
   $stateProvider
-    .state('home', {
-      url: '/',
-      component: 'home',
+    .state('userPanel.home', {
+      url: '',
+      component: 'userPanelHome',
       onEnter: (AclService, $auth, $state) => {
 
         return $auth
@@ -39,7 +39,7 @@ let homeModule = angular.module('home', [
     });
 })
 
-.component('home', homeComponent)
+.component('userPanelHome', homeComponent)
 
 .name;
 

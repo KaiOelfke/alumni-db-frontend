@@ -10,9 +10,9 @@ let editProfileModule = angular.module('edit-profile', [
   "ngInject";
 
   $stateProvider
-    .state('edit-profile', {
+    .state('userPanel.edit-profile', {
       url: '/profile/edit',
-      component: 'editProfile',
+      component: 'userPanelEditProfile',
       onEnter: (AclService, $auth, $state) => {
         return $auth
             .validateUser()
@@ -41,12 +41,12 @@ let editProfileModule = angular.module('edit-profile', [
     });
 })
 
-.component('editProfile', editProfileComponent)
+.component('userPanelEditProfile', editProfileComponent)
 
 .run(($transitions, $state) => {
   'ngInject';
 
-  $transitions.onError({to: 'edit-profile'}, ($transition$, $error$) => {
+  $transitions.onError({to: 'userPanel.edit-profile'}, ($transition$, $error$) => {
 
     $transition$.promise.catch((error) => {
       if (error === 'unauthorized') {

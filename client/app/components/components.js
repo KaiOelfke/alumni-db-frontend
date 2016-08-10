@@ -1,4 +1,6 @@
 import angular from 'angular';
+// User Components
+import UserPanel from './user-panel/user-panel';
 import Home from './home/home';
 import Signin from './signin/signin';
 import Signup from './signup/signup';
@@ -15,7 +17,15 @@ import User from './users/user/user';
 import Confirmation from './confirmation/confirmation';
 import RestPassword from './reset-password/reset-password';
 
+
+// Admin Components
+import AdminPanel from './admin-panel/admin-panel';
+import AdminHome from './admin/home/home';
+import AdminUsers from './admin/users/users';
+import AdminSubscriptions from './admin/subscriptions/subscriptions';
+
 let componentModule = angular.module('app.components', [
+  UserPanel,
   Home,
   Signup,
   Signin,
@@ -30,7 +40,11 @@ let componentModule = angular.module('app.components', [
   User,
   ChangePassword,
   Confirmation,
-  RestPassword
+  RestPassword,
+  AdminPanel,
+  AdminHome,
+  AdminUsers,
+  AdminSubscriptions
 ])
   
 .name;

@@ -9,7 +9,7 @@ let confirmationModule = angular.module('confirmation', [
 .config(($stateProvider) => {
   "ngInject";
   $stateProvider
-    .state('confirmation', {
+    .state('userPanel.confirmation', {
       url: '/profile/email-confirmation',
       component: 'confirmation',
     });

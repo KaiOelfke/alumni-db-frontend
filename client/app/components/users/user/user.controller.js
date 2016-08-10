@@ -22,7 +22,7 @@ class UserController {
   }
 
   editProfile() {
-    this.$state.go('edit-user');
+    this.$state.go('userPanel.edit-profile');
   }
 
   showEdit(){

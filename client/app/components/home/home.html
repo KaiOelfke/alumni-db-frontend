@@ -7,11 +7,6 @@
       <h3 class="content md-toolbar-tools">
         <span class="md-flex title">Find People</span>
         <span flex></span>
-
-        <md-button class="md-fab" aria-label="Edit">  
-            <md-icon md-font-set="material-icons"> mode_edit </md-icon>        
-        </md-button>
-
       </h3>
 
   </md-toolbar>
@@ -31,7 +26,7 @@
   <md-card class="search-results" ng-show="$ctrl.users.length" flex layout-fill>
     <md-list>
       <md-list-item 
-        ui-sref="user({userId: user.id})"
+        ui-sref="userPanel.user({userId: user.id})"
         class="md-3-line" ng-repeat="user in $ctrl.users">
         <img ng-src="{{user.avatar.url}}" class="md-avatar" alt="{{user.first_name}}" />
         <div class="md-list-item-text">

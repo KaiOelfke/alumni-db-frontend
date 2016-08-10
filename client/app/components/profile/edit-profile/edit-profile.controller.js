@@ -62,14 +62,14 @@ class EditProfileController {
   }
 
   cancelEdit() {
-    this.$state.go('profile');
+    this.$state.go('userPanel.profile');
   }
 
   saveEdit() {
     this.$auth
         .updateAccount(this.user)
         .then(() => {
-      this.$state.go('profile');
+      this.$state.go('userPanel.profile');
     })
     .catch(() => {
         this.$mdToast.show(

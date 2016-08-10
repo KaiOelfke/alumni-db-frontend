@@ -1,8 +1,8 @@
-let UsersFactory = function ($http, Upload) {
+let UsersFactory = function ($http, $resource, Upload) {
   'ngInject';
 
-  const APIUrl = 'http://localhost:3000';
-  const urlBase = APIUrl + '/users';
+  const APIHost = 'http://localhost:3000';
+  const urlBase = APIHost + '/users';
   const usersFactory = {};
   const confirm_success_url = window.location.origin + '/profile/email-confirmation';
   const config_name = 'default';
@@ -38,10 +38,17 @@ let UsersFactory = function ($http, Upload) {
   }
 
   usersFactory.sendConfirmationEmail = () => {
-    return $http.post(APIUrl + '/auth/confirmation',
+    return $http.post(APIHost + '/auth/confirmation',
                      {confirm_success_url,
                       config_name});
   }
+
+  const resourceUrl = APIHost + '/users/:id';
+
+  usersFactory.Resource = $resource(resourceUrl, null,
+    {
+      'update': { method:'PUT' }
+    });  
 
   return usersFactory;
 };

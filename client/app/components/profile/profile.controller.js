@@ -27,7 +27,7 @@ class ProfileController {
   }
 
   editProfile() {
-    this.$state.go('edit-profile');
+    this.$state.go('userPanel.edit-profile');
   }
 
   resendConfirmationEmail() {

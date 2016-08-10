@@ -1,9 +1,9 @@
-let PlansFactory = function ($http) {
+let PlansFactory = function ($http, $resource) {
   'ngInject';
 
   const APIHost = 'http://localhost:3000';
   const urlBase = APIHost + '/subscriptions/plans';
-  const plansFactory = {};
+
 
   const insertPlan = function(plan) {
     return $http.post(urlBase, {
@@ -29,7 +29,14 @@ let PlansFactory = function ($http) {
     return $http.get(urlBase);
   };
 
-  return {insertPlan, destroyPlan,
+  const resourceUrl = APIHost + '/subscriptions/plans/:id';
+
+  const Resource = $resource(resourceUrl, null,
+    {
+      'update': { method:'PUT' }    
+    });
+
+  return {Resource, insertPlan, destroyPlan,
           editPlan, getPlan,
           getAllPlans};
 };

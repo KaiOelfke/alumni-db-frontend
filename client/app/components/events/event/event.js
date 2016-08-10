@@ -10,9 +10,9 @@ let eventModule = angular.module('event', [
   "ngInject";
 
   $stateProvider
-    .state('event', {
+    .state('userPanelEvent', {
       url: '/events/:eventId',
-      component: 'event',
+      component: 'userPanel.event',
       onEnter: (AclService, $state) => {
         if (AclService.can('event')) {
             return true;
@@ -22,7 +22,7 @@ let eventModule = angular.module('event', [
     });
 })
 
-.component('event', eventComponent)
+.component('userPanelEvent', eventComponent)
 
 .name;
 
