@@ -15,6 +15,7 @@ class EditProfileController {
                           ${this.capitalizeFirstLetter(this.user.last_name)}`;
 
     this.user.avatar.url  = this.changeStartOfAvatarUrl(this.user.avatar.url);
+    this.user.cover.url  = this.changeStartOfAvatarUrl(this.user.cover.url);
     this.name = 'profile';
     this.searchText = null;
     this.selectedItem = null;
@@ -32,8 +33,24 @@ class EditProfileController {
     return url; 
   }
 
-  changeCoverImage($file) {
-
+  changeCover($file) {
+    this.isUploading = true;    
+    this.Users
+        .changeCover($file)
+        .then( (resp) => {
+            this.isUploading = false;
+            this.user.cover.url = 
+              this.changeStartOfAvatarUrl(resp.data.data.cover.url);
+            console.log('Success ',resp);
+            //console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+        },  (resp) => {
+            this.isUploading = false;          
+            console.log('Error status: ' + resp);
+        },  (evt)  =>{
+            console.log('progress ' , evt);          
+            //var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            //console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        });
 
   }
 
