@@ -15,8 +15,9 @@
     <md-progress-linear md-mode="query" ng-show="$ctrl.isUploading"></md-progress-linear>
 
     <div class="md-card-image cover-image-box"
-          style="background: url('http://www.freedigitalphotos.net/images/img/homepage/87357.jpg');">
-      <div ngf-select="$ctrl.changeCoverImage($file)" class="md-card-image cover-image-overlay">
+      style="background: url('{{$ctrl.user.cover.url}}');">
+      <!-- <img ng-src="{{$ctrl.user.cover.url}}" class="md-card-image" alt="Washed Out"> -->
+      <div ngf-select="$ctrl.changeCover($file)" class="md-card-image cover-image-overlay">
         <md-icon md-font-set="fa" md-font-icon="fa-upload"></md-icon>
       </div>
     </div>

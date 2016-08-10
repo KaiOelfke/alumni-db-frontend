@@ -33,7 +33,8 @@ let UsersFactory = function ($http, Upload) {
   usersFactory.changeCover = (file) => {
     return Upload.upload({
       url: urlBase,
-      data: {user: {cover: file}}
+      method: 'PUT',
+      data: {cover: file}
     });
   }
 
