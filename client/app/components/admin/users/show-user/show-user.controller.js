@@ -1,6 +1,8 @@
 class ShowUserController {
-  constructor (Users) {
+  constructor (Users, Premium, $mdToast) {
     'ngInject';
+    this.premium = Premium;
+    this.$mdToast = $mdToast;
   }
 
   $onInit() {
@@ -14,6 +16,38 @@ class ShowUserController {
 
   capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  makePremium() {
+    this.premium
+        .subscribe({user_id: this.user.id})
+        .then((resp) => {
+          this.user.subscription_id = resp.data.subscription_id;
+          this.$mdToast.show(
+                this.$mdToast.simple()
+                    .textContent(`Success: ${this.user.fullname} became a premium user`));
+        })
+        .catch(() => {
+          this.$mdToast.show(
+                this.$mdToast.simple()
+                    .textContent(`Failed: Server Error`));
+        });
+  }
+
+  removePremium() {
+    this.premium
+        .destroySubscription(this.user.subscription_id)
+        .then(() => {
+          this.user.subscription_id = null;
+          this.$mdToast.show(
+                this.$mdToast.simple()
+                    .textContent(`Success: ${this.user.fullname} became a normal user`));
+        })
+        .catch(() => {
+          this.$mdToast.show(
+                this.$mdToast.simple()
+                    .textContent(`Failed: Server Error`));
+        }); 
   }
 
 }

@@ -288,8 +288,18 @@
 
       </form>
     </md-card-content>
+
     <md-card-actions layout="row" layout-align="end center">
-      <md-button ui-sref="adminPanel.UsersEditUser({id: $ctrl.user.id})">Edit</md-button>
+      <md-button 
+        ng-hide="$ctrl.user.subscription_id"
+        ng-click="$ctrl.makePremium()">
+        Make Premium
+      </md-button>
+      <md-button 
+        ng-show="$ctrl.user.subscription_id"
+        ng-click="$ctrl.removePremium()">
+        Remove Permium
+      </md-button>      
     </md-card-actions>
 
   </md-card>

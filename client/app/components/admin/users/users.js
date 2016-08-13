@@ -26,18 +26,7 @@ let usersModule = angular.module('adminPanelUsers', [
                             () => $q.reject('notfound'));
         }
       }
-    })
-    .state('adminPanel.UsersEditUser', {
-      url: '/users/:id/edit',
-      component: 'adminPanelUsersEditUser',
-      resolve: {
-        user: (Users, $stateParams, $q) => {
-          return Users.getUser($stateParams.id)
-                      .then((resp) => resp.data.data,
-                            () => $q.reject('notfound'));
-        }
-      }
-    });    
+    });  
 })
 
 .component('adminPanelUsers', usersComponent)

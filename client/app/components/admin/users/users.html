@@ -41,6 +41,7 @@
             <th md-column><span>First name</span></th>
             <th md-column><span>Last name</span></th>            
             <th md-column><span>Email</span></th>
+            <th md-column><span>Permium</span></th>
           </tr>
         </thead>
         <tbody md-body>
@@ -50,6 +51,7 @@
             <td md-cell>{{user.first_name}}</td>
             <td md-cell>{{user.last_name}}</td>            
             <td md-cell>{{user.email}}</td>
+            <td md-cell>{{!!user.subscription_id ? 'Yes': 'No'}}</td>
           </tr>
         </tbody>
       </table>
