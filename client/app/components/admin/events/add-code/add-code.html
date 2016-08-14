@@ -1,0 +1,48 @@
+  <md-dialog-content class="md-dialog-content">
+    
+    <h2 class="md-title">Add Code</h2>
+    
+    <form name="code.form" novalidate>
+
+      <md-autocomplete
+          md-input-name="user_id"
+          md-selected-item="$ctrl.selectedItem"
+          md-selected-item-change="$ctrl.selectedItemChange(user)"
+          md-search-text="$ctrl.searchText"
+          md-items="user in $ctrl.querySearch($ctrl.searchText)"
+          md-item-text="user.first"
+          md-min-length="0"
+          md-floating-label="User"
+          flex
+          class="md-block"
+          required>
+        <md-item-template>
+          <span md-highlight-text="$ctrl.searchText" md-highlight-flags="^i">{{user.name}}</span>
+        </md-item-template>
+        <md-not-found>
+          No Users matching.
+        </md-not-found>     
+      </md-autocomplete>
+
+      <md-input-container class="md-block" flex>
+        <label>Fee</label>
+        <input required name="fee_id" ng-model="$ctrl.currentFee.fee_id">
+        <md-select name="fee_id" placeholder="Fee" required
+                   ng-model="$ctrl.currentCode.fee_id" md-on-open="$ctrl.loadFees()">
+             <md-option ng-value="fee.id" ng-repeat="fee in $ctrl.allFees">{{fee.name}}</md-option>
+            </md-select>
+        </md-input-container>
+        <div ng-messages="fee.form.fee_id.$error">
+          <div ng-message="required">Fee is required.</div>
+        </div>  
+      </md-input-container>
+    </form>
+    
+  </md-dialog-content>
+  
+  <md-dialog-actions>
+    <md-button  class="md-primary" 
+                ng-click="$ctrl.save($ctrl.currentFee)" ng-disabled="fee.form.$invalid">Add</md-button>
+    <md-button class="md-primary" ng-click="$ctrl.cancel()">Cancel</md-button>
+  </md-dialog-actions>
+  

@@ -1,4 +1,4 @@
-class EventsController {
+class EditFeeController {
   constructor (Events, $mdToast, $state, $scope) {
     'ngInject';
     this.events = Events;
@@ -77,4 +77,4 @@ class EventsController {
 
 }
 
-export default EventsController;
+export default EditFeeController;

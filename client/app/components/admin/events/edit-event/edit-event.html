@@ -1,6 +1,5 @@
-<div id="show-event">
+<div id="edit-event">
 	
-
   <md-card>
     <img ng-src="{{$ctrl.event.cover_photo.url}}"
          class="md-card-image"
@@ -22,11 +21,36 @@
     <md-card-content>
       <form name="eventForm">
 
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Name</label>
+            <input type="text"                  
+                  required name="name" ng-model="$ctrl.event.name">
+            <div ng-messages="eventForm.name.$error">
+              <div ng-message="required">Name is required.</div>
+            </div>                  
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Publish</label>
+              <md-switch name="publish" ng-model="$ctrl.event.publish" aria-label="Publish">
+              </md-switch>    
+          </md-input-container>
+
+        </div>
+
+
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label>Type</label>
             <md-select 
-                disabled
+                required
                 name="etype"
                 ng-model="$ctrl.event.etype">
               <md-option  ng-repeat="event in $ctrl.events"
@@ -34,6 +58,9 @@
                 {{event.name}}
               </md-option>
             </md-select>
+            <div ng-messages="eventForm.etype.$error">
+              <div ng-message="required">Type is required.</div>
+            </div>
           </md-input-container>
 
           <div flex="5" hide-xs="" hide-sm="">
@@ -43,8 +70,7 @@
           <md-input-container 
               class="md-block" flex-gt-sm>
               <label>Facebook</label>
-              <input type="text"
-                     disabled
+              <input type="text"              
                      name="facebook" ng-model="$ctrl.event.facebook">
           </md-input-container>
 
@@ -55,7 +81,6 @@
               class="md-block" flex-gt-sm>
               <label>Contact Email</label>
               <input type="text"
-                     disabled
                      name="contact_email" ng-model="$ctrl.event.contact_email">
           </md-input-container>
 
@@ -68,7 +93,6 @@
             <input
                   name="institution"
                   ng-model="$ctrl.event.phone_number"
-                  disabled
                   required/>
           </md-input-container>
 
@@ -79,7 +103,7 @@
           <md-input-container 
               class="md-block" flex-gt-sm>
               <label>Location</label>
-              <textarea name="location" disabled ng-model="$ctrl.event.location" rows="3"></textarea> 
+              <textarea name="location" ng-model="$ctrl.event.location" rows="3"></textarea> 
           </md-input-container>
 
           <div flex="5" hide-xs="" hide-sm="">
@@ -88,7 +112,7 @@
 
           <md-input-container class="md-block" flex-gt-sm>
             <label>Dates</label>
-            <textarea name="dates" disabled ng-model="$ctrl.event.dates" rows="3"></textarea>
+            <textarea name="dates" ng-model="$ctrl.event.dates" rows="3"></textarea>
           </md-input-container>
         </div>
 
@@ -96,8 +120,9 @@
         
           <md-input-container 
               class="md-block" flex-gt-sm>
-              <label>agenda</label>
-              <textarea name="agenda" disabled ng-model="$ctrl.event.agenda" rows="3"></textarea>
+              <label>Slogan</label>
+              <input type="text"
+                     name="slogan" ng-model="$ctrl.event.slogan">
           </md-input-container>
 
           <div flex="5" hide-xs="" hide-sm="">
@@ -106,8 +131,18 @@
 
           <md-input-container class="md-block" flex-gt-sm>
             <label>description</label>
-            <textarea name="description" disabled ng-model="$ctrl.event.description" rows="3"></textarea>
+            <textarea name="description" ng-model="$ctrl.event.description" rows="3"></textarea>
           </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+        
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>agenda</label>
+              <textarea name="agenda" ng-model="$ctrl.event.agenda" rows="3"></textarea>
+          </md-input-container>
+
         </div>
 
       </form>
@@ -115,75 +150,14 @@
 
     <md-card-actions layout="row" layout-align="end center">
       <md-button 
-        ng-click="$ctrl.editEvent()">
-        Edit
+        ng-click="$ctrl.cancel()">
+        Cancel
+      </md-button>
+      <md-button 
+        ng-click="$ctrl.save()">
+        Save
       </md-button>
     </md-card-actions>
-
-  </md-card>
-
-
-  <md-card>
-    <md-toolbar class="md-table-toolbar md-default" ng-hide="$ctrl.filter.show">
-      <div class="md-toolbar-tools">
-        <span>Fees</span>
-        <div flex></div>
-        <md-button class="md-icon-button" ng-click="$ctrl.refresh()">
-          <md-tooltip>
-            Refresh
-          </md-tooltip>
-          <md-icon>refresh</md-icon>
-        </md-button>    
-      </div>
-    </md-toolbar>    
-
-  </md-card>
-
-  <md-card>
-    <md-toolbar class="md-table-toolbar md-default" ng-hide="$ctrl.filter.show">
-      <div class="md-toolbar-tools">
-        <span>Codes</span>
-        <div flex></div>
-        <md-button class="md-icon-button" ng-click="$ctrl.refresh()">
-          <md-tooltip>
-            Refresh
-          </md-tooltip>
-          <md-icon>refresh</md-icon>
-        </md-button>    
-      </div>
-    </md-toolbar>    
-
-  </md-card>  
-
-  <md-card>
-    <md-toolbar class="md-table-toolbar md-default" ng-hide="$ctrl.filter.show">
-      <div class="md-toolbar-tools">
-        <span>Participants</span>
-        <div flex></div>
-        <md-button class="md-icon-button" ng-click="$ctrl.refresh()">
-          <md-tooltip>
-            Refresh
-          </md-tooltip>
-          <md-icon>refresh</md-icon>
-        </md-button>    
-      </div>
-    </md-toolbar>    
-
-  </md-card>
-
-  <md-card>
-    <md-toolbar class="md-table-toolbar md-default" ng-hide="$ctrl.filter.show">
-      <div class="md-toolbar-tools">
-        <span>Applications</span>
-        <div flex></div>
-        <md-button class="md-icon-button" ng-click="$ctrl.refresh()">
-          <md-tooltip>
-            Refresh
-          </md-tooltip>
-          <md-icon>refresh</md-icon>
-        </md-button>    
-      </div>
-    </md-toolbar>    
 
   </md-card>
 

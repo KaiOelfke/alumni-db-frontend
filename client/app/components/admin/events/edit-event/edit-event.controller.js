@@ -1,4 +1,4 @@
-class ShowEventController {
+class EditEventController {
   constructor (Users, Premium, $mdToast) {
     'ngInject';
     this.premium = Premium;
@@ -52,4 +52,4 @@ class ShowEventController {
 
 }
 
-export default ShowEventController;
+export default EditEventController;
