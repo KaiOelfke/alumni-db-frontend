@@ -9,38 +9,10 @@ class EventsController {
 
   $onInit() {
     this.allEvents = null;
-    this.query = {
-      limit: 15,
-      page: 1
-    };
-    this.filter = {
-      options: {
-        debounce: 500
-      }
-    };
-
-    let bookmark;
-
-    this.$scope.$watch(() => this.query.filter,  (newValue, oldValue) => {
-      if(!oldValue) {
-        bookmark = this.query.page;
-      }
-      
-      if(newValue !== oldValue) {
-        this.query.page = 1;
-      }
-      
-      if(!newValue) {
-        this.query.page = bookmark;
-      }
-      
-      this.getEvents();
-    });
-
     this.getEvents();
   }
 
-  setCurrentEvent($event, event) {
+  setEditEvent($event, event) {
     this.$state.go("adminPanel.EventsShowEvent", {id: event.id})
   }
 
@@ -66,6 +38,15 @@ class EventsController {
     this.getEvents();
   }
 
+  getEventTypeName(etype) {
+    return this.events.eventTypes.reduce((mem, et)=> {
+        if(et.id === etype) {
+          return et.name;
+        }
+        return mem;
+      }, '');    
+  }
+
   success(allEvents) {
     this.allEvents = allEvents;
   }
@@ -73,6 +54,10 @@ class EventsController {
   getEvents() {
     this.promise = this.events.Resource.get(this.query).$promise
                         .then(this.success.bind(this), this.showError.bind(this));
+  }
+
+  addEvent() {
+    this.$state.go("adminPanel.EventsCreateEvent")
   }
 
 }

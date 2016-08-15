@@ -23,6 +23,7 @@ import AdminPanel from './admin-panel/admin-panel';
 import AdminHome from './admin/home/home';
 import AdminUsers from './admin/users/users';
 import AdminSubscriptions from './admin/subscriptions/subscriptions';
+import AdminEvents from './admin/events/events';
 
 let componentModule = angular.module('app.components', [
   UserPanel,
@@ -44,7 +45,8 @@ let componentModule = angular.module('app.components', [
   AdminPanel,
   AdminHome,
   AdminUsers,
-  AdminSubscriptions
+  AdminSubscriptions,
+  AdminEvents
 ])
   
 .name;

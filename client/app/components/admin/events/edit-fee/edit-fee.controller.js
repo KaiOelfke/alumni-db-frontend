@@ -1,80 +1,48 @@
-class EditFeeController {
-  constructor (Events, $mdToast, $state, $scope) {
+class AddFeeController {
+  constructor (Fees, ProfileUtilities, $mdToast, $mdDialog, $state, $scope) {
     'ngInject';
-    this.events = Events;
+    this.fees = Fees;
     this.$mdToast = $mdToast;
     this.$scope = $scope;
     this.$state = $state;
+    this.$mdDialog = $mdDialog;
+    this.ProfileUtilities = ProfileUtilities;
+    this.cFee = JSON.parse(this.currentFee);
   }
 
   $onInit() {
-    this.allEvents = null;
-    this.query = {
-      limit: 15,
-      page: 1
-    };
-    this.filter = {
-      options: {
-        debounce: 500
-      }
-    };
+    this.cancel = this.$mdDialog.cancel;
+    this.dateCheckRegex = this.ProfileUtilities.dateCheckRegex;    
+  }
 
-    let bookmark;
-
-    this.$scope.$watch(() => this.query.filter,  (newValue, oldValue) => {
-      if(!oldValue) {
-        bookmark = this.query.page;
-      }
-      
-      if(newValue !== oldValue) {
-        this.query.page = 1;
-      }
-      
-      if(!newValue) {
-        this.query.page = bookmark;
-      }
-      
-      this.getEvents();
+  success(fee) {
+    return this.$mdDialog.hide(fee).then(() => {
+      return this.$mdToast.show(
+        this.$mdToast.simple()
+          .textContent('Fee updated!')
+          .position("top right")
+          .hideDelay(4000)
+      );
     });
-
-    this.getEvents();
   }
-
-  setCurrentEvent($event, event) {
-    this.$state.go("adminPanel.EventsShowEvent", {id: event.id})
-  }
-
-  removeFilter() {
-    this.filter.show = false;
-    this.query.filter = '';
     
-    if(this.filter.form.$dirty) {
-      this.filter.form.$setPristine();
-    }
-  }
-
   showError() {
     this.$mdToast.show(
-      this.$mdToast.simple()
-        .textContent('Oops something went wrong')
-        .position("top right")
-        .hideDelay(3000)
-    );
-  }
+            this.$mdToast.simple()
+              .textContent('Oops error happend!')
+              .position("top right")
+              .hideDelay(4000)
+          );
+  }  
 
-  refresh() {
-    this.getEvents();
-  }
+  save() {
+    const updatedFee = this.fees.Resource.update({id: this.cFee.id}, {fee: this.cFee || {}});
 
-  success(allEvents) {
-    this.allEvents = allEvents;
-  }
-
-  getEvents() {
-    this.promise = this.events.Resource.get(this.query).$promise
-                        .then(this.success.bind(this), this.showError.bind(this));
-  }
+    updatedFee
+      .$promise
+      .then(this.success.bind(this), this.showError.bind(this));
+  } 
 
 }
 
-export default EditFeeController;
+export default AddFeeController;

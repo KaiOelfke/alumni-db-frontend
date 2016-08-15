@@ -2,9 +2,11 @@
 	
 
   <md-card>
-    <img ng-src="{{$ctrl.event.cover_photo.url}}"
-         class="md-card-image"
-         alt="event cover">
+
+    <div class="md-card-image cover-image-box"
+      style="background: #ccc url('{{$ctrl.event.cover_photo.url}}');">
+    </div>    
+
     <md-card-title>
       <md-card-title-text>
         <span class="md-headline">{{ $ctrl.event.name }}</span>
@@ -12,11 +14,10 @@
   
       </md-card-title-text>
       <md-card-title-media>
-        <div class="md-media-lg card-media">
-          <img ng-src="{{$ctrl.event.logo_photo.url}}"
-               class="md-card-image" alt="event logo">
+        <div class="md-media-lg card-media overlay-box">
+          <img ng-src="{{$ctrl.event.logo_photo.url}}" class="md-card-image" alt="logo">       
         </div>
-      </md-card-title-media>
+      </md-card-title-media>      
     </md-card-title>
 
     <md-card-content>
@@ -29,8 +30,8 @@
                 disabled
                 name="etype"
                 ng-model="$ctrl.event.etype">
-              <md-option  ng-repeat="event in $ctrl.events"
-                          value="{{event.code}}">
+              <md-option  ng-repeat="event in $ctrl.eventTypes"
+                          value="{{event.id}}">
                 {{event.name}}
               </md-option>
             </md-select>
@@ -119,31 +120,70 @@
         Edit
       </md-button>
     </md-card-actions>
-
   </md-card>
 
-
   <md-card>
-    <md-toolbar class="md-table-toolbar md-default" ng-hide="$ctrl.filter.show">
+    <md-toolbar class="md-table-toolbar md-default">
       <div class="md-toolbar-tools">
         <span>Fees</span>
         <div flex></div>
-        <md-button class="md-icon-button" ng-click="$ctrl.refresh()">
+        <md-button class="md-icon-button" ng-click="$ctrl.addFee()">
+          <md-tooltip>
+            Add
+          </md-tooltip>
+          <md-icon>add</md-icon>
+        </md-button>         
+        <md-button class="md-icon-button" ng-click="$ctrl.getFees()">
           <md-tooltip>
             Refresh
           </md-tooltip>
           <md-icon>refresh</md-icon>
-        </md-button>    
+        </md-button>            
       </div>
-    </md-toolbar>    
+    </md-toolbar>
 
+    <md-table-container>
+      <table md-table md-progress="$ctrl.feesPromise">
+        <thead md-head>
+          <tr md-row>
+            <th md-column><span>Name</span></th>
+            <th md-column><span>Price</span></th>            
+            <th md-column><span>Deadline</span></th>
+            <th md-column><span>Public</span></th>
+            <th md-column><span>Edit</span></th>
+            <th md-column><span>Delete</span></th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr md-row 
+              ng-repeat="fee in $ctrl.allFees track by fee.id">
+            <td md-cell>{{fee.name}}</td>
+            <td md-cell>{{fee.price}}</td>
+            <td md-cell>{{fee.deadline}}</td>
+            <td md-cell>{{fee.public_fee}}</td>
+            <td md-cell ng-click="$ctrl.editFee($event, fee)">
+              <md-icon>edit</md-icon>
+            </td>
+            <td md-cell ng-click="$ctrl.removeFee($event, fee)">
+              <md-icon>delete</md-icon>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
   </md-card>
 
   <md-card>
-    <md-toolbar class="md-table-toolbar md-default" ng-hide="$ctrl.filter.show">
+    <md-toolbar class="md-table-toolbar md-default">
       <div class="md-toolbar-tools">
         <span>Codes</span>
         <div flex></div>
+        <md-button class="md-icon-button" ng-click="$ctrl.addCode()">
+          <md-tooltip>
+            Add
+          </md-tooltip>
+          <md-icon>add</md-icon>
+        </md-button> 
         <md-button class="md-icon-button" ng-click="$ctrl.refresh()">
           <md-tooltip>
             Refresh
@@ -152,11 +192,33 @@
         </md-button>    
       </div>
     </md-toolbar>    
-
+    <md-table-container>
+      <table md-table md-progress="$ctrl.promise">
+        <thead md-head>
+          <tr md-row>
+            <th md-column><span>Fee</span></th>
+            <th md-column><span>User</span></th>            
+            <th md-column><span>Code</span></th>
+            <th md-column><span>Delete</span></th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr md-row 
+              ng-repeat="code in $ctrl.allCodes.data track by code.id">
+            <td md-cell>{{code.fee.name}}</td>
+            <td md-cell>{{code.user.name}}</td>
+            <td md-cell>{{code.code}}</td>
+            <td md-cell ng-click="$ctrl.removeFee($event, code)">
+              <md-icon>delete</md-icon>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
   </md-card>  
 
-  <md-card>
-    <md-toolbar class="md-table-toolbar md-default" ng-hide="$ctrl.filter.show">
+  <md-card ng-show="false">
+    <md-toolbar class="md-table-toolbar md-default">
       <div class="md-toolbar-tools">
         <span>Participants</span>
         <div flex></div>
@@ -171,7 +233,7 @@
 
   </md-card>
 
-  <md-card>
+  <md-card ng-show="false">
     <md-toolbar class="md-table-toolbar md-default" ng-hide="$ctrl.filter.show">
       <div class="md-toolbar-tools">
         <span>Applications</span>

@@ -1,32 +1,11 @@
-<div id="edit-event">
+<div id="create-event">
 	
+
   <md-card>
     <md-progress-linear md-mode="query" ng-show="$ctrl.processing"></md-progress-linear>
 
-    <div class="md-card-image cover-image-box"
-      style="background: url('{{$ctrl.event.cover_photo.url}}');">
-      <div ngf-select="$ctrl.changeCover($file)" class="md-card-image cover-image-overlay">
-        <md-icon md-font-set="fa" md-font-icon="fa-upload"></md-icon>
-      </div>
-    </div>    
-
-    <md-card-title>
-      <md-card-title-text>  
-      </md-card-title-text>
-
-      <md-card-title-media>
-        <div class="md-media-lg card-media overlay-box">
-          <img ng-src="{{$ctrl.event.logo_photo.url}}" class="md-card-image" alt="Washed Out">
-          <div ngf-select="$ctrl.changeAvatar($file)" class="md-media-lg overlay">
-            <md-icon md-font-set="fa" md-font-icon="fa-upload"></md-icon>
-          </div>          
-        </div>
-      </md-card-title-media>      
-    </md-card-title>
-
     <md-card-content>
       <form name="eventForm">
-
 
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
@@ -44,13 +23,12 @@
 
           <md-input-container 
               class="md-block" flex-gt-sm>
-              <label>Publish</label>
               <md-switch name="publish" ng-model="$ctrl.event.publish" aria-label="Publish">
+                Publish
               </md-switch>    
           </md-input-container>
 
         </div>
-
 
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
@@ -63,6 +41,9 @@
                 {{event.name}}
               </md-option>
             </md-select>
+            <div ng-messages="eventForm.etype.$error">
+              <div ng-message="required">Type is required.</div>
+            </div>
           </md-input-container>
 
           <div flex="5" hide-xs="" hide-sm="">
@@ -103,24 +84,6 @@
         
           <md-input-container 
               class="md-block" flex-gt-sm>
-              <label>Location</label>
-              <textarea name="location" ng-model="$ctrl.event.location" rows="3"></textarea> 
-          </md-input-container>
-
-          <div flex="5" hide-xs="" hide-sm="">
-            <!-- Spacer //-->
-          </div>
-
-          <md-input-container class="md-block" flex-gt-sm>
-            <label>Dates</label>
-            <textarea name="dates" ng-model="$ctrl.event.dates" rows="3"></textarea>
-          </md-input-container>
-        </div>
-
-        <div layout-gt-sm="row">
-        
-          <md-input-container 
-              class="md-block" flex-gt-sm>
               <label>Slogan</label>
               <input type="text"
                      name="slogan" ng-model="$ctrl.event.slogan">
@@ -133,6 +96,24 @@
           <md-input-container class="md-block" flex-gt-sm>
             <label>description</label>
             <textarea name="description" ng-model="$ctrl.event.description" rows="3"></textarea>
+          </md-input-container>
+        </div>        
+
+        <div layout-gt-sm="row">
+        
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Location</label>
+              <textarea name="location" ng-model="$ctrl.event.location" rows="3"></textarea> 
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Dates</label>
+            <textarea name="dates" ng-model="$ctrl.event.dates" rows="3"></textarea>
           </md-input-container>
         </div>
 
@@ -155,13 +136,12 @@
         Cancel
       </md-button>
       <md-button 
-        ng-disabled="eventForm.$invalid"
-        ng-click="$ctrl.save()">
-        Save
+        ng-disabled="eventForm.$invalid"      
+        ng-click="$ctrl.create()">
+        Create
       </md-button>
     </md-card-actions>
 
   </md-card>
-
 </div>
 

@@ -1,53 +1,83 @@
 class EditEventController {
-  constructor (Users, Premium, $mdToast) {
+  constructor (Events, $state, $mdToast) {
     'ngInject';
-    this.premium = Premium;
+    this.events = Events;
     this.$mdToast = $mdToast;
+    this.$state = $state;
   }
 
   $onInit() {
-    this.user.fullname = `${this.capitalizeFirstLetter(this.user.first_name)} 
-                          ${this.capitalizeFirstLetter(this.user.last_name)}`;
-    if (!(this.user.avatar.url.indexOf('http://') == 0 ||
-        this.user.avatar.url.indexOf('https://') == 0)) {
-      this.user.avatar.url = 'http://localhost:3000'+ this.user.avatar.url;
-    }
+    this.processing = false;
+    this.event.logo_photo.url  = this.changeStartOfAvatarUrl(this.event.logo_photo.url);
+    this.event.cover_photo.url  = this.changeStartOfAvatarUrl(this.event.cover_photo.url);
+    this.eventTypes = this.events.eventTypes;
   }
 
-  capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+  changeStartOfAvatarUrl (url) {
+    if (!(url.indexOf('http://') === 0 ||
+         url.indexOf('https://') === 0)) {
+      return 'http://localhost:3000' + url;
+    }     
+    return url; 
+  }  
+
+  changeAvatar($file) {
+    this.processing = true;    
+    this.events
+        .changeAvatar(this.event.id, $file)
+        .then( (resp) => {
+            this.processing = false;
+            this.event.logo_photo.url = 
+              this.changeStartOfAvatarUrl(resp.data.data.logo_photo.url);
+            console.log('Success ',resp);
+        },  (resp) => {
+            this.processing = false;          
+            console.log('Error status: ' + resp);
+        },  (evt)  =>{
+            console.log('progress ' , evt);          
+        });
   }
 
-  makePremium() {
-    this.premium
-        .subscribe({user_id: this.user.id})
-        .then((resp) => {
-          this.user.subscription_id = resp.data.subscription_id;
+  changeCover($file) {
+    this.processing = true;    
+    this.events
+        .changeCover(this.event.id, $file)
+        .then( (resp) => {
+            this.processing = false;
+            this.event.cover_photo.url = 
+              this.changeStartOfAvatarUrl(resp.data.data.cover_photo.url);
+            console.log('Success ',resp);
+        },  (resp) => {
+            this.processing = false;          
+            console.log('Error status: ' + resp);
+        },  (evt)  =>{
+            console.log('progress ' , evt);          
+        });
+  }
+
+  cancel() {
+    this.$state.go("adminPanel.EventsShowEvent", {id: this.event.id});
+  }
+
+  save() {
+    this.processing = true;
+    this.events
+        .Resource
+        .update({ id: this.event.id }, {event: this.event})
+        .$promise
+        .then( (resp) => {
+          this.processing = false;
+          this.$state.go("adminPanel.EventsShowEvent", {id: this.event.id});
           this.$mdToast.show(
                 this.$mdToast.simple()
-                    .textContent(`Success: ${this.user.fullname} became a premium user`));
-        })
-        .catch(() => {
+                    .textContent(`Success: ${this.event.name} has been updated`));
+        }, (resp) => {
+          this.processing = false;
+
           this.$mdToast.show(
                 this.$mdToast.simple()
                     .textContent(`Failed: Server Error`));
         });
-  }
-
-  removePremium() {
-    this.premium
-        .destroySubscription(this.user.subscription_id)
-        .then(() => {
-          this.user.subscription_id = null;
-          this.$mdToast.show(
-                this.$mdToast.simple()
-                    .textContent(`Success: ${this.user.fullname} became a normal user`));
-        })
-        .catch(() => {
-          this.$mdToast.show(
-                this.$mdToast.simple()
-                    .textContent(`Failed: Server Error`));
-        }); 
   }
 
 }

@@ -29,7 +29,6 @@ let UsersFactory = function ($http, $resource, Upload) {
     });
   }
 
-  // not implemented in backend
   usersFactory.changeCover = (file) => {
     return Upload.upload({
       url: urlBase,

@@ -3,9 +3,9 @@ let FeesFactory = function ($resource) {
 
   const APIHost = 'http://localhost:3000';
 
-  const resourceUrl = APIHost + '/events/:event_id/fees/:id';
+  const resourceUrl = APIHost + '/events/fees/:id';
 
-  const Resource = $resource(resourceUrl, {event_id: 'eventId', id: 'id'},
+  const Resource = $resource(resourceUrl, null,
     {
       'update': { method:'PUT' }
     });

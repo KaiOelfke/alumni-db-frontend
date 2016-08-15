@@ -19,12 +19,9 @@
         </div>        
       </md-input-container>
       <md-input-container class="md-block" flex>
-        <label>Public</label>
         <md-switch name="public_fee" ng-model="$ctrl.currentFee.public_fee" aria-label="Public">
-        </md-switch>
-        <div ng-messages="fee.form.public_fee.$error">
-          <div ng-message="required">Price is required.</div>
-        </div>        
+          Public
+        </md-switch>      
       </md-input-container>      
       <md-input-container class="md-block" flex>
         <label>Deadline</label>
@@ -45,7 +42,7 @@
   
   <md-dialog-actions>
     <md-button  class="md-primary" 
-                ng-click="$ctrl.save($ctrl.currentFee)" ng-disabled="fee.form.$invalid">Add</md-button>
+                ng-click="$ctrl.create()" ng-disabled="fee.form.$invalid">Add</md-button>
     <md-button class="md-primary" ng-click="$ctrl.cancel()">Cancel</md-button>
   </md-dialog-actions>
   

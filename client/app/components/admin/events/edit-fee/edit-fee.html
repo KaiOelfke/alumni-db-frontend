@@ -6,23 +6,28 @@
 
       <md-input-container class="md-block" flex>
         <label>Name</label>
-        <input required name="name" ng-model="$ctrl.currentFee.name" required>
+        <input required name="name" ng-model="$ctrl.cFee.name" required>
         <div ng-messages="fee.form.name.$error">
           <div ng-message="required">Name is required.</div>
         </div>          
       </md-input-container>
       <md-input-container class="md-block" flex>
         <label>Price</label>
-        <input required name="price" ng-model="$ctrl.currentFee.price">
+        <input required name="price" ng-model="$ctrl.cFee.price">
         <div ng-messages="fee.form.price.$error">
           <div ng-message="required">Price is required.</div>
         </div>        
       </md-input-container>
       <md-input-container class="md-block" flex>
+        <md-switch name="public_fee" ng-model="$ctrl.cFee.public_fee" aria-label="Public">
+          Public
+        </md-switch>      
+      </md-input-container>          
+      <md-input-container class="md-block" flex>
         <label>Deadline</label>
         <input
               name="deadline"
-              ng-model="$ctrl.currentFee.deadline"
+              ng-model="$ctrl.cFee.deadline"
               ng-pattern="$ctrl.dateCheckRegex"
               required/>
         <div ng-messages="fee.form.deadline.$error">
@@ -37,7 +42,7 @@
   
   <md-dialog-actions>
     <md-button  class="md-primary" 
-                ng-click="$ctrl.save($ctrl.currentFee)" ng-disabled="fee.form.$invalid">Save</md-button>
+                ng-click="$ctrl.save()" ng-disabled="fee.form.$invalid">Save</md-button>
     <md-button class="md-primary" ng-click="$ctrl.cancel()">Cancel</md-button>
   </md-dialog-actions>
   

@@ -3,7 +3,7 @@ import controller from './add-fee.controller';
 
 let addFeeComponent = {
   restrict: 'E',
-  bindings: {},
+  bindings: {eventId: '@'},
   template,
   controller
 };

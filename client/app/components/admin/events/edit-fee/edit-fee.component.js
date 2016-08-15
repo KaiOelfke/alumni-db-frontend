@@ -3,7 +3,7 @@ import controller from './edit-fee.controller';
 
 let editFeeComponent = {
   restrict: 'E',
-  bindings: {fee: '@'},
+  bindings: {eventId: '@', currentFee: '@'},
   template,
   controller
 };

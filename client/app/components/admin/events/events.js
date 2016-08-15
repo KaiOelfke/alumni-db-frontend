@@ -1,12 +1,13 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-import evntsComponent from './users.component';
-import showEventComponent from './show-user/show-user.component';
+import eventsComponent from './events.component';
+import showEventComponent from './show-event/show-event.component';
+import editEventComponent from './edit-event/edit-event.component';
+import createEventComponent from './create-event/create-event.component';
 import addCodeComponent from './add-code/add-code.component';
 import addFeeComponent from './add-fee/add-fee.component';
 import editFeeComponent from './edit-fee/edit-fee.component';
 
-//import editEventComponent from './edit-user/edit-user.component';
 
 let eventsModule = angular.module('adminPanelEvents', [
   uiRouter
@@ -20,12 +21,27 @@ let eventsModule = angular.module('adminPanelEvents', [
       url: '/events',
       component: 'adminPanelEvents',
     })
+    .state('adminPanel.EventsCreateEvent', {
+      url: '/events/create',
+      component: 'adminPanelEventsCreateEvent',
+    })    
     .state('adminPanel.EventsShowEvent', {
-      url: '/users/:id',
+      url: '/events/:id',
       component: 'adminPanelEventsShowEvent',
       resolve: {
         event: (Events, $stateParams, $q) => {
-          return Events.get({id: $stateParams.id}).$promise
+          return Events.Resource.get({id: $stateParams.id}).$promise
+                      .then((resp) => resp.data,
+                            () => $q.reject('notfound'));
+        }
+      }
+    })
+    .state('adminPanel.EventsEditEvent', {
+      url: '/events/:id/edit',
+      component: 'adminPanelEventsEditEvent',
+      resolve: {
+        event: (Events, $stateParams, $q) => {
+          return Events.Resource.get({id: $stateParams.id}).$promise
                       .then((resp) => resp.data,
                             () => $q.reject('notfound'));
         }
@@ -43,7 +59,9 @@ let eventsModule = angular.module('adminPanelEvents', [
 
 .component('adminPanelEventsShowEvent', showEventComponent)
 
-//.component('adminPanelEventsEditEvent', editEventComponent)
+.component('adminPanelEventsEditEvent', editEventComponent)
+
+.component('adminPanelEventsCreateEvent', createEventComponent)
 
 .run(($transitions, $state) => {
   'ngInject';

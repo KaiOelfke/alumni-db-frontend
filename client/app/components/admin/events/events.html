@@ -6,6 +6,12 @@
       <div class="md-toolbar-tools">
         <span>Events</span>
         <div flex></div>
+        <md-button class="md-icon-button" ng-click="$ctrl.addEvent()">
+          <md-tooltip>
+            Add
+          </md-tooltip>
+          <md-icon>add</md-icon>
+        </md-button>             
         <md-button class="md-icon-button" ng-click="$ctrl.refresh()">
           <md-tooltip>
             Refresh
@@ -21,29 +27,25 @@
         <thead md-head>
           <tr md-row>
             <th md-column><span>Name</span></th>
-            <th md-column><span>Date</span></th>            
+            <th md-column><span>Dates</span></th>            
             <th md-column><span>Type</span></th>
-            <th md-column><span>Participents</span></th>
+            <th md-column><span>Published</span></th>
+
           </tr>
         </thead>
         <tbody md-body>
           <tr md-row 
-              ng-click="$ctrl.setCurrentEvent($event, event)"
+              ng-click="$ctrl.setEditEvent($event, event)"
               ng-repeat="event in $ctrl.allEvents.data track by event.id">
             <td md-cell>{{event.name}}</td>
-            <td md-cell>{{event.date}}</td>            
-            <td md-cell>{{event.type}}</td>
-            <td md-cell>{{event.paricipents}}</td>
+            <td md-cell>{{event.dates}}</td>            
+            <td md-cell>{{$ctrl.getEventTypeName(event.etype)}}</td>
+            <td md-cell>{{event.published ? 'Yes' : 'No'}}</td>            
           </tr>
         </tbody>
       </table>
     </md-table-container>
 
-    <md-table-pagination md-limit="$ctrl.query.limit" md-limit-options="[5, 10, 15]" 
-                         md-page="$ctrl.query.page"
-                         md-total="{{$ctrl.allEvents.count}}"
-                         md-on-paginate="$ctrl.getEvents"
-                         md-page-select></md-table-pagination>    
   </md-card>
 
 
