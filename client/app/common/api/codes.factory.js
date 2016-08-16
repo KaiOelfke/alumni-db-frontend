@@ -6,23 +6,22 @@ let CodesFactory = function ($http, $resource) {
 
 
   const getCodes = function(eventId) {
-    return $http.get(urlBase+'/all_codes_for_event/?event_id=' + eventId);
+    return $http.get(urlBase + '/' + eventId + '/fee_codes');
   };
 
   const validateCode = function(eventId, code) {
-    return $http.get(urlBase + '/valdiate_code/?event_id=' + eventId + 
-    										'&code=' + code);
+    return $http.get(urlBase + '/' + eventId +'/valdiate_code?code='+code);
   };
 
  	// code :: user_id, fee_id
-  const createCode = function(code) {
-    return $http.post(urlBase + '/fee_codes', {
-      code,
+  const createCode = function(fee_code) {
+    return $http.post(APIHost + '/fee_codes', {
+      fee_code,
     });
   };
 
   const removeCode = function(id) {
-    return $http.delete(urlBase + '/fee_codes/' + id);
+    return $http.delete(APIHost + '/fee_codes/' + id);
   };
 
   return {getCodes,

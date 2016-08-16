@@ -2,9 +2,7 @@ class EditPlanController {
   constructor (Plans, $mdDialog, $mdToast) {
     'ngInject';
 
-
     this.currentPlan = JSON.parse(this.plan);
-    console.log(this);
     this.plans = Plans;
     this.$mdDialog = $mdDialog;
     this.$mdToast = $mdToast;

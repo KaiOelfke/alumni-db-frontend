@@ -4,7 +4,7 @@
   <md-card>
 
     <div class="md-card-image cover-image-box"
-      style="background: #ccc url('{{$ctrl.event.cover_photo.url}}');">
+        ng-style="{'background': '#ccc url({{$ctrl.event.cover_photo.url}})' }">
     </div>    
 
     <md-card-title>
@@ -122,8 +122,8 @@
     </md-card-actions>
   </md-card>
 
-  <md-card>
-    <md-toolbar class="md-table-toolbar md-default">
+  <md-card ng-hide="$ctrl.hideFees()">
+    <md-toolbar class="md-table-toolbar md-default" >
       <div class="md-toolbar-tools">
         <span>Fees</span>
         <div flex></div>
@@ -146,26 +146,29 @@
       <table md-table md-progress="$ctrl.feesPromise">
         <thead md-head>
           <tr md-row>
+            <th md-column><span>ID</span></th>          
             <th md-column><span>Name</span></th>
             <th md-column><span>Price</span></th>            
             <th md-column><span>Deadline</span></th>
             <th md-column><span>Public</span></th>
-            <th md-column><span>Edit</span></th>
             <th md-column><span>Delete</span></th>
           </tr>
         </thead>
         <tbody md-body>
-          <tr md-row 
+          <tr ng-click="$ctrl.editFee($event, fee)" md-row
+              ng-style="$ctrl.getDeletedBackgroundColor(fee)"
               ng-repeat="fee in $ctrl.allFees track by fee.id">
+            <td md-cell>{{fee.id}}</td>
             <td md-cell>{{fee.name}}</td>
             <td md-cell>{{fee.price}}</td>
             <td md-cell>{{fee.deadline}}</td>
-            <td md-cell>{{fee.public_fee}}</td>
-            <td md-cell ng-click="$ctrl.editFee($event, fee)">
-              <md-icon>edit</md-icon>
-            </td>
-            <td md-cell ng-click="$ctrl.removeFee($event, fee)">
-              <md-icon>delete</md-icon>
+            <td md-cell>{{fee.public_fee ? 'Yes' : 'No'}}</td>
+            <td md-cell>
+              <md-button class="md-icon-button"
+                          ng-hide="{{fee.delete_flag}}" 
+                          ng-click="$ctrl.removeFee($event, fee)">
+                <md-icon>delete</md-icon>
+              </md-button>                
             </td>
           </tr>
         </tbody>
@@ -173,18 +176,18 @@
     </md-table-container>
   </md-card>
 
-  <md-card>
+  <md-card ng-hide="$ctrl.hideCodes()">
     <md-toolbar class="md-table-toolbar md-default">
       <div class="md-toolbar-tools">
         <span>Codes</span>
         <div flex></div>
-        <md-button class="md-icon-button" ng-click="$ctrl.addCode()">
+        <md-button class="md-icon-button" ng-click="$ctrl.addCode($event)">
           <md-tooltip>
             Add
           </md-tooltip>
           <md-icon>add</md-icon>
         </md-button> 
-        <md-button class="md-icon-button" ng-click="$ctrl.refresh()">
+        <md-button class="md-icon-button" ng-click="$ctrl.getCodes()">
           <md-tooltip>
             Refresh
           </md-tooltip>
@@ -193,23 +196,30 @@
       </div>
     </md-toolbar>    
     <md-table-container>
-      <table md-table md-progress="$ctrl.promise">
+      <table md-table md-progress="$ctrl.codesPromise">
         <thead md-head>
-          <tr md-row>
-            <th md-column><span>Fee</span></th>
-            <th md-column><span>User</span></th>            
+          <tr md-row>          
+            <th md-column><span>Fee Id</span></th>
+            <th md-column><span>User Id</span></th>
+            <th md-column><span>Used</span></th>
             <th md-column><span>Code</span></th>
             <th md-column><span>Delete</span></th>
           </tr>
         </thead>
         <tbody md-body>
           <tr md-row 
-              ng-repeat="code in $ctrl.allCodes.data track by code.id">
-            <td md-cell>{{code.fee.name}}</td>
-            <td md-cell>{{code.user.name}}</td>
+              ng-style="$ctrl.getDeletedBackgroundColor(code)"          
+              ng-repeat="code in $ctrl.allCodes track by code.id">
+            <td md-cell>{{code.fee_id}}</td>
+            <td md-cell>{{code.user_id}}</td>
+            <td md-cell>{{code.used_flag ? 'Yes' : 'No'}}</td>
             <td md-cell>{{code.code}}</td>
-            <td md-cell ng-click="$ctrl.removeFee($event, code)">
-              <md-icon>delete</md-icon>
+            <td md-cell>
+              <md-button class="md-icon-button"
+                          ng-hide="{{code.delete_flag}}" 
+                          ng-click="$ctrl.removeCode($event, code)">
+                <md-icon>delete</md-icon>
+              </md-button>                
             </td>
           </tr>
         </tbody>

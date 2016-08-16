@@ -55,7 +55,6 @@ class SubscriptionsController {
 
 
   edit(event, plan) {
-    console.log(plan);
 
     event.stopPropagation();
     this.$mdDialog.show({
@@ -71,10 +70,27 @@ class SubscriptionsController {
 
   }
 
+  getDeletedBackgroundColor(instance) { 
+    if (instance.delete_flag) {
+      return {'background': '#d7d7d7'};
+    }
+    return {};
+  }
+
+
   remove(event, plan) {
     event.stopPropagation();
 
-    let showSuccessToaster = () => {
+    const showError = () => {
+        this.$mdToast.show(
+          this.$mdToast.simple()
+            .textContent('Failed to remove the Plan.')
+            .position("top right")
+            .hideDelay(4000)
+        )    
+    }
+
+    const showSuccessToaster = () => {
       this.$mdToast.show(
         this.$mdToast.simple()
           .textContent('Plan removed!')
@@ -85,20 +101,22 @@ class SubscriptionsController {
       return Promise.resolve();
     }
 
-    let rmPlan = () => {
+
+
+    const rmPlan = () => {
         return this.plansFactory.Resource
                  .remove({id: plan.id})
                  .$promise
-                 .then(showSuccessToaster, this.showError.bind(this))
+                 .then(showSuccessToaster, showError)
     }
 
-    let confirm = this.$mdDialog.confirm()
+    const confirm = this.$mdDialog.confirm()
           .title('Would you like to delete the Plan?')
           .targetEvent(event)
           .ok('Delete')
           .cancel('Cancel');
 
-    this.$mdDialog.show(confirm.bind(this))
+    this.$mdDialog.show(confirm)
       .then(rmPlan.bind(this))
       .then(this.getPlans.bind(this));
   }

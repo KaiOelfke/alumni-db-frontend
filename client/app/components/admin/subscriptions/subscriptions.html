@@ -41,15 +41,24 @@
         </thead>
         <tbody md-body>
           <tr md-row 
+              ng-style="$ctrl.getDeletedBackgroundColor(plan)"
               ng-repeat="plan in $ctrl.plans.data track by plan.id">
             <td md-cell>{{plan.name}}</td>
             <td md-cell>{{plan.price}}</td>
             <td md-cell>{{plan.default}}</td>
-            <td md-cell ng-click="$ctrl.edit($event, plan)">
-              <md-icon>edit</md-icon>
+            <td md-cell>
+              <md-button class="md-icon-button"
+                          ng-hide="{{plan.delete_flag}}"               
+                          ng-click="$ctrl.edit($event, plan)">
+                <md-icon>edit</md-icon>
+              </md-button>                
             </td>
-            <td md-cell ng-click="$ctrl.remove($event, plan)">
-              <md-icon>delete</md-icon>
+            <td md-cell>
+              <md-button class="md-icon-button"
+                          ng-disabled="{{plan.delete_flag}}" 
+                          ng-click="$ctrl.remove($event, plan)">
+                <md-icon>delete</md-icon>
+              </md-button>                
             </td>
           </tr>
         </tbody>

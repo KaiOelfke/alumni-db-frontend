@@ -31,7 +31,13 @@ let eventsModule = angular.module('adminPanelEvents', [
       resolve: {
         event: (Events, $stateParams, $q) => {
           return Events.Resource.get({id: $stateParams.id}).$promise
-                      .then((resp) => resp.data,
+                      .then((resp) => {
+                              const data = resp.data;
+                              if (data.event) {
+                                return data.event;
+                              }
+                              return data;
+                            },
                             () => $q.reject('notfound'));
         }
       }
@@ -42,7 +48,13 @@ let eventsModule = angular.module('adminPanelEvents', [
       resolve: {
         event: (Events, $stateParams, $q) => {
           return Events.Resource.get({id: $stateParams.id}).$promise
-                      .then((resp) => resp.data,
+                      .then((resp) => {
+                              const data = resp.data;
+                              if (data.event) {
+                                return data.event
+                              }    
+                              return data;
+                            },
                             () => $q.reject('notfound'));
         }
       }

@@ -7,17 +7,21 @@ class ShowEventController {
     this.$mdToast = $mdToast;
     this.$mdDialog = $mdDialog;
     this.$state = $state;
-    console.log(this);
   }
 
   $onInit() {
-    console.log(this);
     this.event.logo_photo.url  = this.changeStartOfAvatarUrl(this.event.logo_photo.url);
-    this.event.cover_photo.url  = this.changeStartOfAvatarUrl(this.event.cover_photo.url);  
+    this.event.cover_photo.url  = this.changeStartOfAvatarUrl(this.event.cover_photo.url);
     this.eventTypes = this.events.eventTypes;
     this.allFees = [];
     this.allCodes = [];
-    this.getFees();
+    if (!this.hideFees()) {
+      this.getFees();  
+    }
+    if (!this.hideCodes()) {
+      this.getCodes();
+    }
+    
   }
 
   changeStartOfAvatarUrl (url) {
@@ -32,6 +36,15 @@ class ShowEventController {
     this.$state.go('adminPanel.EventsEditEvent', {id: this.event.id});
   }
 
+  getDeletedBackgroundColor(instance) { 
+    if (instance.delete_flag) {
+      return {'background': '#d7d7d7'};
+    }
+
+    return {};
+  }
+
+  delete_flag
   // Codes
 
   getCodes() {
@@ -51,7 +64,6 @@ class ShowEventController {
   }
 
   addCode($event) {
-    $event.stopPropagation();
     this.$mdDialog.show({
       clickOutsideToClose: true,
       focusOnOpen: false,
@@ -59,15 +71,24 @@ class ShowEventController {
       targetEvent: $event,
       controllerAs: '$ctrl',
       bindToController: true,
-      template: '<admin-panel-add-code current-event="{{$ctrl.event.id}}"></admin-panel-add-code>',
-      locals: {}
+      template: '<admin-panel-add-code event-id="{{$ctrl.eventId}}"></admin-panel-add-code>',
+      locals: {eventId: this.event.id}
     }).then(this.getCodes.bind(this));
   }
 
   removeCode($event, code) {
     $event.stopPropagation();
 
-    let showSuccessToaster = () => {
+    const showError = () => {
+        this.$mdToast.show(
+          this.$mdToast.simple()
+            .textContent('Failed to remove the fee.')
+            .position("top right")
+            .hideDelay(4000)
+        )    
+    }
+
+    const showSuccessToaster = () => {
       this.$mdToast.show(
         this.$mdToast.simple()
           .textContent('Code removed!')
@@ -78,20 +99,18 @@ class ShowEventController {
       return Promise.resolve();
     }
 
-    let rmCode = () => {
-        return this.codes.Resource
-                 .remove({id: code.id})
-                 .$promise
-                 .then(showSuccessToaster, this.showError.bind(this))
+    const rmCode = () => {
+        return this.codes.removeCode(code.id)
+                 .then(showSuccessToaster, showError.bind(this))
     }
 
-    let confirm = this.$mdDialog.confirm()
+    const confirm = this.$mdDialog.confirm()
           .title('Would you like to delete the Code?')
-          .targetEvent(code)
+          .targetEvent($event)
           .ok('Delete')
           .cancel('Cancel');
 
-    this.$mdDialog.show(confirm.bind(this))
+    this.$mdDialog.show(confirm)
       .then(rmCode.bind(this))
       .then(this.getCodes.bind(this));    
   }
@@ -117,7 +136,6 @@ class ShowEventController {
   }
 
   addFee() {
-    console.log(this.event.id);
     this.$mdDialog.show({
       clickOutsideToClose: true,
       focusOnOpen: false,
@@ -132,6 +150,8 @@ class ShowEventController {
 
   editFee($event, fee) {
     $event.stopPropagation();
+    if (fee.delete_flag ) { return };
+    
     this.currentFee = fee;
     this.$mdDialog.show({
       clickOutsideToClose: true,
@@ -148,6 +168,16 @@ class ShowEventController {
   removeFee($event, fee) {
     $event.stopPropagation();
 
+
+    const showError = () => {
+        this.$mdToast.show(
+          this.$mdToast.simple()
+            .textContent('Failed to remove the fee.')
+            .position("top right")
+            .hideDelay(4000)
+        )    
+    }
+
     const showSuccessToaster = () => {
       this.$mdToast.show(
         this.$mdToast.simple()
@@ -163,18 +193,34 @@ class ShowEventController {
         return this.fees.Resource
                  .remove({id: fee.id})
                  .$promise
-                 .then(showSuccessToaster, this.showError.bind(this))
+                 .then(showSuccessToaster, showError.bind(this))
     }
 
     const confirm = this.$mdDialog.confirm()
           .title('Would you like to delete the Fee?')
-          .targetEvent(fee)
+          .targetEvent($event)
           .ok('Delete')
           .cancel('Cancel');
 
     this.$mdDialog.show(confirm)
-      .then(rmFee)
+      .then(rmFee.bind(this))
       .then(this.getFees.bind(this));
+  }
+
+
+  hideFees() {
+    if (this.event.etype === 'without_application_payment' ||
+        this.event.etype === 'with_application') {
+      return true;
+    }
+    return false;
+  }
+
+  hideCodes() {
+    if (this.event.etype === 'without_application_payment') {
+      return true;
+    }
+    return false;
   }
 
 }

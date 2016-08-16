@@ -3,7 +3,7 @@ import controller from './add-code.controller';
 
 let addCodeComponent = {
   restrict: 'E',
-  bindings: {currentEvent: '@'},
+  bindings: {eventId: '@'},
   template,
   controller
 };
