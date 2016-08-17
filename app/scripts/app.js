@@ -284,6 +284,21 @@ angular
 
           authz: function(authorizedRoles, authorizationService) {
             return authorizationService.isAuthorized(authorizedRoles);
+          },
+
+          data: function(eventService, feeService, $stateParams) {
+            return eventService
+              .getEvent($stateParams.id)
+              .then(function successCallback(event) {
+                console.log('received event info:', event);
+                return {
+                  event: event
+                };
+              }, function errorCallback(error) {
+
+                // TODO: Make a state change
+                console.error(error);
+              });
           }
         }
       })

@@ -10,13 +10,16 @@ angular
     'eventService',
     'feeService',
     'codeService',
-    'displayErrors', function($rootScope, $scope, $state, $stateParams, eventService, feeService, codeService, displayErrors) {
+    'data',
+    'displayErrors', function($rootScope, $scope, $state, $stateParams, eventService, feeService, codeService, data, displayErrors) {
 
-      $scope.eventId = $stateParams.id;
-
-      $scope.event;
+      $scope.event = data.event;
 
       $scope.enteredCode = null;
+
+      $scope.codeWasValid = false;
+
+      $scope.fee;
 
       $scope.newApplication = {};
 
@@ -32,31 +35,22 @@ angular
 
       $scope.enterCode = function() {
         console.log('entered code', $scope.enteredCode);
-
-        // TODO: Validate code
-        if ($scope.enteredCode.code.length > 3) {
-          //valid code
-          $scope.enteredCode.valid = true;
-        } else {
-          // false code
-          $scope.enteredCode.valid = false;
-
-        }
-      };
-
-      $scope.createCode = function() {
+        var event_id = $scope.event.id;
+        var user_id = $rootScope.user.id;
+        var code_input = $scope.enteredCode.code;
         codeService
-          .createCode($scope.newCode)
-          .then(
-            function successCallback() {
-              console.log('success');
-            },
+          .validateCode(event_id, user_id, code_input)
+          .then(function successCallback(response) {
 
-            // TODO: use toaster for displaying this error message
-            function errorCallback(response) {
-              console.error(displayErrors.convertErrorResponse(response));
-            }
-          );
+            $scope.codeWasValid = true;
+            $scope.fee = response;
+            $scope.toggleEnterCodeView();
+          }, function errorCallback(errorMessage) {
+
+            console.error('invalid code:', errorMessage);
+            $scope.codeWasValid = false;
+          });
+
       };
 
       $scope.clearApplicationForm = function() {
@@ -68,6 +62,7 @@ angular
       };
 
       $scope.participate = function() {
+
         //TODO: Integreate backend, add completion handlers
         $scope.participationComplete = true;
         var request = {
@@ -85,17 +80,6 @@ angular
         console.log('need to apply with object', request);
       };
 
-      eventService
-        .getEvent($scope.eventId)
-        .then(
-          function successCallback(event) {
-            $scope.event = event;
-          },
-
-          // TODO: use toaster for displaying this error message
-          function errorCallback(response) {
-            console.error(displayErrors.convertErrorResponse(response));
-          }
-        );
+      console.log('event here:', $scope.event);
 
     }]);

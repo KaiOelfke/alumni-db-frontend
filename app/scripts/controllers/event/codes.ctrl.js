@@ -39,31 +39,39 @@ angular
         codeService
           .createCode(user_id, fee_id)
           .then(function successCallback(response) {
+
             $scope.newCode = null;
             getAllCodes();
           }, function errorCallback(errorMessage) {
+
             toaster.pop('error', errorMessage);
           });
+
       };
 
       $scope.removeCode = function(code) {
         codeService
           .removeCode(code.id)
           .then(function successCallback(response) {
+
             getAllCodes();
           }, function errorCallback(errorMessage) {
+
             toaster.pop('error', errorMessage);
           });
+
       };
 
       var getAllCodes = function() {
         codeService
           .getCodesForEvent($scope.event.id)
           .then(function successCallback(response) {
+
             $scope.codes = response;
           }, function errorCallback(errorMessage) {
+
             toaster.pop('error', errorMessage);
           });
-      }
+      };
 
     }]);

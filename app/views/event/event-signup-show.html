@@ -23,6 +23,11 @@
        class="form-view">
   </div>
 
+  <!-- braintree payment form if code was valid -->
+  <div ng-show="codeWasValid"
+       ng-include="'/views/event/partials/event-payment.html'">
+  </div>
+
   <hr>
 
   <!-- application form -->
