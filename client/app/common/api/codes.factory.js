@@ -14,14 +14,14 @@ let CodesFactory = function ($http, $resource) {
   };
 
  	// code :: user_id, fee_id
-  const createCode = function(fee_code) {
-    return $http.post(APIHost + '/fee_codes', {
+  const createCode = function(eventId, fee_code) {
+    return $http.post(urlBase + '/' + eventId + '/fee_codes', {
       fee_code,
     });
   };
 
-  const removeCode = function(id) {
-    return $http.delete(APIHost + '/fee_codes/' + id);
+  const removeCode = function(eventId, id) {
+    return $http.delete(urlBase + '/' + eventId + '/fee_codes/' + id);
   };
 
   return {getCodes,

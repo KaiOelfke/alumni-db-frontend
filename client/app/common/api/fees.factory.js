@@ -3,7 +3,7 @@ let FeesFactory = function ($resource) {
 
   const APIHost = 'http://localhost:3000';
 
-  const resourceUrl = APIHost + '/events/fees/:id';
+  const resourceUrl = APIHost + '/events/:eventId/fees/:id';
 
   const Resource = $resource(resourceUrl, null,
     {

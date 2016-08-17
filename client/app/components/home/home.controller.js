@@ -16,16 +16,30 @@ class HomeController {
   }
 
   searchTextChange() {
+    this.query.next = false;
+    if (this.query.page > 1) {
+      this.query.back = true;
+    } else {
+      this.query.back = false;
+    }
+
     this.search
         .userSearch(this.searchText, this.query.page)
         .then((resp)=> {
-          this.users = resp.data.data.map((user) => {
+          this.users = resp.data.data.users.map((user) => {
             user.avatar.url = this.changeStartOfAvatarUrl(user.avatar.url);
             return user;
           });
-          this.query.back = true;
+
+          if (resp.data.data.total_count > this.query.page * 10 ) {
+            this.query.next = false;
+          } else {
+            this.query.next = true;
+          }
+
+        }, () => {
           this.query.next = true;
-        })
+        });
   }
 
   changeStartOfAvatarUrl (url) {

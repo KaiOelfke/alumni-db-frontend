@@ -7,65 +7,68 @@
       <h3 class="content md-toolbar-tools">
         <span class="md-flex title">Events</span>
         <span flex></span>
-
-        <md-button class="md-fab md-hue-2" aria-label="Edit">  
-            <md-icon md-font-set="material-icons"> add </md-icon>
-        </md-button>
-
       </h3>
 
   </md-toolbar>
 
-  <md-content class="md-padding" layout-xs="column" layout="row">
-    <div flex-xs flex-gt-xs="50" layout="column">
-      <md-card>
-        <img ng-src="http://www.jaeurope.org/images/site1/events/JA_Alumni_Conference_formatted.jpg" class="md-card-image" alt="Washed Out">
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">JA Alumni Leadership Conference</span>
-            <span class="md-subhead">Stuttgart, Germany</span>            
-          </md-card-title-text>
-        </md-card-title>
-        <md-card-content>
-          <p>
-              JA Alumni Leadership Conference "Mobility in the Future" is the network's main event of the year bringing together the most entrepreneurial alumni from all across Europe....
-          </p>
-        </md-card-content>
-        <md-card-actions layout="row" layout-align="end center">
-          <md-button  aria-label="Settings">
-            Details
-          </md-button>          
-          <md-button class="md-icon-button" aria-label="share">
-            <md-icon md-font-set="material-icons"> share </md-icon>
-          </md-button>
-        </md-card-actions>
-      </md-card>
 
-    </div>
-    <div flex-xs flex-gt-xs="50" layout="column">
-      <md-card>
-        <img ng-src="http://www.jaeurope.org/images/site1/events/COYC_formatted_final.jpg" class="md-card-image" alt="Washed Out">
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">JA Europe Company of the Year Competition (COYC)</span>
-            <span class="md-subhead">Lucerne, Switzerland</span>            
-          </md-card-title-text>
-        </md-card-title>
-        <md-card-content>
-          <p>
-            In Lucerne, all of the JA organisations in Europe will celebrate their best 200+ young entrepreneurs. A high-level panel of 10 judges will examine the contestants...
-          </p>
-        </md-card-content>
-        <md-card-actions layout="row" layout-align="end center">
-          <md-button  aria-label="Settings">
-            Details
-          </md-button>          
-          <md-button class="md-icon-button" aria-label="share">
-            <md-icon md-font-set="material-icons"> share </md-icon>
-          </md-button>
-        </md-card-actions>
-      </md-card>
 
+  <md-content class="md-padding" layout="column">
+
+    <div ng-repeat="event in $ctrl.events" ng-if="$index % 2 == 0" >
+      <div layout-xs="column" layout="row">
+        <div flex-xs flex-gt-xs="50" layout="column">
+          <md-card>
+            <img ng-show="{{$ctrl.events[$index].cover_photo.url}}"
+                  ng-src="{{$ctrl.events[$index].cover_photo.url}}"  alt="Cover">
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">{{$ctrl.events[$index].name}}</span>
+                <span class="md-subhead">{{$ctrl.events[$index].location}}</span>            
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+              <p>
+              {{$ctrl.events[$index].description | limitTo:300}}
+              {{$ctrl.events[$index].description.length > 300 ? '...' : ''}}
+              </p>
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="end center">
+              <md-button ui-sref="userPanel.Event({eventId: $ctrl.events[$index].id})" aria-label="Details">
+                Details
+              </md-button>
+            </md-card-actions>
+          </md-card>
+
+        </div>
+        <div flex-xs flex-gt-xs="50" layout="column">
+          <md-card>
+            <img 
+                ng-show="{{$ctrl.events[$index + 1].cover_photo.url}}"
+                ng-src="{{$ctrl.events[$index + 1].cover_photo.url}}" class="md-card-image" alt="Cover">
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">{{$ctrl.events[$index + 1].name}}</span>
+                <span class="md-subhead">{{$ctrl.events[$index + 1].location}}</span>            
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+              <p>
+                {{$ctrl.events[$index + 1 ].description | limitTo:300}}
+                {{$ctrl.events[$index + 1 ].description.length > 300 ? '...' : ''}}
+              </p>
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="end center">
+              <md-button ui-sref="userPanel.Event({eventId: $ctrl.events[$index + 1].id})" aria-label="Details">
+                Details
+              </md-button>
+            </md-card-actions>
+          </md-card>
+
+        </div>
+
+
+      </div>
     </div>
 
   </md-content>

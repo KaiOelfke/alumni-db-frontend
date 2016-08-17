@@ -15,17 +15,21 @@ class EventsController {
 
   }
 
-  searchTextChange() {
-
+  $onInit() {
+    this.events.forEach((event) => {
+      event.logo_photo.url  = this.changeStartOfAvatarUrl(event.logo_photo.url);
+      event.cover_photo.url  = this.changeStartOfAvatarUrl(event.cover_photo.url);
+    })
   }
 
-  selectedItemChange() {
+  changeStartOfAvatarUrl (url) {
+    if (!(url.indexOf('http://') === 0 ||
+         url.indexOf('https://') === 0)) {
+      return 'http://localhost:3000' + url;
+    }     
+    return url; 
+  }  
 
-  }
-
-  querySearch() {
-
-  }
 }
 
 export default EventsController;

@@ -5,56 +5,366 @@
       <h3 class="content md-toolbar-tools">
         <span class="md-flex title">Event</span>
         <span flex></span>
-
-        <md-button class="md-fab md-hue-2" aria-label="Edit">  
-            <md-icon md-font-set="material-icons"> mode_edit </md-icon>        
-        </md-button>
-
       </h3>
-
   </md-toolbar>
 
-  <md-card>
-    <img ng-src="http://www.jaeurope.org/images/site1/events/JA_Alumni_Conference_formatted.jpg" class="md-card-image" alt="Washed Out">
+  <md-card class="info" ng-show="true">
+    <div ng-show="$ctrl.event.cover_photo.url"
+        class="md-card-image cover-image-box"
+        ng-style="{'background': '#ccc url({{$ctrl.event.cover_photo.url}})' }">
+    </div>    
+
+    <section  class="connections"
+              layout="row"
+              layout-align="end center"
+              layout-wrap>
+        <md-button 
+          ng-href="{{ $ctrl.event.facebook_url }}"
+          ng-show="$ctrl.event.facebook_url"          
+          class="md-fab md-mini" aria-label="Facebook">
+          <md-icon md-font-set="fa" md-font-icon="fa-facebook"></md-icon>
+        </md-button>
+    </section>
+
     <md-card-title>
       <md-card-title-text>
-        <span class="md-headline">JA Alumni Leadership Conference</span>
-        <span class="md-subhead">Stuttgart, Germany</span>
+        <span class="md-headline">{{ $ctrl.event.name }}</span>
+        <span class="md-subhead">{{ $ctrl.event.slogan }}</span>
+  
       </md-card-title-text>
+      <md-card-title-media>
+        <div class="md-media-lg card-media overlay-box">
+          <img ng-show="$ctrl.event.logo_photo.url"
+               ng-src="{{$ctrl.event.logo_photo.url}}" class="md-card-image" alt="logo">       
+        </div>
+      </md-card-title-media>      
     </md-card-title>
 
     <md-card-content>
-      <form name="signinForm">
-        <div layout-gt-xs="row">
-          <md-input-container class="md-block" flex>
-            <label>Where</label>
-            <input type="text"
-                    disabled
-                   name="location" ng-model="project.email">
-          </md-input-container>
+      <form name="eventForm">
 
-          <md-input-container class="md-block" flex>
-            <label>Agenda</label>
-            <input type="email"
-                   disabled
-                   name="email"  ng-model="project.email">
+        <div layout-gt-sm="row">
+
+          <md-input-container 
+              class="md-block"
+              ng-show="$ctrl.event.facebook"
+              flex-gt-sm>
+              <label>Facebook</label>
+              <input type="text"
+                     disabled
+                     name="facebook" ng-model="$ctrl.event.facebook">
           </md-input-container>
 
         </div>
 
-        <md-input-container class="md-block">
-          <label>Etc.</label>
-          <input type="email"
-                 disabled
-                 name="email"  ng-model="project.email">
-        </md-input-container>
+        <div layout-gt-sm="row">
+          <md-input-container 
+              class="md-block"
+              ng-show="$ctrl.event.contact_email"
+              flex-gt-sm>
+              <label>Contact Email</label>
+              <input type="text"
+                     disabled
+                     name="contact_email" ng-model="$ctrl.event.contact_email">
+          </md-input-container>
+
+          <div  flex="5" hide-xs="" 
+                ng-show="$ctrl.event.contact_email && $ctrl.event.phone_number" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+
+          <md-input-container
+            ng-show="$ctrl.event.phone_number"
+            class="md-block"
+            flex-gt-sm>
+            <label>Phone Number</label>
+            <input
+                  name="institution"
+                  ng-model="$ctrl.event.phone_number"
+                  disabled/>
+          </md-input-container>
+
+        </div>
+
+        <div layout-gt-sm="row">
+        
+          <md-input-container
+              ng-show="$ctrl.event.location"
+              class="md-block" flex-gt-sm>
+              <label>Location</label>
+              <textarea name="location" disabled ng-model="$ctrl.event.location" rows="1"></textarea> 
+          </md-input-container>
+
+          <div flex="5" hide-xs=""
+                ng-show="$ctrl.event.dates && $ctrl.event.location" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+
+          <md-input-container
+            class="md-block"
+            ng-show="$ctrl.event.dates"
+            flex-gt-sm>
+            <label>Dates</label>
+            <textarea name="dates" disabled ng-model="$ctrl.event.dates" rows="1"></textarea>
+          </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+        
+          <md-input-container 
+              class="md-block" 
+              ng-show="$ctrl.event.agenda"
+              flex-gt-sm>
+              <label>agenda</label>
+              <textarea name="agenda" disabled ng-model="$ctrl.event.agenda" rows="3"></textarea>
+          </md-input-container>
+
+          <div flex="5" hide-xs=""
+              ng-show="$ctrl.event.description && $ctrl.event.agenda" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+
+          <md-input-container ng-show="$ctrl.event.description" class="md-block" flex-gt-sm>
+            <label>description</label>
+            <textarea name="description" disabled ng-model="$ctrl.event.description" rows="1"></textarea>
+          </md-input-container>
+        </div>
 
       </form>
     </md-card-content>
     <md-card-actions layout="row" layout-align="end center">
-      <md-button class="md-raised md-accent">participate</md-button>
-      <md-button class="md-raised md-accent">attend</md-button>
+      <md-button 
+        class="md-raised md-accent"
+        ng-click="$ctrl.attend()">
+        Attend
+      </md-button>
+    </md-card-actions>    
+  </md-card>
+
+
+  <md-card>
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">Fees</span>
+        <span class="md-subhead">Select a fee then click checkout</span>
+      </md-card-title-text>
+    </md-card-title>
+
+
+      <md-list-item ng-repeat="fee in $ctrl.fees">
+        <md-checkbox ng-model="fee.selected"></md-checkbox>
+        <p>{{fee.name}}</p>
+
+        <p class="md-secondary">{{fee.price}}</p>
+      </md-list-item>  
+    </md-list>
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button 
+        class="md-raised md-accent"
+        ng-click="$ctrl.attend()">
+        Checkout
+      </md-button>
     </md-card-actions>
   </md-card>
 
+  <md-card>
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">Code</span>
+        <span class="md-subhead">Use code</span>
+      </md-card-title-text>
+    </md-card-title>
+
+    <md-card-content>
+      <form>
+        <div layout="column">
+
+          <md-input-container flex>
+            <label>Code</label>
+            <input type="" name="">
+          </md-input-container>
+        </div>
+      </form>
+    </md-card-content>
+
+
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button
+        class="button-form md-secondary md-raised md-accent"
+        ng-click="$ctrl.applyCode()">
+        Next
+      </md-button>
+    </md-card-actions>
+
+  </md-card>
+
+
+  <md-card>
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">Application</span>
+        <span class="md-subhead">Fill the application to apply to the event</span>
+      </md-card-title-text>
+    </md-card-title>
+
+    <md-card-content>
+      <form name="application.Form">
+         <md-input-container
+              required
+              ng-show="$ctrl.event.location"
+              class="md-block">
+              <label>Motivation</label>
+              <textarea
+                name="motivation"
+                ng-model="$ctrl.applicationForm.motivation"
+                md-maxlength="1500" rows="3"></textarea> 
+          </md-input-container>
+
+          <div ng-messages="application.Form.motivation.$error">
+            <div ng-message="required">Motivation is required.</div>
+          </div>
+        <md-input-container class="md-block">
+          <md-button class="md-raised md-hue-2" ngf-select="$ctrl.upload($file)">Upload CV</md-button>
+        </md-input-container>
+      </form>
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button 
+        class="md-raised md-accent"
+        ng-click="$ctrl.sendApplication()">
+        Apply
+      </md-button>
+    </md-card-actions>
+  </md-card>  
+
+  <md-card>
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">Participation</span>
+        <span class="md-subhead">Fill the participation information</span>
+      </md-card-title-text>
+    </md-card-title>
+
+    <md-card-content>
+      <form name="participation.Form">
+        <div layout-gt-sm="row">
+
+          <md-input-container flex-gt-sm class="md-block">
+            <label>Arrival</label>
+            <textarea name="arrival"
+              ng-model="$ctrl.participationForm.arrival" md-maxlength="150"></textarea> 
+          </md-input-container>
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+          <md-input-container flex-gt-sm class="md-block">
+            <label>Departure</label>            
+            <textarea name="departure" 
+              ng-model="$ctrl.participationForm.departure" md-maxlength="150"></textarea> 
+          </md-input-container>
+
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Diet</label>
+            <textarea name="diet"></textarea> 
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>allergies</label>
+            <textarea name="allergies"
+              ng-model="$ctrl.participationForm.allergies" md-maxlength="150"></textarea> 
+          </md-input-container>
+
+
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Extra Nights</label>
+            <textarea name="extra_nights"
+              ng-model="$ctrl.participationForm.extra_nights" md-maxlength="150"></textarea>
+          </md-input-container>
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Notes</label>
+            <textarea name="notes"
+              ng-model="$ctrl.participationForm.notes" md-maxlength="300"></textarea>
+          </md-input-container>          
+        </div>        
+      </form>
+
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button 
+          class="md-raised md-accent"
+          ng-click="$ctrl.sendApplication()">
+          Checkout
+        </md-button>
+      </md-card-actions>
+    </md-card-content>
+  </md-card>
+
+  <md-card>
+
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">Application Recived</span>
+      </md-card-title-text>
+    </md-card-title>
+
+    <md-card-content>
+      <p>
+        We recived your application and will contact you for further informations.
+      </p>
+    </md-card-content>
+
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button 
+        class="md-raised md-accent"
+        ng-click="$ctrl.sendApplication()">
+        Back to Event
+      </md-button>
+    </md-card-actions>
+  </md-card>
+
+  <md-card>
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">Checkout</span>
+        <span class="md-subhead">{{$ctrl.progressMsg}}</span>
+
+      </md-card-title-text>
+    </md-card-title>
+    <md-progress-linear md-mode="query" ng-disabled="$ctrl.notProcessing"></md-progress-linear>
+
+    <md-content layout-padding>
+      <p ng-show="$ctrl.status === 0">
+        {{$ctrl.status}}
+      </p>
+
+      <form ng-submit="$ctrl.submitPaymentDetails()" novalidate>
+        <div id="payment-form"></div>
+        <md-button class="md-raised md-accent"
+                   ng-show="$ctrl.status === 2"
+                   type="submit">Add Payment Method</md-button>
+      </form>
+    </md-content>
+    <md-card-actions flex
+      layout="row"
+      layout-align="end end">
+        <md-button
+          ng-show="$ctrl.status > 2"
+          class="md-raised md-accent"
+          ng-click="$ctrl.submitPayment()">
+          Submit
+        </md-button>
+    </md-card-actions>    
+  </md-card>
 </div>

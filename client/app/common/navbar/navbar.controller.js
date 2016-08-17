@@ -28,7 +28,7 @@ class NavbarController {
   refresh(state) {
     this.currentNavItem = state.name;
     this.isShow = true;
-
+    console.log(state);
     switch (state.name) {
       case 'userPanel.user':
       case 'userPanel.home':
@@ -36,8 +36,8 @@ class NavbarController {
           this.dynamicTheme = 'home';
           this.currentNavItem = 'userPanel.home';  
           break;
-      case 'userPanel.events':
-      case 'userPanel.event':
+      case 'userPanel.Events':
+      case 'userPanel.Event':
           this.currentNavItem = 'userPanel.events';
           this.dynamicNavTextTheme = 'navDark';
           this.dynamicTheme = 'events';
@@ -62,6 +62,8 @@ class NavbarController {
       case 'reset-password':
           this.isShow = false;
     }
+
+    console.log(this.dynamicTheme, this.currentNavItem)
   }
 
   logout() {

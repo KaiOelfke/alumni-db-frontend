@@ -10,7 +10,7 @@ let eventsModule = angular.module('events', [
   "ngInject";
 
   $stateProvider
-    .state('userPanel.events', {
+    .state('userPanel.Events', {
       url: '/events',
       component: 'userPanelEvents',
       onEnter: (AclService, $auth, $state) => {
@@ -32,11 +32,31 @@ let eventsModule = angular.module('events', [
                 return $state.target('unauthorized');
 
             }, () => $state.target('unauthorized'));
+      },
+    resolve: {
+      events: (Events, $q) => {
+        return Events.Resource.get({})
+                    .$promise
+                    .then( (resp) => resp.data,
+                           () => $q.reject('notfound'))
       }
+    }
     });
 })
 
 .component('userPanelEvents', eventsComponent)
+
+.run(($transitions, $state) => {
+  'ngInject';
+
+  $transitions.onError({to: 'events.*'}, ($transition$, $error$) => {
+
+    $transition$.promise.catch((error) => {
+        $state.go('notfound');
+    });
+
+  });
+})
 
 .name;
 

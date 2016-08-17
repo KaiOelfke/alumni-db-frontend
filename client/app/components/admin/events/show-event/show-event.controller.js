@@ -100,7 +100,7 @@ class ShowEventController {
     }
 
     const rmCode = () => {
-        return this.codes.removeCode(code.id)
+        return this.codes.removeCode(this.event.id, code.id)
                  .then(showSuccessToaster, showError.bind(this))
     }
 
@@ -119,7 +119,7 @@ class ShowEventController {
 
   getFees() {
     this.feesPromise = this.fees.Resource
-        .get({event_id: this.event.id})
+        .get({eventId: this.event.id})
         .$promise
         .then((resp) => {
           console.log(resp.data);
@@ -191,7 +191,7 @@ class ShowEventController {
 
     const rmFee = () => {
         return this.fees.Resource
-                 .remove({id: fee.id})
+                 .remove({eventId: this.event.id, id: fee.id})
                  .$promise
                  .then(showSuccessToaster, showError.bind(this))
     }

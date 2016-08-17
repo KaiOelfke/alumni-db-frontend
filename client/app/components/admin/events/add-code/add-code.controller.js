@@ -49,7 +49,7 @@ class AddFeeController {
 
   loadFees() {
     this.fees.Resource
-            .get({event_id: this.eventId})
+            .get({eventId: this.eventId})
             .$promise
             .then((resp) => {
               this.allFees = resp.data;
@@ -69,7 +69,7 @@ class AddFeeController {
       this.code.user_id = this.selectedUser.id;  
     }
     
-    const newCode = this.codes.createCode(this.code);
+    const newCode = this.codes.createCode(this.eventId, this.code);
 
     newCode
       .then(this.success.bind(this), this.showError.bind(this));

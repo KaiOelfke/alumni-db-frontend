@@ -10,14 +10,36 @@ let eventModule = angular.module('event', [
   "ngInject";
 
   $stateProvider
-    .state('userPanelEvent', {
+    .state('userPanel.Event', {
       url: '/events/:eventId',
-      component: 'userPanel.event',
-      onEnter: (AclService, $state) => {
-        if (AclService.can('event')) {
-            return true;
+      component: 'userPanelEvent',
+      onEnter: (AclService, $auth, $state) => {
+        return $auth
+            .validateUser()
+            .then((user) => {
+                AclService.detachRole('guest');
+                
+                if (user.statuses.indexOf("completedProfile") > -1) {
+                  AclService.attachRole('registeredUser');
+                } else {
+                  AclService.attachRole('notRegisteredUser');
+                }
+
+                if (AclService.can('event')) {
+                    return true;
+                }
+
+                return $state.target('unauthorized');
+
+            }, () => $state.target('unauthorized'));
+      },
+      resolve: {
+        eventFees: (Events, $stateParams, $q) => {
+          return Events.Resource.get({id: $stateParams.eventId})
+                      .$promise
+                      .then( (resp) => resp.data,
+                             () => $q.reject('notfound'))
         }
-        return $state.target('unauthorized');
       }
     });
 })

@@ -10,11 +10,17 @@ class UserController {
     this.selectedItem = null;    
     this.user.fullname = `${this.capitalizeFirstLetter(this.user.first_name)} 
                           ${this.capitalizeFirstLetter(this.user.last_name)}`;
-    if (!(this.user.avatar.url.indexOf('http://') == 0 ||
-        this.user.avatar.url.indexOf('https://') == 0)) {
-      this.user.avatar.url = 'http://localhost:3000'+ this.user.avatar.url;
-    }
+    this.user.avatar.url  = this.changeStartOfAvatarUrl(this.user.avatar.url);
+    this.user.cover.url  = this.changeStartOfAvatarUrl(this.user.cover.url);
+  }
 
+
+  changeStartOfAvatarUrl (url) {
+    if (!(url.indexOf('http://') === 0 ||
+         url.indexOf('https://') === 0)) {
+      return 'http://localhost:3000' + url;
+    }     
+    return url; 
   }
 
   capitalizeFirstLetter(string) {
@@ -28,6 +34,7 @@ class UserController {
   showEdit(){
     return this.currentUser.id === this.user.id;
   }
+
 
 }
 

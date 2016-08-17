@@ -1,31 +1,34 @@
 class eventController {
-  constructor() {
+  constructor(Events) {
+    'ngInject';
+
     this.name = 'event';
-    this.searchText = null;
-    this.selectedItem = null;
+    this.events = Events;
+    console.log(this);
+  }
 
-    this.todos = [];
-    for (var i = 0; i < 10; i++) {
-      this.todos.push({
-        what: "Brunch this weekend?",
-        who: "Min Li Chan",
-        notes: "I'll be in your neighborhood doing errands."
-      });
+  $onInit() {
+    if (this.eventFees.event) {
+      this.event = this.eventFees.event;
+      this.fees = this.eventFees.fees;
+
+    } else {
+      this.event = this.eventFees;
     }
-
+    this.eventTypes = this.events.eventTypes;
+    this.event.logo_photo.url  = this.changeStartOfAvatarUrl(this.event.logo_photo.url);
+    this.event.cover_photo.url  = this.changeStartOfAvatarUrl(this.event.cover_photo.url);
   }
 
-  searchTextChange() {
-
+  changeStartOfAvatarUrl (url) {
+    if (!(url.indexOf('http://') === 0 ||
+         url.indexOf('https://') === 0)) {
+      return 'http://localhost:3000' + url;
+    }     
+    return url; 
   }
 
-  selectedItemChange() {
 
-  }
-
-  querySearch() {
-
-  }
 }
 
 export default eventController;

@@ -4,7 +4,7 @@ import './event.less';
 
 let eventComponent = {
   restrict: 'E',
-  bindings: {},
+  bindings: {eventFees: '<'},
   template,
   controller
 };
