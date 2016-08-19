@@ -18,7 +18,7 @@
     <div ng-repeat="event in $ctrl.events" ng-if="$index % 2 == 0" >
       <div layout-xs="column" layout="row">
         <div flex-xs flex-gt-xs="50" layout="column">
-          <md-card>
+          <md-card ng-show="$ctrl.events[$index]">
             <img ng-show="{{$ctrl.events[$index].cover_photo.url}}"
                   ng-src="{{$ctrl.events[$index].cover_photo.url}}"  alt="Cover">
             <md-card-title>
@@ -42,7 +42,7 @@
 
         </div>
         <div flex-xs flex-gt-xs="50" layout="column">
-          <md-card>
+          <md-card ng-show="$ctrl.events[$index + 1]">
             <img 
                 ng-show="{{$ctrl.events[$index + 1].cover_photo.url}}"
                 ng-src="{{$ctrl.events[$index + 1].cover_photo.url}}" class="md-card-image" alt="Cover">
