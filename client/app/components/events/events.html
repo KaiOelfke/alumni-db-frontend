@@ -19,7 +19,7 @@
       <div layout-xs="column" layout="row">
         <div flex-xs flex-gt-xs="50" layout="column">
           <md-card ng-show="$ctrl.events[$index]">
-            <img ng-show="{{$ctrl.events[$index].cover_photo.url}}"
+            <img ng-show="$ctrl.events[$index].cover_photo.url"
                   ng-src="{{$ctrl.events[$index].cover_photo.url}}"  alt="Cover">
             <md-card-title>
               <md-card-title-text>
@@ -44,7 +44,7 @@
         <div flex-xs flex-gt-xs="50" layout="column">
           <md-card ng-show="$ctrl.events[$index + 1]">
             <img 
-                ng-show="{{$ctrl.events[$index + 1].cover_photo.url}}"
+                ng-show="$ctrl.events[$index + 1].cover_photo.url"
                 ng-src="{{$ctrl.events[$index + 1].cover_photo.url}}" class="md-card-image" alt="Cover">
             <md-card-title>
               <md-card-title-text>

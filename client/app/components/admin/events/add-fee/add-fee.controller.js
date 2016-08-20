@@ -37,10 +37,10 @@ class AddFeeController {
   }  
 
   create() {
-    const newFee = this.fees.Resource.save({eventId: this.eventId, fee: this.currentFee || {}});
+    const newFee = new this.fees.Resource({fee: this.currentFee || {}});
 
     newFee
-      .$promise
+      .$save({eventId: this.eventId})
       .then(this.success.bind(this), this.showError.bind(this));
   } 
 

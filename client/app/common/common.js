@@ -6,6 +6,8 @@ import ValidationMatch from './validation-match/validation-match';
 import Api from './api/api';
 import ProfileUtilities from './profile-utilities/profile-utilities';
 import SideNavbar from './side-navbar/side-navbar';
+import PageLoading from './page-loading/page-loading';
+
 
 let commonModule = angular.module('app.common', [
   Navbar,
@@ -14,6 +16,7 @@ let commonModule = angular.module('app.common', [
   ValidationMatch,
   ProfileUtilities,
   SideNavbar,
+  PageLoading,
   Api
 ])
   

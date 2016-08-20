@@ -1,7 +1,18 @@
+<div
+  ng-style="{height: '5px'}" 
+  md-colors="{background: '{{$ctrl.dynamicTheme}}-primary-500-1'}">
+  <md-progress-linear
+      md-theme="navDark"
+      ng-show="$ctrl.pageLoading.isLoading()"
+      md-mode="indeterminate"></md-progress-linear>
+      
+</div>
+
 <nav
     ng-show="$ctrl.isShow"
     md-colors="{background: '{{$ctrl.dynamicTheme}}-primary-500-1'}"
     class="navbar">
+
   <div class="content" layout="row">
 
     <div class="logo" md-colors="{color: '{{$ctrl.dynamicNavTextTheme}}-accent-900-1'}" flex>

@@ -39,7 +39,6 @@ class AddFeeController {
     const updatedFee = this.fees.Resource
         .update({eventId: this.eventId,
                  id: this.cFee.id}, {fee: this.cFee || {}});
-
     updatedFee
       .$promise
       .then(this.success.bind(this), this.showError.bind(this));

@@ -8,10 +8,10 @@
       </h3>
   </md-toolbar>
 
-  <md-card class="info" ng-show="true">
-    <div ng-show="$ctrl.event.cover_photo.url"
+  <md-card class="info" ng-show="$ctrl.showCard('event')">
+    <div ng-show="$ctrl.cards.event.data.cover_photo.url"
         class="md-card-image cover-image-box"
-        ng-style="{'background': '#ccc url({{$ctrl.event.cover_photo.url}})' }">
+        ng-style="{'background': '#ccc url({{$ctrl.cards.event.data.cover_photo.url}})' }">
     </div>    
 
     <section  class="connections"
@@ -19,8 +19,8 @@
               layout-align="end center"
               layout-wrap>
         <md-button 
-          ng-href="{{ $ctrl.event.facebook_url }}"
-          ng-show="$ctrl.event.facebook_url"          
+          ng-href="{{ $ctrl.cards.event.data.facebook_url }}"
+          ng-show="$ctrl.cards.event.data.facebook_url"          
           class="md-fab md-mini" aria-label="Facebook">
           <md-icon md-font-set="fa" md-font-icon="fa-facebook"></md-icon>
         </md-button>
@@ -28,14 +28,14 @@
 
     <md-card-title>
       <md-card-title-text>
-        <span class="md-headline">{{ $ctrl.event.name }}</span>
-        <span class="md-subhead">{{ $ctrl.event.slogan }}</span>
+        <span class="md-headline">{{ $ctrl.cards.event.data.name }}</span>
+        <span class="md-subhead">{{ $ctrl.cards.event.data.slogan }}</span>
   
       </md-card-title-text>
       <md-card-title-media>
         <div class="md-media-lg card-media overlay-box">
-          <img ng-show="$ctrl.event.logo_photo.url"
-               ng-src="{{$ctrl.event.logo_photo.url}}" class="md-card-image" alt="logo">       
+          <img ng-show="$ctrl.cards.event.data.logo_photo.url"
+               ng-src="{{$ctrl.cards.event.data.logo_photo.url}}" class="md-card-image" alt="logo">       
         </div>
       </md-card-title-media>      
     </md-card-title>
@@ -47,12 +47,12 @@
 
           <md-input-container 
               class="md-block"
-              ng-show="$ctrl.event.facebook"
+              ng-show="$ctrl.cards.event.data.facebook"
               flex-gt-sm>
               <label>Facebook</label>
               <input type="text"
                      disabled
-                     name="facebook" ng-model="$ctrl.event.facebook">
+                     name="facebook" ng-model="$ctrl.cards.event.data.facebook">
           </md-input-container>
 
         </div>
@@ -60,27 +60,27 @@
         <div layout-gt-sm="row">
           <md-input-container 
               class="md-block"
-              ng-show="$ctrl.event.contact_email"
+              ng-show="$ctrl.cards.event.data.contact_email"
               flex-gt-sm>
               <label>Contact Email</label>
               <input type="text"
                      disabled
-                     name="contact_email" ng-model="$ctrl.event.contact_email">
+                     name="contact_email" ng-model="$ctrl.cards.event.data.contact_email">
           </md-input-container>
 
           <div  flex="5" hide-xs="" 
-                ng-show="$ctrl.event.contact_email && $ctrl.event.phone_number" hide-sm="">
+                ng-show="$ctrl.cards.event.data.contact_email && $ctrl.cards.event.data.phone_number" hide-sm="">
             <!-- Spacer //-->
           </div>
 
           <md-input-container
-            ng-show="$ctrl.event.phone_number"
+            ng-show="$ctrl.cards.event.data.phone_number"
             class="md-block"
             flex-gt-sm>
             <label>Phone Number</label>
             <input
                   name="institution"
-                  ng-model="$ctrl.event.phone_number"
+                  ng-model="$ctrl.cards.event.data.phone_number"
                   disabled/>
           </md-input-container>
 
@@ -89,23 +89,23 @@
         <div layout-gt-sm="row">
         
           <md-input-container
-              ng-show="$ctrl.event.location"
+              ng-show="$ctrl.cards.event.data.location"
               class="md-block" flex-gt-sm>
               <label>Location</label>
-              <textarea name="location" disabled ng-model="$ctrl.event.location" rows="1"></textarea> 
+              <textarea name="location" disabled ng-model="$ctrl.cards.event.data.location" rows="1"></textarea> 
           </md-input-container>
 
           <div flex="5" hide-xs=""
-                ng-show="$ctrl.event.dates && $ctrl.event.location" hide-sm="">
+                ng-show="$ctrl.cards.event.data.dates && $ctrl.cards.event.data.location" hide-sm="">
             <!-- Spacer //-->
           </div>
 
           <md-input-container
             class="md-block"
-            ng-show="$ctrl.event.dates"
+            ng-show="$ctrl.cards.event.data.dates"
             flex-gt-sm>
             <label>Dates</label>
-            <textarea name="dates" disabled ng-model="$ctrl.event.dates" rows="1"></textarea>
+            <textarea name="dates" disabled ng-model="$ctrl.cards.event.data.dates" rows="1"></textarea>
           </md-input-container>
         </div>
 
@@ -113,20 +113,20 @@
         
           <md-input-container 
               class="md-block" 
-              ng-show="$ctrl.event.agenda"
+              ng-show="$ctrl.cards.event.data.agenda"
               flex-gt-sm>
               <label>agenda</label>
-              <textarea name="agenda" disabled ng-model="$ctrl.event.agenda" rows="3"></textarea>
+              <textarea name="agenda" disabled ng-model="$ctrl.cards.event.data.agenda" rows="3"></textarea>
           </md-input-container>
 
           <div flex="5" hide-xs=""
-              ng-show="$ctrl.event.description && $ctrl.event.agenda" hide-sm="">
+              ng-show="$ctrl.cards.event.data.description && $ctrl.cards.event.data.agenda" hide-sm="">
             <!-- Spacer //-->
           </div>
 
-          <md-input-container ng-show="$ctrl.event.description" class="md-block" flex-gt-sm>
+          <md-input-container ng-show="$ctrl.cards.event.data.description" class="md-block" flex-gt-sm>
             <label>description</label>
-            <textarea name="description" disabled ng-model="$ctrl.event.description" rows="1"></textarea>
+            <textarea name="description" disabled ng-model="$ctrl.cards.event.data.description" rows="1"></textarea>
           </md-input-container>
         </div>
 
@@ -135,6 +135,7 @@
     <md-card-actions layout="row" layout-align="end center">
       <md-button 
         class="md-raised md-accent"
+        ng-show="$ctrl.showAttend()"
         ng-click="$ctrl.attend()">
         Attend
       </md-button>
@@ -142,7 +143,7 @@
   </md-card>
 
 
-  <md-card>
+  <md-card ng-show="$ctrl.showCard('fees')">
     <md-card-title>
       <md-card-title-text>
         <span class="md-headline">Fees</span>
@@ -151,61 +152,30 @@
     </md-card-title>
 
 
-      <md-list-item ng-repeat="fee in $ctrl.fees">
-        <md-checkbox ng-model="fee.selected"></md-checkbox>
+      <md-list-item ng-repeat="fee in $ctrl.cards.fees.data">
+        <md-checkbox ng-change="$ctrl.feeSelectChanged(fee)" ng-model="fee.selected"></md-checkbox>
         <p>{{fee.name}}</p>
-
         <p class="md-secondary">{{fee.price}}</p>
       </md-list-item>  
     </md-list>
     <md-card-actions layout="row" layout-align="end center">
       <md-button 
         class="md-raised md-accent"
-        ng-click="$ctrl.attend()">
+        ng-disabled="!$ctrl.cards.fees.selected"
+        ng-click="$ctrl.setFee()">
         Checkout
       </md-button>
     </md-card-actions>
   </md-card>
 
-  <md-card>
-    <md-card-title>
-      <md-card-title-text>
-        <span class="md-headline">Code</span>
-        <span class="md-subhead">Use code</span>
-      </md-card-title-text>
-    </md-card-title>
-
-    <md-card-content>
-      <form>
-        <div layout="column">
-
-          <md-input-container flex>
-            <label>Code</label>
-            <input type="" name="">
-          </md-input-container>
-        </div>
-      </form>
-    </md-card-content>
-
-
-    <md-card-actions layout="row" layout-align="end center">
-      <md-button
-        class="button-form md-secondary md-raised md-accent"
-        ng-click="$ctrl.applyCode()">
-        Next
-      </md-button>
-    </md-card-actions>
-
-  </md-card>
-
-
-  <md-card>
+  <md-card ng-show="$ctrl.showCard('application')">
     <md-card-title>
       <md-card-title-text>
         <span class="md-headline">Application</span>
         <span class="md-subhead">Fill the application to apply to the event</span>
       </md-card-title-text>
     </md-card-title>
+    <md-progress-linear md-mode="query" ng-disabled="!$ctrl.cards.application.isLoading"></md-progress-linear>
 
     <md-card-content>
       <form name="application.Form">
@@ -215,43 +185,75 @@
               <label>Motivation</label>
               <textarea
                 name="motivation"
-                ng-model="$ctrl.applicationForm.motivation"
+                ng-model="$ctrl.cards.application.data.motivation"
                 md-maxlength="1500" rows="3"></textarea> 
           </md-input-container>
-
           <div ng-messages="application.Form.motivation.$error">
             <div ng-message="required">Motivation is required.</div>
           </div>
         <md-input-container class="md-block">
-          <md-button class="md-raised md-hue-2" ngf-select="$ctrl.upload($file)">Upload CV</md-button>
+          <md-button class="md-raised md-hue-2" ngf-select="$ctrl.uploadCV($file)">Upload CV</md-button>
         </md-input-container>
       </form>
     </md-card-content>
     <md-card-actions layout="row" layout-align="end center">
       <md-button 
         class="md-raised md-accent"
+        ng-disabled="application.Form.$invalid"
         ng-click="$ctrl.sendApplication()">
         Apply
       </md-button>
     </md-card-actions>
-  </md-card>  
+  </md-card>
 
-  <md-card>
+  <md-card ng-show="$ctrl.showCard('code')">
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">Code</span>
+        <span class="md-subhead">Use code</span>
+      </md-card-title-text>
+    </md-card-title>
+    <md-progress-linear md-mode="query" ng-disabled="!$ctrl.cards.code.isLoading"></md-progress-linear>
+    <md-card-content>
+      <form name="code.Form">
+        <div layout="column">
+          <md-input-container flex>
+            <label>Code</label>
+            <input requried ng-model="$ctrl.cards.data.code" name="code">
+            <div ng-messages="code.Form.code.$error">
+              <div ng-message="required">Code is required.</div>
+            </div>            
+          </md-input-container>
+        </div>
+      </form>
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button
+        class="button-form md-secondary md-raised md-accent"
+        ng-disabled="code.Form.$invalid"
+        ng-click="$ctrl.applyCode()">
+        Apply
+      </md-button>
+    </md-card-actions>
+
+  </md-card>
+
+  <md-card ng-show="$ctrl.showCard('participation')">
     <md-card-title>
       <md-card-title-text>
         <span class="md-headline">Participation</span>
         <span class="md-subhead">Fill the participation information</span>
       </md-card-title-text>
     </md-card-title>
+    <md-progress-linear md-mode="query" ng-disabled="!$ctrl.cards.participation.isLoading"></md-progress-linear>
 
     <md-card-content>
       <form name="participation.Form">
         <div layout-gt-sm="row">
-
           <md-input-container flex-gt-sm class="md-block">
             <label>Arrival</label>
             <textarea name="arrival"
-              ng-model="$ctrl.participationForm.arrival" md-maxlength="150"></textarea> 
+              ng-model="$ctrl.cards.participation.data.arrival" md-maxlength="150"></textarea> 
           </md-input-container>
           <div flex="5" hide-xs="" hide-sm="">
             <!-- Spacer //-->
@@ -259,9 +261,8 @@
           <md-input-container flex-gt-sm class="md-block">
             <label>Departure</label>            
             <textarea name="departure" 
-              ng-model="$ctrl.participationForm.departure" md-maxlength="150"></textarea> 
+              ng-model="$ctrl.cards.participation.data.departure" md-maxlength="150"></textarea> 
           </md-input-container>
-
         </div>
 
         <div layout-gt-sm="row">
@@ -277,17 +278,15 @@
           <md-input-container class="md-block" flex-gt-sm>
             <label>allergies</label>
             <textarea name="allergies"
-              ng-model="$ctrl.participationForm.allergies" md-maxlength="150"></textarea> 
+              ng-model="$ctrl.cards.participation.data.allergies" md-maxlength="150"></textarea> 
           </md-input-container>
-
-
         </div>
 
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label>Extra Nights</label>
             <textarea name="extra_nights"
-              ng-model="$ctrl.participationForm.extra_nights" md-maxlength="150"></textarea>
+              ng-model="$ctrl.cards.participation.data.extra_nights" md-maxlength="150"></textarea>
           </md-input-container>
           <div flex="5" hide-xs="" hide-sm="">
             <!-- Spacer //-->
@@ -295,7 +294,7 @@
           <md-input-container class="md-block" flex-gt-sm>
             <label>Notes</label>
             <textarea name="notes"
-              ng-model="$ctrl.participationForm.notes" md-maxlength="300"></textarea>
+              ng-model="$ctrl.cards.participation.data.notes" md-maxlength="300"></textarea>
           </md-input-container>          
         </div>        
       </form>
@@ -303,14 +302,14 @@
       <md-card-actions layout="row" layout-align="end center">
         <md-button 
           class="md-raised md-accent"
-          ng-click="$ctrl.sendApplication()">
-          Checkout
+          ng-click="$ctrl.saveParticipation()">
+          Save
         </md-button>
       </md-card-actions>
     </md-card-content>
   </md-card>
 
-  <md-card>
+  <md-card ng-show="$ctrl.showCard('application_recived')">
 
     <md-card-title>
       <md-card-title-text>
@@ -327,13 +326,13 @@
     <md-card-actions layout="row" layout-align="end center">
       <md-button 
         class="md-raised md-accent"
-        ng-click="$ctrl.sendApplication()">
-        Back to Event
+        ng-click="$ctrl.backToEvents()">
+        Back to Events
       </md-button>
     </md-card-actions>
   </md-card>
 
-  <md-card>
+  <md-card ng-show="$ctrl.showCard('checkout')">
     <md-card-title>
       <md-card-title-text>
         <span class="md-headline">Checkout</span>
@@ -341,7 +340,7 @@
 
       </md-card-title-text>
     </md-card-title>
-    <md-progress-linear md-mode="query" ng-disabled="$ctrl.notProcessing"></md-progress-linear>
+    <md-progress-linear md-mode="query" ng-disabled="!$ctrl.cards.checkout.isLoading"></md-progress-linear>
 
     <md-content layout-padding>
       <p ng-show="$ctrl.status === 0">
@@ -361,9 +360,32 @@
         <md-button
           ng-show="$ctrl.status > 2"
           class="md-raised md-accent"
-          ng-click="$ctrl.submitPayment()">
+          ng-click="$ctrl.checkout()">
           Submit
         </md-button>
     </md-card-actions>    
   </md-card>
+
+  <md-card ng-show="$ctrl.showCard('event_success')">
+
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">Attend Successfull</span>
+      </md-card-title-text>
+    </md-card-title>
+
+    <md-card-content>
+      <p>
+      </p>
+    </md-card-content>
+
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button 
+        class="md-raised md-accent"
+        ng-click="$ctrl.backToEvents()">
+        Back to Events
+      </md-button>
+    </md-card-actions>
+  </md-card>
+
 </div>

@@ -1,8 +1,5 @@
 <div id="show-event">
-	
-
-  <md-card>
-
+	<md-card>
     <div class="md-card-image cover-image-box"
         ng-style="{'background': '#ccc url({{$ctrl.event.cover_photo.url}})' }">
     </div>    
@@ -226,37 +223,84 @@
     </md-table-container>
   </md-card>  
 
-  <md-card ng-show="false">
+  <md-card ng-hide="$ctrl.hideApplications()">
+    <md-toolbar class="md-table-toolbar md-default">
+      <div class="md-toolbar-tools">
+        <span>Applications</span>
+        <div flex></div>
+        <md-button class="md-icon-button" ng-click="$ctrl.refreshApplications()">
+          <md-tooltip>
+            Refresh
+          </md-tooltip>
+          <md-icon>refresh</md-icon>
+        </md-button>    
+      </div>
+    </md-toolbar>
+    <md-table-container>
+      <table md-table md-progress="$ctrl.applicationsPromise">
+        <thead md-head>
+          <tr md-row>          
+            <th md-column><span>Id</span></th>
+            <th md-column><span>User Id</span></th>
+            <th md-column><span>Motiviation</span></th>
+            <th md-column><span>CV</span></th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr md-row 
+              ng-repeat="application in $ctrl.allApplications track by application.id">
+            <td md-cell>{{application.id}}</td>
+            <td md-cell>{{application.user_id}}</td>
+            <td md-cell>{{application.motiviation | limitTo: 50}}</td>
+            <td md-cell>{{application.cv_file}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+  </md-card>
+
+  <md-card>
     <md-toolbar class="md-table-toolbar md-default">
       <div class="md-toolbar-tools">
         <span>Participants</span>
         <div flex></div>
-        <md-button class="md-icon-button" ng-click="$ctrl.refresh()">
+        <md-button class="md-icon-button" ng-click="$ctrl.refreshParticipants()">
           <md-tooltip>
             Refresh
           </md-tooltip>
           <md-icon>refresh</md-icon>
         </md-button>    
       </div>
+      <md-table-container>
+        <table md-table md-progress="$ctrl.participantsPromise">
+          <thead md-head>
+            <tr md-row>          
+              <th md-column><span>Id</span></th>
+              <th md-column><span>User Id</span></th>
+              <th md-column><span>Arrival</span></th>
+              <th md-column><span>Departure</span></th>
+              <th md-column><span>Allergie</span></th>
+              <th md-column><span>Diet</span></th>              
+            </tr>
+          </thead>
+          <tbody md-body>
+            <tr md-row 
+                ng-repeat="participant in $ctrl.allParticipants track by participant.id">
+              <td md-cell>{{participant.id}}</td>
+              <td md-cell>{{participant.user_id}}</td>
+              <td md-cell>{{participant.arrival}}</td>
+              <td md-cell>{{participant.departure}}</td>
+              <td md-cell>{{participant.allergie}}</td>              
+              <td md-cell>{{participant.diet}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </md-table-container>
     </md-toolbar>    
 
   </md-card>
 
-  <md-card ng-show="false">
-    <md-toolbar class="md-table-toolbar md-default" ng-hide="$ctrl.filter.show">
-      <div class="md-toolbar-tools">
-        <span>Applications</span>
-        <div flex></div>
-        <md-button class="md-icon-button" ng-click="$ctrl.refresh()">
-          <md-tooltip>
-            Refresh
-          </md-tooltip>
-          <md-icon>refresh</md-icon>
-        </md-button>    
-      </div>
-    </md-toolbar>    
 
-  </md-card>
 
 </div>
 

@@ -1,12 +1,12 @@
 class UserPanelController {
-  constructor($auth, $mdToast, AclService, $state) {
+  constructor(PageLoading) {
     'ngInject';
+    this.pageLoading = PageLoading;
   }
 
   $onInit() {
 
   }
-
 }
 
 export default UserPanelController;

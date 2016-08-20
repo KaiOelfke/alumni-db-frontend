@@ -1,5 +1,5 @@
 class NavbarController {
-  constructor($rootScope, $state, $transitions, $mdToast, $auth, AclService) {
+  constructor($rootScope, $state, PageLoading, $transitions, $mdToast, $auth, AclService) {
     "ngInject";
 
     this.AclService = AclService;
@@ -8,6 +8,7 @@ class NavbarController {
     this.$rootScope = $rootScope;
     this.$auth = $auth;
     this.$mdToast = $mdToast;
+    this.pageLoading = PageLoading;
   }
 
   $onInit(){

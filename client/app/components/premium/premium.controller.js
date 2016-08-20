@@ -42,9 +42,6 @@ class PremiumController {
     this.progressMsg = 'Submit your payment.';
     this.paymentData.payment_method_nonce = res.nonce;
     this.$scope.$digest();
-    console.log(this.paymentData);    
-    console.log(this, res);
-
   }
 
 
@@ -52,7 +49,6 @@ class PremiumController {
     console.log('an error occurred');
     console.error(err);
   }
-
 
   becomePremiumUser() {
     this.payProcess = true;
@@ -85,8 +81,6 @@ class PremiumController {
   }
 
   submitPayment() {
-
-    console.log(this.paymentData);
     this.Premium
         .subscribe(this.paymentData)
         .then((resp) => {
@@ -104,7 +98,6 @@ class PremiumController {
                     .textContent('Couldn\'t submit your payment!'));
 
         })
-
   }
 
 

@@ -20,6 +20,23 @@ let userPanelModule = angular.module('userPanel', [
 
 .component('userPanel', userPanelComponent)
 
+.run(($transitions, $state, PageLoading) => {
+  'ngInject';
+
+  $transitions.onStart({to: 'userPanel.*'}, ($transition$, $error$) => {
+    PageLoading.toggleLoading();
+  });
+
+  $transitions.onError({to: 'userPanel.*'}, ($transition$, $error$) => {
+    PageLoading.toggleLoading();
+  });
+
+  $transitions.onSuccess({to: 'userPanel.*'}, ($transition$, $error$) => {
+    PageLoading.toggleLoading();
+  });
+  
+})
+
 .name;
 
 export default userPanelModule;

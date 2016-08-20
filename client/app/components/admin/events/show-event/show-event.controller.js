@@ -1,5 +1,5 @@
 class ShowEventController {
-  constructor (Events, Fees, Codes, $mdDialog, $state, $mdToast) {
+  constructor (Events, Fees, Participants,  Codes, $mdDialog, $state, $mdToast) {
     'ngInject';
     this.events = Events;
     this.fees = Fees;
@@ -15,6 +15,7 @@ class ShowEventController {
     this.eventTypes = this.events.eventTypes;
     this.allFees = [];
     this.allCodes = [];
+    this.allParticipants = [];
     if (!this.hideFees()) {
       this.getFees();  
     }
@@ -44,7 +45,6 @@ class ShowEventController {
     return {};
   }
 
-  delete_flag
   // Codes
 
   getCodes() {
@@ -160,7 +160,7 @@ class ShowEventController {
       targetEvent: $event,
       controllerAs: '$ctrl',
       bindToController: true,
-      template: '<admin-panel-edit-fee eventId="{{$ctrl.eventId}}" current-fee="{{$ctrl.currentFee}}"></admin-panel-edit-fee>',
+      template: '<admin-panel-edit-fee event-id="{{$ctrl.eventId}}" current-fee="{{$ctrl.currentFee}}"></admin-panel-edit-fee>',
       locals: {eventId: this.event.id, currentFee: fee}
     }).then(this.getFees.bind(this));
   }
@@ -219,6 +219,24 @@ class ShowEventController {
   hideCodes() {
     if (this.event.etype === 'without_application_payment') {
       return true;
+    }
+    return false;
+  }
+
+
+  getParticipants() {
+    //this.participantsPromise
+    // this.allParticipants = 
+
+  }
+
+
+
+
+  hideApplications() {
+    if (this.event.etype === 'without_application_payment' ||
+        this.evetm.etype === 'with_payment') {
+      return true
     }
     return false;
   }
