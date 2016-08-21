@@ -228,7 +228,7 @@
       <div class="md-toolbar-tools">
         <span>Applications</span>
         <div flex></div>
-        <md-button class="md-icon-button" ng-click="$ctrl.refreshApplications()">
+        <md-button class="md-icon-button" ng-click="$ctrl.getApplications()">
           <md-tooltip>
             Refresh
           </md-tooltip>
@@ -248,11 +248,19 @@
         </thead>
         <tbody md-body>
           <tr md-row 
+              ng-click="$ctrl.goToApplication($event, application)"          
               ng-repeat="application in $ctrl.allApplications track by application.id">
             <td md-cell>{{application.id}}</td>
             <td md-cell>{{application.user_id}}</td>
             <td md-cell>{{application.motiviation | limitTo: 50}}</td>
-            <td md-cell>{{application.cv_file}}</td>
+            <td md-cell>
+              <md-button class="md-icon-button"
+                          target="_blank"
+                          ng-show="application.cv_file.url" 
+                          ng-href="{{$ctrl.getCVUrl(application.cv_file.url)}}">
+                <md-icon>file_download</md-icon>
+              </md-button>                 
+            </td>
           </tr>
         </tbody>
       </table>
@@ -264,7 +272,7 @@
       <div class="md-toolbar-tools">
         <span>Participants</span>
         <div flex></div>
-        <md-button class="md-icon-button" ng-click="$ctrl.refreshParticipants()">
+        <md-button class="md-icon-button" ng-click="$ctrl.getParticipations()">
           <md-tooltip>
             Refresh
           </md-tooltip>
@@ -285,13 +293,14 @@
           </thead>
           <tbody md-body>
             <tr md-row 
-                ng-repeat="participant in $ctrl.allParticipants track by participant.id">
-              <td md-cell>{{participant.id}}</td>
-              <td md-cell>{{participant.user_id}}</td>
-              <td md-cell>{{participant.arrival}}</td>
-              <td md-cell>{{participant.departure}}</td>
-              <td md-cell>{{participant.allergie}}</td>              
-              <td md-cell>{{participant.diet}}</td>
+                ng-click="$ctrl.goToParticipation($event, participation)"
+                ng-repeat="participation in $ctrl.allParticipations track by participation.id">
+              <td md-cell>{{participation.id}}</td>
+              <td md-cell>{{participation.user_id}}</td>
+              <td md-cell>{{participation.arrival}}</td>
+              <td md-cell>{{participation.departure}}</td>
+              <td md-cell>{{participation.allergie}}</td>              
+              <td md-cell>{{participation.diet}}</td>
             </tr>
           </tbody>
         </table>

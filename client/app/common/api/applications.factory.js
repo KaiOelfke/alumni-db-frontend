@@ -1,4 +1,4 @@
-let ApplicationsFactory = function ($resource, $http) {
+let ApplicationsFactory = function ($resource, Upload, $http) {
   'ngInject';
 
   const APIHost = 'http://localhost:3000';
@@ -11,11 +11,19 @@ let ApplicationsFactory = function ($resource, $http) {
     });
 
   const getByUser = (userId, eventId) => {
-    return $http.get(APIHost + '/events/user_application?user_id='+userId+'&event_id='+eventId);
+    return $http.get(APIHost + '/events/'+ eventId+'/user_application?user_id='+userId);
+  }
+
+  const createApplication = (eventId, application) => {
+    return Upload.upload({
+      url: APIHost + '/events/'+eventId+'/applications',
+      method: 'POST',
+      data: {application}
+    });
   }
 
 
-  return {Resource, getByUser};
+  return {Resource, getByUser, createApplication};
 };
 
 export default ApplicationsFactory;

@@ -11,7 +11,7 @@ let ParticipationsFactory = function ($resource, $http) {
     });
 
   const getByUser = (userId, eventId) => {
-    return $http.get(APIHost + '/events/user_participation?user_id='+userId+'&event_id='+eventId);
+    return $http.get(APIHost + '/events/'+ eventId+'/user_participation?user_id='+userId);
   }
 
   return {Resource, getByUser};

@@ -1,9 +1,11 @@
 class ShowEventController {
-  constructor (Events, Fees, Participants,  Codes, $mdDialog, $state, $mdToast) {
+  constructor (Events, Fees, Participations, Applications, Codes, $mdDialog, $state, $mdToast) {
     'ngInject';
     this.events = Events;
     this.fees = Fees;
     this.codes = Codes;
+    this.participations = Participations;
+    this.applications = Applications;
     this.$mdToast = $mdToast;
     this.$mdDialog = $mdDialog;
     this.$state = $state;
@@ -22,7 +24,10 @@ class ShowEventController {
     if (!this.hideCodes()) {
       this.getCodes();
     }
-    
+    if (!this.hideApplications()) {
+      this.getApplications();
+    }
+    this.getParticipations();
   }
 
   changeStartOfAvatarUrl (url) {
@@ -48,7 +53,7 @@ class ShowEventController {
   // Codes
 
   getCodes() {
-    this.codes.getCodes(this.event.id)
+    this.codesPromise = this.codes.getCodes(this.event.id)
         .then((resp) => {
           this.allCodes = resp.data.data;
         })
@@ -224,22 +229,75 @@ class ShowEventController {
   }
 
 
-  getParticipants() {
-    //this.participantsPromise
-    // this.allParticipants = 
-
+  getParticipations() {
+    this.participantsPromise = 
+      this.participations
+          .Resource
+          .get({eventId: this.event.id})
+          .$promise
+          .then((resp) => {
+            this.allParticipations = resp.data;
+          })
+          .catch(() => {
+            this.$mdToast.show(
+              this.$mdToast.simple()
+                .textContent('Server error, couldn\'t load participations!')
+                .position("top right")
+                .hideDelay(4000)
+            ); 
+          })
   }
 
 
+  getApplications() {
+    this.applicationPromise = 
+      this.applications
+          .Resource
+          .get({eventId: this.event.id})
+          .$promise
+          .then((resp) => {
+            this.allApplications = resp.data;
+          })
+          .catch(() => {
+            this.$mdToast.show(
+              this.$mdToast.simple()
+                .textContent('Server error, couldn\'t load participations!')
+                .position("top right")
+                .hideDelay(4000)
+            ); 
+          })
+  }
 
+  getCVUrl(url) {
+    if (!!!url) {return null;}
+    if (!(url.indexOf('http://') === 0 ||
+         url.indexOf('https://') === 0)) {
+      return 'http://localhost:3000' + url;
+    }     
+    return url;     
+  }
 
   hideApplications() {
     if (this.event.etype === 'without_application_payment' ||
-        this.evetm.etype === 'with_payment') {
+        this.event.etype === 'with_payment') {
       return true
     }
     return false;
   }
+
+  goToApplication($event, application) {
+    $event.stopPropagation();
+
+    this.$state.go('adminPanel.EventsShowApplication',
+             {eventId: this.event.id, id: application.id});
+  }
+
+  goToParticipation($event, participation) {
+    $event.stopPropagation();
+
+    this.$state.go('adminPanel.EventsShowParticipation',
+             {eventId: this.event.id, id: participation.id});
+  }  
 
 }
 

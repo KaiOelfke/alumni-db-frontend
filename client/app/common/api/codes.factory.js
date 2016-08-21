@@ -10,7 +10,7 @@ let CodesFactory = function ($http, $resource) {
   };
 
   const validateCode = function(eventId, code) {
-    return $http.get(urlBase + '/' + eventId +'/valdiate_code?code='+code);
+    return $http.get(urlBase + '/' + eventId +'/validate_code?code='+code);
   };
 
  	// code :: user_id, fee_id

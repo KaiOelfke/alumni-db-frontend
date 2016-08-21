@@ -8,6 +8,12 @@
       </h3>
   </md-toolbar>
 
+  <md-card md-theme="event-dark" ng-show="$ctrl.showCard('status')">
+    <md-card-content>
+      <p>{{$ctrl.cards.status.message}}</p>
+    </md-card-content>
+  </md-card>  
+
   <md-card class="info" ng-show="$ctrl.showCard('event')">
     <div ng-show="$ctrl.cards.event.data.cover_photo.url"
         class="md-card-image cover-image-box"
@@ -185,6 +191,7 @@
               <label>Motivation</label>
               <textarea
                 name="motivation"
+                required
                 ng-model="$ctrl.cards.application.data.motivation"
                 md-maxlength="1500" rows="3"></textarea> 
           </md-input-container>
@@ -219,7 +226,7 @@
         <div layout="column">
           <md-input-container flex>
             <label>Code</label>
-            <input requried ng-model="$ctrl.cards.data.code" name="code">
+            <input requried ng-model="$ctrl.cards.code.data.code" name="code">
             <div ng-messages="code.Form.code.$error">
               <div ng-message="required">Code is required.</div>
             </div>            
@@ -253,7 +260,10 @@
           <md-input-container flex-gt-sm class="md-block">
             <label>Arrival</label>
             <textarea name="arrival"
-              ng-model="$ctrl.cards.participation.data.arrival" md-maxlength="150"></textarea> 
+              ng-model="$ctrl.cards.participation.data.arrival" required md-maxlength="150"></textarea> 
+            <div ng-messages="participation.Form.arrival.$error">
+              <div ng-message="required">Arrival is required.</div>
+            </div>              
           </md-input-container>
           <div flex="5" hide-xs="" hide-sm="">
             <!-- Spacer //-->
@@ -261,14 +271,20 @@
           <md-input-container flex-gt-sm class="md-block">
             <label>Departure</label>            
             <textarea name="departure" 
-              ng-model="$ctrl.cards.participation.data.departure" md-maxlength="150"></textarea> 
+              ng-model="$ctrl.cards.participation.data.departure" required md-maxlength="150"></textarea>
+            <div ng-messages="participation.Form.departure.$error">
+              <div ng-message="required">Departure is required.</div>
+            </div>              
           </md-input-container>
         </div>
 
         <div layout-gt-sm="row">
           <md-input-container class="md-block" flex-gt-sm>
             <label>Diet</label>
-            <textarea name="diet"></textarea> 
+            <textarea  ng-model="$ctrl.cards.participation.data.diet" required name="diet"></textarea> 
+            <div ng-messages="participation.Form.diet.$error">
+              <div ng-message="required">Diet is required.</div>
+            </div>
           </md-input-container>
 
           <div flex="5" hide-xs="" hide-sm="">
@@ -278,7 +294,7 @@
           <md-input-container class="md-block" flex-gt-sm>
             <label>allergies</label>
             <textarea name="allergies"
-              ng-model="$ctrl.cards.participation.data.allergies" md-maxlength="150"></textarea> 
+              ng-model="$ctrl.cards.participation.data.allergies"  md-maxlength="150"></textarea> 
           </md-input-container>
         </div>
 
@@ -302,6 +318,7 @@
       <md-card-actions layout="row" layout-align="end center">
         <md-button 
           class="md-raised md-accent"
+          ng-disabled="participation.Form.$invalid"
           ng-click="$ctrl.saveParticipation()">
           Save
         </md-button>
@@ -336,21 +353,18 @@
     <md-card-title>
       <md-card-title-text>
         <span class="md-headline">Checkout</span>
-        <span class="md-subhead">{{$ctrl.progressMsg}}</span>
+        <span class="md-subhead">{{$ctrl.cards.checkout.progressMsg}}</span>
 
       </md-card-title-text>
     </md-card-title>
     <md-progress-linear md-mode="query" ng-disabled="!$ctrl.cards.checkout.isLoading"></md-progress-linear>
 
     <md-content layout-padding>
-      <p ng-show="$ctrl.status === 0">
-        {{$ctrl.status}}
-      </p>
 
       <form ng-submit="$ctrl.submitPaymentDetails()" novalidate>
         <div id="payment-form"></div>
         <md-button class="md-raised md-accent"
-                   ng-show="$ctrl.status === 2"
+                   ng-show="$ctrl.cards.checkout.status === 2"
                    type="submit">Add Payment Method</md-button>
       </form>
     </md-content>
@@ -358,7 +372,7 @@
       layout="row"
       layout-align="end end">
         <md-button
-          ng-show="$ctrl.status > 2"
+          ng-show="$ctrl.cards.checkout.status > 2"
           class="md-raised md-accent"
           ng-click="$ctrl.checkout()">
           Submit

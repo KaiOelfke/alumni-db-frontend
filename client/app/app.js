@@ -136,6 +136,12 @@ angular.module('app', [
       'contrastLightColors': undefined
     });
 
+
+    $mdThemingProvider.theme('event-dark')
+      .primaryPalette('amber')
+      .accentPalette('grey')
+      .dark();  
+
     $mdThemingProvider.theme('default')
       .primaryPalette('blue')
       .accentPalette('grey');

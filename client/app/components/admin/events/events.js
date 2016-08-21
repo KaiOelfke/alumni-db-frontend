@@ -7,6 +7,8 @@ import createEventComponent from './create-event/create-event.component';
 import addCodeComponent from './add-code/add-code.component';
 import addFeeComponent from './add-fee/add-fee.component';
 import editFeeComponent from './edit-fee/edit-fee.component';
+import showParticipation from './show-participation/show-participation.component';
+import showApplication from './show-application/show-application.component';
 
 
 let eventsModule = angular.module('adminPanelEvents', [
@@ -58,6 +60,38 @@ let eventsModule = angular.module('adminPanelEvents', [
                             () => $q.reject('notfound'));
         }
       }
+    })
+    .state('adminPanel.EventsShowApplication', {
+      url: '/events/:eventId/application/:id',
+      component: 'adminPanelEventsShowApplication',
+      resolve: {
+        application: (Applications, $stateParams, $q) => {
+          return Applications
+                      .Resource
+                      .get({eventId: $stateParams.eventId, id: $stateParams.id})
+                      .$promise
+                      .then((resp) => {
+                              return resp.data;
+                            },
+                            () => $q.reject('notfound'));
+        }
+      }
+    })
+    .state('adminPanel.EventsShowParticipation', {
+      url: '/events/:eventId/participation/:id',
+      component: 'adminPanelEventsShowParticipation',
+      resolve: {
+        participation: (Participations, $stateParams, $q) => {
+          return Participations
+                      .Resource
+                      .get({eventId: $stateParams.eventId, id: $stateParams.id})
+                      .$promise
+                      .then((resp) => {
+                          return resp.data;
+                        },
+                        () => $q.reject('notfound'));
+        }
+      }
     });  
 })
 
@@ -74,6 +108,10 @@ let eventsModule = angular.module('adminPanelEvents', [
 .component('adminPanelEventsEditEvent', editEventComponent)
 
 .component('adminPanelEventsCreateEvent', createEventComponent)
+
+.component('adminPanelEventsShowParticipation', showParticipation)
+
+.component('adminPanelEventsShowApplication', showApplication)
 
 .run(($transitions, $state) => {
   'ngInject';
