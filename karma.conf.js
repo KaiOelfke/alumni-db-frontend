@@ -1,5 +1,5 @@
 module.exports = function (config) {
-  config.set({
+  var configuration = {
     // base path used to resolve all patterns
     basePath: '',
 
@@ -71,11 +71,13 @@ module.exports = function (config) {
 
     // if true, Karma runs tests once and exits
     singleRun: true
-  });
+  };
 
 
   if(process.env.TRAVIS){
     configuration.browsers = ['Chrome_travis_ci'];
   }
+
+  config.set(configuration);
 
 };
