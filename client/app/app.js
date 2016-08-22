@@ -35,7 +35,7 @@ angular.module('app', [
     Common,
     Components
   ])
-  .config(($locationProvider, $stateProvider, $urlRouterProvider, $mdThemingProvider, $authProvider, AclServiceProvider) => {
+  .config(($locationProvider, $stateProvider, APIHost, $urlRouterProvider, $mdThemingProvider, $authProvider, AclServiceProvider) => {
     "ngInject";
 
     // @see: https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions
@@ -110,7 +110,7 @@ angular.module('app', [
     };
 
     $authProvider.configure({
-      apiUrl: 'http://localhost:3000',
+      apiUrl: APIHost,
       accountUpdatePath: '/users',
       storage: 'localStorage',
       confirmationSuccessUrl: window.location.origin + '/profile/email-confirmation',
