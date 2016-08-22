@@ -1,7 +1,6 @@
-let FeesFactory = function ($resource) {
+let FeesFactory = function ($resource, APIHost) {
   'ngInject';
 
-  const APIHost = 'http://localhost:3000';
 
   const resourceUrl = APIHost + '/events/:eventId/fees/:id';
 

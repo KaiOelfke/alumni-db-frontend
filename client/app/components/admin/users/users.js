@@ -2,7 +2,6 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import usersComponent from './users.component';
 import showUserComponent from './show-user/show-user.component';
-import editUserComponent from './edit-user/edit-user.component';
 
 let usersModule = angular.module('adminPanelUsers', [
   uiRouter
@@ -32,8 +31,6 @@ let usersModule = angular.module('adminPanelUsers', [
 .component('adminPanelUsers', usersComponent)
 
 .component('adminPanelUsersShowUser', showUserComponent)
-
-.component('adminPanelUsersEditUser', editUserComponent)
 
 .run(($transitions, $state) => {
   'ngInject';

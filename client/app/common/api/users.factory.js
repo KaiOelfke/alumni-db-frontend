@@ -1,7 +1,6 @@
-let UsersFactory = function ($http, $resource, Upload) {
+let UsersFactory = function ($http, APIHost, $resource, Upload) {
   'ngInject';
 
-  const APIHost = 'http://localhost:3000';
   const urlBase = APIHost + '/users';
   const usersFactory = {};
   const confirm_success_url = window.location.origin + '/profile/email-confirmation';

@@ -1,7 +1,5 @@
-let EventsFactory = function ($resource, Upload) {
+let EventsFactory = function ($resource, APIHost, Upload) {
   'ngInject';
-
-  const APIHost = 'http://localhost:3000';
 
   const resourceUrl = APIHost + '/events/:id';
 

@@ -1,9 +1,7 @@
-let CodesFactory = function ($http, $resource) {
+let CodesFactory = function ($http, APIHost, $resource) {
   'ngInject';
 
-  const APIHost = 'http://localhost:3000';
   const urlBase = APIHost + '/events';
-
 
   const getCodes = function(eventId) {
     return $http.get(urlBase + '/' + eventId + '/fee_codes');

@@ -1,7 +1,5 @@
-let ParticipationsFactory = function ($resource, $http) {
+let ParticipationsFactory = function ($resource, APIHost, $http) {
   'ngInject';
-
-  const APIHost = 'http://localhost:3000';
 
   const resourceUrl = APIHost + '/events/:eventId/participations/:id';
 

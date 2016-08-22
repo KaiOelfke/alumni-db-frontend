@@ -1,7 +1,6 @@
-let PlansFactory = function ($http, $resource) {
+let PlansFactory = function ($http, APIHost, $resource) {
   'ngInject';
 
-  const APIHost = 'http://localhost:3000';
   const urlBase = APIHost + '/subscriptions/plans';
 
 

@@ -1,7 +1,6 @@
-let PremiumFactory = function ($http, $q) {
+let PremiumFactory = function ($http, APIHost, $q) {
   'ngInject';
 
-  const APIHost = 'http://localhost:3000';
   const clientTokenUrl = APIHost + '/subscriptions/client_token';
   const subscriptionUrl = APIHost + '/subscriptions';
 

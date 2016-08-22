@@ -18,11 +18,15 @@ class ShowUserController {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
+  isSubscription() {
+    return !!this.user.subscription_id;
+  }
+
   makePremium() {
     this.premium
         .subscribe({user_id: this.user.id})
         .then((resp) => {
-          this.user.subscription_id = resp.data.subscription_id;
+          this.user.subscription_id = resp.data.data.subscription_id;
           this.$mdToast.show(
                 this.$mdToast.simple()
                     .textContent(`Success: ${this.user.fullname} became a premium user`));

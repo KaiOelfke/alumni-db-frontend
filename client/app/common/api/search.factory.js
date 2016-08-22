@@ -1,7 +1,7 @@
-let SearchFactory = function ($http) {
+let SearchFactory = function ($http, APIHost) {
   'ngInject';
 
-  const urlBase = 'http://localhost:3000' + '/search';
+  const urlBase = APIHost + '/search';
   const searchService = {};
 
   searchService.userSearch = (searchText, page) => {

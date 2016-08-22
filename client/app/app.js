@@ -13,6 +13,7 @@ import ngResource from 'angular-resource';
 import Common from './common/common';
 import Components from './components/components';
 import AppComponent from './app.component';
+import almuniConnectAPPConfig from './config';
 
 import 'font-awesome/css/font-awesome.css'
 import 'normalize.css';
@@ -27,19 +28,34 @@ angular.module('app', [
     ngResource,
     'mdSteppers',
     'mm.acl',
+    'almuniConnectAPP.config',
     angularCookie,
     ngTokenAuth,
     uiRouter,
     Common,
     Components
   ])
-  .config(($locationProvider, $urlRouterProvider, $mdThemingProvider, $authProvider, AclServiceProvider) => {
+  .config(($locationProvider, $stateProvider, $urlRouterProvider, $mdThemingProvider, $authProvider, AclServiceProvider) => {
     "ngInject";
 
     // @see: https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions
     // #how-to-configure-your-server-to-work-with-html5mode
     $locationProvider.html5Mode(true).hashPrefix('!');
     $urlRouterProvider.otherwise('/404');
+
+    $stateProvider
+      .state('main', {
+        url: '/',
+        onEnter: ($auth, AclService, $state) => {          
+          return $auth
+              .validateUser()
+              .then((user) => {
+                return $state.target('userPanel.home');
+              }, () => {
+                return $state.target('signin');
+              });
+        }
+      });
 
     const formatConvertar = (response) => {
       response = response.data;

@@ -6,7 +6,7 @@ class ProfileController {
 
     this.Users = Users;
     this.$mdToast = $mdToast;
-
+    console.log(this.user.cover.url);
   }
 
   $onInit() {

@@ -1,7 +1,5 @@
-let DiscountsFactory = function ($resource) {
+let DiscountsFactory = function ($resource, APIHost) {
   'ngInject';
-
-  const APIHost = 'http://localhost:3000';
 
   const resourceUrl = APIHost + '/subscriptions/discounts/:id';
 

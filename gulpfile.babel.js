@@ -16,6 +16,7 @@ import webpackDevMiddelware from 'webpack-dev-middleware';
 import webpachHotMiddelware from 'webpack-hot-middleware';
 import colorsSupported      from 'supports-color';
 import historyApiFallback   from 'connect-history-api-fallback';
+import gulpNgConfig         from 'gulp-ng-config';
 
 let root = 'client';
 
@@ -42,11 +43,42 @@ let paths = {
   ],
   output: root,
   blankTemplates: path.join(__dirname, 'generator', 'component/**/*.**'),
-  dest: path.join(__dirname, 'dist')
+  dest: path.join(__dirname, 'dist'),
+  envconfig: path.join(__dirname, 'client/app/config.js')
 };
 
+gulp.task('clean-config', (cb) => {
+  del([paths.envconfig]).then(function (paths) {
+    gutil.log("[clean-config]", paths);
+    cb();
+  })
+});
+
+gulp.task('config',  () => {
+  const env = process.env.NODE_ENV || 'development';
+  if (env === 'development') {
+    return gulp.src('config.json')
+    .pipe(gulpNgConfig('almuniConnectAPP.config', {
+      environment: 'development'
+    }))
+    .pipe(gulp.dest('client/app/'))
+  }else if (env === 'staging'){
+    return gulp.src('config.json')
+    .pipe(gulpNgConfig('almuniConnectAPP.config',{
+      environment: 'staging'
+    }))
+    .pipe(gulp.dest('client/app/'))
+  } else {
+    return gulp.src('config.json')
+    .pipe(gulpNgConfig('almuniConnectAPP.config',{
+      environment: 'production'
+    }))
+    .pipe(gulp.dest('client/app/'))    
+  }
+});
+
 // use webpack.config.js to build modules
-gulp.task('webpack', ['clean'], (cb) => {
+gulp.task('webpack', ['clean', 'clean-config', 'config'], (cb) => {
   const config = require('./webpack.dist.config');
   config.entry.app = paths.entry;
 
@@ -65,7 +97,14 @@ gulp.task('webpack', ['clean'], (cb) => {
   });
 });
 
-gulp.task('serve', () => {
+
+gulp.task('build',['webpack'], () => {
+  gulp.src('heroku/*')
+  .pipe(gulp.dest('dist'));
+});
+
+
+gulp.task('serve', ['clean-config', 'config'], () => {
   const config = require('./webpack.dev.config');
   config.entry.app = [
     // this modules required to make HRM working
