@@ -1,0 +1,43 @@
+  <md-dialog-content class="md-dialog-content">
+    
+    <h2 class="md-title">Add Code</h2>
+    
+    <form name="code.form" novalidate>
+
+      <md-autocomplete
+          md-input-name="user_id"
+          md-selected-item="$ctrl.selectedUser"
+          md-search-text="$ctrl.searchText"
+          md-items="user in $ctrl.querySearch()"
+          md-selected-item-change="$ctrl.selectedItemChange(user)"          
+          md-item-text="user.first_name"          
+          md-min-length="0"
+          md-floating-label="User"
+          flex
+          class="md-block">
+        <md-item-template>
+          <span md-highlight-text="$ctrl.searchText" md-highlight-flags="^i">{{user.first_name}} {{user.lastname}} | {{user.country}}</span>
+        </md-item-template>
+        <md-not-found>
+          No Users matching.
+        </md-not-found>     
+      </md-autocomplete>
+
+      <md-input-container class="md-block" flex>
+        <label>Fee</label>
+        <md-select name="fee_id" placeholder="Fee"
+                   ng-model="$ctrl.code.fee_id" md-on-open="$ctrl.loadFees()">
+             <md-option ng-value="fee.id" ng-repeat="fee in $ctrl.allFees">{{fee.name}}</md-option>
+            </md-select>
+        </md-input-container>
+      </md-input-container>
+    </form>
+    
+  </md-dialog-content>
+  
+  <md-dialog-actions>
+    <md-button  class="md-primary" 
+                ng-click="$ctrl.create()" ng-disabled="fee.form.$invalid">Add</md-button>
+    <md-button class="md-primary" ng-click="$ctrl.cancel()">Cancel</md-button>
+  </md-dialog-actions>
+  

@@ -1,0 +1,30 @@
+<div class="confirmation" layout="column" layout-align="center center">
+
+  <header>
+    <logo></logo>
+  </header>
+
+  <md-card flex>
+    <md-progress-linear
+      md-mode="query"
+      ng-disabled="!$ctrl.loading"></md-progress-linear>  
+    <md-card-title>
+      <md-card-title-text>
+        <span ng-hide="$ctrl.loading" class="md-headline">Email Confimation {{$ctrl.statusCode}}</span>
+        <span ng-show="$ctrl.loading" class="md-headline">Validating email confirmation ...</span>
+      </md-card-title-text>
+    </md-card-title>
+    <md-card-content layout-padding>
+      <p>{{$ctrl.status}}</p>
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="end">
+        <md-button  
+                    type="submit"
+                    ui-sref="userPanel.home()"
+                    ng-show="$ctrl.can('home')" flex>
+          Home
+        </md-button>  
+    </md-card-actions>
+  </md-card>
+
+</div>

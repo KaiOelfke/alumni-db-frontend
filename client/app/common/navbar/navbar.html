@@ -1,0 +1,45 @@
+<div
+  ng-style="{height: '5px'}" 
+  md-colors="{background: '{{$ctrl.dynamicTheme}}-primary-500-1'}">
+  <md-progress-linear
+      md-theme="navDark"
+      ng-show="$ctrl.pageLoading.isLoading()"
+      md-mode="indeterminate"></md-progress-linear>
+      
+</div>
+
+<nav
+    ng-show="$ctrl.isShow"
+    md-colors="{background: '{{$ctrl.dynamicTheme}}-primary-500-1'}"
+    class="navbar">
+
+  <div class="content" layout="row">
+
+    <div class="logo" md-colors="{color: '{{$ctrl.dynamicNavTextTheme}}-accent-900-1'}" flex>
+      <span>Alumni Connect</span>
+    </div>
+
+    <md-nav-bar
+        class="md-flex"
+        md-selected-nav-item="$ctrl.currentNavItem" 
+        nav-bar-aria-label="navigation links">
+      <md-nav-item md-nav-sref="userPanel.home" name="userPanel.home">
+        People
+      </md-nav-item>        
+      <md-nav-item md-nav-sref="userPanel.Events" name="userPanel.events">
+        events
+      </md-nav-item>
+      <md-nav-item md-nav-sref="userPanel.premium" name="userPanel.premium">
+        premium
+      </md-nav-item>
+      <md-nav-item md-nav-sref="userPanel.profile" name="userPanel.profile">
+        profile
+      </md-nav-item>
+      <md-nav-item md-nav-click="$ctrl.logout()" name="logout">
+        logout
+      </md-nav-item>
+      <!--<md-nav-item md-nav-href="signup" name="page5">Page Five</md-nav-item>-->
+    </md-nav-bar>
+  </div>
+
+</nav>

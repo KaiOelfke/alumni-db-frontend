@@ -1,0 +1,7 @@
+{
+  "name": "webclient",
+  "version": "0.0.0",
+  "dependencies": {
+     "express": "^4.14.0"
+  }
+}

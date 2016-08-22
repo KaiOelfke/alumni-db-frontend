@@ -1,0 +1,284 @@
+<div class="registration" layout="column" layout-align="center center">
+  <header>
+    <logo></logo>
+  </header>
+
+
+  <md-card flex="nogrow" style="width: 800px; margin: 40px auto">
+
+    <md-stepper-card-content class="md-no-padding">
+      <md-stepper 
+          id="stepper-registration"
+          md-mobile-step-text="$ctrl.isMobileStepText" 
+          md-linear="true"
+          md-alternative="true">
+          <md-step md-label="Personal Information">
+            <md-step-body>
+                <md-progress-linear ng-disabled="$ctrl.notQuery" md-mode="query" ></md-progress-linear>
+                <form name="pinformation"
+                    novalidate
+                    ng-submit="$ctrl.submitCurrentStep($ctrl.stepData[0].data)">
+                    <div class="md-padding">
+                        <div layout="row" layout-align="center top">
+                            <div flex>
+                                <!-- 1 row -->
+                                <div layout-gt-sm="row">
+
+                                  <md-input-container
+                                      class="md-block" flex-gt-sm>
+                                      <label>First name</label>
+                                      <input
+                                            name="firstname"
+                                            ng-model="$ctrl.stepData[0].data.first_name"
+                                            required/>
+                                      <div ng-messages="pinformation.firstname.$error">
+                                        <div ng-message="required">First name is required.</div>
+                                      </div>                                          
+                                  </md-input-container>
+
+                                  <div flex="5" hide-xs="" hide-sm="">
+                                    <!-- Spacer //-->
+                                  </div>
+
+                                  <md-input-container
+                                      class="md-block" flex-gt-sm>
+                                      <label>Last name</label>
+                                      <input
+                                            name="lastname"
+                                            ng-model="$ctrl.stepData[0].data.last_name"
+                                            required/>
+                                      <div ng-messages="pinformation.lastname.$error">
+                                        <div ng-message="required">Last name is required.</div>
+                                      </div>
+                                  </md-input-container>
+
+                                </div>
+
+                                <!-- 2 row -->
+
+                                <div layout-gt-sm="row">
+                                
+                                  <md-input-container 
+                                      class="md-block" flex-gt-sm>
+                                      <label>Country</label>
+                                      <md-select 
+                                          required
+                                          name="country"
+                                          ng-model="$ctrl.stepData[0].data.country">
+                                          
+                                        <md-option  ng-repeat="country in $ctrl.countries"
+                                                    value="{{country.code}}">
+                                          {{country.name}}
+                                        </md-option>
+                                      </md-select>
+                                      <div ng-messages="pinformation.country.$error">
+                                        <div ng-message="required">Country is required.</div>
+                                      </div>
+
+                                  </md-input-container>
+
+                                  <div flex="5" hide-xs="" hide-sm="">
+                                    <!-- Spacer //-->
+                                  </div>
+
+                                  <md-input-container class="md-block" flex-gt-sm>
+                                    <label>City</label>
+                                    <input
+                                          name="city"
+                                          ng-model="$ctrl.stepData[0].data.city"
+                                          required/>
+                                    <div ng-messages="pinformation.city.$error">
+                                      <div ng-message="required">City is required.</div>
+                                    </div>
+
+                                  </md-input-container>
+                                </div>
+
+                                <!-- 3 row -->
+
+                                <div layout-gt-sm="row">
+                                  <md-input-container class="md-block" flex-gt-sm>
+                                      <label>Birthday</label>
+                                      <input
+                                            name="birthday"
+                                            ng-model="$ctrl.stepData[0].data.date_of_birth"
+                                            ng-pattern="$ctrl.dateCheckRegex"
+                                            required/>
+                                      <div ng-messages="pinformation.birthday.$error">
+                                        <div ng-message="pattern">DD.MM.YYYY - Example 01.01.1990</div>
+                                        <div ng-message="required">Birthday is required.</div>
+                                      </div>
+                                  </md-input-container>
+
+                                  <div flex="5" hide-xs="" hide-sm="">
+                                    <!-- Spacer //-->
+                                  </div>
+
+                                  <div
+                                      class="md-block"
+                                      layout="row"
+                                        layout-align="start center" flex-gt-sm>
+                                      <p style="padding: 0px 15px 0px 0px;">Gender</p>
+                                      <md-radio-group 
+                                        layout="row"
+                                        layout-align="start center"
+                                        ng-model="$ctrl.stepData[0].data.gender"
+                                        name="gender">
+                                        <md-radio-button value="1">Female</md-radio-button>
+                                        <md-radio-button value="0"> Male </md-radio-button>
+                                      </md-radio-group>
+
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </md-step-body>
+            <md-step-actions layout="row">
+                <div flex layout="row" layout-align="end top">
+                    <md-button  type="submit"
+                                class="md-primary md-raised"
+                                ng-disabled="pinformation.$invalid"
+                                ng-click="$ctrl.nextStep()">NEXT</md-button>
+                </div>
+            </md-step-actions>
+          </md-step>
+          <md-step md-label="Create an group">
+              <md-step-body>
+                <md-progress-linear ng-disabled="$ctrl.notQuery" md-mode="query" ></md-progress-linear>
+                <form name="prog.information"
+                    novalidate
+                    ng-submit="$ctrl.submitCurrentStep($ctrl.stepData[1].data)">
+                    <div class="md-padding">
+                        <div layout="row" layout-align="center top">
+                            <div flex>
+                                <!-- 1 row -->
+                                <div layout-gt-sm="row">
+
+                                  <div
+                                      class="md-block"
+                                      layout="row"
+                                      layout-align="start center" flex-gt-sm>
+                                      <p style="padding: 0px 15px 0px 0px;">
+                                        Which JA-YE Program did you participate in?
+                                      </p>
+                                      <md-radio-group 
+                                        layout="row"
+                                        layout-align="start center"
+                                        ng-model="$ctrl.stepData[1].data.program_type"
+                                        name="program_type">
+                                        <md-radio-button value="0">Company</md-radio-button>
+                                        <md-radio-button value="1">Startup</md-radio-button>
+                                        <md-radio-button value="2">Other</md-radio-button>
+                                      </md-radio-group>
+                                  </div>
+
+                                </div>
+
+                                <!-- 2 row -->
+
+                                <div layout-gt-sm="row">
+                                
+                                  <md-input-container 
+                                      class="md-block" flex-gt-sm>
+                                      <label>In which country did you participate?</label>
+                                      <md-select 
+                                          required
+                                          name="country_of_participation"
+                                          ng-model="$ctrl.stepData[1].data.country_of_participation">
+                                          
+                                        <md-option  ng-repeat="country in $ctrl.permittedCountries"
+                                                    value="{{country.code}}">
+                                          {{country.name}}
+                                        </md-option>
+                                      </md-select>
+                                      <div ng-messages="prog.information.country_of_participation.$error">
+                                        <div ng-message="required">Country of participation is required.</div>
+                                      </div>
+
+                                  </md-input-container>
+
+                                  <div flex="5" hide-xs="" hide-sm="">
+                                    <!-- Spacer //-->
+                                  </div>
+
+                                  <md-input-container class="md-block" flex-gt-sm>
+                                    <label>At which school or university did you participate?</label>
+                                    <input
+                                          name="institution"
+                                          ng-model="$ctrl.stepData[1].data.institution"
+                                          required/>
+                                    <div ng-messages="prog.information.institution.$error">
+                                      <div ng-message="required">Institution is required.</div>
+                                    </div>
+
+                                  </md-input-container>
+
+                                </div>
+
+                                <!-- 3 row -->
+                                <div layout-gt-sm="row">
+                                
+                                  <md-input-container 
+                                      class="md-block" flex-gt-sm>
+                                      <label>In which year did you participate?</label>
+                                      <md-select 
+                                          required
+                                          name="year_of_participation"
+                                          ng-model="$ctrl.stepData[1].data.year_of_participation">
+                                          
+                                        <md-option  ng-repeat="year in $ctrl.years"
+                                                    value="{{year}}">
+                                          {{year}}
+                                        </md-option>
+                                      </md-select>
+                                      <div ng-messages="prog.information.year_of_participation.$error">
+                                        <div ng-message="required">Year of participation is required.</div>
+                                      </div>
+                                  </md-input-container>
+
+                                  <div flex="5" hide-xs="" hide-sm="">
+                                    <!-- Spacer //-->
+                                  </div>
+
+                                  <md-input-container class="md-block" flex-gt-sm>
+                                    <label>What was the name of your student company?</label>
+                                    <input
+                                          name="student_company_name"
+                                          ng-model="$ctrl.stepData[1].data.student_company_name"
+                                          required/>
+                                    <div ng-messages="prog.information.student_company_name.$error">
+                                      <div ng-message="required">Student company name is required.</div>
+                                    </div>
+
+                                  </md-input-container>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+              </md-step-body>
+              <md-step-actions layout="row">
+                  <div flex layout="row" layout-align="end top">
+                      <md-button ng-click="vm.prevStep();">Back</md-button>
+
+                      <md-button  type="submit"
+                                  class="md-primary md-raised"
+                                  ng-disabled="prog.information.$invalid"
+                                  ng-click="$ctrl.finish();">NEXT</md-button>
+                  </div>
+              </md-step-actions>
+          </md-step>
+      </md-steppers>
+    </md-stepper-card-content>
+
+
+  </md-card>
+
+</div>
+
+
+
+

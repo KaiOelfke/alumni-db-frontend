@@ -1,0 +1,11 @@
+{
+  "development": {
+    "APIHost": "http://localhost:3000" 
+  },
+  "staging": { 
+    "APIHost": "https://alumni-db-backend-dev.herokuapp.com" 
+  }, 
+  "production": {
+    "APIHost": "https://alumni-db-backend.herokuapp.com" 
+  }
+}

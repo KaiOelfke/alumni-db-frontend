@@ -1,0 +1,166 @@
+<div id="edit-event">
+	
+  <md-card>
+    <md-progress-linear md-mode="query" ng-show="$ctrl.processing"></md-progress-linear>
+
+    <div class="md-card-image cover-image-box"
+      style="background: url('{{$ctrl.event.cover_photo.url}}');">
+      <div ngf-select="$ctrl.changeCover($file)" class="md-card-image cover-image-overlay">
+        <md-icon md-font-set="fa" md-font-icon="fa-upload"></md-icon>
+      </div>
+    </div>    
+
+    <md-card-title>
+      <md-card-title-text>  
+      </md-card-title-text>
+      <md-card-title-media>
+        <div class="md-media-lg card-media overlay-box">
+          <img ng-src="{{$ctrl.event.logo_photo.url}}" class="md-media-lg card-media" alt="logo">
+          <div ngf-select="$ctrl.changeAvatar($file)" class="md-media-lg overlay">
+            <md-icon md-font-set="fa" md-font-icon="fa-upload"></md-icon>
+          </div>
+        </div>
+      </md-card-title-media>
+    </md-card-title>
+
+    <md-card-content>
+      <form name="eventForm">
+
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Name</label>
+            <input type="text"                  
+                  required name="name" ng-model="$ctrl.event.name">
+            <div ng-messages="eventForm.name.$error">
+              <div ng-message="required">Name is required.</div>
+            </div>                  
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Publish</label>
+              <md-switch name="publish" ng-model="$ctrl.event.published" aria-label="Publish">
+              </md-switch>    
+          </md-input-container>
+
+        </div>
+
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Type</label>
+            <md-select 
+                name="etype"
+                ng-model="$ctrl.event.etype">
+              <md-option  ng-repeat="event in $ctrl.eventTypes"
+                          value="{{event.id}}">
+                {{event.name}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Facebook</label>
+              <input type="text"              
+                     name="facebook" ng-model="$ctrl.event.facebook_url">
+          </md-input-container>
+
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Contact Email</label>
+              <input type="text"
+                     name="contact_email" ng-model="$ctrl.event.contact_email">
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Phone Number</label>
+            <input
+                  name="institution"
+                  ng-model="$ctrl.event.phone_number"/>
+          </md-input-container>
+
+        </div>
+
+        <div layout-gt-sm="row">
+        
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Location</label>
+              <textarea name="location" ng-model="$ctrl.event.location" rows="3"></textarea> 
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Dates</label>
+            <textarea name="dates" ng-model="$ctrl.event.dates" rows="3"></textarea>
+          </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+        
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Slogan</label>
+              <input type="text"
+                     name="slogan" ng-model="$ctrl.event.slogan">
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>description</label>
+            <textarea name="description" ng-model="$ctrl.event.description" rows="3"></textarea>
+          </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+        
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>agenda</label>
+              <textarea name="agenda" ng-model="$ctrl.event.agenda" rows="3"></textarea>
+          </md-input-container>
+
+        </div>
+
+      </form>
+    </md-card-content>
+
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button 
+        ng-click="$ctrl.cancel()">
+        Cancel
+      </md-button>
+      <md-button 
+        ng-disabled="eventForm.$invalid"
+        ng-click="$ctrl.save()">
+        Save
+      </md-button>
+    </md-card-actions>
+
+  </md-card>
+
+</div>
+

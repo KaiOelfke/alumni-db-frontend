@@ -1,0 +1,53 @@
+<div  class="home"
+      md-theme="home"
+      layout="column" layout-fill>
+
+  <md-toolbar class="md-tall">
+      <span flex></span>
+      <h3 class="content md-toolbar-tools">
+        <span class="md-flex title">Find People</span>
+        <span flex></span>
+      </h3>
+
+  </md-toolbar>
+
+  <md-card class="search-box" flex layout-fill>
+    <form ng-submit="$event.preventDefault()">
+      <md-autocomplete
+          md-search-text-change="$ctrl.searchTextChange()"
+          md-search-text="$ctrl.searchText"
+          md-items="user in $ctrl.querySearch()"
+          md-min-length="0"
+          placeholder="Search ...">
+      </md-autocomplete>
+    </form>
+  </md-card>
+
+  <md-card class="search-results" ng-show="$ctrl.users.length" flex layout-fill>
+    <md-list>
+      <md-list-item 
+        ui-sref="userPanel.user({userId: user.id})"
+        class="md-3-line" ng-repeat="user in $ctrl.users">
+        <img ng-src="{{user.avatar.url}}" class="md-avatar" alt="{{user.first_name}}" />
+        <div class="md-list-item-text">
+          <h3>{{user.first_name}} {{user.last_name}}</h3>
+          <h4>{{user.country}}</h4>
+          <p>
+            {{user.short_bio || "&nbsp;"}}
+          </p>
+        </div>
+        <md-divider inset></md-divider>
+      </md-list-item>
+    </md-list>
+    <md-card-actions layout="row" layout-align="end">
+      <md-button ng-disabled="{{$ctrl.query.back}}"
+                 ng-click="$ctrl.prevPage">
+         <md-icon md-font-set="material-icons">chevron_left</md-icon>
+      </md-button>
+      <md-button ng-disabled="{{$ctrl.query.next}}"
+                 ng-click="$ctrl.nextPage">
+         <md-icon md-font-set="material-icons">chevron_right</md-icon>
+      </md-button>
+    </md-card-actions>
+  </md-card>
+</div>

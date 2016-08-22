@@ -1,0 +1,68 @@
+<div id="users">
+	
+  <md-card>
+
+    <md-toolbar class="md-table-toolbar md-default" ng-show="$ctrl.filter.show">
+      <div class="md-toolbar-tools">
+        <md-icon>search</md-icon>
+        <form flex name="$ctrl.filter.form">
+          <input type="text" ng-model="$ctrl.query.filter" ng-model-options="$ctrl.filter.options" placeholder="search">
+        </form>
+        <md-button class="md-icon-button" ng-click="$ctrl.removeFilter()">
+          <md-icon>close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-toolbar class="md-table-toolbar md-default" ng-hide="$ctrl.filter.show">
+      <div class="md-toolbar-tools">
+        <span>Users</span>
+        <div flex></div>
+        <md-button class="md-icon-button" ng-click="$ctrl.refresh()">
+          <md-tooltip>
+            Refresh
+          </md-tooltip>
+          <md-icon>refresh</md-icon>
+        </md-button>
+        <md-button class="md-icon-button" ng-click="$ctrl.filter.show = true">
+          <md-tooltip>
+            Search
+          </md-tooltip>        
+          <md-icon>filter_list</md-icon>
+        </md-button>        
+      </div>
+    </md-toolbar>
+
+
+    <md-table-container>
+      <table md-table md-progress="$ctrl.promise">
+        <thead md-head>
+          <tr md-row>
+            <th md-column><span>First name</span></th>
+            <th md-column><span>Last name</span></th>            
+            <th md-column><span>Email</span></th>
+            <th md-column><span>Permium</span></th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr md-row 
+              ng-click="$ctrl.setCurrentUser($event, user)"
+              ng-repeat="user in $ctrl.allUsers.data track by user.id">
+            <td md-cell>{{user.first_name}}</td>
+            <td md-cell>{{user.last_name}}</td>            
+            <td md-cell>{{user.email}}</td>
+            <td md-cell>{{!!user.subscription_id ? 'Yes': 'No'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+
+    <md-table-pagination md-limit="$ctrl.query.limit" md-limit-options="[5, 10, 15]" 
+                         md-page="$ctrl.query.page"
+                         md-total="{{$ctrl.allUsers.count}}"
+                         md-on-paginate="$ctrl.getUsers"
+                         md-page-select></md-table-pagination>    
+  </md-card>
+
+
+</div>

@@ -1,0 +1,76 @@
+<div  class="events"
+      md-theme="events"
+      layout="column" layout-fill>
+
+  <md-toolbar class="md-tall">
+      <span flex></span>
+      <h3 class="content md-toolbar-tools">
+        <span class="md-flex title">Events</span>
+        <span flex></span>
+      </h3>
+
+  </md-toolbar>
+
+
+
+  <md-content class="md-padding" layout="column">
+
+    <div ng-repeat="event in $ctrl.events" ng-if="$index % 2 == 0" >
+      <div layout-xs="column" layout="row">
+        <div flex-xs flex-gt-xs="50" layout="column">
+          <md-card ng-show="$ctrl.events[$index]">
+            <img ng-show="$ctrl.events[$index].cover_photo.url"
+                  ng-src="{{$ctrl.events[$index].cover_photo.url}}"  alt="Cover">
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">{{$ctrl.events[$index].name}}</span>
+                <span class="md-subhead">{{$ctrl.events[$index].location}}</span>            
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+              <p>
+              {{$ctrl.events[$index].description | limitTo:300}}
+              {{$ctrl.events[$index].description.length > 300 ? '...' : ''}}
+              </p>
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="end center">
+              <md-button ui-sref="userPanel.Event({eventId: $ctrl.events[$index].id})" aria-label="Details">
+                Details
+              </md-button>
+            </md-card-actions>
+          </md-card>
+
+        </div>
+        <div flex-xs flex-gt-xs="50" layout="column">
+          <md-card ng-show="$ctrl.events[$index + 1]">
+            <img 
+                ng-show="$ctrl.events[$index + 1].cover_photo.url"
+                ng-src="{{$ctrl.events[$index + 1].cover_photo.url}}" class="md-card-image" alt="Cover">
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">{{$ctrl.events[$index + 1].name}}</span>
+                <span class="md-subhead">{{$ctrl.events[$index + 1].location}}</span>            
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+              <p>
+                {{$ctrl.events[$index + 1 ].description | limitTo:300}}
+                {{$ctrl.events[$index + 1 ].description.length > 300 ? '...' : ''}}
+              </p>
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="end center">
+              <md-button ui-sref="userPanel.Event({eventId: $ctrl.events[$index + 1].id})" aria-label="Details">
+                Details
+              </md-button>
+            </md-card-actions>
+          </md-card>
+
+        </div>
+
+
+      </div>
+    </div>
+
+  </md-content>
+
+</div>

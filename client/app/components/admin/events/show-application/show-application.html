@@ -1,0 +1,42 @@
+<div id="show-application">
+  <md-card>
+
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">Application</span>  
+      </md-card-title-text>  
+    </md-card-title>
+
+    <md-card-content>
+      <form name="application.Form">
+         <md-input-container
+              required
+              class="md-block">
+              <label>Motivation</label>
+              <textarea
+                name="motivation"
+                disabled
+                ng-model="$ctrl.application.motivation"
+                md-maxlength="1500" rows="3"></textarea> 
+          </md-input-container>
+      </form>
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="start center">
+      <md-button  class="md-raised"
+                  target="_blank"
+                  ng-show="$ctrl.application.cv_file.url" 
+                  ng-href="{{$ctrl.getCVUrl()}}">
+        Download CV
+      </md-button>
+      <div flex="5" hide-xs="" hide-sm="">
+        <!-- Spacer //-->
+      </div>
+      <md-button 
+        class="md-raised"
+        ng-click="$ctrl.backToEvent()">
+        Back to Event
+      </md-button>
+    </md-card-actions>
+  </md-card>
+
+</div>

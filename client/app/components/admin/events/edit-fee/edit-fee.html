@@ -1,0 +1,48 @@
+  <md-dialog-content class="md-dialog-content">
+    
+    <h2 class="md-title">Edit Fee</h2>
+    
+    <form name="fee.form" novalidate>
+
+      <md-input-container class="md-block" flex>
+        <label>Name</label>
+        <input required name="name" ng-model="$ctrl.cFee.name" required>
+        <div ng-messages="fee.form.name.$error">
+          <div ng-message="required">Name is required.</div>
+        </div>          
+      </md-input-container>
+      <md-input-container class="md-block" flex>
+        <label>Price</label>
+        <input required name="price" ng-model="$ctrl.cFee.price">
+        <div ng-messages="fee.form.price.$error">
+          <div ng-message="required">Price is required.</div>
+        </div>        
+      </md-input-container>
+      <md-input-container class="md-block" flex>
+        <md-switch name="public_fee" ng-model="$ctrl.cFee.public_fee" aria-label="Public">
+          Public
+        </md-switch>      
+      </md-input-container>          
+      <md-input-container class="md-block" flex>
+        <label>Deadline</label>
+        <input
+              name="deadline"
+              ng-model="$ctrl.cFee.deadline"
+              ng-pattern="$ctrl.dateCheckRegex"
+              required/>
+        <div ng-messages="fee.form.deadline.$error">
+          <div ng-message="pattern">DD.MM.YYYY - Example 01.01.1990</div>
+          <div ng-message="required">Deadline is required.</div>
+        </div>
+      </md-input-container>
+
+    </form>
+    
+  </md-dialog-content>
+  
+  <md-dialog-actions>
+    <md-button  class="md-primary" 
+                ng-click="$ctrl.save()" ng-disabled="fee.form.$invalid">Save</md-button>
+    <md-button class="md-primary" ng-click="$ctrl.cancel()">Cancel</md-button>
+  </md-dialog-actions>
+  

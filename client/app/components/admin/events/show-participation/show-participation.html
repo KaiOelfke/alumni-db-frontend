@@ -1,0 +1,88 @@
+<div id="show-participation">
+
+  <md-card>
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">Participation</span>
+      </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+      <form name="participation.Form">
+        <div layout-gt-sm="row">
+          <md-input-container flex-gt-sm class="md-block">
+            <label>Arrival</label>
+            <textarea name="arrival"
+              disabled 
+              ng-model="$ctrl.participation.arrival" required md-maxlength="150"></textarea> 
+            <div ng-messages="participation.Form.arrival.$error">
+              <div ng-message="required">Arrival is required.</div>
+            </div>              
+          </md-input-container>
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+          <md-input-container flex-gt-sm class="md-block">
+            <label>Departure</label>            
+            <textarea name="departure"
+              disabled 
+              ng-model="$ctrl.participation.departure" required md-maxlength="150"></textarea>
+            <div ng-messages="participation.Form.departure.$error">
+              <div ng-message="required">Departure is required.</div>
+            </div>              
+          </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Diet</label>
+            <textarea  
+              ng-model="$ctrl.participation.diet"
+              disabled
+              required name="diet"></textarea> 
+            <div ng-messages="participation.Form.diet.$error">
+              <div ng-message="required">Diet is required.</div>
+            </div>
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>allergies</label>
+            <textarea name="allergies"
+              disabled
+              ng-model="$ctrl.participation.allergies"  md-maxlength="150"></textarea> 
+          </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Extra Nights</label>
+            <textarea name="extra_nights"
+              disabled
+              ng-model="$ctrl.participation.extra_nights" md-maxlength="150"></textarea>
+          </md-input-container>
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Notes</label>
+            <textarea name="notes"
+              disabled
+              ng-model="$ctrl.participation.notes" md-maxlength="300"></textarea>
+          </md-input-container>          
+        </div>        
+      </form>
+
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button 
+          class="md-raised md-accent"
+          ng-click="$ctrl.backToEvent()">
+          Back to Event
+        </md-button>
+      </md-card-actions>
+    </md-card-content>
+  </md-card>
+
+</div>

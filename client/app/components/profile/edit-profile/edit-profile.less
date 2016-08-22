@@ -1,0 +1,80 @@
+.edit-profile {
+
+
+  md-toolbar {
+    font: 'Roboto Mono', 'Roboto', serif;
+    
+    .content {
+      max-width: 768px;
+      margin: 0 auto;
+    }
+
+    .md-toolbar-tools {
+      .title {
+        font-size: 45px;
+      }
+
+      .md-button {
+        margin-bottom: -50px;
+      }
+    } 
+  }
+
+  md-card {
+    width: 768px;
+    margin: 50px auto 50px auto;
+
+    .cover-image-box {
+
+      height: 315px;
+
+      &:hover .cover-image-overlay {
+        opacity: 1;
+      }
+
+      .cover-image-overlay {  
+        background: rgba(0,0,0,.75);
+        line-height: 315px;
+        text-align: center;
+        opacity: 0;
+        -webkit-transition: opacity .25s ease;
+        -moz-transition: opacity .25s ease;
+
+        md-icon {
+          color: rgba(255,255,255,.85);
+          font-size: 50px;
+        }
+      }
+    }
+
+
+    .overlay-box {
+      position: relative;
+
+
+      &:hover .overlay {
+        opacity:1;
+      }
+
+      .overlay  {  
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        background: rgba(0,0,0,.75);
+        text-align: center;
+        line-height: 152px;      
+        opacity: 0;
+        -webkit-transition: opacity .25s ease;
+        -moz-transition: opacity .25s ease;
+
+        md-icon {
+          color: rgba(255,255,255,.85);
+          font-size: 50px;
+        }
+      }
+    }
+
+
+  }
+
+}

@@ -1,0 +1,315 @@
+<div id="show-event">
+	<md-card>
+    <div class="md-card-image cover-image-box"
+        ng-style="{'background': '#ccc url({{$ctrl.event.cover_photo.url}})' }">
+    </div>    
+
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">{{ $ctrl.event.name }}</span>
+        <span class="md-subhead">{{ $ctrl.event.slogan }}</span>
+  
+      </md-card-title-text>
+      <md-card-title-media>
+        <div class="md-media-lg card-media overlay-box">
+          <img ng-src="{{$ctrl.event.logo_photo.url}}" class="md-media-lg card-media" alt="logo">       
+        </div>
+      </md-card-title-media>      
+    </md-card-title>
+
+    <md-card-content>
+      <form name="eventForm">
+
+        <div layout-gt-sm="row">
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Type</label>
+            <md-select 
+                disabled
+                name="etype"
+                ng-model="$ctrl.event.etype">
+              <md-option  ng-repeat="event in $ctrl.eventTypes"
+                          value="{{event.id}}">
+                {{event.name}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Facebook</label>
+              <input type="text"
+                     disabled
+                     name="facebook" ng-model="$ctrl.event.facebook_url">
+          </md-input-container>
+
+        </div>
+
+        <div layout-gt-sm="row">
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Contact Email</label>
+              <input type="text"
+                     disabled
+                     name="contact_email" ng-model="$ctrl.event.contact_email">
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Phone Number</label>
+            <input
+                  name="institution"
+                  ng-model="$ctrl.event.phone_number"
+                  disabled/>
+          </md-input-container>
+
+        </div>
+
+        <div layout-gt-sm="row">
+        
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>Location</label>
+              <textarea name="location" disabled ng-model="$ctrl.event.location" rows="3"></textarea> 
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>Dates</label>
+            <textarea name="dates" disabled ng-model="$ctrl.event.dates" rows="3"></textarea>
+          </md-input-container>
+        </div>
+
+        <div layout-gt-sm="row">
+        
+          <md-input-container 
+              class="md-block" flex-gt-sm>
+              <label>agenda</label>
+              <textarea name="agenda" disabled ng-model="$ctrl.event.agenda" rows="3"></textarea>
+          </md-input-container>
+
+          <div flex="5" hide-xs="" hide-sm="">
+            <!-- Spacer //-->
+          </div>
+
+          <md-input-container class="md-block" flex-gt-sm>
+            <label>description</label>
+            <textarea name="description" disabled ng-model="$ctrl.event.description" rows="3"></textarea>
+          </md-input-container>
+        </div>
+
+      </form>
+    </md-card-content>
+
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button 
+        ng-click="$ctrl.editEvent()">
+        Edit
+      </md-button>
+    </md-card-actions>
+  </md-card>
+
+  <md-card ng-hide="$ctrl.hideFees()">
+    <md-toolbar class="md-table-toolbar md-default" >
+      <div class="md-toolbar-tools">
+        <span>Fees</span>
+        <div flex></div>
+        <md-button class="md-icon-button" ng-click="$ctrl.addFee()">
+          <md-tooltip>
+            Add
+          </md-tooltip>
+          <md-icon>add</md-icon>
+        </md-button>         
+        <md-button class="md-icon-button" ng-click="$ctrl.getFees()">
+          <md-tooltip>
+            Refresh
+          </md-tooltip>
+          <md-icon>refresh</md-icon>
+        </md-button>            
+      </div>
+    </md-toolbar>
+
+    <md-table-container>
+      <table md-table md-progress="$ctrl.feesPromise">
+        <thead md-head>
+          <tr md-row>
+            <th md-column><span>ID</span></th>          
+            <th md-column><span>Name</span></th>
+            <th md-column><span>Price</span></th>            
+            <th md-column><span>Deadline</span></th>
+            <th md-column><span>Public</span></th>
+            <th md-column><span>Delete</span></th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr ng-click="$ctrl.editFee($event, fee)" md-row
+              ng-style="$ctrl.getDeletedBackgroundColor(fee)"
+              ng-repeat="fee in $ctrl.allFees track by fee.id">
+            <td md-cell>{{fee.id}}</td>
+            <td md-cell>{{fee.name}}</td>
+            <td md-cell>{{fee.price}}</td>
+            <td md-cell>{{fee.deadline}}</td>
+            <td md-cell>{{fee.public_fee ? 'Yes' : 'No'}}</td>
+            <td md-cell>
+              <md-button class="md-icon-button"
+                          ng-hide="{{fee.delete_flag}}" 
+                          ng-click="$ctrl.removeFee($event, fee)">
+                <md-icon>delete</md-icon>
+              </md-button>                
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+  </md-card>
+
+  <md-card ng-hide="$ctrl.hideCodes()">
+    <md-toolbar class="md-table-toolbar md-default">
+      <div class="md-toolbar-tools">
+        <span>Codes</span>
+        <div flex></div>
+        <md-button class="md-icon-button" ng-click="$ctrl.addCode($event)">
+          <md-tooltip>
+            Add
+          </md-tooltip>
+          <md-icon>add</md-icon>
+        </md-button> 
+        <md-button class="md-icon-button" ng-click="$ctrl.getCodes()">
+          <md-tooltip>
+            Refresh
+          </md-tooltip>
+          <md-icon>refresh</md-icon>
+        </md-button>    
+      </div>
+    </md-toolbar>    
+    <md-table-container>
+      <table md-table md-progress="$ctrl.codesPromise">
+        <thead md-head>
+          <tr md-row>          
+            <th md-column><span>Fee Id</span></th>
+            <th md-column><span>User Id</span></th>
+            <th md-column><span>Used</span></th>
+            <th md-column><span>Code</span></th>
+            <th md-column><span>Delete</span></th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr md-row 
+              ng-style="$ctrl.getDeletedBackgroundColor(code)"          
+              ng-repeat="code in $ctrl.allCodes track by code.id">
+            <td md-cell>{{code.fee_id}}</td>
+            <td md-cell>{{code.user_id}}</td>
+            <td md-cell>{{code.used_flag ? 'Yes' : 'No'}}</td>
+            <td md-cell>{{code.code}}</td>
+            <td md-cell>
+              <md-button class="md-icon-button"
+                          ng-hide="{{code.delete_flag}}" 
+                          ng-click="$ctrl.removeCode($event, code)">
+                <md-icon>delete</md-icon>
+              </md-button>                
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+  </md-card>  
+
+  <md-card ng-hide="$ctrl.hideApplications()">
+    <md-toolbar class="md-table-toolbar md-default">
+      <div class="md-toolbar-tools">
+        <span>Applications</span>
+        <div flex></div>
+        <md-button class="md-icon-button" ng-click="$ctrl.getApplications()">
+          <md-tooltip>
+            Refresh
+          </md-tooltip>
+          <md-icon>refresh</md-icon>
+        </md-button>    
+      </div>
+    </md-toolbar>
+    <md-table-container>
+      <table md-table md-progress="$ctrl.applicationsPromise">
+        <thead md-head>
+          <tr md-row>          
+            <th md-column><span>Id</span></th>
+            <th md-column><span>User Id</span></th>
+            <th md-column><span>Motiviation</span></th>
+            <th md-column><span>CV</span></th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr md-row 
+              ng-click="$ctrl.goToApplication($event, application)"          
+              ng-repeat="application in $ctrl.allApplications track by application.id">
+            <td md-cell>{{application.id}}</td>
+            <td md-cell>{{application.user_id}}</td>
+            <td md-cell>{{application.motiviation | limitTo: 50}}</td>
+            <td md-cell>
+              <md-button class="md-icon-button"
+                          target="_blank"
+                          ng-show="application.cv_file.url" 
+                          ng-href="{{$ctrl.getCVUrl(application.cv_file.url)}}">
+                <md-icon>file_download</md-icon>
+              </md-button>                 
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+  </md-card>
+
+  <md-card>
+    <md-toolbar class="md-table-toolbar md-default">
+      <div class="md-toolbar-tools">
+        <span>Participants</span>
+        <div flex></div>
+        <md-button class="md-icon-button" ng-click="$ctrl.getParticipations()">
+          <md-tooltip>
+            Refresh
+          </md-tooltip>
+          <md-icon>refresh</md-icon>
+        </md-button>    
+      </div>
+      <md-table-container>
+        <table md-table md-progress="$ctrl.participantsPromise">
+          <thead md-head>
+            <tr md-row>          
+              <th md-column><span>Id</span></th>
+              <th md-column><span>User Id</span></th>
+              <th md-column><span>Arrival</span></th>
+              <th md-column><span>Departure</span></th>
+              <th md-column><span>Allergie</span></th>
+              <th md-column><span>Diet</span></th>              
+            </tr>
+          </thead>
+          <tbody md-body>
+            <tr md-row 
+                ng-click="$ctrl.goToParticipation($event, participation)"
+                ng-repeat="participation in $ctrl.allParticipations track by participation.id">
+              <td md-cell>{{participation.id}}</td>
+              <td md-cell>{{participation.user_id}}</td>
+              <td md-cell>{{participation.arrival}}</td>
+              <td md-cell>{{participation.departure}}</td>
+              <td md-cell>{{participation.allergie}}</td>              
+              <td md-cell>{{participation.diet}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </md-table-container>
+    </md-toolbar>    
+
+  </md-card>
+
+
+
+</div>
+
