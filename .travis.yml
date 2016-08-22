@@ -9,7 +9,7 @@ before_script:
   - 'npm install -g gulp-cli webpack'
   - 'npm install'
 script:
-  - ./node_modules/karma/bin/karma start
+  - npm test
 before_deploy: 
   - chmod a+x deploy.sh  
   - ./deploy.sh

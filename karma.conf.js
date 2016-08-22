@@ -1,5 +1,8 @@
 module.exports = function (config) {
   var configuration = {
+
+    failOnEmptyTestSuite: false,
+    
     // base path used to resolve all patterns
     basePath: '',
 
