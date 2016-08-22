@@ -1,8 +1,8 @@
-if [ $TRAVIS_BRANCH = "staging" ]
+if [ $TRAVIS_BRANCH = "development" ]
 then 
-  NODE_ENV=development
+  NODE_ENV=staging
   gulp build
-elif [ $TRAVIS_BRANCH  = "production" ]
+elif [ $TRAVIS_BRANCH  = "master" ]
 then
   NODE_ENV=production
   gulp build
