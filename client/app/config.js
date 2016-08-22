@@ -1,2 +1,2 @@
 angular.module("almuniConnectAPP.config", [])
-.constant("APIHost", "http://localhost:3000");
+.constant("APIHost", "https://alumni-db-backend-dev.herokuapp.com");
